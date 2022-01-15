@@ -3,8 +3,8 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { IPermissionRepository } from '../../../src/@apps/iam/permission/domain/permission.repository';
-import { MockPermissionSeeder } from '../../../src/@apps/iam/permission/infrastructure/mock/mock-permission.seeder';
+import { IRoleRepository } from '../../../src/@apps/iam/role/domain/role.repository';
+import { MockRoleSeeder } from '../../../src/@apps/iam/role/infrastructure/mock/mock-role.seeder';
 import { GraphQLConfigModule } from '../../../src/@aurora/graphql/graphql-config.module';
 import { IamModule } from '../../../src/@api/iam/iam.module';
 import * as request from 'supertest';
@@ -14,11 +14,11 @@ import * as _ from 'lodash';
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
 
-describe('permission', () =>
+describe('role', () =>
 {
     let app: INestApplication;
-    let repository: IPermissionRepository;
-    let seeder: MockPermissionSeeder;
+    let repository: IRoleRepository;
+    let seeder: MockRoleSeeder;
 
     beforeAll(async () =>
     {
@@ -36,14 +36,14 @@ describe('permission', () =>
                 }),
             ],
             providers: [
-                MockPermissionSeeder,
+                MockRoleSeeder,
             ]
         })
             .compile();
 
         app             = module.createNestApplication();
-        repository      = module.get<IPermissionRepository>(IPermissionRepository);
-        seeder          = module.get<MockPermissionSeeder>(MockPermissionSeeder);
+        repository      = module.get<IRoleRepository>(IRoleRepository);
+        seeder          = module.get<MockRoleSeeder>(MockRoleSeeder);
 
         // seed mock data in memory database
         await repository.insert(seeder.collectionSource);
@@ -51,179 +51,187 @@ describe('permission', () =>
         await app.init();
     });
 
-    test('/REST:POST iam/permission - Got 400 Conflict, PermissionId property can not to be null', () =>
+    test('/REST:POST iam/role - Got 400 Conflict, RoleId property can not to be null', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/permission')
+            .post('/iam/role')
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                name: 'Ergonomic Wooden Chips',
-                boundedContextId: '432db722-592f-4b1f-bcbe-e80c70dca9dd',
-                roleIds: [],
+                name: 'Fantastic Granite Chair',
+                isMaster: true,
+                permissionIds: [],
+                accountIds: [],
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for PermissionId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for RoleId must be defined, can not be null');
             });
     });
 
-    test('/REST:POST iam/permission - Got 400 Conflict, PermissionName property can not to be null', () =>
+    test('/REST:POST iam/role - Got 400 Conflict, RoleName property can not to be null', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/permission')
+            .post('/iam/role')
             .set('Accept', 'application/json')
             .send({
-                id: '66e89c7e-ccdf-425f-bf40-f58012a7fdac',
+                id: '67c3c7ea-55c9-4ee9-af91-d0c4ebff0e19',
                 name: null,
-                boundedContextId: 'c421c35a-a19f-409d-bb03-26091221edf8',
-                roleIds: [],
+                isMaster: true,
+                permissionIds: [],
+                accountIds: [],
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for PermissionName must be defined, can not be null');
+                expect(res.body.message).toContain('Value for RoleName must be defined, can not be null');
             });
     });
 
-    test('/REST:POST iam/permission - Got 400 Conflict, PermissionBoundedContextId property can not to be null', () =>
+    test('/REST:POST iam/role - Got 400 Conflict, RoleIsMaster property can not to be null', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/permission')
+            .post('/iam/role')
             .set('Accept', 'application/json')
             .send({
-                id: '6d6e2747-5f25-4418-810b-ab480b54fd2d',
-                name: 'Incredible Soft Bike',
-                boundedContextId: null,
-                roleIds: [],
+                id: 'f4c7fa84-28f3-413f-bc2a-807d6c649c15',
+                name: 'Ergonomic Soft Soap',
+                isMaster: null,
+                permissionIds: [],
+                accountIds: [],
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for PermissionBoundedContextId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for RoleIsMaster must be defined, can not be null');
             });
     });
 
-    test('/REST:POST iam/permission - Got 400 Conflict, PermissionId property can not to be undefined', () =>
+    test('/REST:POST iam/role - Got 400 Conflict, RoleId property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/permission')
+            .post('/iam/role')
             .set('Accept', 'application/json')
             .send({
-                name: 'Ergonomic Cotton Bacon',
-                boundedContextId: '8871eae6-2bb3-4032-a3e0-df2d7ea5f733',
-                roleIds: [],
+                name: 'Refined Soft Salad',
+                isMaster: false,
+                permissionIds: [],
+                accountIds: [],
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for PermissionId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for RoleId must be defined, can not be undefined');
             });
     });
 
-    test('/REST:POST iam/permission - Got 400 Conflict, PermissionName property can not to be undefined', () =>
+    test('/REST:POST iam/role - Got 400 Conflict, RoleName property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/permission')
+            .post('/iam/role')
             .set('Accept', 'application/json')
             .send({
-                id: '8bd14a3d-5bd9-4e58-8ed6-132380736afe',
-                boundedContextId: 'b9e7d4bb-4993-45c4-b493-a8ab79ed259b',
-                roleIds: [],
+                id: 'ca286f76-341f-4d12-9272-b2b1cc3db51d',
+                isMaster: true,
+                permissionIds: [],
+                accountIds: [],
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for PermissionName must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for RoleName must be defined, can not be undefined');
             });
     });
 
-    test('/REST:POST iam/permission - Got 400 Conflict, PermissionBoundedContextId property can not to be undefined', () =>
+    test('/REST:POST iam/role - Got 400 Conflict, RoleIsMaster property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/permission')
+            .post('/iam/role')
             .set('Accept', 'application/json')
             .send({
-                id: '1eda61b0-55a0-4630-8156-d5b345fa69df',
-                name: 'Licensed Metal Fish',
-                roleIds: [],
+                id: '311f282e-1540-414b-93c2-093e1990acf4',
+                name: 'Incredible Cotton Shoes',
+                permissionIds: [],
+                accountIds: [],
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for PermissionBoundedContextId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for RoleIsMaster must be defined, can not be undefined');
             });
     });
 
-    test('/REST:POST iam/permission - Got 400 Conflict, PermissionId is not allowed, must be a length of 36', () =>
+    test('/REST:POST iam/role - Got 400 Conflict, RoleId is not allowed, must be a length of 36', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/permission')
+            .post('/iam/role')
             .set('Accept', 'application/json')
             .send({
-                id: 'r5ntmdxjlqshbb7gxocz7mo2no46vs53vx0k7',
-                name: 'Small Wooden Fish',
-                boundedContextId: 'ddb99823-9be2-4a8d-9a1c-5939652d3aa1',
-                roleIds: [],
+                id: 'xg99ulzwyk5vesgzon04mrxvr0oso0kja2or5',
+                name: 'Incredible Steel Chicken',
+                isMaster: true,
+                permissionIds: [],
+                accountIds: [],
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for PermissionId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for RoleId is not allowed, must be a length of 36');
             });
     });
 
-    test('/REST:POST iam/permission - Got 400 Conflict, PermissionBoundedContextId is not allowed, must be a length of 36', () =>
+    test('/REST:POST iam/role - Got 400 Conflict, RoleName is too large, has a maximum length of 255', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/permission')
+            .post('/iam/role')
             .set('Accept', 'application/json')
             .send({
-                id: '7a5fead0-1c90-4a85-80e1-652094050fb9',
-                name: 'Unbranded Metal Bike',
-                boundedContextId: 'cyk1ugk0jncr9jzqrlikm8nlqitzsiupp4zoi',
-                roleIds: [],
+                id: '76f167ca-bf09-49e1-9eaa-3fd3eff4063e',
+                name: 'k6gr2n46zp9go9yy4czt2wrw5voy9ekeld6mbyd5c2hyoia7h6o4ndjd6m9mnffero2rlfwqexfa538exytjy9cxxe71ihibfzqpfy1egbij0bwimjo8kf5j7a8yefpnscohbj8hp1c43y3w25nij04uatmrwwgffua45v054e3wlfupxsnkcdcpx4m6w8r6csk585ref0mlhhn6pzbdafutg47xg1m6zkzxxacwnzgjzutr3hj823ty7gwc72sc',
+                isMaster: true,
+                permissionIds: [],
+                accountIds: [],
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for PermissionBoundedContextId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for RoleName is too large, has a maximum length of 255');
             });
     });
 
-    test('/REST:POST iam/permission - Got 400 Conflict, PermissionName is too large, has a maximum length of 255', () =>
+    test('/REST:POST iam/role - Got 400 Conflict, RoleIsMaster has to be a boolean value', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/permission')
+            .post('/iam/role')
             .set('Accept', 'application/json')
             .send({
-                id: 'ed93584d-8ad8-4e0a-a6e7-05ae983b507a',
-                name: 'nqyh1p9k3wdyxu4x6pdx47njr5oedevgalo7wgjl4x8tmwgs0gud0an16r7n485okml32h6iv6z9wdstcq13705qhy0zh8cdy21kqxbmtbhvrtbon76mrg4fb7blzbiltyzlsxkrxubzd14pz7hs476fjqdiz1tlooxxbf9ebarcev1tcl3s8smrtwfcrhlumow91b3mdxtmxdfdeujei7g3dfeidvbzax778ki87w989twnbi0dp76cimpl69y7',
-                boundedContextId: '29ca53a8-a503-4c77-8302-2e2fa7bf6fcd',
-                roleIds: [],
+                id: 'fcc0dd7d-de59-4ff0-82f6-5178773cee0d',
+                name: 'Gorgeous Wooden Tuna',
+                isMaster: 'true',
+                permissionIds: [],
+                accountIds: [],
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for PermissionName is too large, has a maximum length of 255');
+                expect(res.body.message).toContain('Value for RoleIsMaster has to be a boolean value');
             });
     });
 
-
-    test('/REST:POST iam/permission - Got 409 Conflict, item already exist in database', () =>
+    test('/REST:POST iam/role - Got 409 Conflict, item already exist in database', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/permission')
+            .post('/iam/role')
             .set('Accept', 'application/json')
             .send(seeder.collectionResponse[0])
             .expect(409);
     });
 
-    test('/REST:POST iam/permissions/paginate', () =>
+    test('/REST:POST iam/roles/paginate', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/permissions/paginate')
+            .post('/iam/roles/paginate')
             .set('Accept', 'application/json')
             .send({
                 query:
@@ -238,60 +246,61 @@ describe('permission', () =>
                 expect(res.body).toEqual({
                     total: seeder.collectionResponse.length,
                     count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'roleIds']))).slice(0, 5)
+                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'permissionIds', 'accountIds']))).slice(0, 5)
                 });
             });
     });
 
-    test('/REST:GET iam/permissions', () =>
+    test('/REST:GET iam/roles', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/permissions')
+            .get('/iam/roles')
             .set('Accept', 'application/json')
             .expect(200)
             .then(res =>
             {
                 expect(res.body).toEqual(
-                    seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'roleIds'])))
+                    seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'permissionIds', 'accountIds'])))
                 );
             });
     });
 
-    test('/REST:GET iam/permission - Got 404 Not Found', () =>
+    test('/REST:GET iam/role - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/permission')
+            .get('/iam/role')
             .set('Accept', 'application/json')
             .send({
                 query:
                 {
                     where:
                     {
-                        id: '726a685e-6aa6-4485-8eee-65ed3a1a5f33'
+                        id: '3f55403f-5099-4739-a4ce-882920e41998'
                     }
                 }
             })
             .expect(404);
     });
 
-    test('/REST:POST iam/permission', () =>
+    test('/REST:POST iam/role', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/permission')
+            .post('/iam/role')
             .set('Accept', 'application/json')
             .send({
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Small Metal Table',
-                boundedContextId: 'a6dfef70-8eda-4df0-8c93-12720fe61b07',
-                roleIds: [],
+                name: 'Rustic Metal Pizza',
+                isMaster: true,
+                permissionIds: [],
+                accountIds: [],
             })
             .expect(201);
     });
 
-    test('/REST:GET iam/permission', () =>
+    test('/REST:GET iam/role', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/permission')
+            .get('/iam/role')
             .set('Accept', 'application/json')
             .send({
                 query:
@@ -309,18 +318,18 @@ describe('permission', () =>
             });
     });
 
-    test('/REST:GET iam/permission/{id} - Got 404 Not Found', () =>
+    test('/REST:GET iam/role/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/permission/e909bcf0-541d-4ba0-bb13-6a7688d7276e')
+            .get('/iam/role/6e2ec4de-1759-463b-add7-b37a368ef3fb')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:GET iam/permission/{id}', () =>
+    test('/REST:GET iam/role/{id}', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/permission/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .get('/iam/role/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200)
             .then(res =>
@@ -329,30 +338,32 @@ describe('permission', () =>
             });
     });
 
-    test('/REST:PUT iam/permission - Got 404 Not Found', () =>
+    test('/REST:PUT iam/role - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .put('/iam/permission')
+            .put('/iam/role')
             .set('Accept', 'application/json')
             .send({
-                id: '321de990-8fb6-41e4-8791-86b3f10ad34e',
-                name: 'Rustic Steel Salad',
-                boundedContextId: '28b515d1-4504-4c76-8831-847dafdd39eb',
-                roleIds: [],
+                id: 'b9f8488f-4419-4ee0-be29-bd90900441df',
+                name: 'Gorgeous Wooden Salad',
+                isMaster: false,
+                permissionIds: [],
+                accountIds: [],
             })
             .expect(404);
     });
 
-    test('/REST:PUT iam/permission', () =>
+    test('/REST:PUT iam/role', () =>
     {
         return request(app.getHttpServer())
-            .put('/iam/permission')
+            .put('/iam/role')
             .set('Accept', 'application/json')
             .send({
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Awesome Plastic Pants',
-                boundedContextId: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                roleIds: [],
+                name: 'Awesome Wooden Bacon',
+                isMaster: false,
+                permissionIds: [],
+                accountIds: [],
             })
             .expect(200)
             .then(res =>
@@ -361,36 +372,36 @@ describe('permission', () =>
             });
     });
 
-    test('/REST:DELETE iam/permission/{id} - Got 404 Not Found', () =>
+    test('/REST:DELETE iam/role/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/permission/fb55196e-6d44-42f7-a7f8-d381d6734b64')
+            .delete('/iam/role/0e25f3b1-0771-431b-b20d-553a0d9b3294')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:DELETE iam/permission/{id}', () =>
+    test('/REST:DELETE iam/role/{id}', () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/permission/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .delete('/iam/role/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200);
     });
 
-    test('/GraphQL iamCreatePermission - Got 409 Conflict, item already exist in database', () =>
+    test('/GraphQL iamCreateRole - Got 409 Conflict, item already exist in database', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:IamCreatePermissionInput!)
+                    mutation ($payload:IamCreateRoleInput!)
                     {
-                        iamCreatePermission (payload:$payload)
+                        iamCreateRole (payload:$payload)
                         {
                             id
                             name
-                            boundedContextId
+                            isMaster
                         }
                     }
                 `,
@@ -408,7 +419,7 @@ describe('permission', () =>
             });
     });
 
-    test('/GraphQL iamPaginatePermissions', () =>
+    test('/GraphQL iamPaginateRoles', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -417,7 +428,7 @@ describe('permission', () =>
                 query: `
                     query ($query:QueryStatement $constraint:QueryStatement)
                     {
-                        iamPaginatePermissions (query:$query constraint:$constraint)
+                        iamPaginateRoles (query:$query constraint:$constraint)
                         {
                             total
                             count
@@ -437,15 +448,15 @@ describe('permission', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.iamPaginatePermissions).toEqual({
+                expect(res.body.data.iamPaginateRoles).toEqual({
                     total: seeder.collectionResponse.length,
                     count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'roleIds']))).slice(0, 5)
+                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'permissionIds', 'accountIds']))).slice(0, 5)
                 });
             });
     });
 
-    test('/GraphQL iamGetPermissions', () =>
+    test('/GraphQL iamGetRoles', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -454,10 +465,11 @@ describe('permission', () =>
                 query: `
                     query ($query:QueryStatement)
                     {
-                        iamGetPermissions (query:$query)
+                        iamGetRoles (query:$query)
                         {
                             id
                             name
+                            isMaster
                             createdAt
                             updatedAt
                         }
@@ -468,46 +480,46 @@ describe('permission', () =>
             .expect(200)
             .then(res =>
             {
-                for (const [index, value] of res.body.data.iamGetPermissions.entries())
+                for (const [index, value] of res.body.data.iamGetRoles.entries())
                 {
                     expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
                 }
             });
     });
 
-    test('/GraphQL iamCreatePermission', () =>
+    test('/GraphQL iamCreateRole', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:IamCreatePermissionInput!)
+                    mutation ($payload:IamCreateRoleInput!)
                     {
-                        iamCreatePermission (payload:$payload)
+                        iamCreateRole (payload:$payload)
                         {
                             id
                             name
-                            boundedContextId
+                            isMaster
                         }
                     }
                 `,
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Awesome Fresh Hat',
-                        boundedContextId: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                        name: 'Awesome Metal Chicken',
+                        isMaster: false,
                     }
                 }
             })
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.iamCreatePermission).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+                expect(res.body.data.iamCreateRole).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 
-    test('/GraphQL iamFindPermission - Got 404 Not Found', () =>
+    test('/GraphQL iamFindRole - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -516,10 +528,11 @@ describe('permission', () =>
                 query: `
                     query ($query:QueryStatement)
                     {
-                        iamFindPermission (query:$query)
+                        iamFindRole (query:$query)
                         {
                             id
                             name
+                            isMaster
                             createdAt
                             updatedAt
                         }
@@ -531,7 +544,7 @@ describe('permission', () =>
                     {
                         where:
                         {
-                            id: 'c7d85ba1-8bd9-4e60-acd8-681fb95c7016'
+                            id: 'd31c88b1-167a-4dca-8f10-a159a3d2d388'
                         }
                     }
                 }
@@ -545,7 +558,7 @@ describe('permission', () =>
             });
     });
 
-    test('/GraphQL iamFindPermission', () =>
+    test('/GraphQL iamFindRole', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -554,10 +567,11 @@ describe('permission', () =>
                 query: `
                     query ($query:QueryStatement)
                     {
-                        iamFindPermission (query:$query)
+                        iamFindRole (query:$query)
                         {
                             id
                             name
+                            isMaster
                             createdAt
                             updatedAt
                         }
@@ -577,11 +591,11 @@ describe('permission', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.iamFindPermission.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+                expect(res.body.data.iamFindRole.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 
-    test('/GraphQL iamFindPermissionById - Got 404 Not Found', () =>
+    test('/GraphQL iamFindRoleById - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -590,17 +604,18 @@ describe('permission', () =>
                 query: `
                     query ($id:ID!)
                     {
-                        iamFindPermissionById (id:$id)
+                        iamFindRoleById (id:$id)
                         {
                             id
                             name
+                            isMaster
                             createdAt
                             updatedAt
                         }
                     }
                 `,
                 variables: {
-                    id: 'ba006fab-1646-4ec3-89a4-1959780d3da4'
+                    id: '0230e26a-f1bf-4c92-9f66-61512a10e4cb'
                 }
             })
             .expect(200)
@@ -612,7 +627,7 @@ describe('permission', () =>
             });
     });
 
-    test('/GraphQL iamFindPermissionById', () =>
+    test('/GraphQL iamFindRoleById', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -621,10 +636,11 @@ describe('permission', () =>
                 query: `
                     query ($id:ID!)
                     {
-                        iamFindPermissionById (id:$id)
+                        iamFindRoleById (id:$id)
                         {
                             id
                             name
+                            isMaster
                             createdAt
                             updatedAt
                         }
@@ -637,23 +653,24 @@ describe('permission', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.iamFindPermissionById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+                expect(res.body.data.iamFindRoleById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 
-    test('/GraphQL iamUpdatePermission - Got 404 Not Found', () =>
+    test('/GraphQL iamUpdateRole - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:IamUpdatePermissionInput!)
+                    mutation ($payload:IamUpdateRoleInput!)
                     {
-                        iamUpdatePermission (payload:$payload)
+                        iamUpdateRole (payload:$payload)
                         {
                             id
                             name
+                            isMaster
                             createdAt
                             updatedAt
                         }
@@ -661,10 +678,11 @@ describe('permission', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'c2c9d1a1-3e66-4595-bd5e-f03d6d90e3cb',
-                        name: 'Small Concrete Soap',
-                        boundedContextId: '5978065c-8f36-4bd2-92ed-51e67dba0c82',
-                        roleIds: [],
+                        id: '6c8d7337-d09a-401f-abc8-4793dd09d533',
+                        name: 'Licensed Concrete Tuna',
+                        isMaster: false,
+                        permissionIds: [],
+                        accountIds: [],
                     }
                 }
             })
@@ -677,19 +695,20 @@ describe('permission', () =>
             });
     });
 
-    test('/GraphQL iamUpdatePermission', () =>
+    test('/GraphQL iamUpdateRole', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:IamUpdatePermissionInput!)
+                    mutation ($payload:IamUpdateRoleInput!)
                     {
-                        iamUpdatePermission (payload:$payload)
+                        iamUpdateRole (payload:$payload)
                         {
                             id
                             name
+                            isMaster
                             createdAt
                             updatedAt
                         }
@@ -698,20 +717,21 @@ describe('permission', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Rustic Concrete Salad',
-                        boundedContextId: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        roleIds: [],
+                        name: 'Gorgeous Frozen Chips',
+                        isMaster: false,
+                        permissionIds: [],
+                        accountIds: [],
                     }
                 }
             })
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.iamUpdatePermission.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+                expect(res.body.data.iamUpdateRole.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 
-    test('/GraphQL iamDeletePermissionById - Got 404 Not Found', () =>
+    test('/GraphQL iamDeleteRoleById - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -720,17 +740,18 @@ describe('permission', () =>
                 query: `
                     mutation ($id:ID!)
                     {
-                        iamDeletePermissionById (id:$id)
+                        iamDeleteRoleById (id:$id)
                         {
                             id
                             name
+                            isMaster
                             createdAt
                             updatedAt
                         }
                     }
                 `,
                 variables: {
-                    id: 'bfba2919-1be7-479e-83cb-bb57da9b6c53'
+                    id: 'cd11b19f-76b2-428b-b0de-1f73aac5bbd1'
                 }
             })
             .expect(200)
@@ -742,7 +763,7 @@ describe('permission', () =>
             });
     });
 
-    test('/GraphQL iamDeletePermissionById', () =>
+    test('/GraphQL iamDeleteRoleById', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -751,10 +772,11 @@ describe('permission', () =>
                 query: `
                     mutation ($id:ID!)
                     {
-                        iamDeletePermissionById (id:$id)
+                        iamDeleteRoleById (id:$id)
                         {
                             id
                             name
+                            isMaster
                             createdAt
                             updatedAt
                         }
@@ -767,7 +789,7 @@ describe('permission', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.iamDeletePermissionById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+                expect(res.body.data.iamDeleteRoleById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 

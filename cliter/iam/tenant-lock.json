@@ -1,4 +1,497 @@
 {
     "version": "0.0.1",
-    "files": []
+    "files": [
+        {
+            "path": "src/@apps/iam/tenant/application/create/create-tenant.command-handler.spec.ts",
+            "integrity": "sha1:db4ccb702008c4055819ea1c066786a08befd837"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/create/create-tenant.command-handler.ts",
+            "integrity": "sha1:5c8bdfa98df076cd8e21f15defa54fddce304e14"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/create/create-tenant.command.ts",
+            "integrity": "sha1:74e5005944eee7456d90702548401a6d634427d7"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/create/create-tenant.service.spec.ts",
+            "integrity": "sha1:312424b63fc490ac1ccb59fd2f6870e466e81295"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/create/create-tenant.service.ts",
+            "integrity": "sha1:a0741e21cd20fd286aac419850388f120f3ab53b"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/create/create-tenants.command-handler.spec.ts",
+            "integrity": "sha1:acc138a8becfcd308647e447fae0031f0ad69d04"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/create/create-tenants.command-handler.ts",
+            "integrity": "sha1:b356da52b88a5d62c1ac18e05162b3d9910117fb"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/create/create-tenants.command.ts",
+            "integrity": "sha1:517ff6453bfddc52be4b827d377d47905cbb2cf3"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/create/create-tenants.service.spec.ts",
+            "integrity": "sha1:f92fa3e8200a21832b01550a83eb2bbec0285795"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/create/create-tenants.service.ts",
+            "integrity": "sha1:d6caab030eff80bfae16adf8632cbd185f74cbde"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/delete/delete-tenant-by-id.command-handler.spec.ts",
+            "integrity": "sha1:bc2bb138c3c4f7ff4f105400ad3540cd8a43b521"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/delete/delete-tenant-by-id.command-handler.ts",
+            "integrity": "sha1:dbbb5e772ff6edb6659e1c7151e88ae5474a0bdf"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/delete/delete-tenant-by-id.command.ts",
+            "integrity": "sha1:00375218c92d2cd56109fe5261b71ab495e21007"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/delete/delete-tenant-by-id.service.spec.ts",
+            "integrity": "sha1:207ae6d95d85951082a66ec2125a4c23244c480d"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/delete/delete-tenant-by-id.service.ts",
+            "integrity": "sha1:456c2eaceecba8f3556e0ccace72a377a513a799"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/delete/delete-tenants.command-handler.spec.ts",
+            "integrity": "sha1:75284503c0e8ea05be8b05e95bced9931a348d67"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/delete/delete-tenants.command-handler.ts",
+            "integrity": "sha1:aa7395a5878a8c892c1755c629ee0eb2fa2e54aa"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/delete/delete-tenants.command.ts",
+            "integrity": "sha1:d01bb2f7eab63bcaf637fa0685efedff363f49f8"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/delete/delete-tenants.service.spec.ts",
+            "integrity": "sha1:08a767d16d5e5560bac7ec7907a78e8d4afbb729"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/delete/delete-tenants.service.ts",
+            "integrity": "sha1:15d06a9ef00d95cc48b369826c92f6aaf61408d8"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/events/add-tenants-context.event.ts",
+            "integrity": "sha1:b05ffdc2a3e56545ea62b7492b06deab361f3689"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/events/created-tenant.event-handler.ts",
+            "integrity": "sha1:3720c81b5753856c8ef08371a71efaaa1b195f18"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/events/created-tenant.event.ts",
+            "integrity": "sha1:d412b86f4a7750bda2663ab1a76e345f6659840e"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/events/created-tenants.event-handler.ts",
+            "integrity": "sha1:1c4d0c034cf2ae0f6977f8bce54c4cbed4b19da9"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/events/created-tenants.event.ts",
+            "integrity": "sha1:0c8bce9757878e024c7ee337f815c76f84da3f8c"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/events/deleted-tenant.event-handler.ts",
+            "integrity": "sha1:de3dd754e7913b09096a14155144dc382c3094e4"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/events/deleted-tenant.event.ts",
+            "integrity": "sha1:42589f33a29a606921e5b8e92ca488bdf0c23b49"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/events/deleted-tenants.event-handler.ts",
+            "integrity": "sha1:4785f6ea1487a846c23bb0c733a6bce82a9a3a91"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/events/deleted-tenants.event.ts",
+            "integrity": "sha1:528e9d5fa7f26912698eb87ff2df577ad8cf7ecf"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/events/updated-tenant.event-handler.ts",
+            "integrity": "sha1:1bd7324066913cdac14347b608378432ed7afa68"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/events/updated-tenant.event.ts",
+            "integrity": "sha1:02e618ec57c854164b6998ec9b9e932e714d61c2"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/find/find-tenant-by-id.query-handler.spec.ts",
+            "integrity": "sha1:ee06c9fc23a4241008242fd15a0de9f5eb08fc87"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/find/find-tenant-by-id.query-handler.ts",
+            "integrity": "sha1:cb104b1d381f5b60adcf26a7f6248a0518fbc704"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/find/find-tenant-by-id.query.ts",
+            "integrity": "sha1:c3ebc92165738d7cb826e98afdc6dde12b52ba24"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/find/find-tenant-by-id.service.spec.ts",
+            "integrity": "sha1:c58f8baa646ee691af3c9eeb36524d2b359b693c"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/find/find-tenant-by-id.service.ts",
+            "integrity": "sha1:3568ee2df10cc404847cd99f4286282b6e93ccdc"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/find/find-tenant.query-handler.spec.ts",
+            "integrity": "sha1:e90a1e031a0689619671e99626a9fbd37dfa0c1f"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/find/find-tenant.query-handler.ts",
+            "integrity": "sha1:6b2660ab5700293a5923c712c76cdac6cb7976e3"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/find/find-tenant.query.ts",
+            "integrity": "sha1:4dc633a9a670c3b7c8e8f9e4a516e654cf61987c"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/find/find-tenant.service.spec.ts",
+            "integrity": "sha1:12291a8c4603e48b817a7998c3aecd7b157a6de3"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/find/find-tenant.service.ts",
+            "integrity": "sha1:91bba990e0d0e1ae318aab431a71111a35cb1254"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/get/get-tenants.query-handler.spec.ts",
+            "integrity": "sha1:37adafed92d3a80d0b21c2421e94fecb8c49f2f6"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/get/get-tenants.query-handler.ts",
+            "integrity": "sha1:262ce0ea1f6f69c1017f4b4dc44506afeab0419f"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/get/get-tenants.query.ts",
+            "integrity": "sha1:a0b28105662c88b2e92adbf0642ef3f95d4c7633"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/get/get-tenants.service.spec.ts",
+            "integrity": "sha1:d511312dd267551c32d5ca8de4061a323aec35ca"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/get/get-tenants.service.ts",
+            "integrity": "sha1:ac754201470961f9f6fd8a40f96fb785dc2f039e"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/paginate/paginate-tenants.query-handler.spec.ts",
+            "integrity": "sha1:89721244bdf6589dc8fd28ae0a339e83c41f4954"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/paginate/paginate-tenants.query-handler.ts",
+            "integrity": "sha1:9e8f3859f7458148d7c6e80dcf37e2806be4cbb0"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/paginate/paginate-tenants.query.ts",
+            "integrity": "sha1:ad461f59f9db433724a4aea15cfb02e93bd24100"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/paginate/paginate-tenants.service.spec.ts",
+            "integrity": "sha1:975aa07b6ed21fa6bd0d0a14196786e11ac3e9b0"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/paginate/paginate-tenants.service.ts",
+            "integrity": "sha1:fa1ca06f346933704ed2b6c6df1835d16c64551e"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/sagas/tenant.sagas.ts",
+            "integrity": "sha1:ee61aadbead90223ec6895e5f5e640e39a67acac"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/update/update-tenant.command-handler.spec.ts",
+            "integrity": "sha1:6b02c19b81fcf7e459d27a529fdec50872546baf"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/update/update-tenant.command-handler.ts",
+            "integrity": "sha1:6121781dbee7b6f016be4129c7eae21eeeb2204b"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/update/update-tenant.command.ts",
+            "integrity": "sha1:d5f78a161941b363ea344c3b920c542820193c48"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/update/update-tenant.service.spec.ts",
+            "integrity": "sha1:99f45d15cb081ee8607351309a32e3a95aeffd12"
+        },
+        {
+            "path": "src/@apps/iam/tenant/application/update/update-tenant.service.ts",
+            "integrity": "sha1:4d8eec772d3dbbc24a9704ef7dd1ae3e7bd78a1c"
+        },
+        {
+            "path": "src/@apps/iam/tenant/domain/tenant.aggregate.ts",
+            "integrity": "sha1:bcb8d075447ee42f074b36fd083506a8206463ac"
+        },
+        {
+            "path": "src/@apps/iam/tenant/domain/tenant.mapper.ts",
+            "integrity": "sha1:493946e5787d224c6ccae3394a70b9d3a140cdf9"
+        },
+        {
+            "path": "src/@apps/iam/tenant/domain/tenant.repository.ts",
+            "integrity": "sha1:50555527914d3f082582ff40e42fabf1c17f1ee9"
+        },
+        {
+            "path": "src/@apps/iam/tenant/domain/tenant.response.ts",
+            "integrity": "sha1:2097ef16687374d13037ec67aa63487da85946c7"
+        },
+        {
+            "path": "src/@apps/iam/tenant/domain/value-objects/index.ts",
+            "integrity": "sha1:5652910bd40ed33785ecb807108b56e05f8cc696"
+        },
+        {
+            "path": "src/@apps/iam/tenant/index.ts",
+            "integrity": "sha1:8ebcda3da88738d7ba103cd8dff76bff80a62349"
+        },
+        {
+            "path": "src/@apps/iam/tenant/infrastructure/mock/mock-tenant.repository.ts",
+            "integrity": "sha1:433b0fed329886aaed665f7bf9f6b38e2b6c592b"
+        },
+        {
+            "path": "src/@apps/iam/tenant/infrastructure/mock/mock-tenant.seeder.ts",
+            "integrity": "sha1:bd7d1c4b66e166bc294d248f5ee420ca709ff230"
+        },
+        {
+            "path": "src/@apps/iam/tenant/infrastructure/seeds/tenant.seed.ts",
+            "integrity": "sha1:2f4747168dc14a1f91b90edfccdd2b56e1d151d9"
+        },
+        {
+            "path": "src/@apps/iam/tenant/infrastructure/sequelize/sequelize-tenant.model.ts",
+            "integrity": "sha1:4b87581fe88446b375319fb674822fb720e939bc"
+        },
+        {
+            "path": "src/@apps/iam/tenant/infrastructure/sequelize/sequelize-tenant.repository.ts",
+            "integrity": "sha1:bc67d28908a82653e88ff1683dec66e8557b6468"
+        },
+        {
+            "path": "src/@apps/iam/tenant/domain/value-objects/tenant-id.ts",
+            "integrity": "sha1:e9f9c9f45d9a3a292eceb043f69da82253d6b55a"
+        },
+        {
+            "path": "src/@apps/iam/tenant/domain/value-objects/tenant-name.ts",
+            "integrity": "sha1:77c6247fcf3884f126e69e1cb170ef02b5e7a178"
+        },
+        {
+            "path": "src/@apps/iam/tenant/domain/value-objects/tenant-code.ts",
+            "integrity": "sha1:4f0ab5d5044d7244b7d6dea5036760330916dd69"
+        },
+        {
+            "path": "src/@apps/iam/tenant/domain/value-objects/tenant-logo.ts",
+            "integrity": "sha1:af26450e44bdbcf5328b19c690fcd4ea2161b370"
+        },
+        {
+            "path": "src/@apps/iam/tenant/domain/value-objects/tenant-is-active.ts",
+            "integrity": "sha1:b0c07dafc5f637feab5b96afdd2b048e0a2af153"
+        },
+        {
+            "path": "src/@apps/iam/tenant/domain/value-objects/tenant-data.ts",
+            "integrity": "sha1:d0c05516432e6c32fdbe5e1c425bbfa9d87ecb99"
+        },
+        {
+            "path": "src/@apps/iam/tenant/domain/value-objects/tenant-account-ids.ts",
+            "integrity": "sha1:aee57b5b8ab71c00f8fad92917165c8c4e8c92da"
+        },
+        {
+            "path": "src/@apps/iam/tenant/domain/value-objects/tenant-created-at.ts",
+            "integrity": "sha1:bd49ff5409be7262f60be8f9016703132e58d23e"
+        },
+        {
+            "path": "src/@apps/iam/tenant/domain/value-objects/tenant-updated-at.ts",
+            "integrity": "sha1:db29bd6982b7d1378ef2cc0fa0b6a8e9768d522d"
+        },
+        {
+            "path": "src/@apps/iam/tenant/domain/value-objects/tenant-deleted-at.ts",
+            "integrity": "sha1:199201e7f41929535d72e89a1f3c143693039a40"
+        },
+        {
+            "path": "src/@apps/iam/tenant/infrastructure/sequelize/sequelize-tenants-accounts.model.ts",
+            "integrity": "sha1:35ba40ad23b550845c912504cd17799f13ad6016"
+        },
+        {
+            "path": "src/@api/iam/tenant/controllers/iam-create-tenant.controller.spec.ts",
+            "integrity": "sha1:f8cae5680505826200d0093b7eb1fdd27428a97e"
+        },
+        {
+            "path": "src/@api/iam/tenant/controllers/iam-create-tenant.controller.ts",
+            "integrity": "sha1:1f4798e4551f0aa07807f57fe9117c9f3ecbef0e"
+        },
+        {
+            "path": "src/@api/iam/tenant/controllers/iam-create-tenants.controller.spec.ts",
+            "integrity": "sha1:563a281207ee2113528fdd7fdcceaad4500dc450"
+        },
+        {
+            "path": "src/@api/iam/tenant/controllers/iam-create-tenants.controller.ts",
+            "integrity": "sha1:91c05c1ade87eba9c70762afc614a0c3c6858d85"
+        },
+        {
+            "path": "src/@api/iam/tenant/controllers/iam-delete-tenant-by-id.controller.spec.ts",
+            "integrity": "sha1:d68671b5c060db4b56691b9b399fe6c1c3e4ee5e"
+        },
+        {
+            "path": "src/@api/iam/tenant/controllers/iam-delete-tenant-by-id.controller.ts",
+            "integrity": "sha1:f731941d6018f6904f8f0310e38a4f2143d304db"
+        },
+        {
+            "path": "src/@api/iam/tenant/controllers/iam-delete-tenants.controller.spec.ts",
+            "integrity": "sha1:faafd6c6b5c23f8819491c7d3505fa8f713f3926"
+        },
+        {
+            "path": "src/@api/iam/tenant/controllers/iam-delete-tenants.controller.ts",
+            "integrity": "sha1:9b2ba025d233e647fc40c09f6c72420cdc708df4"
+        },
+        {
+            "path": "src/@api/iam/tenant/controllers/iam-find-tenant-by-id.controller.spec.ts",
+            "integrity": "sha1:13d07105315cdd0147bc396e29ce19aa324e6507"
+        },
+        {
+            "path": "src/@api/iam/tenant/controllers/iam-find-tenant-by-id.controller.ts",
+            "integrity": "sha1:2a5dff542d1b1ffdf8a11c96ccafdc66e6d5c6e1"
+        },
+        {
+            "path": "src/@api/iam/tenant/controllers/iam-find-tenant.controller.spec.ts",
+            "integrity": "sha1:e693dd547014824299daacdd920a2e698586f3f1"
+        },
+        {
+            "path": "src/@api/iam/tenant/controllers/iam-find-tenant.controller.ts",
+            "integrity": "sha1:b7e0261ce4f1dd81f35a13a227f4687ae70f288d"
+        },
+        {
+            "path": "src/@api/iam/tenant/controllers/iam-get-tenants.controller.spec.ts",
+            "integrity": "sha1:32a812b6e61807b2a9bd697449370b4983caa7f7"
+        },
+        {
+            "path": "src/@api/iam/tenant/controllers/iam-get-tenants.controller.ts",
+            "integrity": "sha1:10b23dabdec08472da4b0c9d68ed005e4a2dd391"
+        },
+        {
+            "path": "src/@api/iam/tenant/controllers/iam-paginate-tenants.controller.spec.ts",
+            "integrity": "sha1:511a64530b1125167a3a0c11e1980bc919efcdff"
+        },
+        {
+            "path": "src/@api/iam/tenant/controllers/iam-paginate-tenants.controller.ts",
+            "integrity": "sha1:12ea92df95716968899831fec3f4e40eefe40c05"
+        },
+        {
+            "path": "src/@api/iam/tenant/controllers/iam-update-tenant.controller.spec.ts",
+            "integrity": "sha1:6ce70deb398b220463b09a1c816706a48ce0fe8b"
+        },
+        {
+            "path": "src/@api/iam/tenant/controllers/iam-update-tenant.controller.ts",
+            "integrity": "sha1:16d49913f49a93294e98ba28b4790f7d19f61dd4"
+        },
+        {
+            "path": "src/@api/iam/tenant/dto/tenant.dto.ts",
+            "integrity": "sha1:58157662c78b38dc4ca59b303b90d2224e07a3ff"
+        },
+        {
+            "path": "src/@api/iam/tenant/dto/create-tenant.dto.ts",
+            "integrity": "sha1:c24c2ad84870fd36c6d986e99457de9f26db661d"
+        },
+        {
+            "path": "src/@api/iam/tenant/dto/update-tenant.dto.ts",
+            "integrity": "sha1:97c761757f53f1cec021cfca7db1b73c6b296f42"
+        },
+        {
+            "path": "src/@api/iam/tenant/graphql/tenant.graphql",
+            "integrity": "sha1:6fcbfca3fa56671c7e2e9657ee38163a7f319f07"
+        },
+        {
+            "path": "src/@api/iam/tenant/index.ts",
+            "integrity": "sha1:7c8385826d0a351f92f93a040bf52b637194b5bd"
+        },
+        {
+            "path": "src/@api/iam/tenant/resolvers/iam-create-tenant.resolver.spec.ts",
+            "integrity": "sha1:a4a88e7c3a3c8fc0358d8507fbe46c1676153dd3"
+        },
+        {
+            "path": "src/@api/iam/tenant/resolvers/iam-create-tenant.resolver.ts",
+            "integrity": "sha1:846e34118135e3281617c9f1c3409f4e7d9c0e3d"
+        },
+        {
+            "path": "src/@api/iam/tenant/resolvers/iam-create-tenants.resolver.spec.ts",
+            "integrity": "sha1:10beb8a9ad6430c352704c976fb8656e0f6426b2"
+        },
+        {
+            "path": "src/@api/iam/tenant/resolvers/iam-create-tenants.resolver.ts",
+            "integrity": "sha1:92471d7e8fafa3297b836457cf5c6c9a34c538ed"
+        },
+        {
+            "path": "src/@api/iam/tenant/resolvers/iam-delete-tenant-by-id.resolver.spec.ts",
+            "integrity": "sha1:0dc0843834d9e142d9af4e35f874c0bd1ee91fe0"
+        },
+        {
+            "path": "src/@api/iam/tenant/resolvers/iam-delete-tenant-by-id.resolver.ts",
+            "integrity": "sha1:5b5c84471103f0a7482dc2e8c2770af18117f86e"
+        },
+        {
+            "path": "src/@api/iam/tenant/resolvers/iam-delete-tenants.resolver.spec.ts",
+            "integrity": "sha1:b889d3d27958c59ac24c5298f7532efdc9ba4b85"
+        },
+        {
+            "path": "src/@api/iam/tenant/resolvers/iam-delete-tenants.resolver.ts",
+            "integrity": "sha1:538da9aee31a7477d7fcc08979169fdb58caa27d"
+        },
+        {
+            "path": "src/@api/iam/tenant/resolvers/iam-find-tenant-by-id.resolver.spec.ts",
+            "integrity": "sha1:2a09b2fed29795efeaaeeae16a3b6b2f9d1cc066"
+        },
+        {
+            "path": "src/@api/iam/tenant/resolvers/iam-find-tenant-by-id.resolver.ts",
+            "integrity": "sha1:f27dea5d11e5f6a90709dff94db8e01b743f392f"
+        },
+        {
+            "path": "src/@api/iam/tenant/resolvers/iam-find-tenant.resolver.spec.ts",
+            "integrity": "sha1:ecef43240a76fad1b905af52db0caf6358106580"
+        },
+        {
+            "path": "src/@api/iam/tenant/resolvers/iam-find-tenant.resolver.ts",
+            "integrity": "sha1:30a03bc23d928f28444bf51fa99ab018fede5752"
+        },
+        {
+            "path": "src/@api/iam/tenant/resolvers/iam-get-tenants.resolver.spec.ts",
+            "integrity": "sha1:4fcc522bc14fd4af6ee658bc7e0e35feb0f188c9"
+        },
+        {
+            "path": "src/@api/iam/tenant/resolvers/iam-get-tenants.resolver.ts",
+            "integrity": "sha1:d9f32f45e0ae4f99b9ca36b1384c8854fe6cb67a"
+        },
+        {
+            "path": "src/@api/iam/tenant/resolvers/iam-paginate-tenants.resolver.spec.ts",
+            "integrity": "sha1:558f419ea9b3b2a7826543985f061217d61cce7f"
+        },
+        {
+            "path": "src/@api/iam/tenant/resolvers/iam-paginate-tenants.resolver.ts",
+            "integrity": "sha1:7d7643d07701cc6c9127d430a5a7d69e4a91e7ac"
+        },
+        {
+            "path": "src/@api/iam/tenant/resolvers/iam-update-tenant.resolver.spec.ts",
+            "integrity": "sha1:ab393ef504f48a8f3fe4838e1651491cbe1df38f"
+        },
+        {
+            "path": "src/@api/iam/tenant/resolvers/iam-update-tenant.resolver.ts",
+            "integrity": "sha1:0bb9c9d0c878735c3085296a39032fb35c2c5405"
+        },
+        {
+            "path": "src/@api/iam/tenant/seeder/seeder.module.ts",
+            "integrity": "sha1:1eecfa92976be3106391aea32c8844b1744e1b45"
+        },
+        {
+            "path": "src/@api/iam/tenant/seeder/seeder.ts",
+            "integrity": "sha1:a80321fbe7112dec9f5341eeec6a2ea96c500d2f"
+        },
+        {
+            "path": "postman/iam.tenant.postman.json",
+            "integrity": "sha1:1e2f7063ae651a0c4634b9a1887e299e9b9e389b"
+        }
+    ]
 }
