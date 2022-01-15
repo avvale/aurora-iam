@@ -1,0 +1,59 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
+import { ICommandBus, IQueryBus } from 'aurora-ts-core';
+
+// custom items
+import { IamPaginateUsersController } from './iam-paginate-users.controller';
+
+// sources
+import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed';
+
+describe('IamPaginateUsersController', () =>
+{
+    let controller: IamPaginateUsersController;
+    let queryBus: IQueryBus;
+    let commandBus: ICommandBus;
+
+    beforeAll(async () =>
+    {
+        const module: TestingModule = await Test.createTestingModule({
+            imports: [
+            ],
+            controllers: [
+                IamPaginateUsersController
+            ],
+            providers: [
+                {
+                    provide : IQueryBus,
+                    useValue: {
+                        ask: () => { /**/ },
+                    }
+                },
+                {
+                    provide : ICommandBus,
+                    useValue: {
+                        dispatch: () => { /**/ },
+                    }
+                },
+            ]
+        }).compile();
+
+        controller  = module.get<IamPaginateUsersController>(IamPaginateUsersController);
+        queryBus    = module.get<IQueryBus>(IQueryBus);
+        commandBus  = module.get<ICommandBus>(ICommandBus);
+    });
+
+    describe('main', () =>
+    {
+        test('IamPaginateUsersController should be defined', () =>
+        {
+            expect(controller).toBeDefined();
+        });
+
+        test('should return a users', async () =>
+        {
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(users)));
+            expect(await controller.main()).toBe(users);
+        });
+    });
+});

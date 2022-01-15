@@ -1,0 +1,553 @@
+{
+    "info": {
+		"_postman_id"   : "ac4a9d0e-4b0d-4215-869d-6fcc76c7bdb5",
+		"name"          : "@apps - iam/tenant",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - iamCreateTenant",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:IamCreateTenantInput!)\n{\n\tiamCreateTenant (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Gorgeous Cotton Gloves\", \n\t\t\"code\": \"ewdbjtdfxtcm2ysv547cgukk0dtyn3gye8ejnvp8d20b5ukvfz\", \n\t\t\"logo\": \"7lauejy4llaqr6x69no6fv950ujo95syv74ez8ni6yaywpvk1e6k2s51efoqqulsbpx8hh6h9hkp97pjdrcjx0wjz3bjslw4g31bryzku8j31uw425n9zmflqmd2dgib47u07to0ld9v6eu7jsq5mvqcz0m685ols25owuct367c3468t23hggl5m92l4liap9aodzvj32tlp6mmlvndv1wr92t1l8hqwd3efqzzlh1sz9vqv43s4kyaqh73fsy\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamCreateTenants",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[IamCreateTenantInput]!)\n{\n\tiamCreateTenants (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"8e63c85d-0c58-4193-9262-63bb67931a13\", \n\t\t\t\"name\": \"Fantastic Cotton Shirt\", \n\t\t\t\"code\": \"e40ovcb60w9g1bqq78mg1mpieglplwx26shvic11co7bf0wzka\", \n\t\t\t\"logo\": \"gnsghnj2kp1ad1dj91uuwo3nij1p93ku7890ol3hk6d6f618w9l72lyv7wjv2sx4p63zopal89app4w7yc72sbpesovpavtya30azgv6z7k3z8b3habrfio1podkbsgxdyavdlttlkibj1lao60iv59wt2ol1286ungpzzbmce4k3o0kxds79ow8msgr3lt15ktbhfjt7u14xfrfh52vxvup3eys2fj87tewixls5p9rrze9ozm91fdc2kdlkwz\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"d1c58671-1e99-4140-bba2-92ab53c2f251\", \n\t\t\t\"name\": \"Rustic Plastic Towels\", \n\t\t\t\"code\": \"4j84d5or02ghahi7jqm5z8vsnwc16867o6mt9u6sxat3g2k729\", \n\t\t\t\"logo\": \"j5dypyk9wfpx887gaa2xetwkmvfmrmn2hz7dgqxge3htekd6dgd21e66vxkel9lako18gamclwd3vsjpitkxnpx1ou1rzw0u2rcmnl8pd28bbbzsd63f3e5ewwex49hx77mig5aazghz2ixxpq0rpraba7l57b0uelxmkdn75ec50nf1g50jevs1w30y9t3mw3y1y39tu9gqafkrzkz513vr7fgpr81pbmahw4f2nw8t5dc7jwm23ro45ltrme3\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"bacdb6a8-af0b-4f6f-ba0b-e92b0a0f5e16\", \n\t\t\t\"name\": \"Unbranded Concrete Car\", \n\t\t\t\"code\": \"jw9cm9kxzhv8lefmalr5701nv0gv239uvx4qkgf6me9esxb4b5\", \n\t\t\t\"logo\": \"bkco0tmktarj8baap4nqmyr2w0hy3i7ihcurgq9rcunvmt4st73qu9bwqlpb6nwk2vuymb9ceons292tng4k64kmrwvkqdlfp7p4k8skz1s9vhoo4781idou8hlnpp88dc1ax70wb1m7ctco4s9zejxo00tb4jpnfcbydkr7au9q3axt3erwftdd11pj71h02hyhu5l6pskuw9jqggn16iczrnpd7kddup5tjd4kdorp78ntowcbm3xtmlxqirq\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"349be9d7-871b-438a-b300-216da1137640\", \n\t\t\t\"name\": \"Rustic Frozen Shirt\", \n\t\t\t\"code\": \"3jvzdx9yxl2n59tc1vd3w8zbtb74eioa2fgm2fyts1kxajpfs1\", \n\t\t\t\"logo\": \"mwe62lemzi4s6pa4op1nz3utsr2i4diytiih8qe865z1azvea9tfgjc2b35d16uq4mkpnsuu7nquajg41jit5yfvrffs6jxzq2pen2ntftu22eouhqhl65j26ke8uttsf76p0kpb57ol2deqxzsewqfjnhvaiy1xyego5t3cx1cuxf8md83widopdtr4j8w9qejdgz6wuttjux5pt9vq6pwcf4b6res09qxj7o4b2j5zwpvxdmxfdesjktijyer\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"632cce98-c5ce-45f2-8127-a7184c24c181\", \n\t\t\t\"name\": \"Incredible Plastic Table\", \n\t\t\t\"code\": \"ezitvccp91koify22984remaitobtyx9et6s7bq86akawr1hmq\", \n\t\t\t\"logo\": \"h3kx2kixh97kjr39qz7hpuba2bz739mcfeay0z637872vg3cxq37tvzkaebsgfjfxn6lya00g5hodwbvxzi6ob99iwlxjv1rkb30cnrltjplj89psvcbbpjijtxtk34bu1i0l39wvhv1rky4mek6oft7ojc0i2550lva08sciqamkglyaos210ouodoxfwq8ikv9dwa3f3hmupr6l0r2lx6go7qmw89trxtuoc32m3a1c8vz5o1vcz2ahg20cdc\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"f80e97c3-3ea6-483f-b4f6-97d71b9da09c\", \n\t\t\t\"name\": \"Unbranded Concrete Keyboard\", \n\t\t\t\"code\": \"yqxz0ijlri76i3mutra0gj4kayj5maj81lmdvrt9hmw6evwxqr\", \n\t\t\t\"logo\": \"69dp0vk1mxa7cba1tq8nh6dswkixutw8k9i5ks7vy3khbinptpox9klhhuwoefuu9iws7jta9k8p4m1u6kv0y5ju70nlw0yzp1pkszce3szkat7mcvd3brfvb6kxrwzd1q7o785fuf5wvoelzoe46kc5kpnmg1l2loubi2eaazgbczbektnf3zcx9xlqwswyw4m7l0s8paaqcds2wmmz95jxn7p6aeeortbuwwwddtlfg6ulthtctklxn0ixcef\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"d76bfa08-24a7-47df-a288-b7b6105ef46a\", \n\t\t\t\"name\": \"Gorgeous Granite Car\", \n\t\t\t\"code\": \"z5mjfwvqvrjw999hrl61ydlq2sd35hejpyfqnrshguc3jyyamh\", \n\t\t\t\"logo\": \"nymh94erytah1mctf6yddujph1nnfxsvviimge0kcx8i6nk869jrz0fsf6nb27445t17m6jm9tmqi0grcsrjrocvx12m99jvo9dis50qide7l4qpxshsufcih5qn5qm6dlen5e65esokko13mpwpaixe8mcs8lb2uejsli7aq8kihyrsmohnbywfg57tq4t4m49i1zk471vbp2z99g7v4qy9w13p23x2s2yvk3buidy2chzz5iav8eu0cb9o8um\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"0c73698d-1031-4d55-8e08-61edd1a210a1\", \n\t\t\t\"name\": \"Small Concrete Ball\", \n\t\t\t\"code\": \"c2pq7hl9hn95baru9njkcchoiohxhi34us9gmu5emnjlf2w79n\", \n\t\t\t\"logo\": \"g7lymonporl35g8puncsxrq5c2c8uppcdrv895282s6dt7fjj5haxty2bq2yfcbkzqm5s7u3bzwfjla2rphgjm3oh3dru19mn119qpbtwc24msquswg37nqyv2htc0fqo3979bj0dvbk9s7y1oacw4lmofemlkhhywqblp7f97nntxspowsitrpstwhyohzxpf1t43qhwfae0ho828sbfl6yft879hr6ne8jhizlwwg9xmhor0al3lvmpomqhkr\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"6cf7dfca-3235-45c8-8e9c-f0545036692e\", \n\t\t\t\"name\": \"Fantastic Granite Keyboard\", \n\t\t\t\"code\": \"dhianyqyxy5q8sblosdja6qe6y3gd0gfjmwrszdogn7h7q0wsm\", \n\t\t\t\"logo\": \"fnbh77jsstgqwemj9cif7bs8bc0b33mikdelw5gzaa5gf2t0aupas26al5cmxd00gus31gp0q4s9ayy2m2pvnged9cxqhyuj8sr9w1yspq3xt5yv0lim08w84zrd5xakgjye93bumog0qztwrum2ugfagk9z2p0punfcabfqak5us6jjsq0uopsrsbf9jreue2nn8pjfkysgpwb9allxj5kcc97qffwp82rsy4w2n0xx7jfh28jk6cvz2lj6kmo\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"842bce47-c0fe-4054-a2b9-d7fbcdac556c\", \n\t\t\t\"name\": \"Gorgeous Fresh Chips\", \n\t\t\t\"code\": \"mz65ya4zbcneolyjgtzo1o8e80cf2jtksm2vo7e7uh1p99318b\", \n\t\t\t\"logo\": \"u1uqafmdiwho3b1bvb43jgf3gq30kjkij25idncd8jqqvmiuh5hek2wvwtlybbivtpl0ja2meyj5lm9r5q9f41d0kz86sjv1321wx4vvdtle5g2e5nyppsahy842fjohmlslwhzd373uzn3hhclxmfysq0n15ug25863lr2784rakvv786379yms1r5yxku11zk8ntz6mq9fklw6nmn4u4hv0ic9dwsnis1ge4fffuo0qp531h6sb1iivihdukf\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamPaginateTenants",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tiamPaginateTenants (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamGetTenants",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tiamGetTenants (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamFindTenant",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tiamFindTenant (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamFindTenantById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tiamFindTenantById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamUpdateTenant",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:IamUpdateTenantInput!)\n{\n\tiamUpdateTenant (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Handcrafted Rubber Computer\", \n\t\t\"code\": \"bxyusicgqv1i5d2vl0v1wminesukw1h5dlc2weapgh92totosf\", \n\t\t\"logo\": \"eva022pzw21152oqaf3arqcycaj1yycrwx7g0013nscp57erk0fkwd0kedbx73kslq7p992s3kwvh0n40ln4lxkgo8m1n77r69bz76n7mfb730mqh7gj444a87yyp6l3vpdvzh8sljkl9d642uoxx0ut0wbbecgz7ze0t9a661v4txc9er2e5djylnm9zl0hki292d38w203t8ou385e8of44ryj76vibbmw7guutsgkzec3cmp4g8so357l524\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamDeleteTenantById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tiamDeleteTenantById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamDeleteTenants",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tiamDeleteTenants (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenant",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Practical Wooden Chips\", \n\t\"code\": \"jqpugqfkg5m0zyks9uvngldg8jv2eyv7q07rrfp0b1qi4i7wr2\", \n\t\"logo\": \"yfoty0djnnp3dddfxc1xzd8unwbmadr6i8hfg02ftpdii6i3r2en65ikkkf5ysx2r5tfeexis9d1b148hxpf4x178ha3r7k2v89usiei0tlg2nep4d47ts1k5h9rbnkh7kphfbyzykpztgxqvhoqif351ms5hfdnt4tickvshta9ksm3zzo4npgnwrom8zx0n073968yiavzxn07auefdywmrun0xfbfn0kds0fb5vobcuylghkzaww5bnv4jkk\", \n\t\"isActive\": false, \n\t\"data\": { \"foo\" : \"bar\" }, \n\t\"accountIds\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenant",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenant"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenants",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"def1b360-0b6f-4fef-8d0a-40482bf1d758\", \n\t\t\"name\": \"Gorgeous Fresh Chicken\", \n\t\t\"code\": \"0qh0i0rsxer7lqnjza0bf0rhhbj57sfonp57yh7elwd2hsbi1h\", \n\t\t\"logo\": \"uod7dpsnxhfr3a1irc4udcmmnwb22oe52kfrzlw866vt0ixu559x0r65pz9oqhfejz3k8r4ky3z6q47w52t5kt7nv14php0fxlokyy7zlnz9rjm95jtqyz1ykmtnx09ija0ar4vvt29z7jzw4wvoarvvso6ekmf4stlrvzecu2d4ijsjlk0khxefwuexa7ibdsbkchasz0m23vz17oko6lli6dqmeiivr7h9lkp4jdj6fgv45qb536oz7vlcgzz\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"eeea6c41-3502-4e99-bd47-0873f925ce73\", \n\t\t\"name\": \"Handmade Soft Tuna\", \n\t\t\"code\": \"eawi93t8zy3kjonandp1sz29fhrj60p6yyvztq34g4j52rysx5\", \n\t\t\"logo\": \"dxo3zxvsr0v0vhlr0n2geaycjnuvb2my9ek0ev815cccsh5nktnf51qkqdoo3jg8cqp78gngqoc96v472sjjurlhaapvttozejkvyc3n8buzph9mywrczoi2f8u9bwg6h9yyu997h03vxrgd6domblnkye8io7qvu8jvzpykghi5ftsj9hixstmwmjaa9btys0lqj4pjrbagx7my03h5z870v0qtsl3ldq5cwy2lt34hzpf90kct9rz1y04tbbb\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"15f51136-0bc7-4bbc-9a54-e6530b41f03d\", \n\t\t\"name\": \"Ergonomic Metal Cheese\", \n\t\t\"code\": \"ei4bygyrcuqvowepyjkc171s94s0yecsi2nct170jexv3px88v\", \n\t\t\"logo\": \"eg6rzqyobip6yug13wbplo3ip5a50uf9c5vzt7jtgdy83jz4dhuxbanabnj4e5o1d23tduz9owg4rvzupg53xd69tbxtg4egwpxtiy2u9s8bdz6mzcjysj184aw9qz47psw8c9bl3zjw31jaxbyd9gf51ql58jr3yzpxl1rcm4xr6l2lztbhb8pwjg15dtdq60c3ifvcwqhh2ekk8md5d8kvjvc14a3gmo4aamqvf0nsufocdcjhwtp9b5mq44j\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"8fa88a06-6003-44e7-85e9-577036a08548\", \n\t\t\"name\": \"Licensed Frozen Soap\", \n\t\t\"code\": \"lvzkeh092w9skr97leum0bv68lehhydwjy5yxw07qg35fyszx0\", \n\t\t\"logo\": \"c4l6en4g87wzkgbz1hg1gpjet30mpan558r4otprwa3hu0tpyzurwghaf0f1chlqpljf3030syo9oscon87ftrbsimbhiux4le7mvhe8g8gc3w8zeloa9w0ntuuu1oarzfymx1fpv0jqlpkb7oqoa6k93xgken70je52w08942mbu21jwchum0y2gs5teft3pvq49shpd6jks6pw0de76kkh70orwxhubumyfu89tvoihq9dgzi9gp629m72qua\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"b09fc19a-b0a8-4975-a201-e3ec317285da\", \n\t\t\"name\": \"Unbranded Fresh Cheese\", \n\t\t\"code\": \"3jh1p0uiv1uw8a9y4nfk8kmt6jd1arsxny0dc9j0t66hbi8u45\", \n\t\t\"logo\": \"ws4zclro63d0xqrr1lyxto8q81hdkvep5csfdewjyztaebekdpuj9p17n5ekhy2bhshvpwqqonxtufe8by1is4oukyn4qo4npgwtagoqt84k04y1669pat86b6cgoj3x9ffo3cbszpp4lg9in0rs6wa1g8ij7ablvhlzofdjlhcv80xmly11q3nauvkba2t0o8xjad0ybjggqg1hedbrh1uj5urhumx1zzds2xamz7ba9vrdc4mki5g3scmqyi3\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"9b9ee7be-9abd-4b98-a36c-04e365ba9fb7\", \n\t\t\"name\": \"Ergonomic Fresh Keyboard\", \n\t\t\"code\": \"wro8cy5icz33bdt9xu4r6e861j51tr2yy5rgsukzpcsmjzd2og\", \n\t\t\"logo\": \"y5mv2ux1twayf0njxsa2ja50ufpj81gjmu1vtkb8g8u2v92qke63pgrvl4jpkp50w09q5071wy9n1dkrdufwjwlktqzhufemglrerz91l6pvomz2a4hztrjv05ev19i2hhrfrxub54hbu1pkwn2bahh2vsf4j1nevdnb28l5uls22q4jof4wv8uieqi3fl4nv4b3s2k8jhs7ypmohm0nxr7vpes2kibve7gsktbb7hhjp9ij190h2aeyikw9cz9\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"2bf658ab-9826-4b61-b22e-4f781d52c3ef\", \n\t\t\"name\": \"Handmade Frozen Soap\", \n\t\t\"code\": \"sy8ot8xk03z71rwoqtda82481u25lro0y8nqfqxvjxkm9wc77p\", \n\t\t\"logo\": \"7dy2prbz174frvc7v41znssvnkswk2b6kray1qktqki6boty1znq8nss5yqs6gu4zakmxde2q5rp8r60ds9azihnbkvod1qvqj0089byzm7ket3abkcd4itonknh03vnh4qqgyw6j4j3dfrsf3hy0wqbm9kjga6e38deua2jr05e8k5ex51o8cncemroznt9wag42uoi8iryykil4b62b4xdwwowix6pylbwk0yrz1by2kl8q62k927bvj7329r\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"33c3a087-4065-4d49-b637-4cee4eccf6a2\", \n\t\t\"name\": \"Handmade Metal Keyboard\", \n\t\t\"code\": \"y96oxa2gie3ecow8jznp07mjy5zlk8lb46ipuwtwor9ep0ofpm\", \n\t\t\"logo\": \"38jrhw0ysdz94og05vxh7dh3489r5rocz6zvu60qqsqx3htyt1405kbfrb3gbt3muiuh6key81fgl8wvpb695dmeldukopdz168pwk9nzqq0dramwsfznkquipry3rs6x8clhtl4vljen59gbdncpo5xarwgqjrjssysb5gffd1gaubi2uk7y6twcywwhrp86fomw0c782ryydbwbruv7ly6lsefd2wg1wgzv20bqno60jde0kp3nayl1uequd2\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"5beb7894-ce5f-4ccb-a3d2-8487458d0449\", \n\t\t\"name\": \"Intelligent Steel Gloves\", \n\t\t\"code\": \"wtviietai2y6j9szjhw4l4rhfjexfsiboe3phn286l7i3dy3gd\", \n\t\t\"logo\": \"aj8746z6o0qvga5ur0l1rn4tkyythefi9xy308tgmlmssjugfabb718k3cs6ke3iaxsuhkud793if7j082usmkav08so9ovevseuo61wuf29s93e014ifwfqmkibez702wnu1c7kkj4850i4e1xe6xz50ee7fw1c8nucy196mp5lxnjmitm8dgkdr57zazv3kd4u5ewgn6cftdkdawkf9ynn88qzqpekucfh3zitfonnrp1jnp33qmcliwyypaw\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"d2684608-d05a-4754-b3f3-5e983d378fb9\", \n\t\t\"name\": \"Tasty Granite Car\", \n\t\t\"code\": \"7xcyd9tsu84xevgzruacnoal63lqmmovikp0d9n1bj99m0kzno\", \n\t\t\"logo\": \"7jdlt1rl3p6tn9szu752zyxftveusco11q8hm7bxunu9ena4yvoeks0j1qou742k3y5tmu0hfx9a3iwqzs92uk5yonh8uzy3nt9z7eot8c5wn9w1up4567e9djzz55vuynleq3kofppld75cszgz33fhuzt2ss361lv6b0mbshecy7xuzcxrsb8p6kocj00tc3nwdq78f9wpndi80ztkglfqtxi1yom8miau566gta6pukjo0l9p3765g7xttmw\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenants",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenants"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenants/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenants/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+                        "tenants",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenants",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenants",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenants"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenant",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenant",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenant"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenant/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenant/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenant",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenant",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Awesome Granite Keyboard\", \n\t\"code\": \"2w6qzvyo8g5p9wzqbgwfanudw44vfmhbcuoohm6cvapy2a7lhw\", \n\t\"logo\": \"gbl26un8gggk07lny2yw2ku02qbvof8ztz26z6qefetf0tvv3viv4dmdi6yxspo3n91wt1zxaqmt21ljb2y8k9o30rbzq6hyxfs5we0pfi8xkn4yi04qcuwzmb63abwo2cykujqpgicvugjho8ydf6bfqba224dmjum41xcz5lo5b6vx4fe715qg4s9u041dxpfrk5p4zr2wnbmc4gywjnku0xv2pve48gsjn5tov4pipykgo0stggvnyt61y4k\", \n\t\"isActive\": false, \n\t\"data\": { \"foo\" : \"bar\" }, \n\t\"accountIds\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenant",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenant"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenant/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenant/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenant",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - iam/tenants",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenants",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenants"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "e90cf88f-9530-4d4a-b06c-aff68ff53511",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
