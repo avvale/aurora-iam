@@ -28,15 +28,12 @@ export class IamPermissionModel extends Model<IamPermissionModel>
         field: 'boundedContextId',
         allowNull: false,
         type: DataTypes.UUID,
-        references: {
-            key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'NO ACTION',
     })
     boundedContextId: string;
 
-    @BelongsTo(() => IamBoundedContextModel)
+    @BelongsTo(() => IamBoundedContextModel, {
+        constraints: false,
+    })
     boundedContext: IamBoundedContextModel;
 
 

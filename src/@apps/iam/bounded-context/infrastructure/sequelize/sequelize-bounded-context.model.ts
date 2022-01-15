@@ -36,7 +36,9 @@ export class IamBoundedContextModel extends Model<IamBoundedContextModel>
     isActive: boolean;
 
 
-    @HasMany(() => IamPermissionModel)
+    @HasMany(() => IamPermissionModel, {
+        constraints: false,
+    })
     permissions: IamPermissionModel[];
 
     @Column({

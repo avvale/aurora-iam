@@ -29,6 +29,7 @@ aggregateProperties:
     relationshipSingularName: permission
     relationshipAggregate: IamPermission
     relationshipModulePath: iam/permission
+    relationshipAvoidConstraint: true
   - name: createdAt
     type: timestamp
     nullable: true

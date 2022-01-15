@@ -24,6 +24,7 @@ aggregateProperties:
     relationshipModulePath: iam/bounded-context
     relationshipKey: id
     relationshipField: boundedContext
+    relationshipAvoidConstraint: true
   - name: roles
     type: relationship
     nullable: true
