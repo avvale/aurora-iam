@@ -19,7 +19,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "graphql:types": "ts-node generate-typings"
+    "graphql:types": "ts-node generate-typings",
+    "copy:package": "cp -r src/@api ../aurora-ts-iam/src && cp -r src/@apps ../aurora-ts-iam/src && cp -r src/@aurora ../aurora-ts-iam/src && cp -r src/graphql.ts ../aurora-ts-iam/src/graphql.ts && cp -r src/index.ts ../aurora-ts-iam/src/index.ts"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
