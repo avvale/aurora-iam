@@ -37,6 +37,9 @@ export { IamPermissionsRolesModel } from './infrastructure/sequelize/sequelize-p
 export { IPermissionRepository } from './domain/permission.repository';
 export { SequelizePermissionRepository } from './infrastructure/sequelize/sequelize-permission.repository';
 
+// custom
+export { IPermissionRoleRepository } from './domain/permission-role.repository';
+
 // sagas
 export { PermissionSagas } from './application/sagas/permission.sagas';
 
