@@ -1,6 +1,5 @@
 
-import { IRepository, ObjectLiteral, QueryStatement } from 'aurora-ts-core';
-import { CQMetadata, Pagination } from 'aurora-ts-core';
+import { CQMetadata, IRepository, ObjectLiteral, Pagination, QueryStatement } from 'aurora-ts-core';
 import { IamBoundedContext } from './bounded-context.aggregate';
 import { BoundedContextId } from './value-objects';
 

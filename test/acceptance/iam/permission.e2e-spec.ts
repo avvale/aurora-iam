@@ -58,8 +58,8 @@ describe('permission', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                name: 'Ergonomic Wooden Chips',
-                boundedContextId: '432db722-592f-4b1f-bcbe-e80c70dca9dd',
+                name: 'Handmade Frozen Pants',
+                boundedContextId: '1a693931-7994-4fb7-b147-4459dc339805',
                 roleIds: [],
             })
             .expect(400)
@@ -75,9 +75,9 @@ describe('permission', () =>
             .post('/iam/permission')
             .set('Accept', 'application/json')
             .send({
-                id: '66e89c7e-ccdf-425f-bf40-f58012a7fdac',
+                id: '8525efeb-9dee-4a99-b3f3-0e4636999a3f',
                 name: null,
-                boundedContextId: 'c421c35a-a19f-409d-bb03-26091221edf8',
+                boundedContextId: 'daec2b27-1c0b-4172-9132-d07c93032cea',
                 roleIds: [],
             })
             .expect(400)
@@ -93,8 +93,8 @@ describe('permission', () =>
             .post('/iam/permission')
             .set('Accept', 'application/json')
             .send({
-                id: '6d6e2747-5f25-4418-810b-ab480b54fd2d',
-                name: 'Incredible Soft Bike',
+                id: '5a6610ad-f748-4f3c-a689-fbc5d62ba489',
+                name: 'Handmade Cotton Pizza',
                 boundedContextId: null,
                 roleIds: [],
             })
@@ -111,8 +111,8 @@ describe('permission', () =>
             .post('/iam/permission')
             .set('Accept', 'application/json')
             .send({
-                name: 'Ergonomic Cotton Bacon',
-                boundedContextId: '8871eae6-2bb3-4032-a3e0-df2d7ea5f733',
+                name: 'Tasty Rubber Bike',
+                boundedContextId: '8fa71614-b6ad-442e-bb3e-1aae5e2ff3c9',
                 roleIds: [],
             })
             .expect(400)
@@ -128,8 +128,8 @@ describe('permission', () =>
             .post('/iam/permission')
             .set('Accept', 'application/json')
             .send({
-                id: '8bd14a3d-5bd9-4e58-8ed6-132380736afe',
-                boundedContextId: 'b9e7d4bb-4993-45c4-b493-a8ab79ed259b',
+                id: '765a9eb4-a628-495e-9191-46bde10ab0e1',
+                boundedContextId: '518a7757-10fa-4d5c-8899-0b5e4bdee136',
                 roleIds: [],
             })
             .expect(400)
@@ -145,8 +145,8 @@ describe('permission', () =>
             .post('/iam/permission')
             .set('Accept', 'application/json')
             .send({
-                id: '1eda61b0-55a0-4630-8156-d5b345fa69df',
-                name: 'Licensed Metal Fish',
+                id: '94ca945e-b94b-47c2-8c6b-4ee459aa55ba',
+                name: 'Intelligent Frozen Chips',
                 roleIds: [],
             })
             .expect(400)
@@ -162,9 +162,9 @@ describe('permission', () =>
             .post('/iam/permission')
             .set('Accept', 'application/json')
             .send({
-                id: 'r5ntmdxjlqshbb7gxocz7mo2no46vs53vx0k7',
-                name: 'Small Wooden Fish',
-                boundedContextId: 'ddb99823-9be2-4a8d-9a1c-5939652d3aa1',
+                id: '2twa6e4uhmt2abf6b09zpql9g5qx64u2hk7tx',
+                name: 'Rustic Plastic Salad',
+                boundedContextId: '85090a33-30ff-40a1-ae5b-018c506088e5',
                 roleIds: [],
             })
             .expect(400)
@@ -180,9 +180,9 @@ describe('permission', () =>
             .post('/iam/permission')
             .set('Accept', 'application/json')
             .send({
-                id: '7a5fead0-1c90-4a85-80e1-652094050fb9',
-                name: 'Unbranded Metal Bike',
-                boundedContextId: 'cyk1ugk0jncr9jzqrlikm8nlqitzsiupp4zoi',
+                id: '6e321213-d446-40fd-8cdb-129d5c80fade',
+                name: 'Sleek Steel Pizza',
+                boundedContextId: 'sens2mvibweief9pscnudcpyh90kq0si20d2g',
                 roleIds: [],
             })
             .expect(400)
@@ -198,9 +198,9 @@ describe('permission', () =>
             .post('/iam/permission')
             .set('Accept', 'application/json')
             .send({
-                id: 'ed93584d-8ad8-4e0a-a6e7-05ae983b507a',
-                name: 'nqyh1p9k3wdyxu4x6pdx47njr5oedevgalo7wgjl4x8tmwgs0gud0an16r7n485okml32h6iv6z9wdstcq13705qhy0zh8cdy21kqxbmtbhvrtbon76mrg4fb7blzbiltyzlsxkrxubzd14pz7hs476fjqdiz1tlooxxbf9ebarcev1tcl3s8smrtwfcrhlumow91b3mdxtmxdfdeujei7g3dfeidvbzax778ki87w989twnbi0dp76cimpl69y7',
-                boundedContextId: '29ca53a8-a503-4c77-8302-2e2fa7bf6fcd',
+                id: 'acb6b40a-8fc3-473a-a2b9-f9350d6f148d',
+                name: 'kod6ff0j4xfmn192sbtuxp213t95xjm78lwwfsq0co40na8ngwv8khiql2wqs7hq2zzw4keuiia6r291h1ogvxjrd4xe5py6epsnua6tghg6kxvsqwxa1tkv7403hgbr8l62n85l7721yzmk6esmfg7e2e46hn0kd0x7z7k7dmnr0wf5x8ozvj46f985talkebj3bbatfrqipq0ly0jufvh4ru7cuseojfhiww5lm973vnb2ymtwfq0hnxxx4g9t',
+                boundedContextId: '6647daf3-1ece-4316-b83a-04a441fe975b',
                 roleIds: [],
             })
             .expect(400)
@@ -267,7 +267,7 @@ describe('permission', () =>
                 {
                     where:
                     {
-                        id: '726a685e-6aa6-4485-8eee-65ed3a1a5f33'
+                        id: 'f2674cd9-0b94-428e-90e7-6e968d3e644f'
                     }
                 }
             })
@@ -281,8 +281,8 @@ describe('permission', () =>
             .set('Accept', 'application/json')
             .send({
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Small Metal Table',
-                boundedContextId: 'a6dfef70-8eda-4df0-8c93-12720fe61b07',
+                name: 'Unbranded Wooden Tuna',
+                boundedContextId: '7fdd5b01-2e24-4125-8a55-1753bedddebe',
                 roleIds: [],
             })
             .expect(201);
@@ -312,7 +312,7 @@ describe('permission', () =>
     test('/REST:GET iam/permission/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/permission/e909bcf0-541d-4ba0-bb13-6a7688d7276e')
+            .get('/iam/permission/4946f8e7-f066-4d41-bc23-d96562fb999d')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -335,9 +335,9 @@ describe('permission', () =>
             .put('/iam/permission')
             .set('Accept', 'application/json')
             .send({
-                id: '321de990-8fb6-41e4-8791-86b3f10ad34e',
-                name: 'Rustic Steel Salad',
-                boundedContextId: '28b515d1-4504-4c76-8831-847dafdd39eb',
+                id: 'c37dfb44-0979-4a12-ba7d-75bd3493c074',
+                name: 'Fantastic Steel Pants',
+                boundedContextId: '3f8ef63f-1eea-4d24-b927-fafe5d847297',
                 roleIds: [],
             })
             .expect(404);
@@ -350,7 +350,7 @@ describe('permission', () =>
             .set('Accept', 'application/json')
             .send({
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Awesome Plastic Pants',
+                name: 'Rustic Steel Ball',
                 boundedContextId: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                 roleIds: [],
             })
@@ -364,7 +364,7 @@ describe('permission', () =>
     test('/REST:DELETE iam/permission/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/permission/fb55196e-6d44-42f7-a7f8-d381d6734b64')
+            .delete('/iam/permission/94859061-a2d9-497e-b543-c8631d12267d')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -495,7 +495,7 @@ describe('permission', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Awesome Fresh Hat',
+                        name: 'Generic Plastic Fish',
                         boundedContextId: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     }
                 }
@@ -531,7 +531,7 @@ describe('permission', () =>
                     {
                         where:
                         {
-                            id: 'c7d85ba1-8bd9-4e60-acd8-681fb95c7016'
+                            id: '32665763-387e-4f0b-894f-ae65c922f8de'
                         }
                     }
                 }
@@ -600,7 +600,7 @@ describe('permission', () =>
                     }
                 `,
                 variables: {
-                    id: 'ba006fab-1646-4ec3-89a4-1959780d3da4'
+                    id: 'cf03e226-c260-43b3-aeb8-aae0dda0af99'
                 }
             })
             .expect(200)
@@ -661,9 +661,9 @@ describe('permission', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'c2c9d1a1-3e66-4595-bd5e-f03d6d90e3cb',
-                        name: 'Small Concrete Soap',
-                        boundedContextId: '5978065c-8f36-4bd2-92ed-51e67dba0c82',
+                        id: '07432d1b-8db6-4491-acdc-6759a2b7c43a',
+                        name: 'Awesome Cotton Sausages',
+                        boundedContextId: '22808db7-095c-4c84-8684-40178df6fa22',
                         roleIds: [],
                     }
                 }
@@ -698,7 +698,7 @@ describe('permission', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Rustic Concrete Salad',
+                        name: 'Awesome Concrete Bike',
                         boundedContextId: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                         roleIds: [],
                     }
@@ -730,7 +730,7 @@ describe('permission', () =>
                     }
                 `,
                 variables: {
-                    id: 'bfba2919-1be7-479e-83cb-bb57da9b6c53'
+                    id: 'ea4e82e4-71ca-4915-b50d-b058fe97d0d5'
                 }
             })
             .expect(200)

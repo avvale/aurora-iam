@@ -58,10 +58,10 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                name: 'Unbranded Rubber Tuna',
-                code: '64ha3o7kxl7w8975zz7up3kj6a51pfer2p9tlo8lr7kasrcrjf',
-                logo: '9k4326u31ldpe2ee1pnt1ywod31hcyyfvba4uxaf6w3vlpz6qm7zdvkr77pq3p8vusg3kfe6lqiuhx9md4kdbfua2eypz5elqjwr3o83kfje3pttxrpvxa8hivvbdoaai864rxaj21g8vslannv5gyg0k7gi39iwdyea1peiqrf1lota4zyqp7uoa633rdab4gsdl7vfpzt9sw479bzce6dqbnp5tunmaguuuqmu1yg0zkdjs1ho4kqqds0qwuu',
-                isActive: true,
+                name: 'Generic Frozen Salad',
+                code: '2k995vqxsej6by9cfyp4tage7nlogg03giwzync07szm4kx5mc',
+                logo: 'fil06pfwxexi09ls7h1oom360vae39z7ykb72d1t8b0yqd1otpppt0o12pvkhwqgdqh1xmaqna1wj7brmr64iq9cxngfvgch05nv3mdp6z56xvy6wilnkfb2kil8ws65ha9xi3mo66j5l9hiernq2rr9eba3qf4blzaxk7nshfxqw30kxne41v8hsk7emcuss1d6nymy2d4lfzxc10rlvb98to5q9b521cry8xrgc176uiu73ul7aez0ycee0x1',
+                isActive: false,
                 data: { "foo" : "bar" },
                 accountIds: [],
             })
@@ -78,11 +78,11 @@ describe('tenant', () =>
             .post('/iam/tenant')
             .set('Accept', 'application/json')
             .send({
-                id: '4d24ac37-15f6-457b-974d-806531dc87a0',
+                id: 'feaa251c-cfc1-4a98-a6a7-7c79145eeb0f',
                 name: null,
-                code: 'x4ml202juqbc88bzwsiusvomcgrqyfv4y62a7zh7k8fa5n6jgx',
-                logo: '1ktutsqa2qdoh9weqzqtz9dxw3zjffk9b9lev4p28i15b7dgl0jyq4qxweif4bygsudmbt5i5gblbys4ew9mj9mtzwhankb211ip2798iqd9dv7gjfpj42exeb6a764qkvs45m0c0psq6fz1ip2k1veqxdhiez7rtzj08ehpgqckm87xbruist552b1psq7kzlxdr0mtfy2mgnylozfxkn8rdcnkgipwobgcrwe009d9u1l0vibt1repcifymlx',
-                isActive: true,
+                code: '1zru2h9ljo1nv6x26aumvmoulbtq13poojb6otw3xk9g6fjtts',
+                logo: 'm03gqr2qki3ciad1o23xeuqqacxenkpp26hppkxkq91oalkhvcir44w1egxvnerjyr34k4598odco6kg5bb3hkije9wqu3d1jmprcc8fymqvqlg8w17wm0dq0szo1wltrbai1vnntx5i4pj3kca37kea5c2j7vxzhzfs3whs42l2ctek85j20snu16tall4fl2h137cnx7klq573648lldxfo1vler72ga274ga6k36zefeifmsokg4fwmg75pe',
+                isActive: false,
                 data: { "foo" : "bar" },
                 accountIds: [],
             })
@@ -99,10 +99,10 @@ describe('tenant', () =>
             .post('/iam/tenant')
             .set('Accept', 'application/json')
             .send({
-                id: '2e04a2ad-1dbf-40ea-a57d-bcb5d0f68f30',
-                name: 'Tasty Rubber Pants',
-                code: 'aymumdfsve4iaejupjx5ngg4i8guz6pct8olsy24ik0o3eze7l',
-                logo: 'kustp6ut843h0o61a91m0blbeqipkacwr7e20xd82wvh80fg3immuz8iloqbfwbvli88g2ygt5bb2q6tooxq0koeofqkwu6el9qygwjxgg5jf8s81kvm1m2wj30j3zxlszak97xrnfkvgagoejah9u0a1hxzpkasinnup6ghg48qjquvh4t13baqagxqnoaey8lyartf7afsj08vr2hceyz8bbvdrlx2brryvciudrbxa2d7frpemm6etjsu8dh',
+                id: '53f35605-45ce-4774-98ac-ebb327813843',
+                name: 'Handmade Rubber Chair',
+                code: 'b4ripi7z6sm3mewz1vkwj58uft9qhvwln9genj79u3tpbmpdoo',
+                logo: 'j6d2lm4myaskqv62il552n3xlet1f3lbmuvkr2v1webabqpw0tvgnkikzgvxk162bt9y6u3jlptxfynebe3s4s3i9w2em04cf3j8b2jgezwxhhzp206kyus6sp2o2urc4jkaptilwotxzz3wofafcbaxf4r1fvaejf3dsgqfo0sww2cnf3oi0q467igbjv6hia6xl4dncrztvx1yhog3byc3tammdd58tjfakgttagxa6nocibayfzlr5al5o26',
                 isActive: null,
                 data: { "foo" : "bar" },
                 accountIds: [],
@@ -120,10 +120,10 @@ describe('tenant', () =>
             .post('/iam/tenant')
             .set('Accept', 'application/json')
             .send({
-                name: 'Fantastic Cotton Shoes',
-                code: 'rxe0y38flg1kayw5qygl6toiytp5um3pi4zmjdu0j5qicep3pv',
-                logo: 'ir3kyk3ecrw3qdwf441s8foku29vhy4cetc8313wf5zjr63ca5pxsc16cl423sydicwgpl8btzi6ydaod6fur9ql6sg7qtbc9pickeymm0nmeg7qoikqic319bngmb24drr9f2gfu6fv12oxa7q4i8egt73lfnsqcz6siwn1f738gdjfhumnh51ipnunqk34gsipf6kdqkq93fcjcg7031pld8h536sc3fdoi174npl5n7xie6s2krqv4gm5asi',
-                isActive: true,
+                name: 'Ergonomic Fresh Table',
+                code: 'u5b267k5pscv66xa9oxllx3b5z4tbtfk21dstegcyb2m01txuf',
+                logo: '1mt9xy9n6m3ano6ra4vou9ygiru3u48hrfqjh9kou45mow74qz3h8kq25w2iu7u4ujj2qiflgocjq88gju8hhhesslm1fhc1yghj83k4jxtwlmwjf89tq1h1ehd4xdyhukc0j0mvnyhl3izhf39wdmcuea3ch5bkcf2oftgemsj0ifnsnr453f5mf2hpo7sbl39sm45f4n59w7zwxlsdnci1kdwm7jazdn4apqyk670c79cvj09lxrwctto2dkr',
+                isActive: false,
                 data: { "foo" : "bar" },
                 accountIds: [],
             })
@@ -140,10 +140,10 @@ describe('tenant', () =>
             .post('/iam/tenant')
             .set('Accept', 'application/json')
             .send({
-                id: 'e9aff139-d1c2-4035-8f01-24842945887b',
-                code: 'c8jqciesnelzjxyem8l3pn6fxbkqvvooffwiw4hcrud6309fsm',
-                logo: 'orei2ofkucb6dz27elxagosei4adyrb311tchpakhpj6jhesszjoss7mrdj68o68sc8zi7d3xdt4auw95jwu5anv5cxbboegg9k2dhutpcadguupkw6xek16i3uojzx86703bqrtgew8x66lgoqucyc4t207splsm7imr1fqhuyf8fa2nyh0iu4p9p8nkdyy9ojpfw17r6axask24qp0uesfj512lzz5i8aie2fyyr1ggb2rgh5e924k5tdrj0u',
-                isActive: true,
+                id: '84e10144-7668-4925-a2df-f315bb6989a9',
+                code: '6jhos36az26jnw3e9tijnd5b17zo0uip8mb4tvsvjngzunhvmb',
+                logo: 'je2mrtbbcf6ecd7smykr99d9xixkh21swlgagvynho8e7mhwafz8altc0pi0uql3tqzsp07xsjl29jcnuzn2x9rsgmg73xwv7pxjuhwxhnwdb2nv6copvp4pevlo1kypufqx8ufbni0oo4fnx35xe4226wb1c4r2jvbmu63jcginy0hmwvys8kow31rdwsgdd3e1frkf5e8440g6czlgyzl96532uaph7cjemm2ef1d1lyy5cwxr2p2nkdn3wik',
+                isActive: false,
                 data: { "foo" : "bar" },
                 accountIds: [],
             })
@@ -160,10 +160,10 @@ describe('tenant', () =>
             .post('/iam/tenant')
             .set('Accept', 'application/json')
             .send({
-                id: '83d65fc3-1f96-4256-86ba-f15f0d5ad0a7',
-                name: 'Small Frozen Bacon',
-                code: 'o5khdfl7ssrhq3nickzp3heumrzmx65l2rzqe1w5mrxtl7gejh',
-                logo: 'w6zm2ieaogg96mfo3ggzj7n1ymh0foj5wejtfig61qguiewh8fp6icwhr0ez8ksxgwza15q69awbe3nzczshb3plb57jx7l79rhlti01p7xpwf6wm3rvr8xqjdlueuo9kp1u82r1uzhteh61ipl4k88hdygoguper3orbo1x91ohgkdyrnxj5u4qyzwf63zbbdwl6g6y3gn488q5znan5ctm91e50bd2lw9fuct2pv3fpsjqc3jvueijytew35s',
+                id: 'da738f02-443a-4612-b543-faf8f4bffbb7',
+                name: 'Refined Granite Tuna',
+                code: 'usm1eui5clfecmz7p8jcrtjpdp1f1s9bjeuzwpljn2hu6o3zrv',
+                logo: 'rdy4qvxxgm93tbu9azkxsvfibmxu8ypdgypezb4k5q88dcjax68nqouxxj6rxvycodz801u9jiddakyqmazhc4tykejcwgu5r5m3dr1ycsjssw33emr2w5y0j3aolget1ho5962vwh6ifki230scrvab0y9c62kmhh0jzw2zczmdtevto5hdhr89kt3zqvkwyzhgt7mzn2tm82k1knr0sdyz0gw2g21fy889kftfzekj0pmgxp2kc4xxj9hajaw',
                 data: { "foo" : "bar" },
                 accountIds: [],
             })
@@ -180,11 +180,11 @@ describe('tenant', () =>
             .post('/iam/tenant')
             .set('Accept', 'application/json')
             .send({
-                id: 'owryd4fvoht39yl4wxixbmh36a35gokhbe0fp',
-                name: 'Refined Plastic Pizza',
-                code: 'u5vy8lzzyfofskjc947dpat9njsbm3zzzqsjfy6kfzfcfw0eh4',
-                logo: 'mpa65f3uvg07rkufo3jsflnpxyrbnburmf3cehxw8tf1k8ex5rex9bfpckw2p0qtpya25zf0tatbn315l1o0cqkkxmnc81aucbason5bn86wpikgjcgj7jyjbypiqdeh9xz79vr7u8uke7vsrzl2finot9woixiq6be0pmqmndwncff1ksbw4v89t8613byixc6bchyiiluswy7sx16004kp2hwez9xrt5n12mjy3x6a8lintx72f5xspkebdz2',
-                isActive: true,
+                id: 'k6ggia9227uz07ro26x3deqmb7dioqqm96efb',
+                name: 'Small Metal Table',
+                code: '6zflhhzk29fpk7w0wsi8ab9a61y2zcih0evm97k7n2czdon92t',
+                logo: 'zjk4oy5j2ckmjet29ksp5qsr8n8gghxxkbbzqpvmudsdnfbi357nanbicm7a5cgwt2dpc2ucorybzgseyeypvt346g6f24xlbyottklptjm6ce9ahdmwjg2i0h9k5mt2pcgrrzi94npwi9lh5b4mz1mt1wtkdzc1yh3h6rxk6cttzkfl0rd1o6v685veym8f1vdpeh112ul0pu2rixelajqb93v98mnv1zdydyeyq90lwbgpnaqum27bx4hlh2a',
+                isActive: false,
                 data: { "foo" : "bar" },
                 accountIds: [],
             })
@@ -201,11 +201,11 @@ describe('tenant', () =>
             .post('/iam/tenant')
             .set('Accept', 'application/json')
             .send({
-                id: '7f706630-a240-4ab4-b266-26ec4ea084a6',
-                name: 'ul83dwoiy46ko3ezybvq8oc9ngr8dpsi2g9vh3wm99ol4plzjch33168v5vt1xjwe9y4xpohvtby1aa62ula9xsb3mpmqms99lr47hb8ecwf7bi56jcyoowl3jrflwqikdqiu4dty179rzumpzs0rhwd6qj04ecpb5f7fmhwihlcbfar00g50u40zvedvkd2ygpzl9ap1o196bwt3l0nbi5tce4kwc81lvrewj3kwt9blkr9ew6nssggfv6q9sv7',
-                code: 'gw69caq356h6ynfr5q0gai231kg2x0yynlzbjclxi5mkp7fmad',
-                logo: 'sfoiwg52xg8j3dsmfuq6w89x9tks5qp9yfcoq8zpyz0954b1y3ougvrpwb13wl54i85v831eddhcynxe2zf6dsfaj506bumsn7z5qsrfbhvclc6s8083vphgl2686nwbaashqgxmpxpu7z6kia4nmi8w6d1orsaeki6tfish07kzgkq39sb2vx9l8jqu7o888abt7t5ymdkbz7uqqqy1miij419d4xlsbe6xlamrce6ckjgl2tjx7s06i5f5y84',
-                isActive: true,
+                id: '0a43b7d0-5d64-4e43-aeb7-d2991060a7a1',
+                name: 'e6grnmnztxbr2hpo9ljl396les3dee9z4bx1uak1n18bloujc0v69n2tcx844t0xlswlss1i8ka1d9g1ueyehiqd3b0dq0adas2xmze9jcytjqsa24undsh9wz67vlcqqdraankwbgbzwii4byyjhahoiya7m419ed3cwvbyfplwhlmoarcshnr32ywcgdoack6s10lqgwzg265a8qht5brdeqvpthjfk3tc59nl4q3k2ri4md9oz88by7512nzc',
+                code: '5s5x0fir8niov1sbabh1wbmlhureit3znevey5mz1crbpzymqr',
+                logo: '465ma1b8f0hrs4uued2uqb0k3hg588h9s9vqzubbmoq7tlo4tnyso9xf2kg9nk30vv0zq85y7k54mbkuwxbckee367vblnn7tphkq88ztwp07w6zjizo34vh527x7f9siium669un9lf3g0zwe4yk9wlqoda5b0bc0lsus4vuh6fnxdlccizyqpuzs92q7c692tb19m7vlvt2f89xoxsohmd3g1gem6ytrsiu45wz4r83fy64wjxrdsg9yarbkl',
+                isActive: false,
                 data: { "foo" : "bar" },
                 accountIds: [],
             })
@@ -222,10 +222,10 @@ describe('tenant', () =>
             .post('/iam/tenant')
             .set('Accept', 'application/json')
             .send({
-                id: 'c293ed58-4809-486e-a070-6492358f5d06',
-                name: 'Fantastic Steel Salad',
-                code: '0eoo7mbva55z1rmxmpwzyirnwahtrvbcbli6tin10zzm3juzyr2',
-                logo: 'dau42jb2hmewlzjcwt8hi50uyojtv6t791hu26emcdis4wy1tlartr8utk3ij874zxj1j88x122ogvyldeno7eci6fxsuxxjnfoxueov5um1vr3cvl52cxkj38nvkccniwkjkdj4zn6ir86hbjjgrsb16zjulc2bsd7j6cv4uzznhhcw6l1053hsbzbsekr120dl7oe0ro9aji8pp3cyssivd4hbehdohek40shii4uetd6ftgdkzqa7m5618wz',
+                id: '510a60a2-dc82-4bf4-8231-49da7a6de8da',
+                name: 'Rustic Granite Tuna',
+                code: 'mdb9zrga930hd79qk7n50c7vkansf3hm81gvqqyrfszbva8vgs0',
+                logo: 'oj2csg4nyezo2hecoy20fvhxs48hqnrs5ngsqxi1g1cwy0qprozd8ykvg6nufmdj129iro0hyxxnmg31hgzoq6k817c1wc4bhrf1eh8ucer6mt5f5tq3wmg76prtuu2ysasjfd57qcgeqxp5zgeptqqn20ldswm5ueuedp9toh702m361gq9j8eua3kabdfac556ccrhblrek8g5bvr1p5y1p24lxyvrb8ru6oqm8nnzwvml2n3eu6gbsgj89er',
                 isActive: false,
                 data: { "foo" : "bar" },
                 accountIds: [],
@@ -243,11 +243,11 @@ describe('tenant', () =>
             .post('/iam/tenant')
             .set('Accept', 'application/json')
             .send({
-                id: '4f5b4154-0d37-4cb0-b16a-73905ac6db55',
-                name: 'Licensed Soft Salad',
-                code: 'nl88egu2ad2vyv28ljgisjc8tcf4tkhpzm385hsqsmq8hgfbmz',
-                logo: 'dqkhw6l09o8ulal7nihs48cgti7e7e02z7mn5mgjne09y73d4p8lckrgigogabavk2250rc7zds52yf3ktwn3q2gopt6zdqx7egrko9ix3kwlog30e3dsc7e74kevaxdc2i1212s077ovswmgybluywc2drvcfsup0xvw67xcmp2xl9w3s002slafyjn8i4c5ax67kwnfv4ohyvkomy1kozypwibow0ysu1a0w3uxoqcsvm20ae2ivo6r2ct2iay',
-                isActive: false,
+                id: '49894f09-a376-4a4a-b3b4-745a365797c5',
+                name: 'Fantastic Wooden Mouse',
+                code: 'jun6de9q1h9a2qfb08du3ipb368ppt1ceg7wvjp0a394y33m86',
+                logo: '3bn1umw2164o44z8swvlgh7c12kuylo8hlkiupd35xbd3bbbq5i1o8zkavwju2thdxu8pphz943eumbv9mc6z0g4hv0fag8fagp0q6rxv3b71lvyxv1no0p0vpuhcnwtg6m52ww3r8tiglm0sgv1y7sfdgbxtjc6nhm6lpzuemzhte2mrdhlc58bx1wvpixxnchv6ocbwq4zne4phxl82edglg5864wu3h0kqoutuaq0lupb7azgyncjhduhgs3p',
+                isActive: true,
                 data: { "foo" : "bar" },
                 accountIds: [],
             })
@@ -264,10 +264,10 @@ describe('tenant', () =>
             .post('/iam/tenant')
             .set('Accept', 'application/json')
             .send({
-                id: '17325d12-614e-401d-8829-47b1d8339b0d',
-                name: 'Fantastic Plastic Shirt',
-                code: 'fsv3t5nqqyadbx9rqcrttt7ul76a6lemviqds9i7q9vseq3wro',
-                logo: 'rwhe4b6qv7llbs6twzykzvsodv60r11wcozn9z4ijundlll1zmxqjp54jbxomf6oo31tbvg5jin70gaesuspjykuy1jfad9jxjqyhdsegcmasfcotlxizcyplelmxeij57r7jdx9bn7s9i4l6x6va3bdmq7naywgwtr8jvswwzbolb7rcm7zbsnc7ovn0gsxj8qz25u6hzeslrv6i0gh895yjz9zw3f4b162k6ie8qc9f1tn66iy9eowm0s68au',
+                id: 'c3584477-01d0-4e90-85cc-9632d1bdad04',
+                name: 'Licensed Fresh Towels',
+                code: 'v44j0m5w9yk3sipxvl23w4rs12axw2om5y07ykp5se17b6w4si',
+                logo: 'seryo076mj6uw5frhvbys5edbdsd15zbxov3yoat5kwvov5andznqklpnltyg4hy5464z1wbhl7p096j6gtc9crnfm388osf1cz3glp1bxx6zxao06nm32zu11ee9duzkaabr8ls02ta1up2nx6ielqltt58rao04t7hrv86j0t8s3ab4ezva8jf7a9lwcj7s9de1qcbohkvwjefbzp5jbp7in8qe5dkk71fghy9cj4b1spmghheyx8mu5sh7gg',
                 isActive: 'true',
                 data: { "foo" : "bar" },
                 accountIds: [],
@@ -335,7 +335,7 @@ describe('tenant', () =>
                 {
                     where:
                     {
-                        id: 'fb1b0a43-c04d-4a2e-be59-46db88d2517e'
+                        id: 'e0d536ed-0787-417e-95b2-6737c899f9a9'
                     }
                 }
             })
@@ -349,10 +349,10 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Incredible Cotton Keyboard',
-                code: 'xmborwrb8h0d26xxveiw1iqvedcj31pfhu0a1sk7q0uvcxhenz',
-                logo: 's1hc5j6sutc94j4gaqo92ccqvnk0qvz8755j6fz9q292xrlyxhxwtd9pbcutgkzz4d0x2y5b8gi7sfzfjmsxwa2kmnd1tppaq64dcmqyw8w3oed0do11ybgz3hr51l0pcrg901m35k8q21nvedwjou3rah16fx69s37h8fgfj8zzcwczeptx27g434y6lqyow2lwnoge0tp9z8i0aml3dm9sz9pulqmge3od71034h7kuch61kjzu3vdiu817g7',
-                isActive: true,
+                name: 'Fantastic Fresh Chicken',
+                code: 'vcu019cws2w947tby7xucgi0q0abjp4w4pcjc6ydpt5u67ibet',
+                logo: '1ei6by9qpyjn5mt9cgt3uj257htqhl0tp6qbozzsq01yw55abh43x6h30mrczutaf3zro50hs5jxwel2otkd40gf8a91usk2la251lgk2ayh9ihjxswrmgnm0osik1lnb3zli03mpxt5ay6m5bpl3c1p7ty469v9h7ie7538up7axxo2tafojeyuapyj5vcsnqmhdxxin1nlwkfzn4pf3pjwzrb9c45rlyamwjny1lgc18g91wdtx3sysc7gu61',
+                isActive: false,
                 data: { "foo" : "bar" },
                 accountIds: [],
             })
@@ -383,7 +383,7 @@ describe('tenant', () =>
     test('/REST:GET iam/tenant/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/tenant/68ee8949-5503-4521-ad0f-8262fbc79bb6')
+            .get('/iam/tenant/f433f496-7e91-4d6a-909d-033824454c66')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -406,11 +406,11 @@ describe('tenant', () =>
             .put('/iam/tenant')
             .set('Accept', 'application/json')
             .send({
-                id: '92ddb7b1-bcbf-4605-814d-a98d2cba70c9',
-                name: 'Licensed Cotton Chair',
-                code: 'e9pee97wxq730di0zllelobjqds2df74l3zqftktmw63yzh1v1',
-                logo: 'la3aw2qblg3luxh5vzu2stee8o5weo44q6aygvggjjg7iobcifw2dk5ys7njhl1cpg2def6hxi5lw49aowa3ab8h7tgwmjhrtjzxmz6brdkd51xztyjdk2pwzj3zopiwkn69ar2ns2h4cem50umhm6xh3q70zihx9wsmzvuzphjf3589pkl1bgc4j4nt3bgwxeyag8eglyl3hps7fvuwzubk1bmrykt72t1nxkg71lyvt2t2z3tmy5pke6myaqg',
-                isActive: true,
+                id: '15ae9d5f-91da-4819-9c1b-d11e6b2d4d8d',
+                name: 'Tasty Metal Chicken',
+                code: '50o100o8bdujepe8g7fgr93l3qls8o9xw9v1xaau62bqwncvcl',
+                logo: 'trt1ve3ig8k3l5ki0w21rg9j3x3mq9ji016ii46v1jhmfz1nrpjk4yl5hou5ae97q18oh0nd6ii6stm6k1ycx1hf3toh39hbionduqi0q268mwdea7f96ler6lixaoqfopyz83cio2mfowudnprz6604qiyerh986nm6r0k9ztw9okhhsr3wfr2f70or3my4cs3soh6nensndx0n14jbemquu90hfmhh0j63cybz5nqorlaglmtjg6n7sqfmtku',
+                isActive: false,
                 data: { "foo" : "bar" },
                 accountIds: [],
             })
@@ -424,10 +424,10 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Refined Plastic Bacon',
-                code: 't2wmnax9ls4hr8g3xeltc4fzwsvruf23paz210vr2sq05sp6in',
-                logo: 'be7yosfukeey5oilng1b5wbgex7yzjo2y7vlpcxf8szlmneqco8y1w07eq0td7wspx17ffixl19ex4ii4wjlbygg6xpdw3hr5d4ch2upth9k0g18a48plrgrg1qt50njw5hjwykrm4spjgooicz859riuaunv34pc0j6fxj3bfncv9sqkk18ndql3753dm0vkksz1uh9v6ihz4pf43t384oc2s4ljzup9i7atfi83ujxfkiht5tb74j76acpem6',
-                isActive: false,
+                name: 'Incredible Fresh Pizza',
+                code: 'e9ovl2qwp35auxltque5o0bzhsnwoc60hkshdl0wc3iw5hqajp',
+                logo: 'fnmwmaz1dp2wzzvx8kg78qyf9nam8cqdnjw2bbexfb602duq6g3oo70l1p562108jxwypb6q519nmh8zd5kag0poldfwm4lgmfwf4q36fye34hzd64mfdj6q6nogivdh67shvba6j127j2azvprwd9xbfihxaul94p9knnt9tq8i3f5xzmv9t613e86zuhmdyxv8jscdfu4ecvsdvac0ov1dy9ef248vlf88gogk13m5jq5hfn5wkv45qk5g8ex',
+                isActive: true,
                 data: { "foo" : "bar" },
                 accountIds: [],
             })
@@ -441,7 +441,7 @@ describe('tenant', () =>
     test('/REST:DELETE iam/tenant/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/tenant/cb393df1-f7b0-4712-a529-c0a35dbc53e8')
+            .delete('/iam/tenant/bee71e1a-1685-4cf0-ad46-195cd5cce4c9')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -582,9 +582,9 @@ describe('tenant', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Sleek Plastic Hat',
-                        code: 'c09pewq0ihx90gypyjb9i6fz6lecpdpzk5b7jhwo5r1lh56fjn',
-                        logo: 'xtp6tjt614ezpp4bq2mn8dyouz964rm9wh1jm8d48vyw3ugpql0uy7csldr6c6zbqdlv91ldei9xv1jt9xoii1lyl17hlv87vvqfj6k7p8zxfs2qgz1253p3l5g1bdcn8zhcqvdcv22txr3q6849l6214cmpc7h5x65jupm9vt1bios2g7a5adc03upqa9l4vvdc6r37eo5qeml7bj3kp241i9xal666durmsamz7nrvh4vk4pea6l6mingzw8s',
+                        name: 'Ergonomic Wooden Tuna',
+                        code: '8nug94e0kbr0t94fsotg98nhhjkq43en0dtqwli6ofulcmmq9m',
+                        logo: 'g3fxkchyj628nznhv5njfbn5qeri40b1of5y7n3gvj5kiksj6bka1dv9dxh1cohqerpgbh89w0ivxlct3azx4m70hcig4gxs16dl3nihm15v0fjp8zotd10n4hncqcdwabarvcgo34y4s4hosr2x99fkvt0m5cxf2g1bp241dhflapn758csuht9duensm6m0u5ij5qc66768hte9981ecwfg64a9qjssochtcbx6abgv2cs9s9xkv6qg0fum0i',
                         isActive: true,
                         data: { "foo" : "bar" },
                     }
@@ -625,7 +625,7 @@ describe('tenant', () =>
                     {
                         where:
                         {
-                            id: 'b40a405c-1973-4c4d-8ec6-571c2756682f'
+                            id: '982741a5-a7ef-4d29-ba9b-b14de105c956'
                         }
                     }
                 }
@@ -702,7 +702,7 @@ describe('tenant', () =>
                     }
                 `,
                 variables: {
-                    id: 'c9eb8304-d106-4ccf-93db-03e32e71a790'
+                    id: '8b19e41f-6626-4cd0-bf0f-98d320108508'
                 }
             })
             .expect(200)
@@ -771,10 +771,10 @@ describe('tenant', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'd3008e78-1b14-4ba1-bcc1-cc8af6f38466',
-                        name: 'Awesome Soft Chair',
-                        code: '64nxx0t4td002sb9950f0tpt1dfnaevg4zam11fzpcfuxkxsxm',
-                        logo: 'rrgauq37hgexabj771v170y6ktd29vcihsrjild0aqrieu9a34rkuo46ukwxd1ra941f0jfe8lf6y1qx49aesrbz3fnjxlpey4lntffpx9tpshe0h963uqco1vyvwmeh91sk7ihx7asjn0kf4b6up99mkk5u8l5lq5g7m8k7f5wxdw04lv9r8fi0hg48p2oi2l0gixf9w305y58ehqepp11zgx510spmlfpc50c8soi5euge29u6vi678q4xis2',
+                        id: '0308f86a-823a-42cf-84fb-6d22503bfea4',
+                        name: 'Intelligent Steel Towels',
+                        code: 'b0g0tdsr4gqmlmt0h02t8719japs6i14weijlalfncre5nwg77',
+                        logo: 'pi5kl81tmcgp1c1gwwvwyogwyu40zh0wslbdnh0jfakqbhima8q3euot65wb1mdzmpa72crrl3uo87qrq43noqjq8orrgg8y3qavft8n20pa76zdpg70zte81295014m7q59ns3ffk3wrn7ttnaotbo9g2of01pgau7ij49sdj91hh7nkty4xos7gcbnc401qumss77po9b6evu9zxqt4pzq8quormfz46shga635r8ltt02tewk71mibs99beg',
                         isActive: false,
                         data: { "foo" : "bar" },
                         accountIds: [],
@@ -815,10 +815,10 @@ describe('tenant', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Gorgeous Wooden Cheese',
-                        code: 'wv35wab2q2hflgw3wugkzt3cl04za5wdoqc0p5d6viggg9wtg7',
-                        logo: '57zfdkcyzlcb2afm8qgx1jyeeemve2t4g8l5wyjo9i88ajquxjgvn2gdh291moe4tnusszfug8zafidmwow40va4i21s2zsxx7ltuvlf0lodr7ldc7ycg2i33jz8ngesyyj5qeadh0oof7pmr6oml24fotp5sj681uf7st1b9t29fl2fk2n5eal9ev5uxrtibtt10j92rcspzd6mz6sks2ygtla4igw0osgp86a45q064n7xmytik306lhemv8q',
-                        isActive: true,
+                        name: 'Practical Metal Hat',
+                        code: '0bwml22e8hfc63ael5s98gtkq4risolngq9ao8lfw6nz57en35',
+                        logo: 'bcn75iwge8c55qysz9jrb8umq9wkzynz8yjlo01wighfyb67ehe3e76c5n1det8qbmdajpo7mou6wvpyr1nec5oke164o8etv6mnp9j4qaqmnw97a4kxibwb10lse4pl8ykt7db235d5nuf8n0l5ugni6b3qcdkewoz6o5evyr0gjde3swltql07c8q0rhuhbnh50e3e00zx7awyvenb4j78h6z9d03fdumaknaq37zbxf41goswfr07fdoqfwx',
+                        isActive: false,
                         data: { "foo" : "bar" },
                         accountIds: [],
                     }
@@ -854,7 +854,7 @@ describe('tenant', () =>
                     }
                 `,
                 variables: {
-                    id: '41938f97-cd3a-4354-bcf0-f079428c06fc'
+                    id: '63788c1c-27a3-4107-9ede-a3d9338a23d7'
                 }
             })
             .expect(200)

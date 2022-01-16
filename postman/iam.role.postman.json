@@ -1,6 +1,6 @@
 {
     "info": {
-		"_postman_id"   : "9312ddbe-cf6a-4ed4-96cf-ffebae5bb754",
+		"_postman_id"   : "f475b3be-632d-44d8-9f2b-f4d712b541e9",
 		"name"          : "@apps - iam/role",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
@@ -15,7 +15,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:IamCreateRoleInput!)\n{\n\tiamCreateRole (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tisMaster\n\t}\n}",
-                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Awesome Metal Chicken\", \n\t\t\"isMaster\": true\n\t}\n}"
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Sleek Frozen Shirt\", \n\t\t\"isMaster\": false\n\t}\n}"
 					}
 				},
 				"url": {
@@ -39,7 +39,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:[IamCreateRoleInput]!)\n{\n\tiamCreateRoles (payload:$payload)\n}",
-						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"0fb195c6-77e4-453b-a345-094ee6975f76\", \n\t\t\t\"name\": \"Awesome Granite Soap\", \n\t\t\t\"isMaster\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"b793eb02-f70f-4cc3-8af7-60a346a6d3a0\", \n\t\t\t\"name\": \"Generic Fresh Soap\", \n\t\t\t\"isMaster\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"3e01acdd-a59c-4848-88e6-b5011bbfeab0\", \n\t\t\t\"name\": \"Unbranded Steel Pants\", \n\t\t\t\"isMaster\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"8a540243-4a36-410e-a3eb-e172e7c71b44\", \n\t\t\t\"name\": \"Licensed Frozen Car\", \n\t\t\t\"isMaster\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"7d9d3d1c-5932-46d0-8e64-2ef21fcb7d30\", \n\t\t\t\"name\": \"Handmade Frozen Mouse\", \n\t\t\t\"isMaster\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"8d054693-2b55-47c8-8d71-c0f66b302921\", \n\t\t\t\"name\": \"Awesome Wooden Chicken\", \n\t\t\t\"isMaster\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"e40ddcd0-c34c-410c-b3de-718f3854c650\", \n\t\t\t\"name\": \"Refined Plastic Mouse\", \n\t\t\t\"isMaster\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"9fed52ae-700b-4b47-8b49-d3ab5e913e8c\", \n\t\t\t\"name\": \"Practical Concrete Towels\", \n\t\t\t\"isMaster\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"b5be1448-935d-45a5-95d3-816018a8edbe\", \n\t\t\t\"name\": \"Tasty Fresh Chair\", \n\t\t\t\"isMaster\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"a3b3efce-d8f0-43bd-91a3-9454768d527f\", \n\t\t\t\"name\": \"Tasty Frozen Mouse\", \n\t\t\t\"isMaster\": false\n\t\t}\n\t]\n}"
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"2bc07ffb-4e9a-4fce-a66b-5958aa4e2808\", \n\t\t\t\"name\": \"Intelligent Rubber Soap\", \n\t\t\t\"isMaster\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"39f29cce-8d61-4df7-8265-77fe04ddca5f\", \n\t\t\t\"name\": \"Handcrafted Plastic Table\", \n\t\t\t\"isMaster\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"5a648747-72ae-4047-b50d-257ccbc52bed\", \n\t\t\t\"name\": \"Tasty Wooden Shoes\", \n\t\t\t\"isMaster\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"94b08aa6-5513-4573-8cba-a6bf93d9dfa2\", \n\t\t\t\"name\": \"Handcrafted Rubber Chicken\", \n\t\t\t\"isMaster\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"706bc9ee-5c75-431f-9d94-97d971d5d880\", \n\t\t\t\"name\": \"Handmade Steel Chair\", \n\t\t\t\"isMaster\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"443b6242-286e-4fd8-ac89-49b945da2978\", \n\t\t\t\"name\": \"Handcrafted Concrete Ball\", \n\t\t\t\"isMaster\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"8283ba34-69bb-47a0-be80-877c5366f2c8\", \n\t\t\t\"name\": \"Sleek Frozen Chips\", \n\t\t\t\"isMaster\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"7036bc59-a1fc-40e3-8d42-d4521e50277e\", \n\t\t\t\"name\": \"Refined Concrete Pizza\", \n\t\t\t\"isMaster\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"873fd445-e97f-4abb-a423-1d28ba1f49fa\", \n\t\t\t\"name\": \"Practical Concrete Cheese\", \n\t\t\t\"isMaster\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"87ce3c2d-22a1-47fd-a64e-db8d87df5ab1\", \n\t\t\t\"name\": \"Handcrafted Cotton Hat\", \n\t\t\t\"isMaster\": false\n\t\t}\n\t]\n}"
 					}
 				},
 				"url": {
@@ -164,7 +164,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:IamUpdateRoleInput!)\n{\n\tiamUpdateRole (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tisMaster\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Ergonomic Metal Tuna\", \n\t\t\"isMaster\": true, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}\n}"
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Sleek Concrete Shirt\", \n\t\t\"isMaster\": true, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}\n}"
 					}
 				},
 				"url": {
@@ -242,7 +242,7 @@
 					}				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Handcrafted Granite Salad\", \n\t\"isMaster\": false, \n\t\"permissionIds\": [], \n\t\"accountIds\": []\n}",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Handcrafted Rubber Car\", \n\t\"isMaster\": true, \n\t\"permissionIds\": [], \n\t\"accountIds\": []\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -275,7 +275,7 @@
 					}				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "[\n\t{\n\t\t\"id\": \"f4e7467d-afe2-401b-940b-216826724df6\", \n\t\t\"name\": \"Gorgeous Cotton Ball\", \n\t\t\"isMaster\": false, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"20b52e04-3532-476b-8a77-52cb9bb79203\", \n\t\t\"name\": \"Refined Metal Ball\", \n\t\t\"isMaster\": false, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"304e4527-0f8f-4e74-b182-e745f2752ab5\", \n\t\t\"name\": \"Gorgeous Metal Sausages\", \n\t\t\"isMaster\": true, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"8e5747ec-73a1-449e-8a8c-039ce86abf1b\", \n\t\t\"name\": \"Intelligent Metal Salad\", \n\t\t\"isMaster\": true, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"143d5d6e-4989-4d4a-934c-9480e9f70300\", \n\t\t\"name\": \"Intelligent Granite Pizza\", \n\t\t\"isMaster\": true, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"79b3f8ba-4cc7-4cf7-b290-9f6f299bc15e\", \n\t\t\"name\": \"Incredible Rubber Soap\", \n\t\t\"isMaster\": false, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"fd17c531-ad0e-4aa7-b615-30dbed0c946d\", \n\t\t\"name\": \"Intelligent Plastic Sausages\", \n\t\t\"isMaster\": false, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"3ff0ccf8-e4c9-4904-8903-24be61b70662\", \n\t\t\"name\": \"Awesome Frozen Chips\", \n\t\t\"isMaster\": false, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"b0ae2b8b-82c3-4735-8db7-552c9f6881a0\", \n\t\t\"name\": \"Refined Plastic Bacon\", \n\t\t\"isMaster\": false, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"1eece3c0-df8a-48a0-8100-bedfb9d6d681\", \n\t\t\"name\": \"Unbranded Frozen Bacon\", \n\t\t\"isMaster\": false, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}\n]",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"14fd07f3-eefc-4087-a1ac-5ec6aa52a10a\", \n\t\t\"name\": \"Small Frozen Chips\", \n\t\t\"isMaster\": false, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"54e30dcf-ebac-4106-a4a7-fb5647abba8e\", \n\t\t\"name\": \"Small Steel Tuna\", \n\t\t\"isMaster\": false, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"911bfaf0-a57d-4ecd-ad49-204a9fcbc9d8\", \n\t\t\"name\": \"Small Rubber Towels\", \n\t\t\"isMaster\": false, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"3e9da5dc-2051-4c5e-885b-8669492983ab\", \n\t\t\"name\": \"Handmade Metal Keyboard\", \n\t\t\"isMaster\": true, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"0c7efed5-69bf-410a-bfc6-0e295ee60bea\", \n\t\t\"name\": \"Ergonomic Granite Bacon\", \n\t\t\"isMaster\": false, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"0fa3c086-ae90-405a-8bdb-141d871e3648\", \n\t\t\"name\": \"Generic Rubber Salad\", \n\t\t\"isMaster\": true, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"551b3f56-b890-4abb-a1a6-c9fe3b4e9669\", \n\t\t\"name\": \"Practical Cotton Pizza\", \n\t\t\"isMaster\": true, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"3c530f7f-b043-4c16-b0f6-d597479b30e5\", \n\t\t\"name\": \"Practical Metal Gloves\", \n\t\t\"isMaster\": true, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"cadfa537-a588-4447-ac89-da3a092b099f\", \n\t\t\"name\": \"Rustic Plastic Fish\", \n\t\t\"isMaster\": false, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"a835d479-284c-4e1a-bc81-2a31bd4d3ced\", \n\t\t\"name\": \"Licensed Soft Towels\", \n\t\t\"isMaster\": true, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -454,7 +454,7 @@
 					}				],
 				"body": {
 					"mode": "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Handcrafted Fresh Car\", \n\t\"isMaster\": true, \n\t\"permissionIds\": [], \n\t\"accountIds\": []\n}",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Gorgeous Concrete Sausages\", \n\t\"isMaster\": false, \n\t\"permissionIds\": [], \n\t\"accountIds\": []\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -544,7 +544,7 @@
     ],
     "variable": [
 		{
-			"id": "dcdc782e-629e-4970-bb6b-71edb22975ff",
+			"id": "58ed22b3-8103-44bd-a929-15282c8090f8",
 			"key": "URL",
 			"value": "http://localhost:8080",
 			"type": "string"

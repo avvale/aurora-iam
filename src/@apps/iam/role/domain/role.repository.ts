@@ -1,6 +1,5 @@
 
-import { IRepository, ObjectLiteral, QueryStatement } from 'aurora-ts-core';
-import { CQMetadata, Pagination } from 'aurora-ts-core';
+import { CQMetadata, IRepository, ObjectLiteral, Pagination, QueryStatement } from 'aurora-ts-core';
 import { IamRole } from './role.aggregate';
 import { RoleId } from './value-objects';
 

@@ -58,8 +58,8 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                name: 'Fantastic Granite Chair',
-                isMaster: true,
+                name: 'Rustic Metal Computer',
+                isMaster: false,
                 permissionIds: [],
                 accountIds: [],
             })
@@ -76,9 +76,9 @@ describe('role', () =>
             .post('/iam/role')
             .set('Accept', 'application/json')
             .send({
-                id: '67c3c7ea-55c9-4ee9-af91-d0c4ebff0e19',
+                id: '0e1b389e-7874-4209-a82d-d77170d6d7c3',
                 name: null,
-                isMaster: true,
+                isMaster: false,
                 permissionIds: [],
                 accountIds: [],
             })
@@ -95,8 +95,8 @@ describe('role', () =>
             .post('/iam/role')
             .set('Accept', 'application/json')
             .send({
-                id: 'f4c7fa84-28f3-413f-bc2a-807d6c649c15',
-                name: 'Ergonomic Soft Soap',
+                id: 'ec4c01b2-fccc-40f9-9cfb-dddd1553b675',
+                name: 'Ergonomic Concrete Chips',
                 isMaster: null,
                 permissionIds: [],
                 accountIds: [],
@@ -114,8 +114,8 @@ describe('role', () =>
             .post('/iam/role')
             .set('Accept', 'application/json')
             .send({
-                name: 'Refined Soft Salad',
-                isMaster: false,
+                name: 'Refined Steel Salad',
+                isMaster: true,
                 permissionIds: [],
                 accountIds: [],
             })
@@ -132,8 +132,8 @@ describe('role', () =>
             .post('/iam/role')
             .set('Accept', 'application/json')
             .send({
-                id: 'ca286f76-341f-4d12-9272-b2b1cc3db51d',
-                isMaster: true,
+                id: '9542ee92-7296-4aee-9431-1c66814481be',
+                isMaster: false,
                 permissionIds: [],
                 accountIds: [],
             })
@@ -150,8 +150,8 @@ describe('role', () =>
             .post('/iam/role')
             .set('Accept', 'application/json')
             .send({
-                id: '311f282e-1540-414b-93c2-093e1990acf4',
-                name: 'Incredible Cotton Shoes',
+                id: 'f055ed72-5153-4469-a26c-57d6afeb70df',
+                name: 'Small Soft Computer',
                 permissionIds: [],
                 accountIds: [],
             })
@@ -168,8 +168,8 @@ describe('role', () =>
             .post('/iam/role')
             .set('Accept', 'application/json')
             .send({
-                id: 'xg99ulzwyk5vesgzon04mrxvr0oso0kja2or5',
-                name: 'Incredible Steel Chicken',
+                id: '8inejr0oq0l7pkiue4s0laix8obmrfvy61jsr',
+                name: 'Ergonomic Plastic Hat',
                 isMaster: true,
                 permissionIds: [],
                 accountIds: [],
@@ -187,9 +187,9 @@ describe('role', () =>
             .post('/iam/role')
             .set('Accept', 'application/json')
             .send({
-                id: '76f167ca-bf09-49e1-9eaa-3fd3eff4063e',
-                name: 'k6gr2n46zp9go9yy4czt2wrw5voy9ekeld6mbyd5c2hyoia7h6o4ndjd6m9mnffero2rlfwqexfa538exytjy9cxxe71ihibfzqpfy1egbij0bwimjo8kf5j7a8yefpnscohbj8hp1c43y3w25nij04uatmrwwgffua45v054e3wlfupxsnkcdcpx4m6w8r6csk585ref0mlhhn6pzbdafutg47xg1m6zkzxxacwnzgjzutr3hj823ty7gwc72sc',
-                isMaster: true,
+                id: '0cd1b42a-b82a-4a3b-9a2c-18cf5e798111',
+                name: 'uw1w2l1ionjjqm3cb2osjgzgywreo1ptzdgsxgigbx1py3cf3tcbtze389jtkgmjanlxta0cc89bj4pzb1paok8uy9esfjlcy4lir0nqghc5mhcn5fmvzu0dll3z7yfufl62t1g1mdt7k5vme35k7y3ca9gtzqcie9f4qjldmvvz8rrz0uhihfkvtqwgabyrmxy4x7rfp4z8gi2x466wzg3wx696nybs9qpnd4c5jdewx1k87cs6c5r0odt3uggf',
+                isMaster: false,
                 permissionIds: [],
                 accountIds: [],
             })
@@ -206,8 +206,8 @@ describe('role', () =>
             .post('/iam/role')
             .set('Accept', 'application/json')
             .send({
-                id: 'fcc0dd7d-de59-4ff0-82f6-5178773cee0d',
-                name: 'Gorgeous Wooden Tuna',
+                id: 'b204a09e-25eb-43f8-bc18-e8a4e789b2f2',
+                name: 'Gorgeous Frozen Mouse',
                 isMaster: 'true',
                 permissionIds: [],
                 accountIds: [],
@@ -275,7 +275,7 @@ describe('role', () =>
                 {
                     where:
                     {
-                        id: '3f55403f-5099-4739-a4ce-882920e41998'
+                        id: '88b0a315-ebdc-4ddd-897f-f2b4db4bd828'
                     }
                 }
             })
@@ -289,8 +289,8 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .send({
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Rustic Metal Pizza',
-                isMaster: true,
+                name: 'Sleek Soft Bacon',
+                isMaster: false,
                 permissionIds: [],
                 accountIds: [],
             })
@@ -321,7 +321,7 @@ describe('role', () =>
     test('/REST:GET iam/role/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/role/6e2ec4de-1759-463b-add7-b37a368ef3fb')
+            .get('/iam/role/dfb4647a-92f4-4746-adf1-cb24764368f7')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -344,9 +344,9 @@ describe('role', () =>
             .put('/iam/role')
             .set('Accept', 'application/json')
             .send({
-                id: 'b9f8488f-4419-4ee0-be29-bd90900441df',
-                name: 'Gorgeous Wooden Salad',
-                isMaster: false,
+                id: 'b25ebb90-4671-4d12-a2c1-584d46ecc203',
+                name: 'Awesome Rubber Bike',
+                isMaster: true,
                 permissionIds: [],
                 accountIds: [],
             })
@@ -360,8 +360,8 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .send({
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Awesome Wooden Bacon',
-                isMaster: false,
+                name: 'Practical Cotton Tuna',
+                isMaster: true,
                 permissionIds: [],
                 accountIds: [],
             })
@@ -375,7 +375,7 @@ describe('role', () =>
     test('/REST:DELETE iam/role/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/role/0e25f3b1-0771-431b-b20d-553a0d9b3294')
+            .delete('/iam/role/627631fb-a76d-444e-babf-683e451fc14c')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -507,8 +507,8 @@ describe('role', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Awesome Metal Chicken',
-                        isMaster: false,
+                        name: 'Ergonomic Rubber Towels',
+                        isMaster: true,
                     }
                 }
             })
@@ -544,7 +544,7 @@ describe('role', () =>
                     {
                         where:
                         {
-                            id: 'd31c88b1-167a-4dca-8f10-a159a3d2d388'
+                            id: '29270b46-b205-41fd-b466-7cdc5a4d4056'
                         }
                     }
                 }
@@ -615,7 +615,7 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: '0230e26a-f1bf-4c92-9f66-61512a10e4cb'
+                    id: '658057ea-3950-4d45-bf3e-37b8b9dbe453'
                 }
             })
             .expect(200)
@@ -678,9 +678,9 @@ describe('role', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '6c8d7337-d09a-401f-abc8-4793dd09d533',
-                        name: 'Licensed Concrete Tuna',
-                        isMaster: false,
+                        id: '240629f1-36d4-4d59-918f-b1bc1145f290',
+                        name: 'Generic Soft Fish',
+                        isMaster: true,
                         permissionIds: [],
                         accountIds: [],
                     }
@@ -717,7 +717,7 @@ describe('role', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Gorgeous Frozen Chips',
+                        name: 'Awesome Metal Chicken',
                         isMaster: false,
                         permissionIds: [],
                         accountIds: [],
@@ -751,7 +751,7 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: 'cd11b19f-76b2-428b-b0de-1f73aac5bbd1'
+                    id: '7823c91a-8e8d-4cbc-bb5a-448d5b5dbe7d'
                 }
             })
             .expect(200)

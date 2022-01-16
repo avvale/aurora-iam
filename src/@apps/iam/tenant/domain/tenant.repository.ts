@@ -1,6 +1,5 @@
 
-import { IRepository, ObjectLiteral, QueryStatement } from 'aurora-ts-core';
-import { CQMetadata, Pagination } from 'aurora-ts-core';
+import { CQMetadata, IRepository, ObjectLiteral, Pagination, QueryStatement } from 'aurora-ts-core';
 import { IamTenant } from './tenant.aggregate';
 import { TenantId } from './value-objects';
 
