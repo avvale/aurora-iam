@@ -1,6 +1,6 @@
 {
     "info": {
-		"_postman_id"   : "09b324ed-2998-425f-8638-3276f74860a1",
+		"_postman_id"   : "362fd9a9-95c8-458f-899d-a9ecd2ecc3b1",
 		"name"          : "@apps - iam/bounded-context",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
@@ -14,8 +14,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation ($payload:IamCreateBoundedContextInput!)\n{\n\tiamCreateBoundedContext (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tsort\n\t\tisActive\n\t}\n}",
-                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Practical Soft Mouse\", \n\t\t\"sort\": 119929, \n\t\t\"isActive\": true\n\t}\n}"
+						"query": "mutation ($payload:IamCreateBoundedContextInput!)\n{\n\tiamCreateBoundedContext (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Unbranded Fresh Pants\", \n\t\t\"root\": \"qpo89dx04lq181w4onchfcxzqgbzu0\", \n\t\t\"sort\": 158707, \n\t\t\"isActive\": false\n\t}\n}"
 					}
 				},
 				"url": {
@@ -39,7 +39,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:[IamCreateBoundedContextInput]!)\n{\n\tiamCreateBoundedContexts (payload:$payload)\n}",
-						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"92dfaed0-51b4-4eef-b374-95740852d9f6\", \n\t\t\t\"name\": \"Practical Rubber Bike\", \n\t\t\t\"sort\": 184132, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"5cad110d-f57c-428e-ae96-94660529dcc9\", \n\t\t\t\"name\": \"Practical Rubber Mouse\", \n\t\t\t\"sort\": 785377, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"7126e4fd-4d4c-4ad4-aa32-c7772b9ede07\", \n\t\t\t\"name\": \"Awesome Cotton Computer\", \n\t\t\t\"sort\": 666160, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"e3d6251c-8acc-452d-8bbc-fbc62670f849\", \n\t\t\t\"name\": \"Practical Fresh Keyboard\", \n\t\t\t\"sort\": 377013, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"12da0e0b-6657-4af5-81e6-05c5d49b1696\", \n\t\t\t\"name\": \"Licensed Wooden Shirt\", \n\t\t\t\"sort\": 501259, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"504fc2fc-38de-4764-a5e3-bd5ba540b1dc\", \n\t\t\t\"name\": \"Generic Wooden Sausages\", \n\t\t\t\"sort\": 137083, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"ce21f2f9-fc70-4b64-a22c-79a234c4bf7d\", \n\t\t\t\"name\": \"Rustic Rubber Shoes\", \n\t\t\t\"sort\": 491652, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"62fe6b9b-b25e-4df6-afa0-b8a5336390d6\", \n\t\t\t\"name\": \"Sleek Concrete Tuna\", \n\t\t\t\"sort\": 633509, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"5e151b84-9435-4863-89d0-e62f439f3741\", \n\t\t\t\"name\": \"Generic Soft Pants\", \n\t\t\t\"sort\": 159083, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"369c6c73-b072-4c2a-80da-76c5f666f067\", \n\t\t\t\"name\": \"Sleek Concrete Bike\", \n\t\t\t\"sort\": 924318, \n\t\t\t\"isActive\": false\n\t\t}\n\t]\n}"
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"ca6720cf-a213-4bf1-866f-8973b4cd2d3b\", \n\t\t\t\"name\": \"Rustic Rubber Mouse\", \n\t\t\t\"root\": \"cysu7ws3fcehqwuup3o0mke5vp8k0h\", \n\t\t\t\"sort\": 508727, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"bdd7bdc8-bd40-433b-a945-4952857bcdc4\", \n\t\t\t\"name\": \"Licensed Steel Hat\", \n\t\t\t\"root\": \"i3wym8ma6p8mvu04xsniyrht634lti\", \n\t\t\t\"sort\": 638275, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"80a1039c-b8ad-4d88-969a-c483fc42794b\", \n\t\t\t\"name\": \"Handcrafted Wooden Pants\", \n\t\t\t\"root\": \"5h08wzr08gbr3za94xvhviy9cusvmg\", \n\t\t\t\"sort\": 616808, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"a3d2d091-4f55-4f7b-886d-22564ebad7b7\", \n\t\t\t\"name\": \"Awesome Plastic Keyboard\", \n\t\t\t\"root\": \"uueenjpw00stq78zpt68cirfx23bjb\", \n\t\t\t\"sort\": 529194, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"23620577-b8d9-453c-a82c-957d031e3792\", \n\t\t\t\"name\": \"Practical Fresh Fish\", \n\t\t\t\"root\": \"gboguh34vuye7ef5rsin93vmqkwxgf\", \n\t\t\t\"sort\": 424220, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"cd358a9c-98c0-4169-9612-bf6375d51889\", \n\t\t\t\"name\": \"Rustic Frozen Ball\", \n\t\t\t\"root\": \"8au0518tuezjjsalxyg5yo131zr8pv\", \n\t\t\t\"sort\": 397563, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"5e6cbf13-dae0-4c12-a86d-60ee4a351bf3\", \n\t\t\t\"name\": \"Unbranded Cotton Mouse\", \n\t\t\t\"root\": \"61xh09kn9pqgi95jmv5e388u62zq65\", \n\t\t\t\"sort\": 631474, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"bbbb442a-67a4-49e9-a0d8-a477801c38dc\", \n\t\t\t\"name\": \"Rustic Wooden Computer\", \n\t\t\t\"root\": \"6pxpfu8d7wr26e0167xijvw2cf1sr8\", \n\t\t\t\"sort\": 256702, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"b70016a1-5d71-4f65-85a7-d8fc02957678\", \n\t\t\t\"name\": \"Generic Granite Chicken\", \n\t\t\t\"root\": \"zhooixoexuuz5pn5u798umy4azfbod\", \n\t\t\t\"sort\": 159200, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"1ad4985c-6131-4857-a116-daec609a61a4\", \n\t\t\t\"name\": \"Small Frozen Soap\", \n\t\t\t\"root\": \"mo22h4pnv8cozxepdn8svd2zov2q8f\", \n\t\t\t\"sort\": 800216, \n\t\t\t\"isActive\": false\n\t\t}\n\t]\n}"
 					}
 				},
 				"url": {
@@ -88,7 +88,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\tiamGetBoundedContexts (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"query": "query ($query:QueryStatement)\n{\n\tiamGetBoundedContexts (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
 						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
 					}
 				},
@@ -113,7 +113,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\tiamFindBoundedContext (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"query": "query ($query:QueryStatement)\n{\n\tiamFindBoundedContext (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
 						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
 					}
 				},
@@ -138,7 +138,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query ($id:ID)\n{\n\tiamFindBoundedContextById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"query": "query ($id:ID)\n{\n\tiamFindBoundedContextById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
 						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
 					}
 				},
@@ -163,8 +163,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation ($payload:IamUpdateBoundedContextInput!)\n{\n\tiamUpdateBoundedContext (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Practical Concrete Chips\", \n\t\t\"sort\": 344867, \n\t\t\"isActive\": true\n\t}\n}"
+						"query": "mutation ($payload:IamUpdateBoundedContextInput!)\n{\n\tiamUpdateBoundedContext (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Tasty Cotton Soap\", \n\t\t\"root\": \"lssjl5h0myjwrrlt33q8giofp3dele\", \n\t\t\"sort\": 163836, \n\t\t\"isActive\": true\n\t}\n}"
 					}
 				},
 				"url": {
@@ -188,7 +188,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation ($id:ID!)\n{\n\tiamDeleteBoundedContextById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"query": "mutation ($id:ID!)\n{\n\tiamDeleteBoundedContextById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
 						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
 					}
 				},
@@ -213,7 +213,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation ($query:QueryStatement)\n{\n\tiamDeleteBoundedContexts (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"query": "mutation ($query:QueryStatement)\n{\n\tiamDeleteBoundedContexts (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
 						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
 					}
 				},
@@ -242,7 +242,7 @@
 					}				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Intelligent Steel Hat\", \n\t\"sort\": 563267, \n\t\"isActive\": true\n}",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Handmade Plastic Ball\", \n\t\"root\": \"qxa8hv4hstjd3izpviwfuollg561ev\", \n\t\"sort\": 394098, \n\t\"isActive\": true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -275,7 +275,7 @@
 					}				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "[\n\t{\n\t\t\"id\": \"a14e3792-17f1-4eb7-a256-31c113bf2e8c\", \n\t\t\"name\": \"Tasty Fresh Pants\", \n\t\t\"sort\": 786260, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"3079b834-a186-4a14-89e9-dde2e2d6ed0f\", \n\t\t\"name\": \"Rustic Soft Sausages\", \n\t\t\"sort\": 566009, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"139b36b4-2f36-45fe-8067-682007466605\", \n\t\t\"name\": \"Fantastic Granite Bacon\", \n\t\t\"sort\": 886154, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"bb5311f9-dfa1-4e5f-ac5e-fdd9212f8725\", \n\t\t\"name\": \"Unbranded Fresh Salad\", \n\t\t\"sort\": 404445, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"3b1ea34f-0135-43ca-ba83-7a41cf4de75b\", \n\t\t\"name\": \"Ergonomic Wooden Sausages\", \n\t\t\"sort\": 622385, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"d9e8cd93-fbec-48cc-b319-a5796899b371\", \n\t\t\"name\": \"Fantastic Steel Towels\", \n\t\t\"sort\": 967081, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"cfb48eff-fa04-46a9-91ab-c53cd45451de\", \n\t\t\"name\": \"Tasty Rubber Chicken\", \n\t\t\"sort\": 834459, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"141c17c5-6e58-492a-9b08-295b51eec4c6\", \n\t\t\"name\": \"Practical Concrete Keyboard\", \n\t\t\"sort\": 933269, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"2f7e73bb-d4d7-4ace-853b-a1bbd5dbf424\", \n\t\t\"name\": \"Practical Concrete Bacon\", \n\t\t\"sort\": 705181, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"0afb7acb-4745-4733-b801-c1415b9caf5f\", \n\t\t\"name\": \"Refined Steel Ball\", \n\t\t\"sort\": 380191, \n\t\t\"isActive\": true\n\t}\n]",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"a4e2db79-3677-4bdd-a9bf-1e58d4f61bfb\", \n\t\t\"name\": \"Ergonomic Metal Table\", \n\t\t\"root\": \"uzaji8q5hlibg6e3vlunel61u0p158\", \n\t\t\"sort\": 943368, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"811a7863-1cbd-4a67-88c9-e138ad84a449\", \n\t\t\"name\": \"Tasty Granite Cheese\", \n\t\t\"root\": \"5r8zl20e8gf3hpxlfdpvq7vh2anipw\", \n\t\t\"sort\": 105200, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"8a0fcc1c-bd7a-474e-ab70-299f99c41b5f\", \n\t\t\"name\": \"Incredible Cotton Bike\", \n\t\t\"root\": \"2rmrgygw7luwc7owdzi07mn1hzkg5y\", \n\t\t\"sort\": 665491, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"426fc330-19cb-48a7-bf58-73b9a8f82e62\", \n\t\t\"name\": \"Generic Fresh Hat\", \n\t\t\"root\": \"38df7a0vsrl69q0jff1219soyfr165\", \n\t\t\"sort\": 151236, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"af7edb3c-d1fd-47fd-882a-39800de05e3e\", \n\t\t\"name\": \"Generic Rubber Pants\", \n\t\t\"root\": \"ursr7l3t9uy98vdanhl8a5g0ty6y2u\", \n\t\t\"sort\": 708363, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"6123905b-5372-4d70-b0e4-93afd8f44bcf\", \n\t\t\"name\": \"Rustic Frozen Keyboard\", \n\t\t\"root\": \"5xe9b0h0wb7oyot7jo5fy6oefz70ox\", \n\t\t\"sort\": 130590, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"ec1f5445-2f89-4601-8f3c-cd3b32bd84c8\", \n\t\t\"name\": \"Licensed Plastic Bacon\", \n\t\t\"root\": \"kezywzaaq7o60fh3wub91spd46m16g\", \n\t\t\"sort\": 248746, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"355e1ccc-fba4-4106-9b3a-3ce153ac1c9f\", \n\t\t\"name\": \"Rustic Wooden Soap\", \n\t\t\"root\": \"g84l3giq2yeigjyjcq8yr8t83w6wq9\", \n\t\t\"sort\": 450246, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"eda10b22-8881-4619-becb-2b19a852457c\", \n\t\t\"name\": \"Handmade Metal Fish\", \n\t\t\"root\": \"tm508mp81ja51mhoyj1x1qrfg1qzfy\", \n\t\t\"sort\": 667045, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"692274ea-2cc9-4af4-afe4-80c798eeeb0f\", \n\t\t\"name\": \"Unbranded Cotton Chips\", \n\t\t\"root\": \"hp7s4vz4ufauaqb0ld88hphwn9ezxq\", \n\t\t\"sort\": 208302, \n\t\t\"isActive\": false\n\t}\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -454,7 +454,7 @@
 					}				],
 				"body": {
 					"mode": "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Tasty Concrete Shoes\", \n\t\"sort\": 144297, \n\t\"isActive\": false\n}",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Refined Concrete Bacon\", \n\t\"root\": \"96riaht1ma8jnxfnzgd0xrfdc38nzh\", \n\t\"sort\": 491672, \n\t\"isActive\": true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -544,7 +544,7 @@
     ],
     "variable": [
 		{
-			"id": "d1899e93-c106-413e-b452-fc5233227267",
+			"id": "eec74ce6-59ff-4a55-8827-c5e84f83073e",
 			"key": "URL",
 			"value": "http://localhost:8080",
 			"type": "string"

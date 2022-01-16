@@ -3,6 +3,7 @@ import { EventPublisher } from '@nestjs/cqrs';
 import {
     BoundedContextId,
     BoundedContextName,
+    BoundedContextRoot,
     BoundedContextSort,
     BoundedContextIsActive,
     BoundedContextCreatedAt,
@@ -25,6 +26,7 @@ export class CreateBoundedContextsService
         boundedContexts: {
             id: BoundedContextId,
             name: BoundedContextName,
+            root: BoundedContextRoot,
             sort: BoundedContextSort,
             isActive: BoundedContextIsActive,
         } []
@@ -34,6 +36,7 @@ export class CreateBoundedContextsService
         const aggregateBoundedContexts = boundedContexts.map(boundedContext => IamBoundedContext.register(
             boundedContext.id,
             boundedContext.name,
+            boundedContext.root,
             boundedContext.sort,
             boundedContext.isActive,
             new BoundedContextCreatedAt({ currentTimestamp: true }),

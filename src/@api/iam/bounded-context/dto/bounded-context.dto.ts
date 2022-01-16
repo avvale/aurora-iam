@@ -16,6 +16,12 @@ export class BoundedContextDto
     name: string;
 
     @ApiProperty({
+        type       : String,
+        description: 'root [input here api field description]',
+    })
+    root: string;
+
+    @ApiProperty({
         type       : Number,
         description: 'sort [input here api field description]',
     })

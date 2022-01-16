@@ -26,6 +26,7 @@ export class AddBoundedContextsContextEvent extends AggregateRoot
                     new CreatedBoundedContextEvent(
                         boundedContext.id.value,
                         boundedContext.name.value,
+                        boundedContext.root.value,
                         boundedContext.sort?.value,
                         boundedContext.isActive.value,
                         boundedContext.createdAt?.value,
@@ -45,6 +46,7 @@ export class AddBoundedContextsContextEvent extends AggregateRoot
                     new DeletedBoundedContextEvent(
                         boundedContext.id.value,
                         boundedContext.name.value,
+                        boundedContext.root.value,
                         boundedContext.sort?.value,
                         boundedContext.isActive.value,
                         boundedContext.createdAt?.value,

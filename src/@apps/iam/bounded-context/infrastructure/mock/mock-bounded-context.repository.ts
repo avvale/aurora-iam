@@ -4,6 +4,7 @@ import { IBoundedContextRepository } from '../../../../../@apps/iam/bounded-cont
 import {
     BoundedContextId,
     BoundedContextName,
+    BoundedContextRoot,
     BoundedContextSort,
     BoundedContextIsActive,
     BoundedContextCreatedAt,
@@ -46,6 +47,7 @@ export class MockBoundedContextRepository extends MockRepository<IamBoundedConte
             this.collectionSource.push(IamBoundedContext.register(
                 new BoundedContextId(itemCollection.id),
                 new BoundedContextName(itemCollection.name),
+                new BoundedContextRoot(itemCollection.root),
                 new BoundedContextSort(itemCollection.sort),
                 new BoundedContextIsActive(itemCollection.isActive),
                 new BoundedContextCreatedAt(itemCollection.createdAt),

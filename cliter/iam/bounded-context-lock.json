@@ -3,23 +3,23 @@
     "files": [
         {
             "path": "src/@apps/iam/bounded-context/application/create/create-bounded-context.command-handler.spec.ts",
-            "integrity": "sha1:1e98d5b7f24d167a4084df290be78d061fb7d58e"
+            "integrity": "sha1:5c67aa752ed2cc38d489f34987ae95b63fff66f5"
         },
         {
             "path": "src/@apps/iam/bounded-context/application/create/create-bounded-context.command-handler.ts",
-            "integrity": "sha1:0f82d92b1c882966b51ccc0ada8b3fe08135b89b"
+            "integrity": "sha1:fac462ab312b0ea20a583e8f719223f1ad45dd6c"
         },
         {
             "path": "src/@apps/iam/bounded-context/application/create/create-bounded-context.command.ts",
-            "integrity": "sha1:39a2dabe847ca0ba4400432e019aa428a8f3d030"
+            "integrity": "sha1:fe055475de4ecb9846c00e09216ad8106375e0e0"
         },
         {
             "path": "src/@apps/iam/bounded-context/application/create/create-bounded-context.service.spec.ts",
-            "integrity": "sha1:8b3c97ea7efc0cacd3fbb4715fe67bbf49a46e80"
+            "integrity": "sha1:d70f6d9cc19b855ce69505ea5186d92f7dc7015a"
         },
         {
             "path": "src/@apps/iam/bounded-context/application/create/create-bounded-context.service.ts",
-            "integrity": "sha1:f30681c11d136e72f9981883d53e0965e3d57f16"
+            "integrity": "sha1:78eaf7fafafe3223bc86f548984c0d662c33e24e"
         },
         {
             "path": "src/@apps/iam/bounded-context/application/create/create-bounded-contexts.command-handler.spec.ts",
@@ -27,11 +27,11 @@
         },
         {
             "path": "src/@apps/iam/bounded-context/application/create/create-bounded-contexts.command-handler.ts",
-            "integrity": "sha1:b64da891e1be6bb5cd8eb20fff6d4a96c424aa41"
+            "integrity": "sha1:93a0a97d8408fb79562d260b4736fee64b539523"
         },
         {
             "path": "src/@apps/iam/bounded-context/application/create/create-bounded-contexts.command.ts",
-            "integrity": "sha1:9e58abf1425ba609fe1b3811852877a31832b90e"
+            "integrity": "sha1:2a5adf8be6a7cd55110315472395fff6e860be15"
         },
         {
             "path": "src/@apps/iam/bounded-context/application/create/create-bounded-contexts.service.spec.ts",
@@ -39,7 +39,7 @@
         },
         {
             "path": "src/@apps/iam/bounded-context/application/create/create-bounded-contexts.service.ts",
-            "integrity": "sha1:9c89034adf28c448ac8e2f5f2da7e126a62da5dc"
+            "integrity": "sha1:b5b872812752ca6199ed85b687ff0c3a84a5899f"
         },
         {
             "path": "src/@apps/iam/bounded-context/application/delete/delete-bounded-context-by-id.command-handler.spec.ts",
@@ -83,7 +83,7 @@
         },
         {
             "path": "src/@apps/iam/bounded-context/application/events/add-bounded-contexts-context.event.ts",
-            "integrity": "sha1:2579a449dd392e4a2870481f226464837e36cb1e"
+            "integrity": "sha1:648c75f899b49cb6231a4d8b4b859e71270900f5"
         },
         {
             "path": "src/@apps/iam/bounded-context/application/events/created-bounded-context.event-handler.ts",
@@ -91,7 +91,7 @@
         },
         {
             "path": "src/@apps/iam/bounded-context/application/events/created-bounded-context.event.ts",
-            "integrity": "sha1:b5c116d7ec401502572090432bb16385e9233a6e"
+            "integrity": "sha1:250da09ed27973d1a72a4627035e675d18743aa5"
         },
         {
             "path": "src/@apps/iam/bounded-context/application/events/created-bounded-contexts.event-handler.ts",
@@ -107,7 +107,7 @@
         },
         {
             "path": "src/@apps/iam/bounded-context/application/events/deleted-bounded-context.event.ts",
-            "integrity": "sha1:2fdfddbb64616912aadbd24d1fbe68ea5d34f698"
+            "integrity": "sha1:e03fe813ce218328c47b39eb4cb352d33377ff3c"
         },
         {
             "path": "src/@apps/iam/bounded-context/application/events/deleted-bounded-contexts.event-handler.ts",
@@ -123,7 +123,7 @@
         },
         {
             "path": "src/@apps/iam/bounded-context/application/events/updated-bounded-context.event.ts",
-            "integrity": "sha1:0c7a9823d3caa31161ca6832265ab4f819509aca"
+            "integrity": "sha1:95a20f58062f325082b36c5f2d0c729800e5871c"
         },
         {
             "path": "src/@apps/iam/bounded-context/application/find/find-bounded-context-by-id.query-handler.spec.ts",
@@ -211,31 +211,31 @@
         },
         {
             "path": "src/@apps/iam/bounded-context/application/update/update-bounded-context.command-handler.spec.ts",
-            "integrity": "sha1:6804ff16f1b251c1e3c9e2117ec3af6a7e52760b"
+            "integrity": "sha1:d9f4518f717df0b43dbcc2f71a9c21e3bcecfe5c"
         },
         {
             "path": "src/@apps/iam/bounded-context/application/update/update-bounded-context.command-handler.ts",
-            "integrity": "sha1:5938bc37afca502fbf97c3cedfdd9534d0bb74cb"
+            "integrity": "sha1:09a539b69601ade3e4caba08777cbbd10a4e8edb"
         },
         {
             "path": "src/@apps/iam/bounded-context/application/update/update-bounded-context.command.ts",
-            "integrity": "sha1:e7e3fcfa14d7ad0125c2bb8fa026fccac462f478"
+            "integrity": "sha1:2d1262ed5ddb1c3611341a7e453ba766d7b82385"
         },
         {
             "path": "src/@apps/iam/bounded-context/application/update/update-bounded-context.service.spec.ts",
-            "integrity": "sha1:b6e9664c8abd01ed0caf8086bdbed2c240fc2706"
+            "integrity": "sha1:5c445247305d5a8329f3b68d4f4b252ba1812cf4"
         },
         {
             "path": "src/@apps/iam/bounded-context/application/update/update-bounded-context.service.ts",
-            "integrity": "sha1:287f9b902c1a8eb3aeca59e3d4005c9d91e39831"
+            "integrity": "sha1:af60069d695bea3577c781756f49184028ac9531"
         },
         {
             "path": "src/@apps/iam/bounded-context/domain/bounded-context.aggregate.ts",
-            "integrity": "sha1:50b763ba540e3b3e63bd80b61ceb6876ae807f18"
+            "integrity": "sha1:80ecba9919d3bd256f15649ef3a87cf3d1825141"
         },
         {
             "path": "src/@apps/iam/bounded-context/domain/bounded-context.mapper.ts",
-            "integrity": "sha1:576a80cbbc5561dc757e98161f429af8ea5bbf78"
+            "integrity": "sha1:e67e88e543a366c43e1e88e32da9d6d1d07bbedc"
         },
         {
             "path": "src/@apps/iam/bounded-context/domain/bounded-context.repository.ts",
@@ -243,11 +243,11 @@
         },
         {
             "path": "src/@apps/iam/bounded-context/domain/bounded-context.response.ts",
-            "integrity": "sha1:df18bd257a2f27835a9bb7aa31a241376578e685"
+            "integrity": "sha1:57ac9e87bc5d3fd26fd48bc383c9688c928432d7"
         },
         {
             "path": "src/@apps/iam/bounded-context/domain/value-objects/index.ts",
-            "integrity": "sha1:4da5ac29f4535ca6cbc10746c55885ae34484759"
+            "integrity": "sha1:7c91381a7c886b353f19d2522f1926eaa00fa48f"
         },
         {
             "path": "src/@apps/iam/bounded-context/index.ts",
@@ -255,19 +255,19 @@
         },
         {
             "path": "src/@apps/iam/bounded-context/infrastructure/mock/mock-bounded-context.repository.ts",
-            "integrity": "sha1:4351be52a14ede0fd3c47b6d2c4f0caa2ea7a1b3"
+            "integrity": "sha1:b7a64cca7469339c632c37c838ad7329c45bc5c7"
         },
         {
             "path": "src/@apps/iam/bounded-context/infrastructure/mock/mock-bounded-context.seeder.ts",
-            "integrity": "sha1:1fd66ac590cb2b49194efe3decf11c46d49e0f39"
+            "integrity": "sha1:e45e8522dcacc04002d5975b986631b12159f386"
         },
         {
             "path": "src/@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed.ts",
-            "integrity": "sha1:550d02fd4d33def1a72bb37e0f91ca61ba9c2bd0"
+            "integrity": "sha1:3e43ac28be72629a56adbf7661054d81f0a6e1cd"
         },
         {
             "path": "src/@apps/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.model.ts",
-            "integrity": "sha1:1b2470cba49d98143e4554f9dc66a1ce9b5062a2"
+            "integrity": "sha1:b5a474a7799842cfde43d02916d67a6d2dffaf57"
         },
         {
             "path": "src/@apps/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.repository.ts",
@@ -280,6 +280,10 @@
         {
             "path": "src/@apps/iam/bounded-context/domain/value-objects/bounded-context-name.ts",
             "integrity": "sha1:c246d70b9124ce89e5cd045d3414fe5c9b9c57d8"
+        },
+        {
+            "path": "src/@apps/iam/bounded-context/domain/value-objects/bounded-context-root.ts",
+            "integrity": "sha1:b8978064cd8031416963efaffd7fee3595b49b31"
         },
         {
             "path": "src/@apps/iam/bounded-context/domain/value-objects/bounded-context-sort.ts",
@@ -375,19 +379,19 @@
         },
         {
             "path": "src/@api/iam/bounded-context/dto/bounded-context.dto.ts",
-            "integrity": "sha1:cd34a9ca5125ed2e86535c6ce05d81c4b7f44792"
+            "integrity": "sha1:e0c8190159c0d590172bc449294766d286027d66"
         },
         {
             "path": "src/@api/iam/bounded-context/dto/create-bounded-context.dto.ts",
-            "integrity": "sha1:d0b7f812ebc013f4675ce566fedef0ab31d7f936"
+            "integrity": "sha1:31264fbd2844cfa52b1e09cdab48dbf1d8f89292"
         },
         {
             "path": "src/@api/iam/bounded-context/dto/update-bounded-context.dto.ts",
-            "integrity": "sha1:19f236803418556779b7856cfecce42120dc8017"
+            "integrity": "sha1:d5f18958a078595ae3f5b6c721db93df5a00a3b9"
         },
         {
             "path": "src/@api/iam/bounded-context/graphql/bounded-context.graphql",
-            "integrity": "sha1:ddb2a03f9528eb52e71af33b1a5958a02ae70ca1"
+            "integrity": "sha1:891cd5375277a71ca1e25091905a8a6bf395491f"
         },
         {
             "path": "src/@api/iam/bounded-context/index.ts",
@@ -475,7 +479,7 @@
         },
         {
             "path": "postman/iam.bounded-context.postman.json",
-            "integrity": "sha1:d0c3bc4c124173b16e4493880126dc15ebf44a9a"
+            "integrity": "sha1:96ac13abfd815dcd884ab950a2bf7cff0bf8a9ab"
         }
     ]
 }

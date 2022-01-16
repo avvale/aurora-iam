@@ -4,6 +4,7 @@ import { BoundedContextResponse } from './bounded-context.response';
 import {
     BoundedContextId,
     BoundedContextName,
+    BoundedContextRoot,
     BoundedContextSort,
     BoundedContextIsActive,
     BoundedContextCreatedAt,
@@ -65,6 +66,7 @@ export class BoundedContextMapper implements IMapper
         return IamBoundedContext.register(
             new BoundedContextId(boundedContext.id),
             new BoundedContextName(boundedContext.name),
+            new BoundedContextRoot(boundedContext.root),
             new BoundedContextSort(boundedContext.sort),
             new BoundedContextIsActive(boundedContext.isActive),
             new BoundedContextCreatedAt(boundedContext.createdAt, {}, { addTimezone: cQMetadata?.timezone }),
@@ -81,6 +83,7 @@ export class BoundedContextMapper implements IMapper
         return new BoundedContextResponse(
             boundedContext.id.value,
             boundedContext.name.value,
+            boundedContext.root.value,
             boundedContext.sort.value,
             boundedContext.isActive.value,
             boundedContext.createdAt.value,

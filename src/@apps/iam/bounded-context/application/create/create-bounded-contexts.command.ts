@@ -6,6 +6,7 @@ export class CreateBoundedContextsCommand
         public readonly payload: {
             id: string,
             name: string,
+            root: string,
             sort?: number,
             isActive: boolean,
         } [],

@@ -5,6 +5,7 @@ import { CreateBoundedContextService } from './create-bounded-context.service';
 import {
     BoundedContextId,
     BoundedContextName,
+    BoundedContextRoot,
     BoundedContextSort,
     BoundedContextIsActive,
     BoundedContextCreatedAt,
@@ -26,6 +27,7 @@ export class CreateBoundedContextCommandHandler implements ICommandHandler<Creat
             {
                 id: new BoundedContextId(command.payload.id),
                 name: new BoundedContextName(command.payload.name),
+                root: new BoundedContextRoot(command.payload.root),
                 sort: new BoundedContextSort(command.payload.sort),
                 isActive: new BoundedContextIsActive(command.payload.isActive),
             }

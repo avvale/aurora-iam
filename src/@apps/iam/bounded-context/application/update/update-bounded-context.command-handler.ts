@@ -5,6 +5,7 @@ import { UpdateBoundedContextService } from './update-bounded-context.service';
 import {
     BoundedContextId,
     BoundedContextName,
+    BoundedContextRoot,
     BoundedContextSort,
     BoundedContextIsActive,
     BoundedContextCreatedAt,
@@ -26,6 +27,7 @@ export class UpdateBoundedContextCommandHandler implements ICommandHandler<Updat
             {
                 id: new BoundedContextId(command.payload.id),
                 name: new BoundedContextName(command.payload.name, { undefinable: true }),
+                root: new BoundedContextRoot(command.payload.root, { undefinable: true }),
                 sort: new BoundedContextSort(command.payload.sort),
                 isActive: new BoundedContextIsActive(command.payload.isActive, { undefinable: true }),
             },

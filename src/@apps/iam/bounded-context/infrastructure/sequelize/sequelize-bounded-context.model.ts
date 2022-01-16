@@ -22,6 +22,13 @@ export class IamBoundedContextModel extends Model<IamBoundedContextModel>
     name: string;
 
     @Column({
+        field: 'root',
+        allowNull: false,
+        type: DataTypes.STRING(30),
+    })
+    root: string;
+
+    @Column({
         field: 'sort',
         allowNull: true,
         type: DataTypes.SMALLINT.UNSIGNED,

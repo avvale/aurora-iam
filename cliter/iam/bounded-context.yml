@@ -15,6 +15,10 @@ aggregateProperties:
     type: varchar
     maxLength: 255
     nullable: false
+  - name: root
+    type: varchar
+    maxLength: 30
+    nullable: false
   - name: sort
     type: smallint.unsigned
     maxLength: 6

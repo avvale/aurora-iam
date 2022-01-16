@@ -5,6 +5,7 @@ import { CQMetadata } from 'aurora-ts-core';
 import {
     BoundedContextId,
     BoundedContextName,
+    BoundedContextRoot,
     BoundedContextSort,
     BoundedContextIsActive,
     BoundedContextCreatedAt,
@@ -26,6 +27,7 @@ export class UpdateBoundedContextService
         payload: {
             id: BoundedContextId,
             name?: BoundedContextName,
+            root?: BoundedContextRoot,
             sort?: BoundedContextSort,
             isActive?: BoundedContextIsActive,
         },
@@ -37,6 +39,7 @@ export class UpdateBoundedContextService
         const boundedContext = IamBoundedContext.register(
             payload.id,
             payload.name,
+            payload.root,
             payload.sort,
             payload.isActive,
             null, // createdAt

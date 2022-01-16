@@ -4,6 +4,7 @@ import { ObjectLiteral, Utils } from 'aurora-ts-core';
 import {
     BoundedContextId,
     BoundedContextName,
+    BoundedContextRoot,
     BoundedContextSort,
     BoundedContextIsActive,
     BoundedContextCreatedAt,
@@ -19,6 +20,7 @@ export class IamBoundedContext extends AggregateRoot
 {
     id: BoundedContextId;
     name: BoundedContextName;
+    root: BoundedContextRoot;
     sort: BoundedContextSort;
     isActive: BoundedContextIsActive;
     createdAt: BoundedContextCreatedAt;
@@ -31,6 +33,7 @@ export class IamBoundedContext extends AggregateRoot
     constructor(
         id: BoundedContextId,
         name: BoundedContextName,
+        root: BoundedContextRoot,
         sort: BoundedContextSort,
         isActive: BoundedContextIsActive,
         createdAt: BoundedContextCreatedAt,
@@ -43,6 +46,7 @@ export class IamBoundedContext extends AggregateRoot
         super();
         this.id = id;
         this.name = name;
+        this.root = root;
         this.sort = sort;
         this.isActive = isActive;
         this.createdAt = createdAt;
@@ -56,6 +60,7 @@ export class IamBoundedContext extends AggregateRoot
     static register (
         id: BoundedContextId,
         name: BoundedContextName,
+        root: BoundedContextRoot,
         sort: BoundedContextSort,
         isActive: BoundedContextIsActive,
         createdAt: BoundedContextCreatedAt,
@@ -68,6 +73,7 @@ export class IamBoundedContext extends AggregateRoot
         return new IamBoundedContext(
             id,
             name,
+            root,
             sort,
             isActive,
             createdAt,
@@ -84,6 +90,7 @@ export class IamBoundedContext extends AggregateRoot
             new CreatedBoundedContextEvent(
                 boundedContext.id.value,
                 boundedContext.name.value,
+                boundedContext.root.value,
                 boundedContext.sort?.value,
                 boundedContext.isActive.value,
                 boundedContext.createdAt?.value,
@@ -99,6 +106,7 @@ export class IamBoundedContext extends AggregateRoot
             new UpdatedBoundedContextEvent(
                 boundedContext.id.value,
                 boundedContext.name?.value,
+                boundedContext.root?.value,
                 boundedContext.sort?.value,
                 boundedContext.isActive?.value,
                 boundedContext.createdAt?.value,
@@ -114,6 +122,7 @@ export class IamBoundedContext extends AggregateRoot
             new DeletedBoundedContextEvent(
                 boundedContext.id.value,
                 boundedContext.name.value,
+                boundedContext.root.value,
                 boundedContext.sort?.value,
                 boundedContext.isActive.value,
                 boundedContext.createdAt?.value,
@@ -128,6 +137,7 @@ export class IamBoundedContext extends AggregateRoot
         return {
             id: this.id.value,
             name: this.name.value,
+            root: this.root.value,
             sort: this.sort?.value,
             isActive: this.isActive.value,
             createdAt: this.createdAt?.value,

@@ -43,6 +43,7 @@ describe('CreateBoundedContextCommandHandler', () =>
                     {
                         id: boundedContexts[0].id,
                         name: boundedContexts[0].name,
+                        root: boundedContexts[0].root,
                         sort: boundedContexts[0].sort,
                         isActive: boundedContexts[0].isActive,
                     },

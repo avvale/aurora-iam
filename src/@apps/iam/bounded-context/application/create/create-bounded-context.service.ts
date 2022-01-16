@@ -3,6 +3,7 @@ import { EventPublisher } from '@nestjs/cqrs';
 import {
     BoundedContextId,
     BoundedContextName,
+    BoundedContextRoot,
     BoundedContextSort,
     BoundedContextIsActive,
     BoundedContextCreatedAt,
@@ -24,6 +25,7 @@ export class CreateBoundedContextService
         payload: {
             id: BoundedContextId,
             name: BoundedContextName,
+            root: BoundedContextRoot,
             sort: BoundedContextSort,
             isActive: BoundedContextIsActive,
         }
@@ -33,6 +35,7 @@ export class CreateBoundedContextService
         const boundedContext = IamBoundedContext.register(
             payload.id,
             payload.name,
+            payload.root,
             payload.sort,
             payload.isActive,
             new BoundedContextCreatedAt({ currentTimestamp: true }),

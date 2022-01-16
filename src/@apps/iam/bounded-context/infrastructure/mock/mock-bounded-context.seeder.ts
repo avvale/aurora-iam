@@ -3,6 +3,7 @@ import { MockSeeder } from 'aurora-ts-core';
 import {
     BoundedContextId,
     BoundedContextName,
+    BoundedContextRoot,
     BoundedContextSort,
     BoundedContextIsActive,
     BoundedContextCreatedAt,
@@ -33,6 +34,7 @@ export class MockBoundedContextSeeder extends MockSeeder<IamBoundedContext>
                 IamBoundedContext.register(
                     new BoundedContextId(boundedContext.id),
                     new BoundedContextName(boundedContext.name),
+                    new BoundedContextRoot(boundedContext.root),
                     new BoundedContextSort(boundedContext.sort),
                     new BoundedContextIsActive(boundedContext.isActive),
                     new BoundedContextCreatedAt({ currentTimestamp: true }),

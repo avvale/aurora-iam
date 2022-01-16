@@ -45,6 +45,7 @@ export interface IamUpdateAccountInput {
 export interface IamCreateBoundedContextInput {
     id: string;
     name: GraphQLString;
+    root: GraphQLString;
     sort?: Nullable<GraphQLInt>;
     isActive: GraphQLBoolean;
 }
@@ -52,6 +53,7 @@ export interface IamCreateBoundedContextInput {
 export interface IamUpdateBoundedContextInput {
     id: string;
     name?: Nullable<GraphQLString>;
+    root?: Nullable<GraphQLString>;
     sort?: Nullable<GraphQLInt>;
     isActive?: Nullable<GraphQLBoolean>;
 }
@@ -224,6 +226,7 @@ export interface IMutation {
 export interface IamBoundedContext {
     id: string;
     name: GraphQLString;
+    root: GraphQLString;
     sort?: Nullable<GraphQLInt>;
     isActive: GraphQLBoolean;
     permissions?: Nullable<Nullable<IamPermission>[]>;

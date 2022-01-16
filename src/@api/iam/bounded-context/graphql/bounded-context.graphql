@@ -3,6 +3,7 @@ type IamBoundedContext
 {
     id: ID!
     name: GraphQLString!
+    root: GraphQLString!
     sort: GraphQLInt
     isActive: GraphQLBoolean!
     permissions: [IamPermission]
@@ -15,6 +16,7 @@ input IamCreateBoundedContextInput
 {
     id: ID!
     name: GraphQLString!
+    root: GraphQLString!
     sort: GraphQLInt
     isActive: GraphQLBoolean!
 }
@@ -23,6 +25,7 @@ input IamUpdateBoundedContextInput
 {
     id: ID!
     name: GraphQLString
+    root: GraphQLString
     sort: GraphQLInt
     isActive: GraphQLBoolean
 }
