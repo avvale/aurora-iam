@@ -37,11 +37,14 @@ export { IamPermissionsRolesModel } from './infrastructure/sequelize/sequelize-p
 export { IPermissionRepository } from './domain/permission.repository';
 export { SequelizePermissionRepository } from './infrastructure/sequelize/sequelize-permission.repository';
 
-// custom
-export { IPermissionRoleRepository } from './domain/permission-role.repository';
-
 // sagas
 export { PermissionSagas } from './application/sagas/permission.sagas';
+
+// custom
+import { CreatePermissionsRolesCommandHandler } from './application/create/create-permissions-roles.command-handler';
+import { CreatePermissionsRolesService } from './application/create/create-permissions-roles.service';
+export { IPermissionRoleRepository } from './domain/permission-role.repository';
+export { SequelizePermissionRoleRepository } from './infrastructure/sequelize/sequelize-permission-role.repository';
 
 export const IamPermissionHandlers = [
     // commands
@@ -63,6 +66,9 @@ export const IamPermissionHandlers = [
     UpdatedPermissionEventHandler,
     DeletedPermissionEventHandler,
     DeletedPermissionsEventHandler,
+
+    // custom
+    CreatePermissionsRolesCommandHandler,
 ];
 
 export const IamPermissionServices = [
@@ -75,4 +81,7 @@ export const IamPermissionServices = [
     UpdatePermissionService,
     DeletePermissionByIdService,
     DeletePermissionsService,
+
+    // custom
+    CreatePermissionsRolesService,
 ];

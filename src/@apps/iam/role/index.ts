@@ -40,6 +40,12 @@ export { SequelizeRoleRepository } from './infrastructure/sequelize/sequelize-ro
 // sagas
 export { RoleSagas } from './application/sagas/role.sagas';
 
+// custom
+import { CreateRolesAccountsCommandHandler } from './application/create/create-roles-accounts.command-handler';
+import { CreateRolesAccountsService } from './application/create/create-roles-accounts.service';
+export { IRoleAccountRepository } from './domain/role-account.repository';
+export { SequelizeRoleAccountRepository } from './infrastructure/sequelize/sequelize-role-account.repository';
+
 export const IamRoleHandlers = [
     // commands
     CreateRoleCommandHandler,
@@ -60,6 +66,10 @@ export const IamRoleHandlers = [
     UpdatedRoleEventHandler,
     DeletedRoleEventHandler,
     DeletedRolesEventHandler,
+
+    // custom
+    CreateRolesAccountsCommandHandler,
+    CreateRolesAccountsService,
 ];
 
 export const IamRoleServices = [

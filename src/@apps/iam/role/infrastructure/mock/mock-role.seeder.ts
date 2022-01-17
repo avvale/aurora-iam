@@ -35,8 +35,9 @@ export class MockRoleSeeder extends MockSeeder<IamRole>
                     new RoleId(role.id),
                     new RoleName(role.name),
                     new RoleIsMaster(role.isMaster),
-                    new RolePermissionIds(role.permissionIds),
-                    new RoleAccountIds(role.accountIds),
+                    new RolePermissionIds(role.permissions.map(permission => permission.id)),
+                    // add permissions on administrator account
+                    new RoleAccountIds(['948a5308-a49d-42dc-9ea3-7490e120000b']),
                     new RoleCreatedAt({ currentTimestamp: true }),
                     new RoleUpdatedAt({ currentTimestamp: true }),
                     new RoleDeletedAt(null),
