@@ -1,10 +1,10 @@
 import { ICommandBus, IQueryBus, SeederPermission } from 'aurora-ts-core';
-import { CreatePermissionsCommand } from '../../permission/application/create/create-permissions.command';
-import { CreatePermissionsRolesCommand } from '../../permission/application/create/create-permissions-roles.command';
-import { FindAccountByIdQuery } from '../../account/application/find/find-account-by-id.query';
-import { AccountResponse } from '../../account/domain/account.response';
-import { UpdateAccountCommand } from '../../account/application/update/update-account.command';
-import { AccountPermissions } from '../../iam.types';
+import { CreatePermissionsCommand } from '../../../permission/application/create/create-permissions.command';
+import { CreatePermissionsRolesCommand } from '../../../permission/application/create/create-permissions-roles.command';
+import { FindAccountByIdQuery } from '../../../account/application/find/find-account-by-id.query';
+import { AccountResponse } from '../../../account/domain/account.response';
+import { UpdateAccountCommand } from '../../../account/application/update/update-account.command';
+import { AccountPermissions } from '../../../iam.types';
 
 export class PermissionHelper
 {

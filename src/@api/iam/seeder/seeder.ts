@@ -3,10 +3,10 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 import { SeederModule } from './seeder.module';
 
 // sources
-import { boundedContexts } from '../../../@apps/iam/shared/infrastructure/seeds/bounded-context.seed';
-import { permissions } from '../../../@apps/iam/shared/infrastructure/seeds/permission.seed';
-import { BoundedContextHelper } from '../../../@apps/iam/shared/domain/bounded-context-helper';
-import { PermissionHelper } from '../../../@apps/iam/shared/domain/permission-helper';
+import { boundedContexts } from '../../../@apps/iam/shared/infrastructure/bounded-context/seeds/bounded-context.seed';
+import { permissions } from '../../../@apps/iam/shared/infrastructure/permission/seeds/permission.seed';
+import { BoundedContextHelper } from '../../../@apps/iam/shared/domain/bounded-context/bounded-context-helper';
+import { PermissionHelper } from '../../../@apps/iam/shared/domain/permission/permission-helper';
 import { FindAccountByIdQuery } from '../../../@apps/iam/account/application/find/find-account-by-id.query';
 import { CreateAccountsCommand } from '../../../@apps/iam/account/application/create/create-accounts.command';
 import { accounts } from '../../../@apps/iam/account/infrastructure/seeds/account.seed';
