@@ -1,5 +1,5 @@
 // ignored file
-import { permissions } from '../../../shared/infrastructure/permission/seeds/permission.seed';
+import { permissions } from '../../../permission/infrastructure/seeds/permission.seed';
 
 export const roles = [
     {

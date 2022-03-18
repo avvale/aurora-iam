@@ -9,7 +9,11 @@ import { IamAccountType, IamCreateAccountInput } from './../../../../graphql';
 
 // custom
 import { JwtService } from '@nestjs/jwt';
-import { AccessTokenService } from '../../../../@apps/iam/shared/domain/access-token/access-token.service';
+import { AccessTokenService } from '../../../../@apps/iam/shared/o-auth/domain/access-token/access-token.service';
+import { ClientService } from '../../../../@apps/iam/shared/o-auth/domain/client/client.service';
+import { GetRolesQuery } from '../../../../@apps/iam/role/application/get/get-roles.query';
+import { CreateUserCommand } from '../../../../@apps/iam/user/application/create/create-user.command';
+import { AccountHelper } from '../../../../@apps/iam/account/domain/account.helper';
 
 @Resolver()
 export class IamCreateAccountResolver
@@ -19,6 +23,7 @@ export class IamCreateAccountResolver
         private readonly queryBus: IQueryBus,
         private readonly jwtService: JwtService,
         private readonly accessTokenService: AccessTokenService,
+        private readonly clientService: ClientService,
     ) {}
 
     @Mutation('iamCreateAccount')
@@ -32,17 +37,17 @@ export class IamCreateAccountResolver
         const jwt = <Jwt>this.jwtService.decode(context.req.headers.authorization.replace('Bearer ', ''));
 
         // get access token from database
-        const accessToken = this.accessTokenService.findAccessTokenById(jwt.jit);
+        const accessToken = await this.accessTokenService.findAccessTokenById(jwt.jit);
 
-        // TODO, como crear una cuenta asociada a otro client??? podría llegar a interesar??
         // get client to get applications related
-        const client = await this.queryBus.ask(new FindClientQuery({
+        const client = await this.clientService.findClient({
             where: {
-                id: payload.type === IamAccountType.SERVICE ? payload.clientId : accessToken.clientId,
+                id: payload.type === IamAccountType.SERVICE ? payload.clientId : accessToken.clientId
             },
             include: ['applications'],
-        }));
+        });
 
+        // get roles
         const roles = await this.queryBus.ask(new GetRolesQuery({
             where: {
                 id: payload.roleIds,
@@ -58,7 +63,7 @@ export class IamCreateAccountResolver
                 isActive         : payload.isActive,
                 clientId         : accessToken.clientId,
                 dApplicationCodes: client.applications.map(application => application.code),
-                dPermissions     : AccountsUtils.createPermissions(roles),
+                dPermissions     : AccountHelper.createPermissions(roles),
                 data             : payload.data,
                 roleIds          : payload.roleIds,
                 tenantIds        : payload.tenantIds,
