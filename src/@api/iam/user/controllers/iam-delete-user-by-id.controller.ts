@@ -9,7 +9,7 @@ import { FindUserByIdQuery } from '../../../../@apps/iam/user/application/find/f
 import { DeleteUserByIdCommand } from '../../../../@apps/iam/user/application/delete/delete-user-by-id.command';
 
 @ApiTags('[iam] user')
-@Controller('iam/user')
+@Controller('iam/user/delete')
 export class IamDeleteUserByIdController
 {
     constructor(

@@ -10,7 +10,7 @@ import { FindAccountByIdQuery } from '../../../../@apps/iam/account/application/
 import { CreateAccountCommand } from '../../../../@apps/iam/account/application/create/create-account.command';
 
 @ApiTags('[iam] account')
-@Controller('iam/account')
+@Controller('iam/account/create')
 export class IamCreateAccountController
 {
     constructor(

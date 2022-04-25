@@ -8,7 +8,7 @@ import { PermissionDto } from './../dto/permission.dto';
 import { FindPermissionByIdQuery } from '../../../../@apps/iam/permission/application/find/find-permission-by-id.query';
 
 @ApiTags('[iam] permission')
-@Controller('iam/permission')
+@Controller('iam/permission/find')
 export class IamFindPermissionByIdController
 {
     constructor(
@@ -24,6 +24,6 @@ export class IamFindPermissionByIdController
         @Timezone() timezone?: string,
     )
     {
-        return await this.queryBus.ask(new FindPermissionByIdQuery(id, constraint, { timezone }));
+        return this.queryBus.ask(new FindPermissionByIdQuery(id, constraint, { timezone }));
     }
 }

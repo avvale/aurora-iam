@@ -9,7 +9,7 @@ import { FindRoleByIdQuery } from '../../../../@apps/iam/role/application/find/f
 import { DeleteRoleByIdCommand } from '../../../../@apps/iam/role/application/delete/delete-role-by-id.command';
 
 @ApiTags('[iam] role')
-@Controller('iam/role')
+@Controller('iam/role/delete')
 export class IamDeleteRoleByIdController
 {
     constructor(

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Get, Body } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { Constraint, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
 import { PermissionDto } from './../dto/permission.dto';
@@ -8,15 +8,16 @@ import { PermissionDto } from './../dto/permission.dto';
 import { GetPermissionsQuery } from '../../../../@apps/iam/permission/application/get/get-permissions.query';
 
 @ApiTags('[iam] permission')
-@Controller('iam/permissions')
+@Controller('iam/permissions/get')
 export class IamGetPermissionsController
 {
     constructor(
         private readonly queryBus: IQueryBus,
     ) {}
 
-    @Get()
-    @ApiOperation({ summary: 'Find permissions according to query' })
+    @Post()
+    @HttpCode(200)
+    @ApiOperation({ summary: 'Get permissions according to query' })
     @ApiOkResponse({ description: 'The records has been found successfully.', type: [PermissionDto] })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })

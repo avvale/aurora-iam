@@ -10,7 +10,7 @@ import { UpdatePermissionCommand } from '../../../../@apps/iam/permission/applic
 import { FindPermissionByIdQuery } from '../../../../@apps/iam/permission/application/find/find-permission-by-id.query';
 
 @ApiTags('[iam] permission')
-@Controller('iam/permission')
+@Controller('iam/permission/update')
 export class IamUpdatePermissionController
 {
     constructor(

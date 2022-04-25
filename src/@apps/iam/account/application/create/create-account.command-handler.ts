@@ -37,12 +37,12 @@ export class CreateAccountCommandHandler implements ICommandHandler<CreateAccoun
                 isActive: new AccountIsActive(command.payload.isActive),
                 clientId: new AccountClientId(command.payload.clientId),
                 dApplicationCodes: new AccountDApplicationCodes(command.payload.dApplicationCodes),
-                dPermissions: new AccountDPermissions(command.payload.dPermissions),
-                dTenants: new AccountDTenants(command.payload.dTenants),
+                dPermissions: new AccountDPermissions(command.payload.dPermissions, { default: {}}),
+                dTenants: new AccountDTenants(command.payload.tenantIds, { default: []}),
                 data: new AccountData(command.payload.data),
                 roleIds: new AccountRoleIds(command.payload.roleIds),
                 tenantIds: new AccountTenantIds(command.payload.tenantIds),
-            }
+            },
         );
     }
 }

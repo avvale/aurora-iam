@@ -10,7 +10,7 @@ import { UpdateAccountCommand } from '../../../../@apps/iam/account/application/
 import { FindAccountByIdQuery } from '../../../../@apps/iam/account/application/find/find-account-by-id.query';
 
 @ApiTags('[iam] account')
-@Controller('iam/account')
+@Controller('iam/account/update')
 export class IamUpdateAccountController
 {
     constructor(

@@ -2,6 +2,7 @@
 /* eslint-disable key-spacing */
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ITenantRepository } from '../../../src/@apps/iam/tenant/domain/tenant.repository';
 import { MockTenantSeeder } from '../../../src/@apps/iam/tenant/infrastructure/mock/mock-tenant.seeder';
@@ -27,17 +28,30 @@ describe('tenant', () =>
                 ...importForeignModules,
                 IamModule,
                 GraphQLConfigModule,
-                SequelizeModule.forRoot({
-                    dialect       : 'sqlite',
-                    storage       : ':memory:',
-                    logging       : false,
-                    autoLoadModels: true,
-                    models        : [],
+                SequelizeModule.forRootAsync({
+                    imports   : [ConfigModule],
+                    inject    : [ConfigService],
+                    useFactory: (configService: ConfigService) =>
+                    {
+                        return {
+                            dialect       : configService.get('TEST_DATABASE_DIALECT'),
+                            storage       : configService.get('TEST_DATABASE_STORAGE'),
+                            host          : configService.get('TEST_DATABASE_HOST'),
+                            port          : +configService.get('TEST_DATABASE_PORT'),
+                            username      : configService.get('TEST_DATABASE_USER'),
+                            password      : configService.get('TEST_DATABASE_PASSWORD'),
+                            database      : configService.get('TEST_DATABASE_SCHEMA'),
+                            synchronize   : configService.get('TEST_DATABASE_SYNCHRONIZE'),
+                            logging       : configService.get('TEST_DATABASE_LOGGIN') === 'true' ? console.log : false,
+                            autoLoadModels: true,
+                            models        : [],
+                        };
+                    },
                 }),
             ],
             providers: [
                 MockTenantSeeder,
-            ]
+            ],
         })
             .compile();
 
@@ -51,16 +65,16 @@ describe('tenant', () =>
         await app.init();
     });
 
-    test('/REST:POST iam/tenant - Got 400 Conflict, TenantId property can not to be null', () =>
+    test('/REST:POST iam/tenant/create - Got 400 Conflict, TenantId property can not to be null', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/tenant')
+            .post('/iam/tenant/create')
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                name: 'Generic Frozen Salad',
-                code: '2k995vqxsej6by9cfyp4tage7nlogg03giwzync07szm4kx5mc',
-                logo: 'fil06pfwxexi09ls7h1oom360vae39z7ykb72d1t8b0yqd1otpppt0o12pvkhwqgdqh1xmaqna1wj7brmr64iq9cxngfvgch05nv3mdp6z56xvy6wilnkfb2kil8ws65ha9xi3mo66j5l9hiernq2rr9eba3qf4blzaxk7nshfxqw30kxne41v8hsk7emcuss1d6nymy2d4lfzxc10rlvb98to5q9b521cry8xrgc176uiu73ul7aez0ycee0x1',
+                name: 'Licensed Steel Tuna',
+                code: 'f2fh6t19plcpmf42bu2m8pg2yvzvmg9jm0ur1ddbys02eboso',
+                logo: 's17yp0wu54w41c52dz0e0pga0nlqs4c45b2mf9w01by0l1pz4nvmrwkauib7fcxh9h8ss5jdkwm2y865niruq4wej59rjxyv3slb68bfllahgnweglkeq4h68ajue2s00tdxg1zg90b7hrxz5euqp3oajfremc0luoufh6dxet0clcnio45hq8kelsuz33cdxtgo091ub7lj9spjtorftwe5py0stevbbyo94cisggt57or3x6a1gsh1o0xamm',
                 isActive: false,
                 data: { "foo" : "bar" },
                 accountIds: [],
@@ -72,17 +86,17 @@ describe('tenant', () =>
             });
     });
 
-    test('/REST:POST iam/tenant - Got 400 Conflict, TenantName property can not to be null', () =>
+    test('/REST:POST iam/tenant/create - Got 400 Conflict, TenantName property can not to be null', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/tenant')
+            .post('/iam/tenant/create')
             .set('Accept', 'application/json')
             .send({
-                id: 'feaa251c-cfc1-4a98-a6a7-7c79145eeb0f',
+                id: '53c414d3-9fe4-4edc-a69b-42ebc0f7002b',
                 name: null,
-                code: '1zru2h9ljo1nv6x26aumvmoulbtq13poojb6otw3xk9g6fjtts',
-                logo: 'm03gqr2qki3ciad1o23xeuqqacxenkpp26hppkxkq91oalkhvcir44w1egxvnerjyr34k4598odco6kg5bb3hkije9wqu3d1jmprcc8fymqvqlg8w17wm0dq0szo1wltrbai1vnntx5i4pj3kca37kea5c2j7vxzhzfs3whs42l2ctek85j20snu16tall4fl2h137cnx7klq573648lldxfo1vler72ga274ga6k36zefeifmsokg4fwmg75pe',
-                isActive: false,
+                code: 'rld9qkysbnwkvozcp8hs2w4o5t8j9x8kri0u0vl899miy6oe6',
+                logo: 'q6tvodappg7tb0djp2i8ay45o0h86tyyrq444sak5di1morvlbiqt7b728aep2mircr2nka29f5ak355nw4ibtrp41nb6clxh5iuwj04irqnzmdnyktv3xg8zbp3l5rmy4vjkhllm65dvwdmiinfrxghkhaf1surt7saje4dh070p62qliqbf9ft06ydco3jkqyph0znsce63mrgauvbur381hs6r21bssaq61p7zjpebf7cqwmq3dgmewmokq',
+                isActive: true,
                 data: { "foo" : "bar" },
                 accountIds: [],
             })
@@ -93,16 +107,16 @@ describe('tenant', () =>
             });
     });
 
-    test('/REST:POST iam/tenant - Got 400 Conflict, TenantIsActive property can not to be null', () =>
+    test('/REST:POST iam/tenant/create - Got 400 Conflict, TenantIsActive property can not to be null', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/tenant')
+            .post('/iam/tenant/create')
             .set('Accept', 'application/json')
             .send({
-                id: '53f35605-45ce-4774-98ac-ebb327813843',
-                name: 'Handmade Rubber Chair',
-                code: 'b4ripi7z6sm3mewz1vkwj58uft9qhvwln9genj79u3tpbmpdoo',
-                logo: 'j6d2lm4myaskqv62il552n3xlet1f3lbmuvkr2v1webabqpw0tvgnkikzgvxk162bt9y6u3jlptxfynebe3s4s3i9w2em04cf3j8b2jgezwxhhzp206kyus6sp2o2urc4jkaptilwotxzz3wofafcbaxf4r1fvaejf3dsgqfo0sww2cnf3oi0q467igbjv6hia6xl4dncrztvx1yhog3byc3tammdd58tjfakgttagxa6nocibayfzlr5al5o26',
+                id: '11bcf341-76d2-401b-9808-834ead2eb7ef',
+                name: 'Tasty Cotton Computer',
+                code: '6ev76q0vwsw3zw0g4dpma4b5tvgiagc463ghzexcmz02ehqgv',
+                logo: 'vgfn3rj261m478qs3nmw04wc4iodj9tdqybmw5tf9whslbxu7ml464gzdjgz2toaisvhgfezz8zqt5pgdngkmm2ffgom8kyoryifj2oyheojvblymhdgqw6xbu05pfqpyy8tlty5mk46fwdoxcblhiy80vdmdxaqjztu43mnjgy1f2w6p69pdti3dm6aqejbam7wygz27soqctnbfffadwohw6giyrhkdy1xznv0ho4p3z44hs8fw0fxemv2am',
                 isActive: null,
                 data: { "foo" : "bar" },
                 accountIds: [],
@@ -114,15 +128,15 @@ describe('tenant', () =>
             });
     });
 
-    test('/REST:POST iam/tenant - Got 400 Conflict, TenantId property can not to be undefined', () =>
+    test('/REST:POST iam/tenant/create - Got 400 Conflict, TenantId property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/tenant')
+            .post('/iam/tenant/create')
             .set('Accept', 'application/json')
             .send({
-                name: 'Ergonomic Fresh Table',
-                code: 'u5b267k5pscv66xa9oxllx3b5z4tbtfk21dstegcyb2m01txuf',
-                logo: '1mt9xy9n6m3ano6ra4vou9ygiru3u48hrfqjh9kou45mow74qz3h8kq25w2iu7u4ujj2qiflgocjq88gju8hhhesslm1fhc1yghj83k4jxtwlmwjf89tq1h1ehd4xdyhukc0j0mvnyhl3izhf39wdmcuea3ch5bkcf2oftgemsj0ifnsnr453f5mf2hpo7sbl39sm45f4n59w7zwxlsdnci1kdwm7jazdn4apqyk670c79cvj09lxrwctto2dkr',
+                name: 'Refined Frozen Computer',
+                code: 'extg0btljkjz0ewy8r7dzismm88wf8wmwm9fjr9kp3e0bmxei',
+                logo: '5tj2q73j0g4p2a7by1xst8svagkwo655lhdc5te4lperjszi7rgl79fy5w1w9klbqe73iyffl9ny5gi2fjxwm4dsoohooxbehtnh3limibu3k7r2zfi3jfayi5qnii5gmodltzpey7vkv8z700c42urr463nso297qozjrot3polk9aul9u3f953am77f3m4f8ifqfoycwkrjngej72d1fkhp1j2bd2hba35dq5qlkosvebd9nhte6eijnu4pt',
                 isActive: false,
                 data: { "foo" : "bar" },
                 accountIds: [],
@@ -134,16 +148,16 @@ describe('tenant', () =>
             });
     });
 
-    test('/REST:POST iam/tenant - Got 400 Conflict, TenantName property can not to be undefined', () =>
+    test('/REST:POST iam/tenant/create - Got 400 Conflict, TenantName property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/tenant')
+            .post('/iam/tenant/create')
             .set('Accept', 'application/json')
             .send({
-                id: '84e10144-7668-4925-a2df-f315bb6989a9',
-                code: '6jhos36az26jnw3e9tijnd5b17zo0uip8mb4tvsvjngzunhvmb',
-                logo: 'je2mrtbbcf6ecd7smykr99d9xixkh21swlgagvynho8e7mhwafz8altc0pi0uql3tqzsp07xsjl29jcnuzn2x9rsgmg73xwv7pxjuhwxhnwdb2nv6copvp4pevlo1kypufqx8ufbni0oo4fnx35xe4226wb1c4r2jvbmu63jcginy0hmwvys8kow31rdwsgdd3e1frkf5e8440g6czlgyzl96532uaph7cjemm2ef1d1lyy5cwxr2p2nkdn3wik',
-                isActive: false,
+                id: '26f34558-e841-42f0-b0a3-a13b87435545',
+                code: 'sjprk28tczw4u85dy8wc5ovn748v5yk4jmguxvecal3260rqm',
+                logo: '8pvd92m1xgtpfxcva9ecwd90elap56v529h1lw90macjajlh41dyk8155am2o6rwqfpcjob163at1ut35o8vw7w4su4ifav1yjj0sp85p21gku4an5ybx8v938j8wnrdyv7jpbnp7tr0mm2zhejv5pmf48eant3kbiwpw2qq5belf4r13hm0dezfv738svspotqsnn905m6uptz3gkshkjw1naxd831tuyk17bs3q01crvnrriphp98vyol4b8',
+                isActive: true,
                 data: { "foo" : "bar" },
                 accountIds: [],
             })
@@ -154,16 +168,16 @@ describe('tenant', () =>
             });
     });
 
-    test('/REST:POST iam/tenant - Got 400 Conflict, TenantIsActive property can not to be undefined', () =>
+    test('/REST:POST iam/tenant/create - Got 400 Conflict, TenantIsActive property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/tenant')
+            .post('/iam/tenant/create')
             .set('Accept', 'application/json')
             .send({
-                id: 'da738f02-443a-4612-b543-faf8f4bffbb7',
-                name: 'Refined Granite Tuna',
-                code: 'usm1eui5clfecmz7p8jcrtjpdp1f1s9bjeuzwpljn2hu6o3zrv',
-                logo: 'rdy4qvxxgm93tbu9azkxsvfibmxu8ypdgypezb4k5q88dcjax68nqouxxj6rxvycodz801u9jiddakyqmazhc4tykejcwgu5r5m3dr1ycsjssw33emr2w5y0j3aolget1ho5962vwh6ifki230scrvab0y9c62kmhh0jzw2zczmdtevto5hdhr89kt3zqvkwyzhgt7mzn2tm82k1knr0sdyz0gw2g21fy889kftfzekj0pmgxp2kc4xxj9hajaw',
+                id: '776e5e4a-0630-48dd-a069-0bc14c17db3b',
+                name: 'Refined Metal Towels',
+                code: 'fw8kb1txxtd0maidvnkawups19tz4q26w3vv2ypqqz3k6qswa',
+                logo: 'qtfvg0vhmfg5qvha4n6kah27yogq3c9e0vf2kq24jvnz6kgmgp67bzv5ugwkntwti68xjegm0syivb65s0bqlfe89gma7jkfg87hetxyvney4w2yzh7kjoobvrmg7wp1iekov7jpilbedj3l0f6qxi4ogft36v0dce3ta6w3wsta32qyc0ax5uh91ppjakesqjw5zxir1xmphdis9r9n61aubrf10rdghgvxmamk0uwdaauxufty8mzy8guuwz',
                 data: { "foo" : "bar" },
                 accountIds: [],
             })
@@ -174,17 +188,17 @@ describe('tenant', () =>
             });
     });
 
-    test('/REST:POST iam/tenant - Got 400 Conflict, TenantId is not allowed, must be a length of 36', () =>
+    test('/REST:POST iam/tenant/create - Got 400 Conflict, TenantId is not allowed, must be a length of 36', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/tenant')
+            .post('/iam/tenant/create')
             .set('Accept', 'application/json')
             .send({
-                id: 'k6ggia9227uz07ro26x3deqmb7dioqqm96efb',
-                name: 'Small Metal Table',
-                code: '6zflhhzk29fpk7w0wsi8ab9a61y2zcih0evm97k7n2czdon92t',
-                logo: 'zjk4oy5j2ckmjet29ksp5qsr8n8gghxxkbbzqpvmudsdnfbi357nanbicm7a5cgwt2dpc2ucorybzgseyeypvt346g6f24xlbyottklptjm6ce9ahdmwjg2i0h9k5mt2pcgrrzi94npwi9lh5b4mz1mt1wtkdzc1yh3h6rxk6cttzkfl0rd1o6v685veym8f1vdpeh112ul0pu2rixelajqb93v98mnv1zdydyeyq90lwbgpnaqum27bx4hlh2a',
-                isActive: false,
+                id: '6ld8hr150vvphsfyfi65hqwi2f1aks3z73nlq',
+                name: 'Small Wooden Bike',
+                code: 'vourlj7jesb1mqo5pecccb8y5vlnbahlty44eemmscwmpabd5',
+                logo: 'lvpekz2fkkfrx7qdtnri62zejuwh2a4kt8ixrnfpmqsuqrob84whsl49em7z460iflfbc3w5y8hizeytaonqjagoquba7hrsa94or3un3ks7dum3vb8v2qcop93j9dia6gajh8tnmor6zusx8yct509sp5mt8cmp8wxa7bbcu8mrdoeuwvcr3f9djjeo13z6w5oaadtjnhhpd85z4776vaoppa4dotxn879dgsbzh9yri50swysbvr3mpssgde',
+                isActive: true,
                 data: { "foo" : "bar" },
                 accountIds: [],
             })
@@ -195,16 +209,16 @@ describe('tenant', () =>
             });
     });
 
-    test('/REST:POST iam/tenant - Got 400 Conflict, TenantName is too large, has a maximum length of 255', () =>
+    test('/REST:POST iam/tenant/create - Got 400 Conflict, TenantName is too large, has a maximum length of 255', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/tenant')
+            .post('/iam/tenant/create')
             .set('Accept', 'application/json')
             .send({
-                id: '0a43b7d0-5d64-4e43-aeb7-d2991060a7a1',
-                name: 'e6grnmnztxbr2hpo9ljl396les3dee9z4bx1uak1n18bloujc0v69n2tcx844t0xlswlss1i8ka1d9g1ueyehiqd3b0dq0adas2xmze9jcytjqsa24undsh9wz67vlcqqdraankwbgbzwii4byyjhahoiya7m419ed3cwvbyfplwhlmoarcshnr32ywcgdoack6s10lqgwzg265a8qht5brdeqvpthjfk3tc59nl4q3k2ri4md9oz88by7512nzc',
-                code: '5s5x0fir8niov1sbabh1wbmlhureit3znevey5mz1crbpzymqr',
-                logo: '465ma1b8f0hrs4uued2uqb0k3hg588h9s9vqzubbmoq7tlo4tnyso9xf2kg9nk30vv0zq85y7k54mbkuwxbckee367vblnn7tphkq88ztwp07w6zjizo34vh527x7f9siium669un9lf3g0zwe4yk9wlqoda5b0bc0lsus4vuh6fnxdlccizyqpuzs92q7c692tb19m7vlvt2f89xoxsohmd3g1gem6ytrsiu45wz4r83fy64wjxrdsg9yarbkl',
+                id: 'f4337fe5-c52e-4624-a8c6-5fb09505e747',
+                name: 'nij2m9j6sm4sf3z7bnyzn99tx2lgdpcyedfcqkutopqp49fp7yeqaxaltwjymqwa51khr52luoxiugg5pp7gp641nw1kla786o4jgt3im7au5w4aelk5bqgyx664imloztfpc2b701134n84jgfahrxet22vu9tnly2csozhtttif7jw0kc35oh9ovl1cp184hdctda70scas6tb2pvxji9u5e5yk4oo6i7757y9lulirqa99tqpoqoz1z0qf5vs',
+                code: 'd28812xih7m1pp3u2mkzzvfgdg8553wre25fgy8el5oc8u6lb',
+                logo: '4vrz8itnzqmx8yj2ji8vleqstbbuvn69k0no7yec8rxxbh70bmuwunqiie5s1uux0fz4icf6zx6cunxb4vj3gc3aw7k2pg1riw357hu7blieqq6xty5zer3ts92g9kp9xo2oe3u0fs1lw0lf7x2h7bmkcwnusr0qdmmettyfip1flwfsgkbzrz5q8vek3jrmd41455owfd2yflst2t12ths8qhl3h66mpgxwou8ajyxk35yizwi0v8vbxe5vwb',
                 isActive: false,
                 data: { "foo" : "bar" },
                 accountIds: [],
@@ -216,16 +230,16 @@ describe('tenant', () =>
             });
     });
 
-    test('/REST:POST iam/tenant - Got 400 Conflict, TenantCode is too large, has a maximum length of 50', () =>
+    test('/REST:POST iam/tenant/create - Got 400 Conflict, TenantCode is too large, has a maximum length of 50', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/tenant')
+            .post('/iam/tenant/create')
             .set('Accept', 'application/json')
             .send({
-                id: '510a60a2-dc82-4bf4-8231-49da7a6de8da',
-                name: 'Rustic Granite Tuna',
-                code: 'mdb9zrga930hd79qk7n50c7vkansf3hm81gvqqyrfszbva8vgs0',
-                logo: 'oj2csg4nyezo2hecoy20fvhxs48hqnrs5ngsqxi1g1cwy0qprozd8ykvg6nufmdj129iro0hyxxnmg31hgzoq6k817c1wc4bhrf1eh8ucer6mt5f5tq3wmg76prtuu2ysasjfd57qcgeqxp5zgeptqqn20ldswm5ueuedp9toh702m361gq9j8eua3kabdfac556ccrhblrek8g5bvr1p5y1p24lxyvrb8ru6oqm8nnzwvml2n3eu6gbsgj89er',
+                id: 'b8c5e29c-c9b9-4f0f-83cf-1b96c8f3afbe',
+                name: 'Fantastic Plastic Sausages',
+                code: 'zzolqpoz38rxfuzdffw4mcg4q6alfm557cnp1xbrccno2gz9l3h',
+                logo: 'yq7db6otn3spo2c9uuv5vbft4n6utxdeynj47wfkkckp7q1wh7z249w08nxhozqj65dyuh1r5ypa4j7zcycwvyydne5ew08v5h4b9v2xn0ym675wf9rr6aczr2dzse9hogyeipeusqd8rh29a1j6p9hhrjm9pse89orecmpgpmbg44nyifgqmk47l9cth8ogy8rn0qdbzbg98u0wqupilwbo3zdbd1lxmvw6httz5f3vjrcc0cgywl0oyzjo1e',
                 isActive: false,
                 data: { "foo" : "bar" },
                 accountIds: [],
@@ -237,16 +251,16 @@ describe('tenant', () =>
             });
     });
 
-    test('/REST:POST iam/tenant - Got 400 Conflict, TenantLogo is too large, has a maximum length of 255', () =>
+    test('/REST:POST iam/tenant/create - Got 400 Conflict, TenantLogo is too large, has a maximum length of 255', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/tenant')
+            .post('/iam/tenant/create')
             .set('Accept', 'application/json')
             .send({
-                id: '49894f09-a376-4a4a-b3b4-745a365797c5',
-                name: 'Fantastic Wooden Mouse',
-                code: 'jun6de9q1h9a2qfb08du3ipb368ppt1ceg7wvjp0a394y33m86',
-                logo: '3bn1umw2164o44z8swvlgh7c12kuylo8hlkiupd35xbd3bbbq5i1o8zkavwju2thdxu8pphz943eumbv9mc6z0g4hv0fag8fagp0q6rxv3b71lvyxv1no0p0vpuhcnwtg6m52ww3r8tiglm0sgv1y7sfdgbxtjc6nhm6lpzuemzhte2mrdhlc58bx1wvpixxnchv6ocbwq4zne4phxl82edglg5864wu3h0kqoutuaq0lupb7azgyncjhduhgs3p',
+                id: 'eea238c1-ee5f-4b84-bc68-176d5a884df5',
+                name: 'Ergonomic Metal Pants',
+                code: 'tk5he7sww5xpws86etpz8d7d42c7eja5ovdcba8052zj9hky4',
+                logo: 'hfzrmwha8bszrj55u1f5w1pq9j9lkybnv3vgfw4xwnplqtizq9dzmcc3gmctpwqzot8sxyfc10szf8bbqij9lf1hpsdm4a5c10k3h18yjja1sscxbesrogso6864clo00vc12imnrs5e4sdy4gkjkqmsnhiwpieuy0d1nj15b0u2wtm0oi3ot7v92k9byt1ef4nifg2c6r5qc3ey4ihb57lshhpc5d4rj4s9pz30lbgfx3xs9e74ihpv518l0hkw',
                 isActive: true,
                 data: { "foo" : "bar" },
                 accountIds: [],
@@ -258,16 +272,16 @@ describe('tenant', () =>
             });
     });
 
-    test('/REST:POST iam/tenant - Got 400 Conflict, TenantIsActive has to be a boolean value', () =>
+    test('/REST:POST iam/tenant/create - Got 400 Conflict, TenantIsActive has to be a boolean value', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/tenant')
+            .post('/iam/tenant/create')
             .set('Accept', 'application/json')
             .send({
-                id: 'c3584477-01d0-4e90-85cc-9632d1bdad04',
-                name: 'Licensed Fresh Towels',
-                code: 'v44j0m5w9yk3sipxvl23w4rs12axw2om5y07ykp5se17b6w4si',
-                logo: 'seryo076mj6uw5frhvbys5edbdsd15zbxov3yoat5kwvov5andznqklpnltyg4hy5464z1wbhl7p096j6gtc9crnfm388osf1cz3glp1bxx6zxao06nm32zu11ee9duzkaabr8ls02ta1up2nx6ielqltt58rao04t7hrv86j0t8s3ab4ezva8jf7a9lwcj7s9de1qcbohkvwjefbzp5jbp7in8qe5dkk71fghy9cj4b1spmghheyx8mu5sh7gg',
+                id: '5a49fe42-70e2-4625-853d-4e9346bb6105',
+                name: 'Small Granite Chips',
+                code: '105pfpftxognkz35feaqh76fy0vs61y01wzuyr1xr8sat0zzv',
+                logo: 'd0018sf43x6609pbdjqa1vfzsvqgmxulfsoujlh3486b61tqr818l2jqey1bcbv20r7odzvqj8d1g61mkmwl105tp1z9z5n8jpa1zlk3y30sxrhdq81lhm6wzb0p86xemnly2juxgotcj1nebuvp7rq2y0mcwououf0zz51n9un092wh7vnhd2oascgapc2mbrwf4pt1bw8r00p8tdksbqolji9licm00mll2lp44ocdnyy3i30yyiozacsu6v',
                 isActive: 'true',
                 data: { "foo" : "bar" },
                 accountIds: [],
@@ -279,10 +293,10 @@ describe('tenant', () =>
             });
     });
 
-    test('/REST:POST iam/tenant - Got 409 Conflict, item already exist in database', () =>
+    test('/REST:POST iam/tenant/create - Got 409 Conflict, item already exist in database', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/tenant')
+            .post('/iam/tenant/create')
             .set('Accept', 'application/json')
             .send(seeder.collectionResponse[0])
             .expect(409);
@@ -297,8 +311,8 @@ describe('tenant', () =>
                 query:
                 {
                     offset: 0,
-                    limit: 5
-                }
+                    limit: 5,
+                },
             })
             .expect(200)
             .then(res =>
@@ -306,72 +320,72 @@ describe('tenant', () =>
                 expect(res.body).toEqual({
                     total: seeder.collectionResponse.length,
                     count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'accountIds']))).slice(0, 5)
+                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'accountIds']))).slice(0, 5),
                 });
             });
     });
 
-    test('/REST:GET iam/tenants', () =>
+    test('/REST:POST iam/tenants/get', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/tenants')
+            .post('/iam/tenants/get')
             .set('Accept', 'application/json')
             .expect(200)
             .then(res =>
             {
                 expect(res.body).toEqual(
-                    seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'accountIds'])))
+                    seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'accountIds']))),
                 );
             });
     });
 
-    test('/REST:GET iam/tenant - Got 404 Not Found', () =>
+    test('/REST:POST iam/tenant/find - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/tenant')
+            .post('/iam/tenant/find')
             .set('Accept', 'application/json')
             .send({
                 query:
                 {
                     where:
                     {
-                        id: 'e0d536ed-0787-417e-95b2-6737c899f9a9'
-                    }
-                }
+                        id: '412c064a-54c8-42b4-a0af-d7496bbf57e0',
+                    },
+                },
             })
             .expect(404);
     });
 
-    test('/REST:POST iam/tenant', () =>
+    test('/REST:POST iam/tenant/create', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/tenant')
+            .post('/iam/tenant/create')
             .set('Accept', 'application/json')
             .send({
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Fantastic Fresh Chicken',
-                code: 'vcu019cws2w947tby7xucgi0q0abjp4w4pcjc6ydpt5u67ibet',
-                logo: '1ei6by9qpyjn5mt9cgt3uj257htqhl0tp6qbozzsq01yw55abh43x6h30mrczutaf3zro50hs5jxwel2otkd40gf8a91usk2la251lgk2ayh9ihjxswrmgnm0osik1lnb3zli03mpxt5ay6m5bpl3c1p7ty469v9h7ie7538up7axxo2tafojeyuapyj5vcsnqmhdxxin1nlwkfzn4pf3pjwzrb9c45rlyamwjny1lgc18g91wdtx3sysc7gu61',
-                isActive: false,
+                name: 'Unbranded Steel Bacon',
+                code: 'x7kqs2qbn105j1ufbpttb779q373csk4x55ctxd7xp929girf',
+                logo: 'azumyrgikcuxjpj56tjzfjho1vzsr4fw0y96s1ep0gdv9f1dyz2npnbxt837mq79w86eg2lomb2wn32a6pnpyhvvajsk4d08t9250nu5igoveifjtdyo0iyu7nkx1hz6q3x2wbazlz7dnk81qzi8qd4lnoz2uqvsau2ukf6tya9v84slq2aco1q0kjcsp68p0tbkrdbpjbicv0jvkxyspbqhn3d0352fwx12syjwg7oqt608k2gtcbcptq0v28',
+                isActive: true,
                 data: { "foo" : "bar" },
                 accountIds: [],
             })
             .expect(201);
     });
 
-    test('/REST:GET iam/tenant', () =>
+    test('/REST:POST iam/tenant/find', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/tenant')
+            .post('/iam/tenant/find')
             .set('Accept', 'application/json')
             .send({
                 query:
                 {
                     where:
                     {
-                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8'
-                    }
-                }
+                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -380,18 +394,18 @@ describe('tenant', () =>
             });
     });
 
-    test('/REST:GET iam/tenant/{id} - Got 404 Not Found', () =>
+    test('/REST:GET iam/tenant/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/tenant/f433f496-7e91-4d6a-909d-033824454c66')
+            .get('/iam/tenant/find/d09545e3-0c65-4734-aac7-8ef1efd52662')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:GET iam/tenant/{id}', () =>
+    test('/REST:GET iam/tenant/find/{id}', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/tenant/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .get('/iam/tenant/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200)
             .then(res =>
@@ -400,16 +414,16 @@ describe('tenant', () =>
             });
     });
 
-    test('/REST:PUT iam/tenant - Got 404 Not Found', () =>
+    test('/REST:PUT iam/tenant/update - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .put('/iam/tenant')
+            .put('/iam/tenant/update')
             .set('Accept', 'application/json')
             .send({
-                id: '15ae9d5f-91da-4819-9c1b-d11e6b2d4d8d',
-                name: 'Tasty Metal Chicken',
-                code: '50o100o8bdujepe8g7fgr93l3qls8o9xw9v1xaau62bqwncvcl',
-                logo: 'trt1ve3ig8k3l5ki0w21rg9j3x3mq9ji016ii46v1jhmfz1nrpjk4yl5hou5ae97q18oh0nd6ii6stm6k1ycx1hf3toh39hbionduqi0q268mwdea7f96ler6lixaoqfopyz83cio2mfowudnprz6604qiyerh986nm6r0k9ztw9okhhsr3wfr2f70or3my4cs3soh6nensndx0n14jbemquu90hfmhh0j63cybz5nqorlaglmtjg6n7sqfmtku',
+                id: '08b6412c-e806-4198-be80-c8051d4d6392',
+                name: 'Licensed Plastic Shoes',
+                code: 'fkt2f60kgrfn3g3wbmd93o0henh2h7031ux0r6zpddj0pcmq2',
+                logo: '00xdlp8d7rygqg7pwskx0vwy2i024k0ekkxbd9pmvob085vstm7bnsxjnra69uc3he1jg4jbjcthjqr5k7380juwo98skic89ns3g9dzy0pp5v0jfvlh3v740qohp5p41f5id3ih8ui3pby7xpyz6qqbesxmr1kfsxf2x1rfre730deftyapli3cteisof866v3x51jbjgh7pd2ciz83shqbvy7jegbhsn14nqsupkkvm9orm1pm1dngetn6ez',
                 isActive: false,
                 data: { "foo" : "bar" },
                 accountIds: [],
@@ -417,16 +431,16 @@ describe('tenant', () =>
             .expect(404);
     });
 
-    test('/REST:PUT iam/tenant', () =>
+    test('/REST:PUT iam/tenant/update', () =>
     {
         return request(app.getHttpServer())
-            .put('/iam/tenant')
+            .put('/iam/tenant/update')
             .set('Accept', 'application/json')
             .send({
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Incredible Fresh Pizza',
-                code: 'e9ovl2qwp35auxltque5o0bzhsnwoc60hkshdl0wc3iw5hqajp',
-                logo: 'fnmwmaz1dp2wzzvx8kg78qyf9nam8cqdnjw2bbexfb602duq6g3oo70l1p562108jxwypb6q519nmh8zd5kag0poldfwm4lgmfwf4q36fye34hzd64mfdj6q6nogivdh67shvba6j127j2azvprwd9xbfihxaul94p9knnt9tq8i3f5xzmv9t613e86zuhmdyxv8jscdfu4ecvsdvac0ov1dy9ef248vlf88gogk13m5jq5hfn5wkv45qk5g8ex',
+                name: 'Generic Frozen Shirt',
+                code: 'r96rkeq5bzzu0aw9oalk829hd3sxhutthv6aculv0aveubppu',
+                logo: 'jkphc8yi5gx9a7bx2eop4cnoa94a39y1ccus0r0bpf1khdmgjz0rehjxj9beb8evfxuqu2wg65u8964rqzgvjhswsl1jdgx1omey90g3q4eqv99vewqrfcsw16ro5mq8jd4v09ntl8h9m11endj36es9sk7mgj63n54nha94ukspvmkri7yasr5qqhcz2ia3ozvjqdw654bek38jvdn6r36zml0f48qiymvy295aupx606hqu6gsoid4wqb2ht',
                 isActive: true,
                 data: { "foo" : "bar" },
                 accountIds: [],
@@ -438,18 +452,18 @@ describe('tenant', () =>
             });
     });
 
-    test('/REST:DELETE iam/tenant/{id} - Got 404 Not Found', () =>
+    test('/REST:DELETE iam/tenant/delete/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/tenant/bee71e1a-1685-4cf0-ad46-195cd5cce4c9')
+            .delete('/iam/tenant/delete/033b71a0-32ee-40ed-9eeb-a7b4ff77d38e')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:DELETE iam/tenant/{id}', () =>
+    test('/REST:DELETE iam/tenant/delete/{id}', () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/tenant/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .delete('/iam/tenant/delete/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -476,8 +490,8 @@ describe('tenant', () =>
                 `,
                 variables:
                 {
-                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
-                }
+                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt']),
+                },
             })
             .expect(200)
             .then(res =>
@@ -510,9 +524,9 @@ describe('tenant', () =>
                     query:
                     {
                         offset: 0,
-                        limit: 5
-                    }
-                }
+                        limit: 5,
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -520,7 +534,7 @@ describe('tenant', () =>
                 expect(res.body.data.iamPaginateTenants).toEqual({
                     total: seeder.collectionResponse.length,
                     count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'accountIds']))).slice(0, 5)
+                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'accountIds']))).slice(0, 5),
                 });
             });
     });
@@ -547,7 +561,7 @@ describe('tenant', () =>
                         }
                     }
                 `,
-                variables: {}
+                variables: {},
             })
             .expect(200)
             .then(res =>
@@ -582,13 +596,13 @@ describe('tenant', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Ergonomic Wooden Tuna',
-                        code: '8nug94e0kbr0t94fsotg98nhhjkq43en0dtqwli6ofulcmmq9m',
-                        logo: 'g3fxkchyj628nznhv5njfbn5qeri40b1of5y7n3gvj5kiksj6bka1dv9dxh1cohqerpgbh89w0ivxlct3azx4m70hcig4gxs16dl3nihm15v0fjp8zotd10n4hncqcdwabarvcgo34y4s4hosr2x99fkvt0m5cxf2g1bp241dhflapn758csuht9duensm6m0u5ij5qc66768hte9981ecwfg64a9qjssochtcbx6abgv2cs9s9xkv6qg0fum0i',
-                        isActive: true,
+                        name: 'Generic Frozen Ball',
+                        code: '0fpkfnvc9snlkyzslx2nsn3uu6zsbd0v9tv1663ablx2wkqf9',
+                        logo: 'kovb1kgwibd9d9t9v9lmm1e1g06pbqbtisewnatxxsp1bklci85pnjaes607e5jhfgqts2bekknqn7b4ndnwnib0lhyjswget8vqun8s1tm17x4j95a7rglr1y7oybu9v1j0rm254i0mtg0xav1bksek1ajp4lqg6yla6gje8j1vd4dun7rynoyt1zetj73ly5opszebhwo3kzc5x4fv9noswd10sc0a42sp059ga79rj4b32qw75re6bie3c9',
+                        isActive: false,
                         data: { "foo" : "bar" },
-                    }
-                }
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -625,10 +639,10 @@ describe('tenant', () =>
                     {
                         where:
                         {
-                            id: '982741a5-a7ef-4d29-ba9b-b14de105c956'
-                        }
-                    }
-                }
+                            id: 'bec62d67-db61-4c5b-aefb-f23908fc132c',
+                        },
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -667,10 +681,10 @@ describe('tenant', () =>
                     {
                         where:
                         {
-                            id: '5b19d6ac-4081-573b-96b3-56964d5326a8'
-                        }
-                    }
-                }
+                            id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                        },
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -702,8 +716,8 @@ describe('tenant', () =>
                     }
                 `,
                 variables: {
-                    id: '8b19e41f-6626-4cd0-bf0f-98d320108508'
-                }
+                    id: '3b542c84-6ece-4f6a-9b65-2961091c836f',
+                },
             })
             .expect(200)
             .then(res =>
@@ -737,8 +751,8 @@ describe('tenant', () =>
                     }
                 `,
                 variables: {
-                    id: '5b19d6ac-4081-573b-96b3-56964d5326a8'
-                }
+                    id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                },
             })
             .expect(200)
             .then(res =>
@@ -771,15 +785,15 @@ describe('tenant', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '0308f86a-823a-42cf-84fb-6d22503bfea4',
-                        name: 'Intelligent Steel Towels',
-                        code: 'b0g0tdsr4gqmlmt0h02t8719japs6i14weijlalfncre5nwg77',
-                        logo: 'pi5kl81tmcgp1c1gwwvwyogwyu40zh0wslbdnh0jfakqbhima8q3euot65wb1mdzmpa72crrl3uo87qrq43noqjq8orrgg8y3qavft8n20pa76zdpg70zte81295014m7q59ns3ffk3wrn7ttnaotbo9g2of01pgau7ij49sdj91hh7nkty4xos7gcbnc401qumss77po9b6evu9zxqt4pzq8quormfz46shga635r8ltt02tewk71mibs99beg',
+                        id: '235f0f66-c95a-438b-9888-be99d83e6509',
+                        name: 'Licensed Soft Pizza',
+                        code: 'i9g0juw18mn2ux6ma4lqi87k2r0y9roxjnw9dio2hvajcrz4h',
+                        logo: 'ses6pz9xqq0d7iacitin13xn5nden7xfglsymd364hwjyrt3v0upifr7xud8nux9skw0hogusr6h1r2iakd9jssp5ia08ds8vigpb5q8fpielxa08fgxjl0p80h90l177zxajo4w7lsxz3gsch1nxkqup7ildgqon5ia8kdc1y9e98eyksggrsp0woxcsp6i9nw2udsorfq68im44mw788blt77otxfz6btu7fcbj5td9fo90mw5t2mclp6jk6',
                         isActive: false,
                         data: { "foo" : "bar" },
                         accountIds: [],
-                    }
-                }
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -815,14 +829,14 @@ describe('tenant', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Practical Metal Hat',
-                        code: '0bwml22e8hfc63ael5s98gtkq4risolngq9ao8lfw6nz57en35',
-                        logo: 'bcn75iwge8c55qysz9jrb8umq9wkzynz8yjlo01wighfyb67ehe3e76c5n1det8qbmdajpo7mou6wvpyr1nec5oke164o8etv6mnp9j4qaqmnw97a4kxibwb10lse4pl8ykt7db235d5nuf8n0l5ugni6b3qcdkewoz6o5evyr0gjde3swltql07c8q0rhuhbnh50e3e00zx7awyvenb4j78h6z9d03fdumaknaq37zbxf41goswfr07fdoqfwx',
-                        isActive: false,
+                        name: 'Unbranded Frozen Mouse',
+                        code: '99rimcotfx9464rf6wlxi1w3h0ssfqfu3ixvbl927di7salty',
+                        logo: '0splcl8xns5lkelz8didi2ff4zlfu5sax2umng0hnmxe5qmehtbmkq0rzbsh7lqbwnj1r11kj1q6nvitlnbfc9k9rj75rd3d2g9icks8eia0tlgn9n9i4tcvshdh278mo76oo0iwnndrk3ge566suddkb0hz0ie0r9r067c8vqv5baaf3s0ia27ulltktpvkge1dnpj9tsc9gsoewlzh6z4bsdml6us74os4ev3xrimck838cnn4i2u8b88fqa',
+                        isActive: true,
                         data: { "foo" : "bar" },
                         accountIds: [],
-                    }
-                }
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -854,8 +868,8 @@ describe('tenant', () =>
                     }
                 `,
                 variables: {
-                    id: '63788c1c-27a3-4107-9ede-a3d9338a23d7'
-                }
+                    id: '9b8a6f45-1a1f-4c76-8814-bca816cf8174',
+                },
             })
             .expect(200)
             .then(res =>
@@ -889,8 +903,8 @@ describe('tenant', () =>
                     }
                 `,
                 variables: {
-                    id: '5b19d6ac-4081-573b-96b3-56964d5326a8'
-                }
+                    id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                },
             })
             .expect(200)
             .then(res =>

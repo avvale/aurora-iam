@@ -32,10 +32,10 @@ aggregateProperties:
     relationshipSingularName: role
     relationshipAggregate: IamRole
     relationshipModulePath: iam/role
-    intermediateTable: IamPermissionsRoles
-    intermediateModel: IamPermissionsRolesModel
-    intermediateModelModuleSection: iam/permission
-    intermediateModelFile: permissions-roles
+    relationshipAvoidConstraint: false
+    pivotAggregateName: IamPermissionsRoles
+    pivotPath: iam/permission
+    pivotFileName: permissions-roles
   - name: createdAt
     type: timestamp
     nullable: true

@@ -9,7 +9,7 @@ import { GetRolesQuery } from '../../../../@apps/iam/role/application/get/get-ro
 import { DeleteRolesCommand } from '../../../../@apps/iam/role/application/delete/delete-roles.command';
 
 @ApiTags('[iam] role')
-@Controller('iam/roles')
+@Controller('iam/roles/delete')
 export class IamDeleteRolesController
 {
     constructor(

@@ -64,15 +64,15 @@ export class BoundedContextMapper implements IMapper
     private makeAggregate(boundedContext: ObjectLiteral, cQMetadata?: CQMetadata): IamBoundedContext
     {
         return IamBoundedContext.register(
-            new BoundedContextId(boundedContext.id),
-            new BoundedContextName(boundedContext.name),
-            new BoundedContextRoot(boundedContext.root),
-            new BoundedContextSort(boundedContext.sort),
-            new BoundedContextIsActive(boundedContext.isActive),
-            new BoundedContextCreatedAt(boundedContext.createdAt, {}, { addTimezone: cQMetadata?.timezone }),
-            new BoundedContextUpdatedAt(boundedContext.updatedAt, {}, { addTimezone: cQMetadata?.timezone }),
-            new BoundedContextDeletedAt(boundedContext.deletedAt, {}, { addTimezone: cQMetadata?.timezone }),
-            this.options.eagerLoading ? new PermissionMapper({ eagerLoading: false }).mapModelsToAggregates(boundedContext.permissions) : undefined,
+            new BoundedContextId(boundedContext.id, { undefinable: true }),
+            new BoundedContextName(boundedContext.name, { undefinable: true }),
+            new BoundedContextRoot(boundedContext.root, { undefinable: true }),
+            new BoundedContextSort(boundedContext.sort, { undefinable: true }),
+            new BoundedContextIsActive(boundedContext.isActive, { undefinable: true }),
+            new BoundedContextCreatedAt(boundedContext.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new BoundedContextUpdatedAt(boundedContext.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new BoundedContextDeletedAt(boundedContext.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            this.options.eagerLoading ? new PermissionMapper({ eagerLoading: true }).mapModelsToAggregates(boundedContext.permissions) : undefined,
         );
     }
 
@@ -89,7 +89,7 @@ export class BoundedContextMapper implements IMapper
             boundedContext.createdAt.value,
             boundedContext.updatedAt.value,
             boundedContext.deletedAt.value,
-            this.options.eagerLoading ? new PermissionMapper({ eagerLoading: false }).mapAggregatesToResponses(boundedContext.permissions) : undefined,
+            this.options.eagerLoading ? new PermissionMapper({ eagerLoading: true }).mapAggregatesToResponses(boundedContext.permissions) : undefined,
         );
     }
 }

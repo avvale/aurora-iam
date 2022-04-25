@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Get, Body } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { Constraint, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
 import { TenantDto } from './../dto/tenant.dto';
@@ -8,14 +8,15 @@ import { TenantDto } from './../dto/tenant.dto';
 import { FindTenantQuery } from '../../../../@apps/iam/tenant/application/find/find-tenant.query';
 
 @ApiTags('[iam] tenant')
-@Controller('iam/tenant')
+@Controller('iam/tenant/find')
 export class IamFindTenantController
 {
     constructor(
         private readonly queryBus: IQueryBus,
     ) {}
 
-    @Get()
+    @Post()
+    @HttpCode(200)
     @ApiOperation({ summary: 'Find tenant according to query' })
     @ApiOkResponse({ description: 'The record has been successfully created.', type: TenantDto })
     @ApiBody({ type: QueryStatement })

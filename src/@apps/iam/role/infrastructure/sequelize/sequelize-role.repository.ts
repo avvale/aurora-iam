@@ -22,7 +22,7 @@ export class SequelizeRoleRepository extends SequelizeRepository<IamRole, IamRol
     }
 
     // hook called after create aggregate
-    async createdAggregateHook(aggregate: IamRole, model: IamRoleModel)
+    async createdAggregateHook(aggregate: IamRole, model: IamRoleModel): Promise<void>
     {
         // add many to many relation
         if (aggregate.permissionIds.length > 0) await model.$add('permissions', aggregate.permissionIds.value);
@@ -30,7 +30,7 @@ export class SequelizeRoleRepository extends SequelizeRepository<IamRole, IamRol
     }
 
     // hook called after create aggregate
-    async updatedAggregateHook(aggregate: IamRole, model: IamRoleModel)
+    async updatedAggregateHook(aggregate: IamRole, model: IamRoleModel): Promise<void>
     {
         // set many to many relation
         if (aggregate.permissionIds.isArray()) await model.$set('permissions', aggregate.permissionIds.value);

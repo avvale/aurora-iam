@@ -72,23 +72,23 @@ export class AccountMapper implements IMapper
     private makeAggregate(account: ObjectLiteral, cQMetadata?: CQMetadata): IamAccount
     {
         return IamAccount.register(
-            new AccountId(account.id),
-            new AccountType(account.type),
-            new AccountEmail(account.email),
-            new AccountIsActive(account.isActive),
-            new AccountClientId(account.clientId),
-            new AccountDApplicationCodes(account.dApplicationCodes),
-            new AccountDPermissions(account.dPermissions),
-            new AccountDTenants(account.dTenants),
-            new AccountData(account.data),
-            new AccountRoleIds(account.roleIds),
-            new AccountTenantIds(account.tenantIds),
-            new AccountCreatedAt(account.createdAt, {}, { addTimezone: cQMetadata?.timezone }),
-            new AccountUpdatedAt(account.updatedAt, {}, { addTimezone: cQMetadata?.timezone }),
-            new AccountDeletedAt(account.deletedAt, {}, { addTimezone: cQMetadata?.timezone }),
-            this.options.eagerLoading ? new UserMapper({ eagerLoading: false }).mapModelToAggregate(account.user) : undefined,
-            this.options.eagerLoading ? new RoleMapper({ eagerLoading: false }).mapModelsToAggregates(account.roles) : undefined,
-            this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapModelsToAggregates(account.tenants) : undefined,
+            new AccountId(account.id, { undefinable: true }),
+            new AccountType(account.type, { undefinable: true }),
+            new AccountEmail(account.email, { undefinable: true }),
+            new AccountIsActive(account.isActive, { undefinable: true }),
+            new AccountClientId(account.clientId, { undefinable: true }),
+            new AccountDApplicationCodes(account.dApplicationCodes, { undefinable: true }),
+            new AccountDPermissions(account.dPermissions, { undefinable: true }),
+            new AccountDTenants(account.dTenants, { undefinable: true }),
+            new AccountData(account.data, { undefinable: true }),
+            new AccountRoleIds(account.roleIds, { undefinable: true }),
+            new AccountTenantIds(account.tenantIds, { undefinable: true }),
+            new AccountCreatedAt(account.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new AccountUpdatedAt(account.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new AccountDeletedAt(account.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            this.options.eagerLoading ? new UserMapper({ eagerLoading: true }).mapModelToAggregate(account.user) : undefined,
+            this.options.eagerLoading ? new RoleMapper({ eagerLoading: true }).mapModelsToAggregates(account.roles) : undefined,
+            this.options.eagerLoading ? new TenantMapper({ eagerLoading: true }).mapModelsToAggregates(account.tenants) : undefined,
         );
     }
 
@@ -111,9 +111,9 @@ export class AccountMapper implements IMapper
             account.createdAt.value,
             account.updatedAt.value,
             account.deletedAt.value,
-            this.options.eagerLoading ? new UserMapper({ eagerLoading: false }).mapAggregateToResponse(account.user) : undefined,
-            this.options.eagerLoading ? new RoleMapper({ eagerLoading: false }).mapAggregatesToResponses(account.roles) : undefined,
-            this.options.eagerLoading ? new TenantMapper({ eagerLoading: false }).mapAggregatesToResponses(account.tenants) : undefined,
+            this.options.eagerLoading ? new UserMapper({ eagerLoading: true }).mapAggregateToResponse(account.user) : undefined,
+            this.options.eagerLoading ? new RoleMapper({ eagerLoading: true }).mapAggregatesToResponses(account.roles) : undefined,
+            this.options.eagerLoading ? new TenantMapper({ eagerLoading: true }).mapAggregatesToResponses(account.tenants) : undefined,
         );
     }
 }

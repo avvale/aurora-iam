@@ -9,7 +9,7 @@ import { CreatePermissionDto } from './../dto/create-permission.dto';
 import { CreatePermissionsCommand } from '../../../../@apps/iam/permission/application/create/create-permissions.command';
 
 @ApiTags('[iam] permission')
-@Controller('iam/permissions')
+@Controller('iam/permissions/create')
 export class IamCreatePermissionsController
 {
     constructor(

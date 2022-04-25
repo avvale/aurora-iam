@@ -22,11 +22,11 @@ export class CreatePermissionService
 
     public async main(
         payload: {
-            id: PermissionId,
-            name: PermissionName,
-            boundedContextId: PermissionBoundedContextId,
-            roleIds: PermissionRoleIds,
-        }
+            id: PermissionId;
+            name: PermissionName;
+            boundedContextId: PermissionBoundedContextId;
+            roleIds: PermissionRoleIds;
+        },
     ): Promise<void>
     {
         // create aggregate with factory pattern

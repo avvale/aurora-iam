@@ -9,7 +9,7 @@ import { CreateRoleDto } from './../dto/create-role.dto';
 import { CreateRolesCommand } from '../../../../@apps/iam/role/application/create/create-roles.command';
 
 @ApiTags('[iam] role')
-@Controller('iam/roles')
+@Controller('iam/roles/create')
 export class IamCreateRolesController
 {
     constructor(

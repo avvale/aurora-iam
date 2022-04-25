@@ -9,7 +9,7 @@ import { GetAccountsQuery } from '../../../../@apps/iam/account/application/get/
 import { DeleteAccountsCommand } from '../../../../@apps/iam/account/application/delete/delete-accounts.command';
 
 @ApiTags('[iam] account')
-@Controller('iam/accounts')
+@Controller('iam/accounts/delete')
 export class IamDeleteAccountsController
 {
     constructor(

@@ -23,12 +23,12 @@ export class CreateRoleService
 
     public async main(
         payload: {
-            id: RoleId,
-            name: RoleName,
-            isMaster: RoleIsMaster,
-            permissionIds: RolePermissionIds,
-            accountIds: RoleAccountIds,
-        }
+            id: RoleId;
+            name: RoleName;
+            isMaster: RoleIsMaster;
+            permissionIds: RolePermissionIds;
+            accountIds: RoleAccountIds;
+        },
     ): Promise<void>
     {
         // create aggregate with factory pattern

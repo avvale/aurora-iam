@@ -10,7 +10,7 @@ import { FindUserByIdQuery } from '../../../../@apps/iam/user/application/find/f
 import { CreateUserCommand } from '../../../../@apps/iam/user/application/create/create-user.command';
 
 @ApiTags('[iam] user')
-@Controller('iam/user')
+@Controller('iam/user/create')
 export class IamCreateUserController
 {
     constructor(

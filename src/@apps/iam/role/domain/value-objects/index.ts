@@ -7,6 +7,6 @@ export { RoleCreatedAt } from './role-created-at';
 export { RoleUpdatedAt } from './role-updated-at';
 export { RoleDeletedAt } from './role-deleted-at';
 
-// custom
+// ---- customizations ----
 export { RoleAccountId } from './role-account-id';
 export { RoleRoleId } from './role-role-id';

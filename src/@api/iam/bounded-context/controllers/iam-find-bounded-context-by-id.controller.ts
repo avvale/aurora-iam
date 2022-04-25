@@ -8,7 +8,7 @@ import { BoundedContextDto } from './../dto/bounded-context.dto';
 import { FindBoundedContextByIdQuery } from '../../../../@apps/iam/bounded-context/application/find/find-bounded-context-by-id.query';
 
 @ApiTags('[iam] bounded-context')
-@Controller('iam/bounded-context')
+@Controller('iam/bounded-context/find')
 export class IamFindBoundedContextByIdController
 {
     constructor(
@@ -24,6 +24,6 @@ export class IamFindBoundedContextByIdController
         @Timezone() timezone?: string,
     )
     {
-        return await this.queryBus.ask(new FindBoundedContextByIdQuery(id, constraint, { timezone }));
+        return this.queryBus.ask(new FindBoundedContextByIdQuery(id, constraint, { timezone }));
     }
 }

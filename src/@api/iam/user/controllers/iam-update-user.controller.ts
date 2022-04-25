@@ -10,7 +10,7 @@ import { UpdateUserCommand } from '../../../../@apps/iam/user/application/update
 import { FindUserByIdQuery } from '../../../../@apps/iam/user/application/find/find-user-by-id.query';
 
 @ApiTags('[iam] user')
-@Controller('iam/user')
+@Controller('iam/user/update')
 export class IamUpdateUserController
 {
     constructor(

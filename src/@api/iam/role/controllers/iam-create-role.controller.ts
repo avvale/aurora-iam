@@ -10,7 +10,7 @@ import { FindRoleByIdQuery } from '../../../../@apps/iam/role/application/find/f
 import { CreateRoleCommand } from '../../../../@apps/iam/role/application/create/create-role.command';
 
 @ApiTags('[iam] role')
-@Controller('iam/role')
+@Controller('iam/role/create')
 export class IamCreateRoleController
 {
     constructor(

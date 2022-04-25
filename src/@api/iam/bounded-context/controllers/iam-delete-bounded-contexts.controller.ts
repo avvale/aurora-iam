@@ -9,7 +9,7 @@ import { GetBoundedContextsQuery } from '../../../../@apps/iam/bounded-context/a
 import { DeleteBoundedContextsCommand } from '../../../../@apps/iam/bounded-context/application/delete/delete-bounded-contexts.command';
 
 @ApiTags('[iam] bounded-context')
-@Controller('iam/bounded-contexts')
+@Controller('iam/bounded-contexts/delete')
 export class IamDeleteBoundedContextsController
 {
     constructor(

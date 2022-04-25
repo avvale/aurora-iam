@@ -2,6 +2,7 @@
 /* eslint-disable key-spacing */
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IRoleRepository } from '../../../src/@apps/iam/role/domain/role.repository';
 import { MockRoleSeeder } from '../../../src/@apps/iam/role/infrastructure/mock/mock-role.seeder';
@@ -27,17 +28,30 @@ describe('role', () =>
                 ...importForeignModules,
                 IamModule,
                 GraphQLConfigModule,
-                SequelizeModule.forRoot({
-                    dialect       : 'sqlite',
-                    storage       : ':memory:',
-                    logging       : false,
-                    autoLoadModels: true,
-                    models        : [],
+                SequelizeModule.forRootAsync({
+                    imports   : [ConfigModule],
+                    inject    : [ConfigService],
+                    useFactory: (configService: ConfigService) =>
+                    {
+                        return {
+                            dialect       : configService.get('TEST_DATABASE_DIALECT'),
+                            storage       : configService.get('TEST_DATABASE_STORAGE'),
+                            host          : configService.get('TEST_DATABASE_HOST'),
+                            port          : +configService.get('TEST_DATABASE_PORT'),
+                            username      : configService.get('TEST_DATABASE_USER'),
+                            password      : configService.get('TEST_DATABASE_PASSWORD'),
+                            database      : configService.get('TEST_DATABASE_SCHEMA'),
+                            synchronize   : configService.get('TEST_DATABASE_SYNCHRONIZE'),
+                            logging       : configService.get('TEST_DATABASE_LOGGIN') === 'true' ? console.log : false,
+                            autoLoadModels: true,
+                            models        : [],
+                        };
+                    },
                 }),
             ],
             providers: [
                 MockRoleSeeder,
-            ]
+            ],
         })
             .compile();
 
@@ -51,14 +65,14 @@ describe('role', () =>
         await app.init();
     });
 
-    test('/REST:POST iam/role - Got 400 Conflict, RoleId property can not to be null', () =>
+    test('/REST:POST iam/role/create - Got 400 Conflict, RoleId property can not to be null', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/role')
+            .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                name: 'Rustic Metal Computer',
+                name: 'Rustic Wooden Hat',
                 isMaster: false,
                 permissionIds: [],
                 accountIds: [],
@@ -70,15 +84,15 @@ describe('role', () =>
             });
     });
 
-    test('/REST:POST iam/role - Got 400 Conflict, RoleName property can not to be null', () =>
+    test('/REST:POST iam/role/create - Got 400 Conflict, RoleName property can not to be null', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/role')
+            .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
-                id: '0e1b389e-7874-4209-a82d-d77170d6d7c3',
+                id: '4425c308-10c7-44b0-a27e-7708793306af',
                 name: null,
-                isMaster: false,
+                isMaster: true,
                 permissionIds: [],
                 accountIds: [],
             })
@@ -89,14 +103,14 @@ describe('role', () =>
             });
     });
 
-    test('/REST:POST iam/role - Got 400 Conflict, RoleIsMaster property can not to be null', () =>
+    test('/REST:POST iam/role/create - Got 400 Conflict, RoleIsMaster property can not to be null', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/role')
+            .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
-                id: 'ec4c01b2-fccc-40f9-9cfb-dddd1553b675',
-                name: 'Ergonomic Concrete Chips',
+                id: 'b9665a84-4a3d-488b-b468-e73619d6ffd1',
+                name: 'Tasty Plastic Car',
                 isMaster: null,
                 permissionIds: [],
                 accountIds: [],
@@ -108,13 +122,13 @@ describe('role', () =>
             });
     });
 
-    test('/REST:POST iam/role - Got 400 Conflict, RoleId property can not to be undefined', () =>
+    test('/REST:POST iam/role/create - Got 400 Conflict, RoleId property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/role')
+            .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
-                name: 'Refined Steel Salad',
+                name: 'Generic Steel Pants',
                 isMaster: true,
                 permissionIds: [],
                 accountIds: [],
@@ -126,14 +140,14 @@ describe('role', () =>
             });
     });
 
-    test('/REST:POST iam/role - Got 400 Conflict, RoleName property can not to be undefined', () =>
+    test('/REST:POST iam/role/create - Got 400 Conflict, RoleName property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/role')
+            .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
-                id: '9542ee92-7296-4aee-9431-1c66814481be',
-                isMaster: false,
+                id: '355236c1-4995-417b-9427-475e83e30630',
+                isMaster: true,
                 permissionIds: [],
                 accountIds: [],
             })
@@ -144,14 +158,14 @@ describe('role', () =>
             });
     });
 
-    test('/REST:POST iam/role - Got 400 Conflict, RoleIsMaster property can not to be undefined', () =>
+    test('/REST:POST iam/role/create - Got 400 Conflict, RoleIsMaster property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/role')
+            .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
-                id: 'f055ed72-5153-4469-a26c-57d6afeb70df',
-                name: 'Small Soft Computer',
+                id: '1dc4f09c-ecbb-480d-a538-9d43fe939bed',
+                name: 'Unbranded Cotton Shirt',
                 permissionIds: [],
                 accountIds: [],
             })
@@ -162,14 +176,14 @@ describe('role', () =>
             });
     });
 
-    test('/REST:POST iam/role - Got 400 Conflict, RoleId is not allowed, must be a length of 36', () =>
+    test('/REST:POST iam/role/create - Got 400 Conflict, RoleId is not allowed, must be a length of 36', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/role')
+            .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
-                id: '8inejr0oq0l7pkiue4s0laix8obmrfvy61jsr',
-                name: 'Ergonomic Plastic Hat',
+                id: '0o7wix264nq3vduetf6988f0ttdvu8eg4wvxf',
+                name: 'Sleek Steel Pizza',
                 isMaster: true,
                 permissionIds: [],
                 accountIds: [],
@@ -181,14 +195,14 @@ describe('role', () =>
             });
     });
 
-    test('/REST:POST iam/role - Got 400 Conflict, RoleName is too large, has a maximum length of 255', () =>
+    test('/REST:POST iam/role/create - Got 400 Conflict, RoleName is too large, has a maximum length of 255', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/role')
+            .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
-                id: '0cd1b42a-b82a-4a3b-9a2c-18cf5e798111',
-                name: 'uw1w2l1ionjjqm3cb2osjgzgywreo1ptzdgsxgigbx1py3cf3tcbtze389jtkgmjanlxta0cc89bj4pzb1paok8uy9esfjlcy4lir0nqghc5mhcn5fmvzu0dll3z7yfufl62t1g1mdt7k5vme35k7y3ca9gtzqcie9f4qjldmvvz8rrz0uhihfkvtqwgabyrmxy4x7rfp4z8gi2x466wzg3wx696nybs9qpnd4c5jdewx1k87cs6c5r0odt3uggf',
+                id: 'fe0eabe5-0a9e-4eb9-ad96-102208a9f967',
+                name: 'qqvkbsprpll02p23fyviifbpdnaxeims730btxc6434np4rijfiwwwsoxv77bmr6qididip95oqpamcak3mnjtvj7oshj16pj2k74hlgfi6gvpog30d83noskjxw101p1z9wekysbql3riaxwfrxd339a5mf7sfs7l303o0occo5btpin2nvp3c9znm0pssd7v4qan5ape9r35vyjxojkcy4t6co6sfxfp054q5h673ds3ph97nxtopzuhy3xytt',
                 isMaster: false,
                 permissionIds: [],
                 accountIds: [],
@@ -200,14 +214,14 @@ describe('role', () =>
             });
     });
 
-    test('/REST:POST iam/role - Got 400 Conflict, RoleIsMaster has to be a boolean value', () =>
+    test('/REST:POST iam/role/create - Got 400 Conflict, RoleIsMaster has to be a boolean value', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/role')
+            .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
-                id: 'b204a09e-25eb-43f8-bc18-e8a4e789b2f2',
-                name: 'Gorgeous Frozen Mouse',
+                id: '0f050082-4090-4354-b723-1f904632deda',
+                name: 'Sleek Plastic Shoes',
                 isMaster: 'true',
                 permissionIds: [],
                 accountIds: [],
@@ -219,10 +233,10 @@ describe('role', () =>
             });
     });
 
-    test('/REST:POST iam/role - Got 409 Conflict, item already exist in database', () =>
+    test('/REST:POST iam/role/create - Got 409 Conflict, item already exist in database', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/role')
+            .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send(seeder.collectionResponse[0])
             .expect(409);
@@ -237,8 +251,8 @@ describe('role', () =>
                 query:
                 {
                     offset: 0,
-                    limit: 5
-                }
+                    limit: 5,
+                },
             })
             .expect(200)
             .then(res =>
@@ -246,50 +260,50 @@ describe('role', () =>
                 expect(res.body).toEqual({
                     total: seeder.collectionResponse.length,
                     count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'permissionIds', 'accountIds']))).slice(0, 5)
+                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'permissionIds', 'accountIds']))).slice(0, 5),
                 });
             });
     });
 
-    test('/REST:GET iam/roles', () =>
+    test('/REST:POST iam/roles/get', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/roles')
+            .post('/iam/roles/get')
             .set('Accept', 'application/json')
             .expect(200)
             .then(res =>
             {
                 expect(res.body).toEqual(
-                    seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'permissionIds', 'accountIds'])))
+                    seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'permissionIds', 'accountIds']))),
                 );
             });
     });
 
-    test('/REST:GET iam/role - Got 404 Not Found', () =>
+    test('/REST:POST iam/role/find - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/role')
+            .post('/iam/role/find')
             .set('Accept', 'application/json')
             .send({
                 query:
                 {
                     where:
                     {
-                        id: '88b0a315-ebdc-4ddd-897f-f2b4db4bd828'
-                    }
-                }
+                        id: '1ecd59a8-344c-4004-97c0-fb39b6ccd922',
+                    },
+                },
             })
             .expect(404);
     });
 
-    test('/REST:POST iam/role', () =>
+    test('/REST:POST iam/role/create', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/role')
+            .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Sleek Soft Bacon',
+                name: 'Ergonomic Soft Fish',
                 isMaster: false,
                 permissionIds: [],
                 accountIds: [],
@@ -297,19 +311,19 @@ describe('role', () =>
             .expect(201);
     });
 
-    test('/REST:GET iam/role', () =>
+    test('/REST:POST iam/role/find', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/role')
+            .post('/iam/role/find')
             .set('Accept', 'application/json')
             .send({
                 query:
                 {
                     where:
                     {
-                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8'
-                    }
-                }
+                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -318,18 +332,18 @@ describe('role', () =>
             });
     });
 
-    test('/REST:GET iam/role/{id} - Got 404 Not Found', () =>
+    test('/REST:GET iam/role/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/role/dfb4647a-92f4-4746-adf1-cb24764368f7')
+            .get('/iam/role/find/8d25c416-eb5b-4a37-a410-7030f97f6d5e')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:GET iam/role/{id}', () =>
+    test('/REST:GET iam/role/find/{id}', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/role/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .get('/iam/role/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200)
             .then(res =>
@@ -338,14 +352,14 @@ describe('role', () =>
             });
     });
 
-    test('/REST:PUT iam/role - Got 404 Not Found', () =>
+    test('/REST:PUT iam/role/update - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .put('/iam/role')
+            .put('/iam/role/update')
             .set('Accept', 'application/json')
             .send({
-                id: 'b25ebb90-4671-4d12-a2c1-584d46ecc203',
-                name: 'Awesome Rubber Bike',
+                id: 'cb6105e6-8a63-47bd-940f-b523c02c9c49',
+                name: 'Intelligent Metal Bacon',
                 isMaster: true,
                 permissionIds: [],
                 accountIds: [],
@@ -353,14 +367,14 @@ describe('role', () =>
             .expect(404);
     });
 
-    test('/REST:PUT iam/role', () =>
+    test('/REST:PUT iam/role/update', () =>
     {
         return request(app.getHttpServer())
-            .put('/iam/role')
+            .put('/iam/role/update')
             .set('Accept', 'application/json')
             .send({
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Practical Cotton Tuna',
+                name: 'Sleek Metal Ball',
                 isMaster: true,
                 permissionIds: [],
                 accountIds: [],
@@ -372,18 +386,18 @@ describe('role', () =>
             });
     });
 
-    test('/REST:DELETE iam/role/{id} - Got 404 Not Found', () =>
+    test('/REST:DELETE iam/role/delete/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/role/627631fb-a76d-444e-babf-683e451fc14c')
+            .delete('/iam/role/delete/3cb4ad05-62ee-4dee-8eac-14d1f1733b6e')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:DELETE iam/role/{id}', () =>
+    test('/REST:DELETE iam/role/delete/{id}', () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/role/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .delete('/iam/role/delete/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -407,8 +421,8 @@ describe('role', () =>
                 `,
                 variables:
                 {
-                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
-                }
+                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt']),
+                },
             })
             .expect(200)
             .then(res =>
@@ -441,9 +455,9 @@ describe('role', () =>
                     query:
                     {
                         offset: 0,
-                        limit: 5
-                    }
-                }
+                        limit: 5,
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -451,7 +465,7 @@ describe('role', () =>
                 expect(res.body.data.iamPaginateRoles).toEqual({
                     total: seeder.collectionResponse.length,
                     count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'permissionIds', 'accountIds']))).slice(0, 5)
+                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'permissionIds', 'accountIds']))).slice(0, 5),
                 });
             });
     });
@@ -475,7 +489,7 @@ describe('role', () =>
                         }
                     }
                 `,
-                variables: {}
+                variables: {},
             })
             .expect(200)
             .then(res =>
@@ -507,10 +521,10 @@ describe('role', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Ergonomic Rubber Towels',
-                        isMaster: true,
-                    }
-                }
+                        name: 'Refined Soft Chicken',
+                        isMaster: false,
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -544,10 +558,10 @@ describe('role', () =>
                     {
                         where:
                         {
-                            id: '29270b46-b205-41fd-b466-7cdc5a4d4056'
-                        }
-                    }
-                }
+                            id: '001e58f1-e4f2-4c74-827c-56f8d628f00f',
+                        },
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -583,10 +597,10 @@ describe('role', () =>
                     {
                         where:
                         {
-                            id: '5b19d6ac-4081-573b-96b3-56964d5326a8'
-                        }
-                    }
-                }
+                            id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                        },
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -615,8 +629,8 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: '658057ea-3950-4d45-bf3e-37b8b9dbe453'
-                }
+                    id: 'f2ab9817-d737-4bee-99e7-61605f131644',
+                },
             })
             .expect(200)
             .then(res =>
@@ -647,8 +661,8 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: '5b19d6ac-4081-573b-96b3-56964d5326a8'
-                }
+                    id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                },
             })
             .expect(200)
             .then(res =>
@@ -678,13 +692,13 @@ describe('role', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '240629f1-36d4-4d59-918f-b1bc1145f290',
-                        name: 'Generic Soft Fish',
-                        isMaster: true,
+                        id: 'f96d028f-7e60-4eec-873c-c48afecdf1ff',
+                        name: 'Rustic Metal Chicken',
+                        isMaster: false,
                         permissionIds: [],
                         accountIds: [],
-                    }
-                }
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -717,12 +731,12 @@ describe('role', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Awesome Metal Chicken',
-                        isMaster: false,
+                        name: 'Small Wooden Chips',
+                        isMaster: true,
                         permissionIds: [],
                         accountIds: [],
-                    }
-                }
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -751,8 +765,8 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: '7823c91a-8e8d-4cbc-bb5a-448d5b5dbe7d'
-                }
+                    id: '9ced1fdf-dc31-4326-9fdb-1c14351ed45f',
+                },
             })
             .expect(200)
             .then(res =>
@@ -783,8 +797,8 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: '5b19d6ac-4081-573b-96b3-56964d5326a8'
-                }
+                    id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                },
             })
             .expect(200)
             .then(res =>

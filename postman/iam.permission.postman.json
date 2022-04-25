@@ -1,6 +1,6 @@
 {
     "info": {
-		"_postman_id"   : "0c757ecd-cfad-4759-9e46-32b87363657f",
+		"_postman_id"   : "c223aed0-94fc-42aa-b212-196ae33808cf",
 		"name"          : "@apps - iam/permission",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
@@ -15,7 +15,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:IamCreatePermissionInput!)\n{\n\tiamCreatePermission (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tboundedContextId\n\t}\n}",
-                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Gorgeous Plastic Hat\", \n\t\t\"boundedContextId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t}\n}"
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Refined Cotton Shoes\", \n\t\t\"boundedContextId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t}\n}"
 					}
 				},
 				"url": {
@@ -39,7 +39,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:[IamCreatePermissionInput]!)\n{\n\tiamCreatePermissions (payload:$payload)\n}",
-						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"6fa7b0ea-14f3-4a88-a476-45cb911e4b96\", \n\t\t\t\"name\": \"Tasty Wooden Shirt\", \n\t\t\t\"boundedContextId\": \"9d07c1c0-6956-45ca-87e3-9ec159b530ce\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"2521fe7c-34c1-4f31-ac2d-48f145cc5f7a\", \n\t\t\t\"name\": \"Gorgeous Concrete Chair\", \n\t\t\t\"boundedContextId\": \"89fb54b0-bd63-4f0d-b0b5-937ddfed4a3b\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"d78a72c9-247c-4bc3-87f8-36ee4fa4cddd\", \n\t\t\t\"name\": \"Licensed Rubber Pizza\", \n\t\t\t\"boundedContextId\": \"6bce643e-b8d8-4737-b4a5-8f2b2a95c585\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"0175dfc1-7b74-4e35-b0d3-cf28bfb9cc42\", \n\t\t\t\"name\": \"Incredible Frozen Bacon\", \n\t\t\t\"boundedContextId\": \"13a8d0bb-d337-46b3-ac8b-91d9ade76de4\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"ca107171-c63e-479a-ac9b-7a22221e7aa0\", \n\t\t\t\"name\": \"Fantastic Frozen Towels\", \n\t\t\t\"boundedContextId\": \"5d16ffd3-8d57-487d-b236-996dd9336496\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"1ee4dd38-053e-4bcb-8cc9-34bd63770559\", \n\t\t\t\"name\": \"Licensed Granite Tuna\", \n\t\t\t\"boundedContextId\": \"4a2b81b7-bb42-4e52-9292-510b0bc8eb7e\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"22d7bb24-195d-4500-b5ca-3d2e65cd615e\", \n\t\t\t\"name\": \"Handmade Rubber Shoes\", \n\t\t\t\"boundedContextId\": \"1d401b6f-18a0-49bb-8ec7-22f95f749b28\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"4c65fa3a-4611-4d19-9209-45c39ff87451\", \n\t\t\t\"name\": \"Sleek Cotton Computer\", \n\t\t\t\"boundedContextId\": \"0b6a7cae-c7fd-4219-a290-232a83633f96\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"127c7903-647a-4c80-b966-8d1da2e6ba22\", \n\t\t\t\"name\": \"Generic Steel Bike\", \n\t\t\t\"boundedContextId\": \"7c581550-811d-4b79-b0f5-c0af13ddeb7e\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"64a3ef3d-1d38-4cf6-8c9d-d3251f3f645c\", \n\t\t\t\"name\": \"Practical Cotton Bacon\", \n\t\t\t\"boundedContextId\": \"a2256249-0297-47f4-874e-5e51f59e27b5\"\n\t\t}\n\t]\n}"
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"61463f4e-bd99-48ac-8e78-fff501ba53f1\", \n\t\t\t\"name\": \"Incredible Plastic Chips\", \n\t\t\t\"boundedContextId\": \"23bf5182-8031-4df0-a737-6295a7dff962\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"2fa99bef-558e-44a3-a6fa-3fee14c3c968\", \n\t\t\t\"name\": \"Intelligent Cotton Salad\", \n\t\t\t\"boundedContextId\": \"dca02588-c494-414f-b409-4d71bc18480e\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"bcb48638-028f-48b3-ba8f-e4759f8b6479\", \n\t\t\t\"name\": \"Ergonomic Soft Pants\", \n\t\t\t\"boundedContextId\": \"b03f1277-d044-4ffa-ae99-ae38718274fc\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"98a95291-8262-4007-adf9-6ebac2001152\", \n\t\t\t\"name\": \"Sleek Frozen Pants\", \n\t\t\t\"boundedContextId\": \"41ab0130-fc95-465a-abfb-cd85d427fd41\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"f687e0f7-bd04-4ca5-b8d7-08837c5c48da\", \n\t\t\t\"name\": \"Handcrafted Frozen Car\", \n\t\t\t\"boundedContextId\": \"48796c57-10ee-44b9-abe1-72a275eaa35d\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"9e839fbd-5c9e-419b-8015-0f1dc203f7e9\", \n\t\t\t\"name\": \"Handmade Metal Ball\", \n\t\t\t\"boundedContextId\": \"45629473-5165-4bbb-a357-405cd3e99dc5\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"4544e6dc-4e86-45cf-9913-637bc94d6776\", \n\t\t\t\"name\": \"Intelligent Frozen Pants\", \n\t\t\t\"boundedContextId\": \"68dba664-c689-40fd-9505-0fc57b6bd6d3\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"5e4659fd-d3fb-4896-bb20-02d17c6813a2\", \n\t\t\t\"name\": \"Awesome Soft Tuna\", \n\t\t\t\"boundedContextId\": \"8d26a447-3115-45cf-a8cf-95f19ff7298a\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"e4581172-4354-4dd3-aad1-0949ab2c58c5\", \n\t\t\t\"name\": \"Practical Frozen Hat\", \n\t\t\t\"boundedContextId\": \"fa4fd320-5b1c-4a5b-87bd-df37688018ea\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"da931b22-437b-4c0d-ba2b-c2cfd1c952b1\", \n\t\t\t\"name\": \"Licensed Soft Sausages\", \n\t\t\t\"boundedContextId\": \"9dd4a52b-c78a-4e1d-b049-e1dea66492bd\"\n\t\t}\n\t]\n}"
 					}
 				},
 				"url": {
@@ -164,7 +164,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:IamUpdatePermissionInput!)\n{\n\tiamUpdatePermission (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Handmade Cotton Bacon\", \n\t\t\"boundedContextId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"roleIds\": []\n\t}\n}"
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Incredible Fresh Chair\", \n\t\t\"boundedContextId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"roleIds\": []\n\t}\n}"
 					}
 				},
 				"url": {
@@ -230,7 +230,7 @@
 			"response": []
         },
         {
-			"name": "REST - iam/permission",
+			"name": "REST - iam/permission/create",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -242,7 +242,7 @@
 					}				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Licensed Fresh Hat\", \n\t\"boundedContextId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"roleIds\": []\n}",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Rustic Fresh Car\", \n\t\"boundedContextId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"roleIds\": []\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -250,20 +250,21 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/iam/permission",
+					"raw": "{{URL}}/iam/permission/create",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"iam",
-						"permission"
+						"permission",
+                        "create"
 					]
 				}
 			},
 			"response": []
         },
         {
-			"name": "REST - iam/permissions",
+			"name": "REST - iam/permissions/create",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -275,7 +276,7 @@
 					}				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "[\n\t{\n\t\t\"id\": \"8f4f18b4-b5b7-4707-a677-70f969721377\", \n\t\t\"name\": \"Tasty Granite Bike\", \n\t\t\"boundedContextId\": \"c59459d9-b12c-4067-9e5e-9e66246080c7\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"53b12265-bfb0-4359-a3b3-92688f8b2261\", \n\t\t\"name\": \"Sleek Rubber Pizza\", \n\t\t\"boundedContextId\": \"3130a1ff-aaae-4e84-8483-087941e3cb09\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"737351ef-0cc1-49e1-b7c4-2ff9a62eb9c5\", \n\t\t\"name\": \"Incredible Metal Keyboard\", \n\t\t\"boundedContextId\": \"a33eff34-4a36-41f8-8aef-cab25d08b66f\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"91bc3eb6-2b69-416d-8324-7ed2c672d45d\", \n\t\t\"name\": \"Unbranded Soft Towels\", \n\t\t\"boundedContextId\": \"54213e18-433c-4d61-9077-e2f3dd79e9ad\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"f8cc931e-2cbe-47f6-99c5-7b6048b65a76\", \n\t\t\"name\": \"Licensed Granite Computer\", \n\t\t\"boundedContextId\": \"b4fd8799-feb5-47e6-8d38-6f3672029911\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"c222bce4-4716-48f9-8db0-7a2c81d3adc1\", \n\t\t\"name\": \"Unbranded Concrete Pizza\", \n\t\t\"boundedContextId\": \"b81dbe3d-79eb-4893-b332-3d1fe05a7820\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"9bfa849d-daf6-452a-b71a-9762fe6e61b2\", \n\t\t\"name\": \"Practical Cotton Mouse\", \n\t\t\"boundedContextId\": \"58b3b6ab-313e-4dd6-8cf7-3af25abb15c2\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"4f1c718b-1cf2-4f5a-85f5-02ad8b68e6be\", \n\t\t\"name\": \"Unbranded Plastic Soap\", \n\t\t\"boundedContextId\": \"5b3bd8f6-3dac-4eac-be62-b65501552f2b\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"aaa3f9b3-073f-4f17-a97c-cdc5d4bc2f20\", \n\t\t\"name\": \"Licensed Plastic Pants\", \n\t\t\"boundedContextId\": \"8da53f32-5da9-46e7-8005-7148c93a9ba9\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"c14ee2ea-1a28-49e6-8bd0-d9c081dec83a\", \n\t\t\"name\": \"Gorgeous Soft Chair\", \n\t\t\"boundedContextId\": \"237da21f-2857-42f5-b51a-8ffb32ca4e46\", \n\t\t\"roleIds\": []\n\t}\n]",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"4335f415-0d36-440d-ac66-6e144c16a347\", \n\t\t\"name\": \"Incredible Granite Tuna\", \n\t\t\"boundedContextId\": \"fa8cfb54-4912-4256-ac26-24b724b29a34\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"3e5c057c-33b6-4197-9ec4-5fa4656e50ec\", \n\t\t\"name\": \"Small Fresh Chips\", \n\t\t\"boundedContextId\": \"e76aa881-1457-48cd-ae8e-d61cf6da77b7\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"e9569a24-a59e-4712-90f1-7e2a2ff8b79f\", \n\t\t\"name\": \"Fantastic Rubber Chicken\", \n\t\t\"boundedContextId\": \"007d1721-4fb7-41ed-a021-5a365cbbf8a7\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"87cbdfcc-93c0-46da-851e-245cfd09e4b2\", \n\t\t\"name\": \"Generic Soft Car\", \n\t\t\"boundedContextId\": \"c0411b3f-e93d-45c4-b426-d8b6cbf1d73a\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"42c54dd1-95a7-4965-be9c-172e265ec6dd\", \n\t\t\"name\": \"Rustic Plastic Chicken\", \n\t\t\"boundedContextId\": \"fb03c8d4-3f0b-4736-83ce-9b831cf3c0b4\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"88e8ac84-e62c-4caa-b8a4-681c13426dff\", \n\t\t\"name\": \"Practical Fresh Soap\", \n\t\t\"boundedContextId\": \"eeab370e-2b18-476d-bf49-37170fdbbc93\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"195e0a92-5d34-467e-aeb8-669676dbd937\", \n\t\t\"name\": \"Generic Frozen Bacon\", \n\t\t\"boundedContextId\": \"ede4bf0e-1c5d-4c0b-be1e-11f91b47700a\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"96f38118-de33-4e06-b9ad-96f895b4e438\", \n\t\t\"name\": \"Awesome Soft Pants\", \n\t\t\"boundedContextId\": \"7a6c4161-6175-4bce-95d4-567d0d86963a\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"96423111-e84f-42fa-90ad-8ac9b42d7d67\", \n\t\t\"name\": \"Intelligent Rubber Salad\", \n\t\t\"boundedContextId\": \"025eab9f-b13e-4977-ae53-8b9cca225f9a\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"792b7d4b-3e36-476c-99c1-e453bb7fb301\", \n\t\t\"name\": \"Generic Soft Soap\", \n\t\t\"boundedContextId\": \"8e6da880-61af-4d75-a465-3f0e4b13409d\", \n\t\t\"roleIds\": []\n\t}\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -283,13 +284,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/iam/permissions",
+					"raw": "{{URL}}/iam/permissions/create",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"iam",
-						"permissions"
+						"permissions",
+                        "create"
 					]
 				}
 			},
@@ -333,12 +335,12 @@
 			"response": []
         },
         {
-			"name": "REST - iam/permissions",
+			"name": "REST - iam/permissions/get",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -356,25 +358,26 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/iam/permissions",
+					"raw": "{{URL}}/iam/permissions/get",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"iam",
-						"permissions"
+						"permissions",
+                        "get"
 					]
 				}
 			},
 			"response": []
         },
         {
-			"name": "REST - iam/permission",
+			"name": "REST - iam/permission/find",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -392,20 +395,21 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/iam/permission",
+					"raw": "{{URL}}/iam/permission/find",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"iam",
-						"permission"
+						"permission",
+                        "find"
 					]
 				}
 			},
 			"response": []
         },
         {
-			"name": "REST - iam/permission/{id}",
+			"name": "REST - iam/permission/find/{id}",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -428,13 +432,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/iam/permission/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"raw": "{{URL}}/iam/permission/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"iam",
 						"permission",
+                        "find",
 						"5b19d6ac-4081-573b-96b3-56964d5326a8"
 					]
 				}
@@ -442,7 +447,7 @@
 			"response": []
         },
         {
-			"name": "REST - iam/permission",
+			"name": "REST - iam/permission/update",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -454,7 +459,7 @@
 					}				],
 				"body": {
 					"mode": "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Awesome Steel Soap\", \n\t\"boundedContextId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"roleIds\": []\n}",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Licensed Concrete Shirt\", \n\t\"boundedContextId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"roleIds\": []\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -462,20 +467,21 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/iam/permission",
+					"raw": "{{URL}}/iam/permission/update",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"iam",
-						"permission"
+						"permission",
+                        "update"
 					]
 				}
 			},
 			"response": []
         },
         {
-			"name": "REST - iam/permission/{id}",
+			"name": "REST - iam/permission/delete/{id}",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -495,13 +501,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/iam/permission/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"raw": "{{URL}}/iam/permission/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"iam",
 						"permission",
+                        "delete",
 						"5b19d6ac-4081-573b-96b3-56964d5326a8"
 					]
 				}
@@ -509,7 +516,7 @@
 			"response": []
 		},
         {
-			"name": "REST - iam/permissions",
+			"name": "REST - iam/permissions/delete",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -529,13 +536,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/iam/permissions",
+					"raw": "{{URL}}/iam/permissions/delete",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"iam",
-						"permissions"
+						"permissions",
+                        "delete"
 					]
 				}
 			},
@@ -544,7 +552,7 @@
     ],
     "variable": [
 		{
-			"id": "2cd02db1-2d9d-4aab-b1a6-d341edcf7f82",
+			"id": "bd971398-cbba-48bc-8e30-81a21a3bb0e3",
 			"key": "URL",
 			"value": "http://localhost:8080",
 			"type": "string"

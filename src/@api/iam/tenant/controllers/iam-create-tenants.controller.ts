@@ -9,7 +9,7 @@ import { CreateTenantDto } from './../dto/create-tenant.dto';
 import { CreateTenantsCommand } from '../../../../@apps/iam/tenant/application/create/create-tenants.command';
 
 @ApiTags('[iam] tenant')
-@Controller('iam/tenants')
+@Controller('iam/tenants/create')
 export class IamCreateTenantsController
 {
     constructor(

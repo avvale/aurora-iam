@@ -8,7 +8,7 @@ import { RoleDto } from './../dto/role.dto';
 import { FindRoleByIdQuery } from '../../../../@apps/iam/role/application/find/find-role-by-id.query';
 
 @ApiTags('[iam] role')
-@Controller('iam/role')
+@Controller('iam/role/find')
 export class IamFindRoleByIdController
 {
     constructor(
@@ -24,6 +24,6 @@ export class IamFindRoleByIdController
         @Timezone() timezone?: string,
     )
     {
-        return await this.queryBus.ask(new FindRoleByIdQuery(id, constraint, { timezone }));
+        return this.queryBus.ask(new FindRoleByIdQuery(id, constraint, { timezone }));
     }
 }

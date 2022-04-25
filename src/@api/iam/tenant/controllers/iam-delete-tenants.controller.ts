@@ -9,7 +9,7 @@ import { GetTenantsQuery } from '../../../../@apps/iam/tenant/application/get/ge
 import { DeleteTenantsCommand } from '../../../../@apps/iam/tenant/application/delete/delete-tenants.command';
 
 @ApiTags('[iam] tenant')
-@Controller('iam/tenants')
+@Controller('iam/tenants/delete')
 export class IamDeleteTenantsController
 {
     constructor(

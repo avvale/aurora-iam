@@ -7,7 +7,7 @@ import { FindAccountByIdQuery } from '../../../../@apps/iam/account/application/
 import { CreateAccountCommand } from '../../../../@apps/iam/account/application/create/create-account.command';
 import { IamAccountType, IamCreateAccountInput } from './../../../../graphql';
 
-// custom
+// ---- customizations ----
 import { JwtService } from '@nestjs/jwt';
 import { AccessTokenService } from '../../../../@apps/iam/shared/o-auth/domain/access-token/access-token.service';
 import { ClientService } from '../../../../@apps/iam/shared/o-auth/domain/client/client.service';

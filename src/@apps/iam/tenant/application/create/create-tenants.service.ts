@@ -26,14 +26,14 @@ export class CreateTenantsService
 
     public async main(
         tenants: {
-            id: TenantId,
-            name: TenantName,
-            code: TenantCode,
-            logo: TenantLogo,
-            isActive: TenantIsActive,
-            data: TenantData,
-            accountIds: TenantAccountIds,
-        } []
+            id: TenantId;
+            name: TenantName;
+            code: TenantCode;
+            logo: TenantLogo;
+            isActive: TenantIsActive;
+            data: TenantData;
+            accountIds: TenantAccountIds;
+        } [],
     ): Promise<void>
     {
         // create aggregate with factory pattern

@@ -10,7 +10,7 @@ import { FindBoundedContextByIdQuery } from '../../../../@apps/iam/bounded-conte
 import { CreateBoundedContextCommand } from '../../../../@apps/iam/bounded-context/application/create/create-bounded-context.command';
 
 @ApiTags('[iam] bounded-context')
-@Controller('iam/bounded-context')
+@Controller('iam/bounded-context/create')
 export class IamCreateBoundedContextController
 {
     constructor(

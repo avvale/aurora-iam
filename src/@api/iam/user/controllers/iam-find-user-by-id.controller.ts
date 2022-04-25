@@ -8,7 +8,7 @@ import { UserDto } from './../dto/user.dto';
 import { FindUserByIdQuery } from '../../../../@apps/iam/user/application/find/find-user-by-id.query';
 
 @ApiTags('[iam] user')
-@Controller('iam/user')
+@Controller('iam/user/find')
 export class IamFindUserByIdController
 {
     constructor(
@@ -24,6 +24,6 @@ export class IamFindUserByIdController
         @Timezone() timezone?: string,
     )
     {
-        return await this.queryBus.ask(new FindUserByIdQuery(id, constraint, { timezone }));
+        return this.queryBus.ask(new FindUserByIdQuery(id, constraint, { timezone }));
     }
 }

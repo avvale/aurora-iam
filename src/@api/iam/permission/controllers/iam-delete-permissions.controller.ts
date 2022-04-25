@@ -9,7 +9,7 @@ import { GetPermissionsQuery } from '../../../../@apps/iam/permission/applicatio
 import { DeletePermissionsCommand } from '../../../../@apps/iam/permission/application/delete/delete-permissions.command';
 
 @ApiTags('[iam] permission')
-@Controller('iam/permissions')
+@Controller('iam/permissions/delete')
 export class IamDeletePermissionsController
 {
     constructor(

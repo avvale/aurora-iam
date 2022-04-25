@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Get, Body } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { Constraint, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
 import { UserDto } from './../dto/user.dto';
@@ -8,15 +8,16 @@ import { UserDto } from './../dto/user.dto';
 import { GetUsersQuery } from '../../../../@apps/iam/user/application/get/get-users.query';
 
 @ApiTags('[iam] user')
-@Controller('iam/users')
+@Controller('iam/users/get')
 export class IamGetUsersController
 {
     constructor(
         private readonly queryBus: IQueryBus,
     ) {}
 
-    @Get()
-    @ApiOperation({ summary: 'Find users according to query' })
+    @Post()
+    @HttpCode(200)
+    @ApiOperation({ summary: 'Get users according to query' })
     @ApiOkResponse({ description: 'The records has been found successfully.', type: [UserDto] })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })

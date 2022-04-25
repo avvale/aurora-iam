@@ -64,15 +64,15 @@ export class PermissionMapper implements IMapper
     private makeAggregate(permission: ObjectLiteral, cQMetadata?: CQMetadata): IamPermission
     {
         return IamPermission.register(
-            new PermissionId(permission.id),
-            new PermissionName(permission.name),
-            new PermissionBoundedContextId(permission.boundedContextId),
-            new PermissionRoleIds(permission.roleIds),
-            new PermissionCreatedAt(permission.createdAt, {}, { addTimezone: cQMetadata?.timezone }),
-            new PermissionUpdatedAt(permission.updatedAt, {}, { addTimezone: cQMetadata?.timezone }),
-            new PermissionDeletedAt(permission.deletedAt, {}, { addTimezone: cQMetadata?.timezone }),
-            this.options.eagerLoading ? new BoundedContextMapper({ eagerLoading: false }).mapModelToAggregate(permission.boundedContext) : undefined,
-            this.options.eagerLoading ? new RoleMapper({ eagerLoading: false }).mapModelsToAggregates(permission.roles) : undefined,
+            new PermissionId(permission.id, { undefinable: true }),
+            new PermissionName(permission.name, { undefinable: true }),
+            new PermissionBoundedContextId(permission.boundedContextId, { undefinable: true }),
+            new PermissionRoleIds(permission.roleIds, { undefinable: true }),
+            new PermissionCreatedAt(permission.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new PermissionUpdatedAt(permission.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new PermissionDeletedAt(permission.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            this.options.eagerLoading ? new BoundedContextMapper({ eagerLoading: true }).mapModelToAggregate(permission.boundedContext) : undefined,
+            this.options.eagerLoading ? new RoleMapper({ eagerLoading: true }).mapModelsToAggregates(permission.roles) : undefined,
         );
     }
 
@@ -88,8 +88,8 @@ export class PermissionMapper implements IMapper
             permission.createdAt.value,
             permission.updatedAt.value,
             permission.deletedAt.value,
-            this.options.eagerLoading ? new BoundedContextMapper({ eagerLoading: false }).mapAggregateToResponse(permission.boundedContext) : undefined,
-            this.options.eagerLoading ? new RoleMapper({ eagerLoading: false }).mapAggregatesToResponses(permission.roles) : undefined,
+            this.options.eagerLoading ? new BoundedContextMapper({ eagerLoading: true }).mapAggregateToResponse(permission.boundedContext) : undefined,
+            this.options.eagerLoading ? new RoleMapper({ eagerLoading: true }).mapAggregatesToResponses(permission.roles) : undefined,
         );
     }
 }

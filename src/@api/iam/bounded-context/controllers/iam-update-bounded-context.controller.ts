@@ -10,7 +10,7 @@ import { UpdateBoundedContextCommand } from '../../../../@apps/iam/bounded-conte
 import { FindBoundedContextByIdQuery } from '../../../../@apps/iam/bounded-context/application/find/find-bounded-context-by-id.query';
 
 @ApiTags('[iam] bounded-context')
-@Controller('iam/bounded-context')
+@Controller('iam/bounded-context/update')
 export class IamUpdateBoundedContextController
 {
     constructor(

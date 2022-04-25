@@ -9,7 +9,7 @@ import { CreateUserDto } from './../dto/create-user.dto';
 import { CreateUsersCommand } from '../../../../@apps/iam/user/application/create/create-users.command';
 
 @ApiTags('[iam] user')
-@Controller('iam/users')
+@Controller('iam/users/create')
 export class IamCreateUsersController
 {
     constructor(

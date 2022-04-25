@@ -8,7 +8,7 @@ import { TenantDto } from './../dto/tenant.dto';
 import { FindTenantByIdQuery } from '../../../../@apps/iam/tenant/application/find/find-tenant-by-id.query';
 
 @ApiTags('[iam] tenant')
-@Controller('iam/tenant')
+@Controller('iam/tenant/find')
 export class IamFindTenantByIdController
 {
     constructor(
@@ -24,6 +24,6 @@ export class IamFindTenantByIdController
         @Timezone() timezone?: string,
     )
     {
-        return await this.queryBus.ask(new FindTenantByIdQuery(id, constraint, { timezone }));
+        return this.queryBus.ask(new FindTenantByIdQuery(id, constraint, { timezone }));
     }
 }

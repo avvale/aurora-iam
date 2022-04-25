@@ -10,7 +10,7 @@ import { FindPermissionByIdQuery } from '../../../../@apps/iam/permission/applic
 import { CreatePermissionCommand } from '../../../../@apps/iam/permission/application/create/create-permission.command';
 
 @ApiTags('[iam] permission')
-@Controller('iam/permission')
+@Controller('iam/permission/create')
 export class IamCreatePermissionController
 {
     constructor(

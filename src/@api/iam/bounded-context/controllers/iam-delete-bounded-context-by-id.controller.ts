@@ -9,7 +9,7 @@ import { FindBoundedContextByIdQuery } from '../../../../@apps/iam/bounded-conte
 import { DeleteBoundedContextByIdCommand } from '../../../../@apps/iam/bounded-context/application/delete/delete-bounded-context-by-id.command';
 
 @ApiTags('[iam] bounded-context')
-@Controller('iam/bounded-context')
+@Controller('iam/bounded-context/delete')
 export class IamDeleteBoundedContextByIdController
 {
     constructor(

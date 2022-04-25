@@ -20,6 +20,6 @@ export class IamFindTenantByIdResolver
         @Timezone() timezone?: string,
     ): Promise<IamTenant>
     {
-        return await this.queryBus.ask(new FindTenantByIdQuery(id, constraint, { timezone }));
+        return this.queryBus.ask(new FindTenantByIdQuery(id, constraint, { timezone }));
     }
 }

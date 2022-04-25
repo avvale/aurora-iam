@@ -15,6 +15,7 @@ export class IamUserModel extends Model<IamUserModel>
     id: string;
 
     @ForeignKey(() => IamAccountModel)
+    @Index
     @Column({
         field: 'accountId',
         allowNull: false,

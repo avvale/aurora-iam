@@ -10,7 +10,7 @@ import { FindTenantByIdQuery } from '../../../../@apps/iam/tenant/application/fi
 import { CreateTenantCommand } from '../../../../@apps/iam/tenant/application/create/create-tenant.command';
 
 @ApiTags('[iam] tenant')
-@Controller('iam/tenant')
+@Controller('iam/tenant/create')
 export class IamCreateTenantController
 {
     constructor(

@@ -40,7 +40,7 @@ export { SequelizeRoleRepository } from './infrastructure/sequelize/sequelize-ro
 // sagas
 export { RoleSagas } from './application/sagas/role.sagas';
 
-// custom
+// ---- customizations ----
 import { CreateRolesAccountsCommandHandler } from './application/create/create-roles-accounts.command-handler';
 import { CreateRolesAccountsService } from './application/create/create-roles-accounts.service';
 export { IRoleAccountRepository } from './domain/role-account.repository';

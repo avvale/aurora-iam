@@ -20,6 +20,6 @@ export class IamFindBoundedContextByIdResolver
         @Timezone() timezone?: string,
     ): Promise<IamBoundedContext>
     {
-        return await this.queryBus.ask(new FindBoundedContextByIdQuery(id, constraint, { timezone }));
+        return this.queryBus.ask(new FindBoundedContextByIdQuery(id, constraint, { timezone }));
     }
 }

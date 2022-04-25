@@ -70,21 +70,21 @@ export class UserMapper implements IMapper
     private makeAggregate(user: ObjectLiteral, cQMetadata?: CQMetadata): IamUser
     {
         return IamUser.register(
-            new UserId(user.id),
-            new UserAccountId(user.accountId),
-            new UserName(user.name),
-            new UserSurname(user.surname),
-            new UserAvatar(user.avatar),
-            new UserMobile(user.mobile),
-            new UserLangId(user.langId),
-            new UserUsername(user.username),
-            new UserPassword(user.password),
-            new UserRememberToken(user.rememberToken),
-            new UserData(user.data),
-            new UserCreatedAt(user.createdAt, {}, { addTimezone: cQMetadata?.timezone }),
-            new UserUpdatedAt(user.updatedAt, {}, { addTimezone: cQMetadata?.timezone }),
-            new UserDeletedAt(user.deletedAt, {}, { addTimezone: cQMetadata?.timezone }),
-            this.options.eagerLoading ? new AccountMapper({ eagerLoading: false }).mapModelToAggregate(user.account) : undefined,
+            new UserId(user.id, { undefinable: true }),
+            new UserAccountId(user.accountId, { undefinable: true }),
+            new UserName(user.name, { undefinable: true }),
+            new UserSurname(user.surname, { undefinable: true }),
+            new UserAvatar(user.avatar, { undefinable: true }),
+            new UserMobile(user.mobile, { undefinable: true }),
+            new UserLangId(user.langId, { undefinable: true }),
+            new UserUsername(user.username, { undefinable: true }),
+            new UserPassword(user.password, { undefinable: true }),
+            new UserRememberToken(user.rememberToken, { undefinable: true }),
+            new UserData(user.data, { undefinable: true }),
+            new UserCreatedAt(user.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new UserUpdatedAt(user.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new UserDeletedAt(user.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            this.options.eagerLoading ? new AccountMapper({ eagerLoading: true }).mapModelToAggregate(user.account) : undefined,
         );
     }
 
@@ -107,7 +107,7 @@ export class UserMapper implements IMapper
             user.createdAt.value,
             user.updatedAt.value,
             user.deletedAt.value,
-            this.options.eagerLoading ? new AccountMapper({ eagerLoading: false }).mapAggregateToResponse(user.account) : undefined,
+            this.options.eagerLoading ? new AccountMapper({ eagerLoading: true }).mapAggregateToResponse(user.account) : undefined,
         );
     }
 }

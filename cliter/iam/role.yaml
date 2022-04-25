@@ -25,9 +25,10 @@ aggregateProperties:
     relationshipSingularName: permission
     relationshipAggregate: IamPermission
     relationshipModulePath: iam/permission
-    intermediateModel: IamPermissionsRolesModel
-    intermediateModelModuleSection: iam/permission
-    intermediateModelFile: permissions-roles
+    relationshipAvoidConstraint: false
+    pivotAggregateName: IamPermissionsRoles
+    pivotPath: iam/permission
+    pivotFileName: permissions-roles
   - name: accounts
     type: relationship
     nullable: true
@@ -35,10 +36,10 @@ aggregateProperties:
     relationshipSingularName: account
     relationshipAggregate: IamAccount
     relationshipModulePath: iam/account
-    intermediateTable: IamRolesAccounts
-    intermediateModel: IamRolesAccountsModel
-    intermediateModelModuleSection: iam/role
-    intermediateModelFile: roles-accounts
+    relationshipAvoidConstraint: false
+    pivotAggregateName: IamRolesAccounts
+    pivotPath: iam/role
+    pivotFileName: roles-accounts
   - name: createdAt
     type: timestamp
     nullable: true

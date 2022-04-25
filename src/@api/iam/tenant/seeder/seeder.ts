@@ -11,7 +11,7 @@ export class Seeder
         NestFactory.createApplicationContext(SeederModule).then(appContext =>
         {
             const commandBus = appContext.get(ICommandBus);
-            commandBus.dispatch(new CreateTenantsCommand(tenants));
+            commandBus.dispatch(new CreateTenantsCommand(tenants, { timezone: process.env.TZ }));
         });
     }
 }

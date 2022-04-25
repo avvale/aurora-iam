@@ -2,6 +2,7 @@
 /* eslint-disable key-spacing */
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IBoundedContextRepository } from '../../../src/@apps/iam/bounded-context/domain/bounded-context.repository';
 import { MockBoundedContextSeeder } from '../../../src/@apps/iam/bounded-context/infrastructure/mock/mock-bounded-context.seeder';
@@ -27,17 +28,30 @@ describe('bounded-context', () =>
                 ...importForeignModules,
                 IamModule,
                 GraphQLConfigModule,
-                SequelizeModule.forRoot({
-                    dialect       : 'sqlite',
-                    storage       : ':memory:',
-                    logging       : false,
-                    autoLoadModels: true,
-                    models        : [],
+                SequelizeModule.forRootAsync({
+                    imports   : [ConfigModule],
+                    inject    : [ConfigService],
+                    useFactory: (configService: ConfigService) =>
+                    {
+                        return {
+                            dialect       : configService.get('TEST_DATABASE_DIALECT'),
+                            storage       : configService.get('TEST_DATABASE_STORAGE'),
+                            host          : configService.get('TEST_DATABASE_HOST'),
+                            port          : +configService.get('TEST_DATABASE_PORT'),
+                            username      : configService.get('TEST_DATABASE_USER'),
+                            password      : configService.get('TEST_DATABASE_PASSWORD'),
+                            database      : configService.get('TEST_DATABASE_SCHEMA'),
+                            synchronize   : configService.get('TEST_DATABASE_SYNCHRONIZE'),
+                            logging       : configService.get('TEST_DATABASE_LOGGIN') === 'true' ? console.log : false,
+                            autoLoadModels: true,
+                            models        : [],
+                        };
+                    },
                 }),
             ],
             providers: [
                 MockBoundedContextSeeder,
-            ]
+            ],
         })
             .compile();
 
@@ -51,17 +65,17 @@ describe('bounded-context', () =>
         await app.init();
     });
 
-    test('/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextId property can not to be null', () =>
+    test('/REST:POST iam/bounded-context/create - Got 400 Conflict, BoundedContextId property can not to be null', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/bounded-context')
+            .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
                 id: null,
-                name: 'Practical Soft Mouse',
-                root: '0bdypdr9xyiljr491jx20zrx30h6gf',
-                sort: 902947,
-                isActive: true,
+                name: 'Fantastic Metal Chips',
+                root: 'vtemzehjwh9kj3u2v3yrvus3fhn6x',
+                sort: 68434,
+                isActive: false,
             })
             .expect(400)
             .then(res =>
@@ -70,16 +84,16 @@ describe('bounded-context', () =>
             });
     });
 
-    test('/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextName property can not to be null', () =>
+    test('/REST:POST iam/bounded-context/create - Got 400 Conflict, BoundedContextName property can not to be null', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/bounded-context')
+            .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: '8ff1b05e-1f87-409d-b8c7-fb701c2355a8',
+                id: '46f775b1-6219-4dd4-acf9-f041d47b045d',
                 name: null,
-                root: 'y8jq5e2l8ig56uhgoiaribhfkav8dr',
-                sort: 157578,
+                root: '2yktle9fnimgwvj8hw2g8lw7s4dqo',
+                sort: 53584,
                 isActive: false,
             })
             .expect(400)
@@ -89,17 +103,17 @@ describe('bounded-context', () =>
             });
     });
 
-    test('/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextRoot property can not to be null', () =>
+    test('/REST:POST iam/bounded-context/create - Got 400 Conflict, BoundedContextRoot property can not to be null', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/bounded-context')
+            .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: 'a3dd4ab4-9e84-4352-9206-0cd044e184e8',
-                name: 'Handmade Granite Bacon',
+                id: 'ab595d26-e1ed-410c-815c-801d9ee6ab3e',
+                name: 'Handmade Cotton Table',
                 root: null,
-                sort: 502457,
-                isActive: true,
+                sort: 25396,
+                isActive: false,
             })
             .expect(400)
             .then(res =>
@@ -108,16 +122,16 @@ describe('bounded-context', () =>
             });
     });
 
-    test('/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextIsActive property can not to be null', () =>
+    test('/REST:POST iam/bounded-context/create - Got 400 Conflict, BoundedContextIsActive property can not to be null', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/bounded-context')
+            .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: '20f0da9c-8dde-4b48-a37c-34899eb884e2',
-                name: 'Gorgeous Metal Mouse',
-                root: 'zxc7xldyjnrzdyzi7b2hldgdnnyo2j',
-                sort: 710249,
+                id: 'cf2c15d8-cd1b-471d-b602-f8df9d1bab81',
+                name: 'Practical Plastic Salad',
+                root: 'x2j6sflg889n4uy2v18pztjcnztsq',
+                sort: 53200,
                 isActive: null,
             })
             .expect(400)
@@ -127,16 +141,16 @@ describe('bounded-context', () =>
             });
     });
 
-    test('/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextId property can not to be undefined', () =>
+    test('/REST:POST iam/bounded-context/create - Got 400 Conflict, BoundedContextId property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/bounded-context')
+            .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                name: 'Ergonomic Concrete Chicken',
-                root: 'mp7lpvfgkdnroq9hwirs7489m1p00c',
-                sort: 527267,
-                isActive: false,
+                name: 'Awesome Granite Gloves',
+                root: 'orabw6n44749wi2qruogdu32osno6',
+                sort: 19844,
+                isActive: true,
             })
             .expect(400)
             .then(res =>
@@ -145,15 +159,15 @@ describe('bounded-context', () =>
             });
     });
 
-    test('/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextName property can not to be undefined', () =>
+    test('/REST:POST iam/bounded-context/create - Got 400 Conflict, BoundedContextName property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/bounded-context')
+            .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: 'ed73bafe-c4c5-4cee-95b9-97098e5a5f0c',
-                root: '060ian4ri9x952v8yk1hbab5slzqq0',
-                sort: 107710,
+                id: '3de23917-cbaf-4349-a4ab-864ab03d818a',
+                root: '7n5ornnrl90qucu4m3ibma5konuni',
+                sort: 65762,
                 isActive: false,
             })
             .expect(400)
@@ -163,15 +177,15 @@ describe('bounded-context', () =>
             });
     });
 
-    test('/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextRoot property can not to be undefined', () =>
+    test('/REST:POST iam/bounded-context/create - Got 400 Conflict, BoundedContextRoot property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/bounded-context')
+            .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: '6505cfce-66d6-4696-b1d4-aebebfd79418',
-                name: 'Tasty Steel Sausages',
-                sort: 171059,
+                id: '31d16291-640d-4136-b867-fa3eeb111fc1',
+                name: 'Handcrafted Metal Pizza',
+                sort: 47625,
                 isActive: true,
             })
             .expect(400)
@@ -181,16 +195,16 @@ describe('bounded-context', () =>
             });
     });
 
-    test('/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextIsActive property can not to be undefined', () =>
+    test('/REST:POST iam/bounded-context/create - Got 400 Conflict, BoundedContextIsActive property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/bounded-context')
+            .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: '4e26f32a-7425-4ca8-a869-e51ca3733103',
-                name: 'Refined Concrete Towels',
-                root: 'lyvh9u7lk6f6r1cnyu921xedko9rwl',
-                sort: 882046,
+                id: '4a4b2ee2-1432-429f-b75e-bf6618a8b6c6',
+                name: 'Sleek Plastic Computer',
+                root: '353mumzbvca8vts8txrz9dygc8cz7',
+                sort: 92892,
             })
             .expect(400)
             .then(res =>
@@ -199,16 +213,16 @@ describe('bounded-context', () =>
             });
     });
 
-    test('/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextId is not allowed, must be a length of 36', () =>
+    test('/REST:POST iam/bounded-context/create - Got 400 Conflict, BoundedContextId is not allowed, must be a length of 36', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/bounded-context')
+            .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: '8zm58f4bkaq2v612jip8xodpaw66xn3ax6n1v',
-                name: 'Fantastic Rubber Gloves',
-                root: '83uc4eenzegiv5flmgior49uyegd96',
-                sort: 428811,
+                id: 'cc9ib6gw13xqij42g5p0xtdiik2ltcxzvsoog',
+                name: 'Fantastic Cotton Tuna',
+                root: '6gqfj29r05n3edgsmcb471618q4m0',
+                sort: 32791,
                 isActive: true,
             })
             .expect(400)
@@ -218,16 +232,16 @@ describe('bounded-context', () =>
             });
     });
 
-    test('/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextName is too large, has a maximum length of 255', () =>
+    test('/REST:POST iam/bounded-context/create - Got 400 Conflict, BoundedContextName is too large, has a maximum length of 255', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/bounded-context')
+            .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: '501f100e-e6c6-4dc0-b0a7-f40d8d801647',
-                name: 'pp6wsglum5f0rka2uqktymq5xwt9hpxxryw788fkpo0foojy9wn49wipxo0i0c982k58ypjlbbd36khuj66574ffmn8dzlmct405jbempad5ki3vtk720yopq4fllik2dbqpgozxei4dau93yp2mpho1gx4vdrceixek7nzlouyab3wva7hoyfs4dm80k550ctd0dst3jbw4cgbgtvbh3nmhf9cdghmjclmp1iyrkxxu8wme6rksc27hkxpcl1op',
-                root: '1q52yio8966u80oy062ego08lb32vy',
-                sort: 819197,
+                id: '420f206d-0fb9-4593-b408-64ddbcd81917',
+                name: 'fa6ayla5kougsdaswjxlyes7bao3obktg1gmmcnrhlguvu82j9bfr6xlo3umtzvj06cqvve6jj6t90tsvgai9g78tb2fzfktxglxwsv6r9oi3cqy1p9ci46uepq773f5j2085qwew7dapy7tkusy0jjndga94ix58ndxv7sri4u2r88hgwx6yh01wvh7loc0vr7jw9bx73spkl6i1jygubdjk94agxaducvg7q37f0qofxsl1yl2s0gzzwkcngnd',
+                root: 'jib468n6jv05vdfa9lcci7d50ciwq',
+                sort: 57863,
                 isActive: true,
             })
             .expect(400)
@@ -237,16 +251,16 @@ describe('bounded-context', () =>
             });
     });
 
-    test('/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextRoot is too large, has a maximum length of 30', () =>
+    test('/REST:POST iam/bounded-context/create - Got 400 Conflict, BoundedContextRoot is too large, has a maximum length of 30', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/bounded-context')
+            .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: '48cb9bee-e84b-47a3-9acd-54413f1552cd',
-                name: 'Practical Plastic Pants',
-                root: 't27vscfqp99emt39m1ynax4tdv7jwgx',
-                sort: 422240,
+                id: '44662e4e-1f94-4e40-b350-9f1bbb657621',
+                name: 'Incredible Fresh Chips',
+                root: '6lo2uwb40n3getevm9tglbk25fpwouw',
+                sort: 85050,
                 isActive: true,
             })
             .expect(400)
@@ -256,17 +270,17 @@ describe('bounded-context', () =>
             });
     });
 
-    test('/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextSort is too large, has a maximum length of 6', () =>
+    test('/REST:POST iam/bounded-context/create - Got 400 Conflict, BoundedContextSort is too large, has a maximum length of 6', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/bounded-context')
+            .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: 'd6648dac-b23a-42ec-b803-35872a5ff2a2',
-                name: 'Sleek Frozen Car',
-                root: 'v59yixwghahr6nfafqnfpkdr7lwlqv',
-                sort: 6733217,
-                isActive: true,
+                id: 'b3ff5a6c-a19a-40a8-b95a-e4042c7226e1',
+                name: 'Awesome Rubber Tuna',
+                root: 'agtjiyp7vm5unv1lh3hqst47p0mle',
+                sort: 7534832,
+                isActive: false,
             })
             .expect(400)
             .then(res =>
@@ -275,16 +289,16 @@ describe('bounded-context', () =>
             });
     });
 
-    test('/REST:POST iam/bounded-context - Got 400 Conflict, BoundedContextIsActive has to be a boolean value', () =>
+    test('/REST:POST iam/bounded-context/create - Got 400 Conflict, BoundedContextIsActive has to be a boolean value', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/bounded-context')
+            .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: 'c5a41a9e-698e-4e82-8928-923a770e7241',
-                name: 'Small Concrete Shoes',
-                root: 's7m1gl7m39as3q4wm0f3l02kbvtnd0',
-                sort: 290353,
+                id: '859c4156-73e9-462d-bccf-9d7253054dfe',
+                name: 'Sleek Steel Bike',
+                root: 'lroeyxtv8ey7veldq9l892ysh6da9',
+                sort: 80999,
                 isActive: 'true',
             })
             .expect(400)
@@ -294,10 +308,10 @@ describe('bounded-context', () =>
             });
     });
 
-    test('/REST:POST iam/bounded-context - Got 409 Conflict, item already exist in database', () =>
+    test('/REST:POST iam/bounded-context/create - Got 409 Conflict, item already exist in database', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/bounded-context')
+            .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send(seeder.collectionResponse[0])
             .expect(409);
@@ -312,8 +326,8 @@ describe('bounded-context', () =>
                 query:
                 {
                     offset: 0,
-                    limit: 5
-                }
+                    limit: 5,
+                },
             })
             .expect(200)
             .then(res =>
@@ -321,70 +335,70 @@ describe('bounded-context', () =>
                 expect(res.body).toEqual({
                     total: seeder.collectionResponse.length,
                     count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5)
+                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
                 });
             });
     });
 
-    test('/REST:GET iam/bounded-contexts', () =>
+    test('/REST:POST iam/bounded-contexts/get', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/bounded-contexts')
+            .post('/iam/bounded-contexts/get')
             .set('Accept', 'application/json')
             .expect(200)
             .then(res =>
             {
                 expect(res.body).toEqual(
-                    seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt'])))
+                    seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))),
                 );
             });
     });
 
-    test('/REST:GET iam/bounded-context - Got 404 Not Found', () =>
+    test('/REST:POST iam/bounded-context/find - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/bounded-context')
+            .post('/iam/bounded-context/find')
             .set('Accept', 'application/json')
             .send({
                 query:
                 {
                     where:
                     {
-                        id: '5e11ebee-9ea4-40fe-93c0-c92f1afdee80'
-                    }
-                }
+                        id: 'e1c68c78-5e20-4ee2-8d91-7f696e12a314',
+                    },
+                },
             })
             .expect(404);
     });
 
-    test('/REST:POST iam/bounded-context', () =>
+    test('/REST:POST iam/bounded-context/create', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/bounded-context')
+            .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Generic Steel Chicken',
-                root: 'q30qf9o0sma269g9uzj1whubo4kowr',
-                sort: 698815,
-                isActive: true,
+                name: 'Handcrafted Soft Ball',
+                root: 'd8a7zmn7jgs1jzj2dyawycbe1z55z',
+                sort: 77790,
+                isActive: false,
             })
             .expect(201);
     });
 
-    test('/REST:GET iam/bounded-context', () =>
+    test('/REST:POST iam/bounded-context/find', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/bounded-context')
+            .post('/iam/bounded-context/find')
             .set('Accept', 'application/json')
             .send({
                 query:
                 {
                     where:
                     {
-                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8'
-                    }
-                }
+                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -393,18 +407,18 @@ describe('bounded-context', () =>
             });
     });
 
-    test('/REST:GET iam/bounded-context/{id} - Got 404 Not Found', () =>
+    test('/REST:GET iam/bounded-context/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/bounded-context/84f58fff-99b2-44c4-bac6-abe6cb301a1d')
+            .get('/iam/bounded-context/find/8acf546a-3419-4e06-9321-161151e17575')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:GET iam/bounded-context/{id}', () =>
+    test('/REST:GET iam/bounded-context/find/{id}', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/bounded-context/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .get('/iam/bounded-context/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200)
             .then(res =>
@@ -413,31 +427,31 @@ describe('bounded-context', () =>
             });
     });
 
-    test('/REST:PUT iam/bounded-context - Got 404 Not Found', () =>
+    test('/REST:PUT iam/bounded-context/update - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .put('/iam/bounded-context')
+            .put('/iam/bounded-context/update')
             .set('Accept', 'application/json')
             .send({
-                id: 'd21e8001-a700-4f1e-9b26-495dc6b876ba',
-                name: 'Tasty Metal Cheese',
-                root: 'lh6vyduc6ixogswt35wciwrdh365rm',
-                sort: 978392,
-                isActive: false,
+                id: '147d5163-90c3-4273-bec7-203de37631bc',
+                name: 'Small Wooden Shoes',
+                root: 'qql6l5trmnijsbo8us6x5h15lpp6m',
+                sort: 36345,
+                isActive: true,
             })
             .expect(404);
     });
 
-    test('/REST:PUT iam/bounded-context', () =>
+    test('/REST:PUT iam/bounded-context/update', () =>
     {
         return request(app.getHttpServer())
-            .put('/iam/bounded-context')
+            .put('/iam/bounded-context/update')
             .set('Accept', 'application/json')
             .send({
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Tasty Metal Shirt',
-                root: 'kdlure2y60hcicvm7x7rjddx5mqh5p',
-                sort: 870131,
+                name: 'Gorgeous Metal Chicken',
+                root: 'dieebws659tqoouof9hm36klsqw25',
+                sort: 54922,
                 isActive: true,
             })
             .expect(200)
@@ -447,18 +461,18 @@ describe('bounded-context', () =>
             });
     });
 
-    test('/REST:DELETE iam/bounded-context/{id} - Got 404 Not Found', () =>
+    test('/REST:DELETE iam/bounded-context/delete/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/bounded-context/0d58a53f-2b51-42e8-aadc-c9cf2fcaa7b2')
+            .delete('/iam/bounded-context/delete/14ab22f1-e5fe-49c5-a4e2-40ad631898ce')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:DELETE iam/bounded-context/{id}', () =>
+    test('/REST:DELETE iam/bounded-context/delete/{id}', () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/bounded-context/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .delete('/iam/bounded-context/delete/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200);
     });
@@ -484,8 +498,8 @@ describe('bounded-context', () =>
                 `,
                 variables:
                 {
-                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
-                }
+                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt']),
+                },
             })
             .expect(200)
             .then(res =>
@@ -518,9 +532,9 @@ describe('bounded-context', () =>
                     query:
                     {
                         offset: 0,
-                        limit: 5
-                    }
-                }
+                        limit: 5,
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -528,7 +542,7 @@ describe('bounded-context', () =>
                 expect(res.body.data.iamPaginateBoundedContexts).toEqual({
                     total: seeder.collectionResponse.length,
                     count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5)
+                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
                 });
             });
     });
@@ -554,7 +568,7 @@ describe('bounded-context', () =>
                         }
                     }
                 `,
-                variables: {}
+                variables: {},
             })
             .expect(200)
             .then(res =>
@@ -588,12 +602,12 @@ describe('bounded-context', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Refined Cotton Bike',
-                        root: '7ka6q3ngu7s4ml718pli5dbd9tvf9j',
-                        sort: 710204,
-                        isActive: false,
-                    }
-                }
+                        name: 'Licensed Wooden Tuna',
+                        root: 'm601tl68a9lpkdvkrn02eewh1idc8',
+                        sort: 31682,
+                        isActive: true,
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -629,10 +643,10 @@ describe('bounded-context', () =>
                     {
                         where:
                         {
-                            id: 'f0c1d2b6-89d8-4ab7-9280-dee79e3ac87c'
-                        }
-                    }
-                }
+                            id: '94f1a1d6-2c04-4345-a755-e2c0b2431428',
+                        },
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -670,10 +684,10 @@ describe('bounded-context', () =>
                     {
                         where:
                         {
-                            id: '5b19d6ac-4081-573b-96b3-56964d5326a8'
-                        }
-                    }
-                }
+                            id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                        },
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -704,8 +718,8 @@ describe('bounded-context', () =>
                     }
                 `,
                 variables: {
-                    id: '63f897ec-d5e2-41ef-84ae-bd35bc60a061'
-                }
+                    id: '8ff83b7c-828f-44ba-baf2-6de428951628',
+                },
             })
             .expect(200)
             .then(res =>
@@ -738,8 +752,8 @@ describe('bounded-context', () =>
                     }
                 `,
                 variables: {
-                    id: '5b19d6ac-4081-573b-96b3-56964d5326a8'
-                }
+                    id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                },
             })
             .expect(200)
             .then(res =>
@@ -771,13 +785,13 @@ describe('bounded-context', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '831f8b2d-4c9a-4ceb-96a3-a8ce60138642',
-                        name: 'Incredible Granite Salad',
-                        root: 'kb8ufbnr2hzef152v5wycysu8rj2xm',
-                        sort: 892111,
+                        id: 'c9c9b01a-8f41-4df2-95f3-e0e8df7afc42',
+                        name: 'Generic Metal Chicken',
+                        root: 'pm3gaxuspvjtbcdukjiriir7j2l5y',
+                        sort: 30102,
                         isActive: false,
-                    }
-                }
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -812,12 +826,12 @@ describe('bounded-context', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Awesome Frozen Computer',
-                        root: 'qn2ks3u3ft4eywgay4oq6d9u9p7e83',
-                        sort: 247220,
-                        isActive: true,
-                    }
-                }
+                        name: 'Handcrafted Rubber Ball',
+                        root: 'n25hd60mvabad2htfmfyi06bzy2tk',
+                        sort: 33232,
+                        isActive: false,
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -848,8 +862,8 @@ describe('bounded-context', () =>
                     }
                 `,
                 variables: {
-                    id: '9c8c0527-fde9-44f0-ab36-d9ae9d84b815'
-                }
+                    id: '679bcca7-904f-49b9-8e45-e77ba04042d3',
+                },
             })
             .expect(200)
             .then(res =>
@@ -882,8 +896,8 @@ describe('bounded-context', () =>
                     }
                 `,
                 variables: {
-                    id: '5b19d6ac-4081-573b-96b3-56964d5326a8'
-                }
+                    id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                },
             })
             .expect(200)
             .then(res =>

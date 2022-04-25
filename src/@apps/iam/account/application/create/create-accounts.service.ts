@@ -30,18 +30,18 @@ export class CreateAccountsService
 
     public async main(
         accounts: {
-            id: AccountId,
-            type: AccountType,
-            email: AccountEmail,
-            isActive: AccountIsActive,
-            clientId: AccountClientId,
-            dApplicationCodes: AccountDApplicationCodes,
-            dPermissions: AccountDPermissions,
-            dTenants: AccountDTenants,
-            data: AccountData,
-            roleIds: AccountRoleIds,
-            tenantIds: AccountTenantIds,
-        } []
+            id: AccountId;
+            type: AccountType;
+            email: AccountEmail;
+            isActive: AccountIsActive;
+            clientId: AccountClientId;
+            dApplicationCodes: AccountDApplicationCodes;
+            dPermissions: AccountDPermissions;
+            dTenants: AccountDTenants;
+            data: AccountData;
+            roleIds: AccountRoleIds;
+            tenantIds: AccountTenantIds;
+        } [],
     ): Promise<void>
     {
         // create aggregate with factory pattern

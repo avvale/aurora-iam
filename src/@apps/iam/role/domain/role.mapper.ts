@@ -65,16 +65,16 @@ export class RoleMapper implements IMapper
     private makeAggregate(role: ObjectLiteral, cQMetadata?: CQMetadata): IamRole
     {
         return IamRole.register(
-            new RoleId(role.id),
-            new RoleName(role.name),
-            new RoleIsMaster(role.isMaster),
-            new RolePermissionIds(role.permissionIds),
-            new RoleAccountIds(role.accountIds),
-            new RoleCreatedAt(role.createdAt, {}, { addTimezone: cQMetadata?.timezone }),
-            new RoleUpdatedAt(role.updatedAt, {}, { addTimezone: cQMetadata?.timezone }),
-            new RoleDeletedAt(role.deletedAt, {}, { addTimezone: cQMetadata?.timezone }),
-            this.options.eagerLoading ? new PermissionMapper({ eagerLoading: false }).mapModelsToAggregates(role.permissions) : undefined,
-            this.options.eagerLoading ? new AccountMapper({ eagerLoading: false }).mapModelsToAggregates(role.accounts) : undefined,
+            new RoleId(role.id, { undefinable: true }),
+            new RoleName(role.name, { undefinable: true }),
+            new RoleIsMaster(role.isMaster, { undefinable: true }),
+            new RolePermissionIds(role.permissionIds, { undefinable: true }),
+            new RoleAccountIds(role.accountIds, { undefinable: true }),
+            new RoleCreatedAt(role.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new RoleUpdatedAt(role.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new RoleDeletedAt(role.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            this.options.eagerLoading ? new PermissionMapper({ eagerLoading: true }).mapModelsToAggregates(role.permissions) : undefined,
+            this.options.eagerLoading ? new AccountMapper({ eagerLoading: true }).mapModelsToAggregates(role.accounts) : undefined,
         );
     }
 
@@ -91,8 +91,8 @@ export class RoleMapper implements IMapper
             role.createdAt.value,
             role.updatedAt.value,
             role.deletedAt.value,
-            this.options.eagerLoading ? new PermissionMapper({ eagerLoading: false }).mapAggregatesToResponses(role.permissions) : undefined,
-            this.options.eagerLoading ? new AccountMapper({ eagerLoading: false }).mapAggregatesToResponses(role.accounts) : undefined,
+            this.options.eagerLoading ? new PermissionMapper({ eagerLoading: true }).mapAggregatesToResponses(role.permissions) : undefined,
+            this.options.eagerLoading ? new AccountMapper({ eagerLoading: true }).mapAggregatesToResponses(role.accounts) : undefined,
         );
     }
 }

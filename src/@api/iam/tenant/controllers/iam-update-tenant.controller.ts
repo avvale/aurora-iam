@@ -10,7 +10,7 @@ import { UpdateTenantCommand } from '../../../../@apps/iam/tenant/application/up
 import { FindTenantByIdQuery } from '../../../../@apps/iam/tenant/application/find/find-tenant-by-id.query';
 
 @ApiTags('[iam] tenant')
-@Controller('iam/tenant')
+@Controller('iam/tenant/update')
 export class IamUpdateTenantController
 {
     constructor(

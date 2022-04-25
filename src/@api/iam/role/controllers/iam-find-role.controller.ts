@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Get, Body } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { Constraint, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
 import { RoleDto } from './../dto/role.dto';
@@ -8,14 +8,15 @@ import { RoleDto } from './../dto/role.dto';
 import { FindRoleQuery } from '../../../../@apps/iam/role/application/find/find-role.query';
 
 @ApiTags('[iam] role')
-@Controller('iam/role')
+@Controller('iam/role/find')
 export class IamFindRoleController
 {
     constructor(
         private readonly queryBus: IQueryBus,
     ) {}
 
-    @Get()
+    @Post()
+    @HttpCode(200)
     @ApiOperation({ summary: 'Find role according to query' })
     @ApiOkResponse({ description: 'The record has been successfully created.', type: RoleDto })
     @ApiBody({ type: QueryStatement })

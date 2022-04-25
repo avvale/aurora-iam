@@ -37,10 +37,10 @@ aggregateProperties:
     relationshipSingularName: account
     relationshipAggregate: IamAccount
     relationshipModulePath: iam/account
-    intermediateTable: IamTenantsAccounts
-    intermediateModel: IamTenantsAccountsModel
-    intermediateModelModuleSection: iam/tenant
-    intermediateModelFile: tenants-accounts
+    relationshipAvoidConstraint: false
+    pivotAggregateName: IamTenantsAccounts
+    pivotPath: iam/tenant
+    pivotFileName: tenants-accounts
   - name: createdAt
     type: timestamp
     nullable: true

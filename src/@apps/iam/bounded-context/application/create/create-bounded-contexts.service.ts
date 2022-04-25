@@ -24,12 +24,12 @@ export class CreateBoundedContextsService
 
     public async main(
         boundedContexts: {
-            id: BoundedContextId,
-            name: BoundedContextName,
-            root: BoundedContextRoot,
-            sort: BoundedContextSort,
-            isActive: BoundedContextIsActive,
-        } []
+            id: BoundedContextId;
+            name: BoundedContextName;
+            root: BoundedContextRoot;
+            sort: BoundedContextSort;
+            isActive: BoundedContextIsActive;
+        } [],
     ): Promise<void>
     {
         // create aggregate with factory pattern

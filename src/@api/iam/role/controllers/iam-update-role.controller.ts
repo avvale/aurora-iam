@@ -10,7 +10,7 @@ import { UpdateRoleCommand } from '../../../../@apps/iam/role/application/update
 import { FindRoleByIdQuery } from '../../../../@apps/iam/role/application/find/find-role-by-id.query';
 
 @ApiTags('[iam] role')
-@Controller('iam/role')
+@Controller('iam/role/update')
 export class IamUpdateRoleController
 {
     constructor(

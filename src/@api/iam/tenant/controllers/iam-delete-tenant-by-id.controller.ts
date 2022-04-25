@@ -9,7 +9,7 @@ import { FindTenantByIdQuery } from '../../../../@apps/iam/tenant/application/fi
 import { DeleteTenantByIdCommand } from '../../../../@apps/iam/tenant/application/delete/delete-tenant-by-id.command';
 
 @ApiTags('[iam] tenant')
-@Controller('iam/tenant')
+@Controller('iam/tenant/delete')
 export class IamDeleteTenantByIdController
 {
     constructor(

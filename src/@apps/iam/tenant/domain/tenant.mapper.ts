@@ -66,17 +66,17 @@ export class TenantMapper implements IMapper
     private makeAggregate(tenant: ObjectLiteral, cQMetadata?: CQMetadata): IamTenant
     {
         return IamTenant.register(
-            new TenantId(tenant.id),
-            new TenantName(tenant.name),
-            new TenantCode(tenant.code),
-            new TenantLogo(tenant.logo),
-            new TenantIsActive(tenant.isActive),
-            new TenantData(tenant.data),
-            new TenantAccountIds(tenant.accountIds),
-            new TenantCreatedAt(tenant.createdAt, {}, { addTimezone: cQMetadata?.timezone }),
-            new TenantUpdatedAt(tenant.updatedAt, {}, { addTimezone: cQMetadata?.timezone }),
-            new TenantDeletedAt(tenant.deletedAt, {}, { addTimezone: cQMetadata?.timezone }),
-            this.options.eagerLoading ? new AccountMapper({ eagerLoading: false }).mapModelsToAggregates(tenant.accounts) : undefined,
+            new TenantId(tenant.id, { undefinable: true }),
+            new TenantName(tenant.name, { undefinable: true }),
+            new TenantCode(tenant.code, { undefinable: true }),
+            new TenantLogo(tenant.logo, { undefinable: true }),
+            new TenantIsActive(tenant.isActive, { undefinable: true }),
+            new TenantData(tenant.data, { undefinable: true }),
+            new TenantAccountIds(tenant.accountIds, { undefinable: true }),
+            new TenantCreatedAt(tenant.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new TenantUpdatedAt(tenant.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new TenantDeletedAt(tenant.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            this.options.eagerLoading ? new AccountMapper({ eagerLoading: true }).mapModelsToAggregates(tenant.accounts) : undefined,
         );
     }
 
@@ -95,7 +95,7 @@ export class TenantMapper implements IMapper
             tenant.createdAt.value,
             tenant.updatedAt.value,
             tenant.deletedAt.value,
-            this.options.eagerLoading ? new AccountMapper({ eagerLoading: false }).mapAggregatesToResponses(tenant.accounts) : undefined,
+            this.options.eagerLoading ? new AccountMapper({ eagerLoading: true }).mapAggregatesToResponses(tenant.accounts) : undefined,
         );
     }
 }

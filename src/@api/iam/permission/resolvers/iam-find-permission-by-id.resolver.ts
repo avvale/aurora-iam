@@ -20,6 +20,6 @@ export class IamFindPermissionByIdResolver
         @Timezone() timezone?: string,
     ): Promise<IamPermission>
     {
-        return await this.queryBus.ask(new FindPermissionByIdQuery(id, constraint, { timezone }));
+        return this.queryBus.ask(new FindPermissionByIdQuery(id, constraint, { timezone }));
     }
 }

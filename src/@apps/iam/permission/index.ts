@@ -40,7 +40,7 @@ export { SequelizePermissionRepository } from './infrastructure/sequelize/sequel
 // sagas
 export { PermissionSagas } from './application/sagas/permission.sagas';
 
-// custom
+// ---- customizations ----
 import { CreatePermissionsRolesCommandHandler } from './application/create/create-permissions-roles.command-handler';
 import { CreatePermissionsRolesService } from './application/create/create-permissions-roles.service';
 export { IPermissionRoleRepository } from './domain/permission-role.repository';

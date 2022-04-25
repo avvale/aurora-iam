@@ -9,7 +9,7 @@ import { CreateBoundedContextDto } from './../dto/create-bounded-context.dto';
 import { CreateBoundedContextsCommand } from '../../../../@apps/iam/bounded-context/application/create/create-bounded-contexts.command';
 
 @ApiTags('[iam] bounded-context')
-@Controller('iam/bounded-contexts')
+@Controller('iam/bounded-contexts/create')
 export class IamCreateBoundedContextsController
 {
     constructor(

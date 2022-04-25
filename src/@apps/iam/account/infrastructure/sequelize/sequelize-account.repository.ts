@@ -22,7 +22,7 @@ export class SequelizeAccountRepository extends SequelizeRepository<IamAccount, 
     }
 
     // hook called after create aggregate
-    async createdAggregateHook(aggregate: IamAccount, model: IamAccountModel)
+    async createdAggregateHook(aggregate: IamAccount, model: IamAccountModel): Promise<void>
     {
         // add many to many relation
         if (aggregate.roleIds.length > 0) await model.$add('roles', aggregate.roleIds.value);
@@ -30,7 +30,7 @@ export class SequelizeAccountRepository extends SequelizeRepository<IamAccount, 
     }
 
     // hook called after create aggregate
-    async updatedAggregateHook(aggregate: IamAccount, model: IamAccountModel)
+    async updatedAggregateHook(aggregate: IamAccount, model: IamAccountModel): Promise<void>
     {
         // set many to many relation
         if (aggregate.roleIds.isArray()) await model.$set('roles', aggregate.roleIds.value);

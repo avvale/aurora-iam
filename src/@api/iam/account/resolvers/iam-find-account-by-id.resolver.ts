@@ -20,6 +20,6 @@ export class IamFindAccountByIdResolver
         @Timezone() timezone?: string,
     ): Promise<IamAccount>
     {
-        return await this.queryBus.ask(new FindAccountByIdQuery(id, constraint, { timezone }));
+        return this.queryBus.ask(new FindAccountByIdQuery(id, constraint, { timezone }));
     }
 }
