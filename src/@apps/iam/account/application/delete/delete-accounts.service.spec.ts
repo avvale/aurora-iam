@@ -4,8 +4,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { DeleteAccountsService } from './delete-accounts.service';
-import { IAccountRepository } from './../../domain/account.repository';
-import { MockAccountRepository } from './../../infrastructure/mock/mock-account.repository';
+import { IAccountRepository } from '../../domain/account.repository';
+import { MockAccountRepository } from '../../infrastructure/mock/mock-account.repository';
 
 describe('DeleteAccountsService', () =>
 {
@@ -29,7 +29,7 @@ describe('DeleteAccountsService', () =>
                         delete: (queryStatement) => { /**/ },
                     }
                 },
-            ]
+            ],
         }).compile();
 
         service         = module.get(DeleteAccountsService);

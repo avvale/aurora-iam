@@ -1,34 +1,33 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Put, Body } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { Constraint, ICommandBus, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
-import { UpdateAccountDto } from './../dto/update-account.dto';
-import { AccountDto } from './../dto/account.dto';
+import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
+import { IamAccountDto, IamUpdateAccountDto } from '../dto';
 
 // @apps
-import { UpdateAccountCommand } from '../../../../@apps/iam/account/application/update/update-account.command';
-import { FindAccountByIdQuery } from '../../../../@apps/iam/account/application/find/find-account-by-id.query';
+import { IamUpdateAccountHandler } from '../handlers/iam-update-account.handler';
 
 @ApiTags('[iam] account')
 @Controller('iam/account/update')
 export class IamUpdateAccountController
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamUpdateAccountHandler,
     ) {}
 
     @Put()
     @ApiOperation({ summary: 'Update account' })
-    @ApiOkResponse({ description: 'The record has been successfully updated.', type: AccountDto})
+    @ApiOkResponse({ description: 'The record has been successfully updated.', type: IamAccountDto})
     async main(
-        @Body() payload: UpdateAccountDto,
+        @Body() payload: IamUpdateAccountDto,
         @Constraint() constraint?: QueryStatement,
         @Timezone() timezone?: string,
     )
     {
-        await this.commandBus.dispatch(new UpdateAccountCommand(payload, constraint, { timezone }));
-
-        return await this.queryBus.ask(new FindAccountByIdQuery(payload.id, constraint, { timezone }));
+        return await this.handler.main(
+            payload,
+            constraint,
+            timezone,
+        );
     }
 }

@@ -1,16 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamCreateAccountsResolver } from './iam-create-accounts.resolver';
+import { IamCreateAccountsHandler } from '../handlers/iam-create-accounts.handler';
+import { IamCreateAccountInput } from '../../../../graphql';
+
+// sources
 import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/account.seed';
-import { IamCreateAccountInput } from './../../../../graphql';
 
 describe('IamCreateAccountsResolver', () =>
 {
     let resolver: IamCreateAccountsResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamCreateAccountsHandler;
 
     beforeAll(async () =>
     {
@@ -18,23 +19,16 @@ describe('IamCreateAccountsResolver', () =>
             providers: [
                 IamCreateAccountsResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamCreateAccountsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<IamCreateAccountsResolver>(IamCreateAccountsResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<IamCreateAccountsResolver>(IamCreateAccountsResolver);
+        handler = module.get<IamCreateAccountsHandler>(IamCreateAccountsHandler);
     });
 
     test('IamCreateAccountsResolver should be defined', () =>
@@ -51,7 +45,7 @@ describe('IamCreateAccountsResolver', () =>
 
         test('should return an accounts created', async () =>
         {
-            expect(await resolver.main(<IamCreateAccountInput[]>accounts)).toBe(true);
+            expect(await resolver.main(<IamCreateAccountInput[]>accounts)).toBe(undefined);
         });
     });
 });

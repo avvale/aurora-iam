@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamGetAccountsResolver } from './iam-get-accounts.resolver';
+import { IamGetAccountsHandler } from '../handlers/iam-get-accounts.handler';
 
 // sources
 import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/account.seed';
 
 describe('IamGetAccountsResolver', () =>
 {
-    let resolver:   IamGetAccountsResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let resolver: IamGetAccountsResolver;
+    let handler: IamGetAccountsHandler;
 
     beforeAll(async () =>
     {
@@ -22,23 +21,16 @@ describe('IamGetAccountsResolver', () =>
             providers: [
                 IamGetAccountsResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamGetAccountsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<IamGetAccountsResolver>(IamGetAccountsResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<IamGetAccountsResolver>(IamGetAccountsResolver);
+        handler = module.get<IamGetAccountsHandler>(IamGetAccountsHandler);
     });
 
     test('IamGetAccountsResolver should be defined', () =>
@@ -55,7 +47,7 @@ describe('IamGetAccountsResolver', () =>
 
         test('should return a accounts', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accounts)));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(accounts)));
             expect(await resolver.main()).toBe(accounts);
         });
     });

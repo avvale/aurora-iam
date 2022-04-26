@@ -10,7 +10,7 @@ export class AccountType extends EnumValueObject
             name       : 'AccountType',
             nullable   : false,
             undefinable: false,
-            enumOptions:  ['USER','SERVICE'],
+            enumOptions: ['USER','SERVICE'],
         }, validationRules));
     }
 }

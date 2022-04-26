@@ -15,9 +15,10 @@ import {
     AccountCreatedAt,
     AccountUpdatedAt,
     AccountDeletedAt,
-} from './../../domain/value-objects';
-import { IamAccount } from './../../domain/account.aggregate';
-import { accounts } from './../seeds/account.seed';
+} from '../../domain/value-objects';
+import { IamAccount } from '../../domain/account.aggregate';
+import { accounts } from '../seeds/account.seed';
+import * as _ from 'lodash';
 
 @Injectable()
 export class MockAccountSeeder extends MockSeeder<IamAccount>
@@ -34,7 +35,7 @@ export class MockAccountSeeder extends MockSeeder<IamAccount>
     {
         this.collectionSource = [];
 
-        for (const account of accounts)
+        for (const account of _.orderBy(accounts, ['id']))
         {
             this.collectionSource.push(
                 IamAccount.register(
@@ -52,7 +53,7 @@ export class MockAccountSeeder extends MockSeeder<IamAccount>
                     new AccountCreatedAt({ currentTimestamp: true }),
                     new AccountUpdatedAt({ currentTimestamp: true }),
                     new AccountDeletedAt(null),
-                )
+                ),
             );
         }
     }

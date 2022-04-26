@@ -20,9 +20,9 @@ import {
     AccountCreatedAt,
     AccountUpdatedAt,
     AccountDeletedAt,
-} from './../../domain/value-objects';
-import { IAccountRepository } from './../../domain/account.repository';
-import { MockAccountRepository } from './../../infrastructure/mock/mock-account.repository';
+} from '../../domain/value-objects';
+import { IAccountRepository } from '../../domain/account.repository';
+import { MockAccountRepository } from '../../infrastructure/mock/mock-account.repository';
 
 describe('UpdateAccountService', () =>
 {

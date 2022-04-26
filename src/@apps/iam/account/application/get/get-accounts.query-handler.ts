@@ -1,6 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { AccountResponse } from './../../domain/account.response';
-import { AccountMapper } from './../../domain/account.mapper';
+import { AccountResponse } from '../../domain/account.response';
+import { AccountMapper } from '../../domain/account.mapper';
 import { GetAccountsQuery } from './get-accounts.query';
 import { GetAccountsService } from './get-accounts.service';
 

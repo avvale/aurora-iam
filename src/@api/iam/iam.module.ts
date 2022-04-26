@@ -6,7 +6,7 @@ import { IamBoundedContextControllers, IamBoundedContextResolvers } from './boun
 import { IamPermissionControllers, IamPermissionResolvers } from './permission';
 import { IamTenantControllers, IamTenantResolvers } from './tenant';
 import { IamRoleControllers, IamRoleResolvers } from './role';
-import { IamAccountControllers, IamAccountResolvers } from './account';
+import { IamAccountControllers, IamAccountResolvers, IamAccountApiHandlers } from './account';
 import { IamUserControllers, IamUserResolvers } from './user';
 
 @Module({
@@ -34,7 +34,8 @@ import { IamUserControllers, IamUserResolvers } from './user';
         ...IamTenantResolvers,
         ...IamRoleResolvers,
         ...IamAccountResolvers,
-        ...IamUserResolvers
+        ...IamUserResolvers,
+        ...IamAccountApiHandlers
     ],
 })
 export class IamModule {}

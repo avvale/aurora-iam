@@ -17,7 +17,7 @@ import {
     AccountCreatedAt,
     AccountUpdatedAt,
     AccountDeletedAt,
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(CreateAccountCommand)
 export class CreateAccountCommandHandler implements ICommandHandler<CreateAccountCommand>
@@ -43,6 +43,7 @@ export class CreateAccountCommandHandler implements ICommandHandler<CreateAccoun
                 roleIds: new AccountRoleIds(command.payload.roleIds),
                 tenantIds: new AccountTenantIds(command.payload.tenantIds),
             },
+            command.cQMetadata,
         );
     }
 }

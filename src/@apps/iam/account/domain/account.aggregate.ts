@@ -17,9 +17,9 @@ import {
     AccountUpdatedAt,
     AccountDeletedAt,
 } from './value-objects';
-import { CreatedAccountEvent } from './../application/events/created-account.event';
-import { UpdatedAccountEvent } from './../application/events/updated-account.event';
-import { DeletedAccountEvent } from './../application/events/deleted-account.event';
+import { CreatedAccountEvent } from '../application/events/created-account.event';
+import { UpdatedAccountEvent } from '../application/events/updated-account.event';
+import { DeletedAccountEvent } from '../application/events/deleted-account.event';
 import { IamUser } from '../../../../@apps/iam/user/domain/user.aggregate';
 import { IamRole } from '../../../../@apps/iam/role/domain/role.aggregate';
 import { IamTenant } from '../../../../@apps/iam/tenant/domain/tenant.aggregate';

@@ -19,10 +19,10 @@ describe('UpdateAccountCommandHandler', () =>
                 {
                     provide : UpdateAccountService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<UpdateAccountCommandHandler>(UpdateAccountCommandHandler);
@@ -54,8 +54,8 @@ describe('UpdateAccountCommandHandler', () =>
                         tenantIds: accounts[0].tenantIds,
                     },
                     {},
-                    { timezone: process.env.TZ }
-                )
+                    { timezone: process.env.TZ },
+                ),
             )).toBe(undefined);
         });
     });

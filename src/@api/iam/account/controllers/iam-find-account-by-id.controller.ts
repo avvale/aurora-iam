@@ -1,29 +1,33 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Get, Param } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { Constraint, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
-import { AccountDto } from './../dto/account.dto';
+import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
+import { IamAccountDto } from '../dto';
 
 // @apps
-import { FindAccountByIdQuery } from '../../../../@apps/iam/account/application/find/find-account-by-id.query';
+import { IamFindAccountByIdHandler } from '../handlers/iam-find-account-by-id.handler';
 
 @ApiTags('[iam] account')
 @Controller('iam/account/find')
 export class IamFindAccountByIdController
 {
     constructor(
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamFindAccountByIdHandler,
     ) {}
 
     @Get(':id')
     @ApiOperation({ summary: 'Find account by id' })
-    @ApiOkResponse({ description: 'The record has been successfully created.', type: AccountDto })
+    @ApiOkResponse({ description: 'The record has been successfully created.', type: IamAccountDto })
     async main(
         @Param('id') id: string,
         @Constraint() constraint?: QueryStatement,
         @Timezone() timezone?: string,
     )
     {
-        return this.queryBus.ask(new FindAccountByIdQuery(id, constraint, { timezone }));
+        return await this.handler.main(
+            id,
+            constraint,
+            timezone,
+        );
     }
 }

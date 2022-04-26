@@ -17,7 +17,7 @@ aggregateProperties:
       - USER
       - SERVICE
     nullable: false
-    example: USER
+    example: IamAccountType.USER
   - name: email
     type: varchar
     maxLength: 120

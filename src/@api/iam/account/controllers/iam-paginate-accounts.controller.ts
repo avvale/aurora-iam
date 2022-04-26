@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { Constraint, IQueryBus, Pagination, QueryStatement, Timezone } from 'aurora-ts-core';
-import { AccountDto } from './../dto/account.dto';
+import { Constraint, Pagination, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
-import { PaginateAccountsQuery } from '../../../../@apps/iam/account/application/paginate/paginate-accounts.query';
+import { IamPaginateAccountsHandler } from '../handlers/iam-paginate-accounts.handler';
 
 @ApiTags('[iam] account')
 @Controller('iam/accounts/paginate')
 export class IamPaginateAccountsController
 {
     constructor(
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamPaginateAccountsHandler,
     ) {}
 
     @Post()
@@ -27,6 +26,10 @@ export class IamPaginateAccountsController
         @Timezone() timezone?: string,
     )
     {
-        return await this.queryBus.ask(new PaginateAccountsQuery(queryStatement, constraint, { timezone }));
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

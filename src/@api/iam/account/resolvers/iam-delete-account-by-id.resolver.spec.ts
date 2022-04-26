@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamDeleteAccountByIdResolver } from './iam-delete-account-by-id.resolver';
+import { IamDeleteAccountByIdHandler } from '../handlers/iam-delete-account-by-id.handler';
 
 // sources
 import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/account.seed';
@@ -11,8 +11,7 @@ import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/acc
 describe('IamDeleteAccountByIdResolver', () =>
 {
     let resolver: IamDeleteAccountByIdResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamDeleteAccountByIdHandler;
 
     beforeAll(async () =>
     {
@@ -22,23 +21,16 @@ describe('IamDeleteAccountByIdResolver', () =>
             providers: [
                 IamDeleteAccountByIdResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamDeleteAccountByIdHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<IamDeleteAccountByIdResolver>(IamDeleteAccountByIdResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<IamDeleteAccountByIdResolver>(IamDeleteAccountByIdResolver);
+        handler = module.get<IamDeleteAccountByIdHandler>(IamDeleteAccountByIdHandler);
     });
 
     test('IamDeleteAccountByIdResolver should be defined', () =>
@@ -55,7 +47,7 @@ describe('IamDeleteAccountByIdResolver', () =>
 
         test('should return an account deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
             expect(await resolver.main(accounts[0].id)).toBe(accounts[0]);
         });
     });

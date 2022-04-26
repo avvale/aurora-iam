@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamCreateAccountResolver } from './iam-create-account.resolver';
-import { IamCreateAccountInput } from './../../../../graphql';
+import { IamCreateAccountHandler } from '../handlers/iam-create-account.handler';
+import { IamCreateAccountInput } from '../../../../graphql';
 
 // sources
 import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/account.seed';
@@ -12,8 +12,7 @@ import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/acc
 describe('IamCreateAccountResolver', () =>
 {
     let resolver: IamCreateAccountResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamCreateAccountHandler;
 
     beforeAll(async () =>
     {
@@ -23,23 +22,16 @@ describe('IamCreateAccountResolver', () =>
             providers: [
                 IamCreateAccountResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamCreateAccountHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<IamCreateAccountResolver>(IamCreateAccountResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<IamCreateAccountResolver>(IamCreateAccountResolver);
+        handler = module.get<IamCreateAccountHandler>(IamCreateAccountHandler);
     });
 
     test('IamCreateAccountResolver should be defined', () =>
@@ -56,7 +48,7 @@ describe('IamCreateAccountResolver', () =>
 
         test('should return an account created', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
             expect(await resolver.main(<IamCreateAccountInput>accounts[0])).toBe(accounts[0]);
         });
     });

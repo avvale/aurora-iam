@@ -20,9 +20,9 @@ import {
     AccountCreatedAt,
     AccountUpdatedAt,
     AccountDeletedAt,
-} from './../../domain/value-objects';
-import { IAccountRepository } from './../../domain/account.repository';
-import { MockAccountRepository } from './../../infrastructure/mock/mock-account.repository';
+} from '../../domain/value-objects';
+import { IAccountRepository } from '../../domain/account.repository';
+import { MockAccountRepository } from '../../infrastructure/mock/mock-account.repository';
 
 describe('CreateAccountService', () =>
 
@@ -44,9 +44,9 @@ describe('CreateAccountService', () =>
                     provide : IAccountRepository,
                     useValue: {
                         create: (item) => { /**/ },
-                    }
+                    },
                 },
-            ]
+            ],
         }).compile();
 
         service         = module.get(CreateAccountService);
@@ -76,7 +76,7 @@ describe('CreateAccountService', () =>
                     data: new AccountData(accounts[0].data),
                     roleIds: new AccountRoleIds(accounts[0].roleIds),
                     tenantIds: new AccountTenantIds(accounts[0].tenantIds),
-                }
+                },
             )).toBe(undefined);
         });
     });

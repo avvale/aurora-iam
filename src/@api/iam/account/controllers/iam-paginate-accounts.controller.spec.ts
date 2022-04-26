@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamPaginateAccountsController } from './iam-paginate-accounts.controller';
+import { IamPaginateAccountsHandler } from '../handlers/iam-paginate-accounts.handler';
 
 // sources
 import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/account.seed';
@@ -11,8 +11,7 @@ import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/acc
 describe('IamPaginateAccountsController', () =>
 {
     let controller: IamPaginateAccountsController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamPaginateAccountsHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,20 @@ describe('IamPaginateAccountsController', () =>
             imports: [
             ],
             controllers: [
-                IamPaginateAccountsController
+                IamPaginateAccountsController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamPaginateAccountsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
-                },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
             ]
         }).compile();
 
-        controller  = module.get<IamPaginateAccountsController>(IamPaginateAccountsController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamPaginateAccountsController>(IamPaginateAccountsController);
+        handler = module.get<IamPaginateAccountsHandler>(IamPaginateAccountsHandler);
     });
 
     describe('main', () =>
@@ -52,8 +44,16 @@ describe('IamPaginateAccountsController', () =>
 
         test('should return a accounts', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accounts)));
-            expect(await controller.main()).toBe(accounts);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
+                total: 5,
+                count: 5,
+                rows : accounts,
+            })));
+            expect(await controller.main()).toStrictEqual({
+                total: 5,
+                count: 5,
+                rows : accounts,
+            });
         });
     });
 });

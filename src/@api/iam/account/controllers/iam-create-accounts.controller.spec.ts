@@ -1,41 +1,35 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamCreateAccountsController } from './iam-create-accounts.controller';
+import { IamCreateAccountsHandler } from '../handlers/iam-create-accounts.handler';
+
+// sources
 import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/account.seed';
 
 describe('IamCreateAccountsController', () =>
 {
     let controller: IamCreateAccountsController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamCreateAccountsHandler;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
-                IamCreateAccountsController
+                IamCreateAccountsController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamCreateAccountsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        controller  = module.get<IamCreateAccountsController>(IamCreateAccountsController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamCreateAccountsController>(IamCreateAccountsController);
+        handler = module.get<IamCreateAccountsHandler>(IamCreateAccountsHandler);
     });
 
     describe('main', () =>

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamGetAccountsController } from './iam-get-accounts.controller';
+import { IamGetAccountsHandler } from '../handlers/iam-get-accounts.handler';
 
 // sources
 import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/account.seed';
@@ -11,8 +11,7 @@ import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/acc
 describe('IamGetAccountsController', () =>
 {
     let controller: IamGetAccountsController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamGetAccountsHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,20 @@ describe('IamGetAccountsController', () =>
             imports: [
             ],
             controllers: [
-                IamGetAccountsController
+                IamGetAccountsController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamGetAccountsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        controller  = module.get<IamGetAccountsController>(IamGetAccountsController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamGetAccountsController>(IamGetAccountsController);
+        handler = module.get<IamGetAccountsHandler>(IamGetAccountsHandler);
     });
 
     describe('main', () =>
@@ -52,7 +44,7 @@ describe('IamGetAccountsController', () =>
 
         test('should return a accounts', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accounts)));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(accounts)));
             expect(await controller.main()).toBe(accounts);
         });
     });

@@ -35,3 +35,4 @@ export { IamUserModel } from './@apps/iam/user';
 export { UserResponse } from './@apps/iam/user/domain/user.response';
 export { UserMapper } from './@apps/iam/user/domain/user.mapper';
 export { users } from './@apps/iam/user/infrastructure/seeds/user.seed';
+export { IamAccountDto } from './@api/iam/account/dto/iam-account.dto';

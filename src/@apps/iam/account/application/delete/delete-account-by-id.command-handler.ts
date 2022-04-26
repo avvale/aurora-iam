@@ -3,7 +3,7 @@ import { DeleteAccountByIdCommand } from './delete-account-by-id.command';
 import { DeleteAccountByIdService } from './delete-account-by-id.service';
 import {
     AccountId
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(DeleteAccountByIdCommand)
 export class DeleteAccountByIdCommandHandler implements ICommandHandler<DeleteAccountByIdCommand>

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamFindAccountByIdResolver } from './iam-find-account-by-id.resolver';
+import { IamFindAccountByIdHandler } from '../handlers/iam-find-account-by-id.handler';
 
 // sources
 import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/account.seed';
@@ -11,8 +11,7 @@ import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/acc
 describe('IamFindAccountByIdResolver', () =>
 {
     let resolver: IamFindAccountByIdResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamFindAccountByIdHandler;
 
     beforeAll(async () =>
     {
@@ -22,23 +21,16 @@ describe('IamFindAccountByIdResolver', () =>
             providers: [
                 IamFindAccountByIdResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamFindAccountByIdHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<IamFindAccountByIdResolver>(IamFindAccountByIdResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<IamFindAccountByIdResolver>(IamFindAccountByIdResolver);
+        handler = module.get<IamFindAccountByIdHandler>(IamFindAccountByIdHandler);
     });
 
     test('IamFindAccountByIdResolver should be defined', () =>
@@ -55,7 +47,7 @@ describe('IamFindAccountByIdResolver', () =>
 
         test('should return an account by id', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
             expect(await resolver.main(accounts[0].id)).toBe(accounts[0]);
         });
     });

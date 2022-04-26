@@ -4,8 +4,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { CreateAccountsService } from './create-accounts.service';
-import { IAccountRepository } from './../../domain/account.repository';
-import { MockAccountRepository } from './../../infrastructure/mock/mock-account.repository';
+import { IAccountRepository } from '../../domain/account.repository';
+import { MockAccountRepository } from '../../infrastructure/mock/mock-account.repository';
 
 describe('CreateAccountsService', () =>
 {

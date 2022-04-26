@@ -21,9 +21,9 @@ describe('CreateAccountsCommandHandler', () =>
                     provide : CreateAccountsService,
                     useValue: {
                         main: () => { /**/ },
-                    }
-                }
-            ]
+                    },
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<CreateAccountsCommandHandler>(CreateAccountsCommandHandler);
@@ -42,8 +42,8 @@ describe('CreateAccountsCommandHandler', () =>
             expect(await commandHandler.execute(
                 new CreateAccountsCommand(
                     accounts,
-                    { timezone: process.env.TZ }
-                )
+                    { timezone: process.env.TZ },
+                ),
             )).toBe(undefined);
         });
     });

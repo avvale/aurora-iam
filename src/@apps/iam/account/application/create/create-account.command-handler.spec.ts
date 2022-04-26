@@ -17,12 +17,12 @@ describe('CreateAccountCommandHandler', () =>
             providers: [
                 CreateAccountCommandHandler,
                 {
-                    provide: CreateAccountService,
+                    provide : CreateAccountService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<CreateAccountCommandHandler>(CreateAccountCommandHandler);
@@ -53,8 +53,8 @@ describe('CreateAccountCommandHandler', () =>
                         roleIds: accounts[0].roleIds,
                         tenantIds: accounts[0].tenantIds,
                     },
-                    { timezone: process.env.TZ }
-                )
+                    { timezone: process.env.TZ },
+                ),
             )).toBe(undefined);
         });
     });

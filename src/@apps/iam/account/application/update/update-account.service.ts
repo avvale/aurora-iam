@@ -17,9 +17,9 @@ import {
     AccountCreatedAt,
     AccountUpdatedAt,
     AccountDeletedAt,
-} from './../../domain/value-objects';
-import { IAccountRepository } from './../../domain/account.repository';
-import { IamAccount } from './../../domain/account.aggregate';
+} from '../../domain/value-objects';
+import { IAccountRepository } from '../../domain/account.repository';
+import { IamAccount } from '../../domain/account.aggregate';
 
 @Injectable()
 export class UpdateAccountService
@@ -29,7 +29,7 @@ export class UpdateAccountService
         private readonly repository: IAccountRepository,
     ) {}
 
-    public async main(
+    async main(
         payload: {
             id: AccountId,
             type?: AccountType,
@@ -67,11 +67,11 @@ export class UpdateAccountService
 
 
         // update
-        await this.repository.update(account, { constraint, cQMetadata });
+        await this.repository.update(account, { constraint, cQMetadata, updateOptions: cQMetadata?.repositoryOptions });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const accountRegister = this.publisher.mergeObjectContext(
-            account
+            account,
         );
 
         accountRegister.updated(account); // apply event to model events

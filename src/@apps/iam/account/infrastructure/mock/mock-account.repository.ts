@@ -17,8 +17,8 @@ import {
     AccountUpdatedAt,
     AccountDeletedAt,
 } from '../../../../../@apps/iam/account/domain/value-objects';
-import { IamAccount } from './../../domain/account.aggregate';
-import { accounts } from './../seeds/account.seed';
+import { IamAccount } from '../../domain/account.aggregate';
+import { accounts } from '../seeds/account.seed';
 
 @Injectable()
 export class MockAccountRepository extends MockRepository<IamAccount> implements IAccountRepository
@@ -34,7 +34,7 @@ export class MockAccountRepository extends MockRepository<IamAccount> implements
         this.createSourceMockData();
     }
 
-    public reset()
+    public reset(): void
     {
         this.createSourceMockData();
     }

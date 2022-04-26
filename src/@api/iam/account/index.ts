@@ -20,6 +20,17 @@ import { IamUpdateAccountResolver } from './resolvers/iam-update-account.resolve
 import { IamDeleteAccountByIdResolver } from './resolvers/iam-delete-account-by-id.resolver';
 import { IamDeleteAccountsResolver } from './resolvers/iam-delete-accounts.resolver';
 
+// handlers
+import { IamCreateAccountHandler } from './handlers/iam-create-account.handler';
+import { IamCreateAccountsHandler } from './handlers/iam-create-accounts.handler';
+import { IamPaginateAccountsHandler } from './handlers/iam-paginate-accounts.handler';
+import { IamGetAccountsHandler } from './handlers/iam-get-accounts.handler';
+import { IamFindAccountByIdHandler } from './handlers/iam-find-account-by-id.handler';
+import { IamFindAccountHandler } from './handlers/iam-find-account.handler';
+import { IamUpdateAccountHandler } from './handlers/iam-update-account.handler';
+import { IamDeleteAccountByIdHandler } from './handlers/iam-delete-account-by-id.handler';
+import { IamDeleteAccountsHandler } from './handlers/iam-delete-accounts.handler';
+
 export const IamAccountControllers = [
     IamCreateAccountController,
     IamCreateAccountsController,
@@ -42,4 +53,16 @@ export const IamAccountResolvers = [
     IamUpdateAccountResolver,
     IamDeleteAccountByIdResolver,
     IamDeleteAccountsResolver,
+];
+
+export const IamAccountApiHandlers = [
+    IamCreateAccountHandler,
+    IamCreateAccountsHandler,
+    IamPaginateAccountsHandler,
+    IamGetAccountsHandler,
+    IamFindAccountByIdHandler,
+    IamFindAccountHandler,
+    IamUpdateAccountHandler,
+    IamDeleteAccountByIdHandler,
+    IamDeleteAccountsHandler,
 ];

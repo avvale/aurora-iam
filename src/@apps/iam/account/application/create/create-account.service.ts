@@ -1,5 +1,6 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
+import { CQMetadata } from 'aurora-ts-core';
 import {
     AccountId,
     AccountType,
@@ -15,9 +16,9 @@ import {
     AccountCreatedAt,
     AccountUpdatedAt,
     AccountDeletedAt,
-} from './../../domain/value-objects';
-import { IAccountRepository } from './../../domain/account.repository';
-import { IamAccount } from './../../domain/account.aggregate';
+} from '../../domain/value-objects';
+import { IAccountRepository } from '../../domain/account.repository';
+import { IamAccount } from '../../domain/account.aggregate';
 
 @Injectable()
 export class CreateAccountService
@@ -27,7 +28,7 @@ export class CreateAccountService
         private readonly repository: IAccountRepository,
     ) {}
 
-    public async main(
+    async main(
         payload: {
             id: AccountId;
             type: AccountType;
@@ -41,6 +42,7 @@ export class CreateAccountService
             roleIds: AccountRoleIds;
             tenantIds: AccountTenantIds;
         },
+        cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // create aggregate with factory pattern
@@ -61,11 +63,11 @@ export class CreateAccountService
             null, // deletedAt
         );
 
-        await this.repository.create(account);
+        await this.repository.create(account, { createOptions: cQMetadata?.repositoryOptions });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const accountRegister = this.publisher.mergeObjectContext(
-            account
+            account,
         );
 
         accountRegister.created(account); // apply event to model events

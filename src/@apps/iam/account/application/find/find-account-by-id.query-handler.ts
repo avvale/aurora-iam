@@ -1,7 +1,7 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { AccountResponse } from './../../domain/account.response';
-import { AccountMapper } from './../../domain/account.mapper';
-import { AccountId } from './../../domain/value-objects';
+import { AccountResponse } from '../../domain/account.response';
+import { AccountMapper } from '../../domain/account.mapper';
+import { AccountId } from '../../domain/value-objects';
 import { FindAccountByIdQuery } from './find-account-by-id.query';
 import { FindAccountByIdService } from './find-account-by-id.service';
 

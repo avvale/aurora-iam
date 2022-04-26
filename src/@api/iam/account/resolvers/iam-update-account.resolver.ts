@@ -1,18 +1,15 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Constraint, ICommandBus, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
+import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
-import { FindAccountByIdQuery } from '../../../../@apps/iam/account/application/find/find-account-by-id.query';
-import { UpdateAccountCommand } from '../../../../@apps/iam/account/application/update/update-account.command';
-import { IamUpdateAccountInput } from './../../../../graphql';
+import { IamUpdateAccountHandler } from '../handlers/iam-update-account.handler';
+import { IamAccount, IamUpdateAccountInput } from '../../../../graphql';
 
 @Resolver()
 export class IamUpdateAccountResolver
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamUpdateAccountHandler,
     ) {}
 
     @Mutation('iamUpdateAccount')
@@ -20,10 +17,12 @@ export class IamUpdateAccountResolver
         @Args('payload') payload: IamUpdateAccountInput,
         @Constraint() constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    )
+    ): Promise<IamAccount>
     {
-        await this.commandBus.dispatch(new UpdateAccountCommand(payload, constraint, { timezone }));
-
-        return await this.queryBus.ask(new FindAccountByIdQuery(payload.id, constraint, { timezone }));
+        return await this.handler.main(
+            payload,
+            constraint,
+            timezone,
+        );
     }
 }

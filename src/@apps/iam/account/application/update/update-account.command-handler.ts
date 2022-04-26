@@ -17,7 +17,7 @@ import {
     AccountCreatedAt,
     AccountUpdatedAt,
     AccountDeletedAt,
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(UpdateAccountCommand)
 export class UpdateAccountCommandHandler implements ICommandHandler<UpdateAccountCommand>

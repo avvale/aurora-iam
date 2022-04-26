@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamUpdateAccountController } from './iam-update-account.controller';
+import { IamUpdateAccountHandler } from '../handlers/iam-update-account.handler';
 
 // sources
 import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/account.seed';
@@ -11,8 +11,7 @@ import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/acc
 describe('IamUpdateAccountController', () =>
 {
     let controller: IamUpdateAccountController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamUpdateAccountHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,20 @@ describe('IamUpdateAccountController', () =>
             imports: [
             ],
             controllers: [
-                IamUpdateAccountController
+                IamUpdateAccountController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamUpdateAccountHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        controller  = module.get<IamUpdateAccountController>(IamUpdateAccountController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamUpdateAccountController>(IamUpdateAccountController);
+        handler = module.get<IamUpdateAccountHandler>(IamUpdateAccountHandler);
     });
 
     describe('main', () =>
@@ -52,7 +44,7 @@ describe('IamUpdateAccountController', () =>
 
         test('should return a account created', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
             expect(await controller.main(accounts[0])).toBe(accounts[0]);
         });
     });

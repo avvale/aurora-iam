@@ -60,9 +60,10 @@ export abstract class IAccountRepository implements IRepository<IamAccount>
     abstract create(
         account: IamAccount,
         options?: {
+            createOptions?: ObjectLiteral;
             dataFactory?: (aggregate: IamAccount) => ObjectLiteral;
             // arguments to find object and check if object is duplicated
-            finderQueryStatement: (aggregate: IamAccount) => QueryStatement;
+            finderQueryStatement?: (aggregate: IamAccount) => QueryStatement;
         }
     ): Promise<void>;
 
@@ -79,6 +80,7 @@ export abstract class IAccountRepository implements IRepository<IamAccount>
     abstract update(
         account: IamAccount,
         options?: {
+            updateOptions?: ObjectLiteral;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: IamAccount) => ObjectLiteral;
@@ -91,6 +93,7 @@ export abstract class IAccountRepository implements IRepository<IamAccount>
     abstract deleteById(
         id: AccountId,
         options?: {
+            deleteOptions?: ObjectLiteral;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
         }
@@ -99,6 +102,7 @@ export abstract class IAccountRepository implements IRepository<IamAccount>
     // delete records
     abstract delete(
         options?: {
+            deleteOptions?: ObjectLiteral;
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;

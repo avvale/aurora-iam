@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamPaginateAccountsResolver } from './iam-paginate-accounts.resolver';
+import { IamPaginateAccountsHandler } from '../handlers/iam-paginate-accounts.handler';
 
 // sources
 import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/account.seed';
@@ -11,8 +11,7 @@ import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/acc
 describe('IamPaginateAccountsResolver', () =>
 {
     let resolver: IamPaginateAccountsResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamPaginateAccountsHandler;
 
     beforeAll(async () =>
     {
@@ -22,23 +21,16 @@ describe('IamPaginateAccountsResolver', () =>
             providers: [
                 IamPaginateAccountsResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamPaginateAccountsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
         resolver    = module.get<IamPaginateAccountsResolver>(IamPaginateAccountsResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamPaginateAccountsHandler>(IamPaginateAccountsHandler);
     });
 
     test('IamPaginateAccountsResolver should be defined', () =>
@@ -55,8 +47,16 @@ describe('IamPaginateAccountsResolver', () =>
 
         test('should return a accounts', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accounts)));
-            expect(await resolver.main()).toBe(accounts);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
+                total: 5,
+                count: 5,
+                rows : accounts,
+            })));
+            expect(await resolver.main()).toStrictEqual({
+                total: 5,
+                count: 5,
+                rows : accounts,
+            });
         });
     });
 });
