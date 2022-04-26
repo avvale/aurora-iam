@@ -463,7 +463,7 @@ describe('account', () =>
                 {
                     where:
                     {
-                        id: 'f410729b-e4f6-4eb8-955d-c655d4f48fb3',
+                        id: 'c1c93a7f-9faa-4f8c-b5c0-7a6cbd839a10',
                     },
                 },
             })
@@ -506,7 +506,7 @@ describe('account', () =>
     test('/REST:GET iam/account/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/account/find/e2946b9d-d4df-4eb5-acd5-f62bfaff7709')
+            .get('/iam/account/find/b0e9a1d7-a285-47a4-abaa-3c1a54213b7a')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -530,7 +530,7 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: '0f1c4ab9-5932-4b39-994b-e5a0fb0ec1f8' },
+                ...{ id: 'eac7a269-e085-4e0d-b839-3627a1fca90d' },
             })
             .expect(404);
     });
@@ -543,8 +543,8 @@ describe('account', () =>
             .send({
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                 type: IamAccountType.SERVICE,
-                email: 'b2re1mjtrn2x4907x5yqnt68px3mun6zmnuxigb4hk68on7k7jlc6920dbk80q50s29lnmprtm2vlzrhnw6740z5bgzmiwh4u18kobykkrx646058cksa3k',
-                isActive: true,
+                email: 'mkjqc19pzmhjtgbneawa1cncb9l1c6sjgvzazlxmkv22op7rx6ejueup9bigvkqcxadezevcbmg724apt4ip3321sv4qj3wtjqba1ppqmat3kjl9trrndu9',
+                isActive: false,
                 clientId: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                 dApplicationCodes: { "foo" : "bar" },
                 dPermissions: { "foo" : "bar" },
@@ -563,7 +563,7 @@ describe('account', () =>
     test('/REST:DELETE iam/account/delete/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/account/delete/1cbb105e-4bc3-497a-8b99-6b5970b3b4c8')
+            .delete('/iam/account/delete/07c6937c-6020-4162-b525-23801a05c2cb')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -714,8 +714,8 @@ describe('account', () =>
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                         type: IamAccountType.SERVICE,
-                        email: 'q5y6kmm9y4kdhbnuu46s1mwux13yjl9irxet7hky9ax67h6qdwclvqz32mikj7v7v2cp783wukazr91k2btleyjxghtqppa761t5bgfwtb2shz90jp76xqh',
-                        isActive: true,
+                        email: '930a8rsgyfv87d50sjblnoqvx243j6l86vx5q2rygj1cffa2udz46pjiviphm3gfrvwhnzl5lxnhedop06ts4m2aith568vpq84crxgo8nkbe5avpg9is2d',
+                        isActive: false,
                         clientId: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                         dApplicationCodes: { "foo" : "bar" },
                         dPermissions: { "foo" : "bar" },
@@ -762,7 +762,7 @@ describe('account', () =>
                     {
                         where:
                         {
-                            id: '12330468-8612-4328-8a63-7f1c39139cfa',
+                            id: '20f765f2-9bb3-4191-af70-6ac0393b3c98',
                         },
                     },
                 },
@@ -845,7 +845,7 @@ describe('account', () =>
                     }
                 `,
                 variables: {
-                    id: '74a3b746-5c5f-4458-be56-c1eb5b779e94',
+                    id: 'c959ff19-9559-4656-92fb-74fe339eaf59',
                 },
             })
             .expect(200)
@@ -921,7 +921,7 @@ describe('account', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        ...{ id: '685c20c3-db01-4283-8b30-359ccdb25a00' },
+                        ...{ id: '50a9970d-c94f-4b76-958d-200cf919f991' },
                     },
                 },
             })
@@ -963,7 +963,7 @@ describe('account', () =>
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                         type: IamAccountType.USER,
-                        email: 'fwj24akp31e2nu2zjr6f9ywj8pn0h0tgr6v3nnc1wlf83w0kz1jf4ne3ems8uzgawlkdfznh3mco89jcv67rxy1zftovx5slvgpmo0yyj9j18od3tgs3q4p',
+                        email: 'hqq4infl1xgfwx020083dupqcyet1h8zu0olf7n6oyskk6wq6qotabo2o9576b37flr936tw0fbmfwl38twzhidewh5ny6s5l9sgd4o4awueqv6qktof3n5',
                         isActive: false,
                         clientId: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                         dApplicationCodes: { "foo" : "bar" },
@@ -1008,7 +1008,7 @@ describe('account', () =>
                     }
                 `,
                 variables: {
-                    id: '6ca769be-78ee-49fb-80a0-bfc5e0cf88d8',
+                    id: 'e021ec7b-3ef1-4139-8a99-54ad33c3179a',
                 },
             })
             .expect(200)

@@ -74,4 +74,11 @@ export class IamUpdateAccountDto
     })
     tenantIds: string[];
 
+    @ApiProperty({
+        type       : IamUserDto,
+        description: 'user [input here api field description]',
+        example    : '',
+    })
+    user?: IamUserDto;
+
 }
