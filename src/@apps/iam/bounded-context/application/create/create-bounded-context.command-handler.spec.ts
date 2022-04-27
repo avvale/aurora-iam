@@ -17,12 +17,12 @@ describe('CreateBoundedContextCommandHandler', () =>
             providers: [
                 CreateBoundedContextCommandHandler,
                 {
-                    provide: CreateBoundedContextService,
+                    provide : CreateBoundedContextService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<CreateBoundedContextCommandHandler>(CreateBoundedContextCommandHandler);
@@ -47,8 +47,8 @@ describe('CreateBoundedContextCommandHandler', () =>
                         sort: boundedContexts[0].sort,
                         isActive: boundedContexts[0].isActive,
                     },
-                    { timezone: process.env.TZ }
-                )
+                    { timezone: process.env.TZ },
+                ),
             )).toBe(undefined);
         });
     });

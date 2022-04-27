@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamCreatePermissionResolver } from './iam-create-permission.resolver';
-import { IamCreatePermissionInput } from './../../../../graphql';
+import { IamCreatePermissionHandler } from '../handlers/iam-create-permission.handler';
+import { IamCreatePermissionInput } from '../../../../graphql';
 
 // sources
 import { permissions } from '../../../../@apps/iam/permission/infrastructure/seeds/permission.seed';
@@ -12,8 +12,7 @@ import { permissions } from '../../../../@apps/iam/permission/infrastructure/see
 describe('IamCreatePermissionResolver', () =>
 {
     let resolver: IamCreatePermissionResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamCreatePermissionHandler;
 
     beforeAll(async () =>
     {
@@ -23,23 +22,16 @@ describe('IamCreatePermissionResolver', () =>
             providers: [
                 IamCreatePermissionResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamCreatePermissionHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<IamCreatePermissionResolver>(IamCreatePermissionResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<IamCreatePermissionResolver>(IamCreatePermissionResolver);
+        handler = module.get<IamCreatePermissionHandler>(IamCreatePermissionHandler);
     });
 
     test('IamCreatePermissionResolver should be defined', () =>
@@ -56,7 +48,7 @@ describe('IamCreatePermissionResolver', () =>
 
         test('should return an permission created', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
             expect(await resolver.main(<IamCreatePermissionInput>permissions[0])).toBe(permissions[0]);
         });
     });

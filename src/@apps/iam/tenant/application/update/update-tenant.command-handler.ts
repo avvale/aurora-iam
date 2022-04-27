@@ -13,7 +13,7 @@ import {
     TenantCreatedAt,
     TenantUpdatedAt,
     TenantDeletedAt,
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(UpdateTenantCommand)
 export class UpdateTenantCommandHandler implements ICommandHandler<UpdateTenantCommand>

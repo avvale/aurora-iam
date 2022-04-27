@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { QueryStatement } from 'aurora-ts-core';
 import { CQMetadata } from 'aurora-ts-core';
-import { ITenantRepository } from './../../domain/tenant.repository';
-import { IamTenant } from './../../domain/tenant.aggregate';
+import { ITenantRepository } from '../../domain/tenant.repository';
+import { IamTenant } from '../../domain/tenant.aggregate';
 
 @Injectable()
 export class GetTenantsService
@@ -11,7 +11,7 @@ export class GetTenantsService
         private readonly repository: ITenantRepository,
     ) {}
 
-    public async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<IamTenant[]>
+    async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<IamTenant[]>
     {
         return await this.repository.get({ queryStatement, constraint, cQMetadata });
     }

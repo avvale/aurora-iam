@@ -1,5 +1,6 @@
 /* eslint-disable indent */
 import { ApiProperty } from '@nestjs/swagger';
+import { IamUpdateUserDto } from '../../../iam/user/dto/iam-update-user.dto';
 import { IamAccountType } from '../../../../graphql';
 
 export class IamUpdateAccountDto
@@ -16,69 +17,69 @@ export class IamUpdateAccountDto
         description: 'type [input here api field description]',
         example    : IamAccountType.USER,
     })
-    type: IamAccountType;
+    type?: IamAccountType;
 
     @ApiProperty({
         type       : String,
         description: 'email [input here api field description]',
         example    : 'john@gmial.com',
     })
-    email: string;
+    email?: string;
 
     @ApiProperty({
         type       : Boolean,
         description: 'isActive [input here api field description]',
         example    : true,
     })
-    isActive: boolean;
+    isActive?: boolean;
 
     @ApiProperty({
         type       : String,
         description: 'clientId [input here api field description]',
     })
-    clientId: string;
+    clientId?: string;
 
     @ApiProperty({
         type       : Object,
         description: 'dApplicationCodes [input here api field description]',
     })
-    dApplicationCodes: any;
+    dApplicationCodes?: any;
 
     @ApiProperty({
         type       : Object,
         description: 'dPermissions [input here api field description]',
     })
-    dPermissions: any;
+    dPermissions?: any;
 
     @ApiProperty({
         type       : Object,
         description: 'dTenants [input here api field description]',
     })
-    dTenants: any;
+    dTenants?: any;
 
     @ApiProperty({
         type       : Object,
         description: 'data [input here api field description]',
     })
-    data: any;
+    data?: any;
 
     @ApiProperty({
         type       : [String],
         description: 'roleIds [input here api field description]',
     })
-    roleIds: string[];
+    roleIds?: string[];
 
     @ApiProperty({
         type       : [String],
         description: 'tenantIds [input here api field description]',
     })
-    tenantIds: string[];
+    tenantIds?: string[];
 
     @ApiProperty({
-        type       : IamUserDto,
+        type       : IamUpdateUserDto,
         description: 'user [input here api field description]',
         example    : '',
     })
-    user?: IamUserDto;
+    user?: IamUpdateUserDto;
 
 }

@@ -1,18 +1,15 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Constraint, ICommandBus, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
+import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
-import { FindBoundedContextByIdQuery } from '../../../../@apps/iam/bounded-context/application/find/find-bounded-context-by-id.query';
-import { UpdateBoundedContextCommand } from '../../../../@apps/iam/bounded-context/application/update/update-bounded-context.command';
-import { IamUpdateBoundedContextInput } from './../../../../graphql';
+import { IamUpdateBoundedContextHandler } from '../handlers/iam-update-bounded-context.handler';
+import { IamBoundedContext, IamUpdateBoundedContextInput } from '../../../../graphql';
 
 @Resolver()
 export class IamUpdateBoundedContextResolver
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamUpdateBoundedContextHandler,
     ) {}
 
     @Mutation('iamUpdateBoundedContext')
@@ -20,10 +17,12 @@ export class IamUpdateBoundedContextResolver
         @Args('payload') payload: IamUpdateBoundedContextInput,
         @Constraint() constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    )
+    ): Promise<IamBoundedContext>
     {
-        await this.commandBus.dispatch(new UpdateBoundedContextCommand(payload, constraint, { timezone }));
-
-        return await this.queryBus.ask(new FindBoundedContextByIdQuery(payload.id, constraint, { timezone }));
+        return await this.handler.main(
+            payload,
+            constraint,
+            timezone,
+        );
     }
 }

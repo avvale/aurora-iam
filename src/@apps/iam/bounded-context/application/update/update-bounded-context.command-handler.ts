@@ -11,7 +11,7 @@ import {
     BoundedContextCreatedAt,
     BoundedContextUpdatedAt,
     BoundedContextDeletedAt,
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(UpdateBoundedContextCommand)
 export class UpdateBoundedContextCommandHandler implements ICommandHandler<UpdateBoundedContextCommand>

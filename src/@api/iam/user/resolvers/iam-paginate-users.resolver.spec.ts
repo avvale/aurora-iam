@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamPaginateUsersResolver } from './iam-paginate-users.resolver';
+import { IamPaginateUsersHandler } from '../handlers/iam-paginate-users.handler';
 
 // sources
 import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed';
@@ -11,8 +11,7 @@ import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed
 describe('IamPaginateUsersResolver', () =>
 {
     let resolver: IamPaginateUsersResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamPaginateUsersHandler;
 
     beforeAll(async () =>
     {
@@ -22,23 +21,16 @@ describe('IamPaginateUsersResolver', () =>
             providers: [
                 IamPaginateUsersResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamPaginateUsersHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
         resolver    = module.get<IamPaginateUsersResolver>(IamPaginateUsersResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamPaginateUsersHandler>(IamPaginateUsersHandler);
     });
 
     test('IamPaginateUsersResolver should be defined', () =>
@@ -55,8 +47,16 @@ describe('IamPaginateUsersResolver', () =>
 
         test('should return a users', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(users)));
-            expect(await resolver.main()).toBe(users);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
+                total: 5,
+                count: 5,
+                rows : users,
+            })));
+            expect(await resolver.main()).toStrictEqual({
+                total: 5,
+                count: 5,
+                rows : users,
+            });
         });
     });
 });

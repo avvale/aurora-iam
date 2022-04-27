@@ -17,9 +17,9 @@ import {
     UserCreatedAt,
     UserUpdatedAt,
     UserDeletedAt,
-} from './../../domain/value-objects';
-import { IUserRepository } from './../../domain/user.repository';
-import { IamUser } from './../../domain/user.aggregate';
+} from '../../domain/value-objects';
+import { IUserRepository } from '../../domain/user.repository';
+import { IamUser } from '../../domain/user.aggregate';
 
 @Injectable()
 export class UpdateUserService
@@ -29,7 +29,7 @@ export class UpdateUserService
         private readonly repository: IUserRepository,
     ) {}
 
-    public async main(
+    async main(
         payload: {
             id: UserId,
             accountId?: UserAccountId,
@@ -67,11 +67,11 @@ export class UpdateUserService
 
 
         // update
-        await this.repository.update(user, { constraint, cQMetadata });
+        await this.repository.update(user, { constraint, cQMetadata, updateOptions: cQMetadata?.repositoryOptions });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const userRegister = this.publisher.mergeObjectContext(
-            user
+            user,
         );
 
         userRegister.updated(user); // apply event to model events

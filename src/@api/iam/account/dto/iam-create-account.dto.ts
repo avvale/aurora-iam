@@ -1,5 +1,6 @@
 /* eslint-disable indent */
 import { ApiProperty } from '@nestjs/swagger';
+import { IamCreateUserDto } from '../../../iam/user/dto/iam-create-user.dto';
 import { IamAccountType } from '../../../../graphql';
 
 export class IamCreateAccountDto
@@ -75,10 +76,10 @@ export class IamCreateAccountDto
     tenantIds?: string[];
 
     @ApiProperty({
-        type       : IamUserDto,
+        type       : IamCreateUserDto,
         description: 'user [input here api field description]',
         example    : '',
     })
-    user?: IamUserDto;
+    user?: IamCreateUserDto;
 
 }

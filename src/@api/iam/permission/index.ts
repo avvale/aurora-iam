@@ -20,6 +20,17 @@ import { IamUpdatePermissionResolver } from './resolvers/iam-update-permission.r
 import { IamDeletePermissionByIdResolver } from './resolvers/iam-delete-permission-by-id.resolver';
 import { IamDeletePermissionsResolver } from './resolvers/iam-delete-permissions.resolver';
 
+// handlers
+import { IamCreatePermissionHandler } from './handlers/iam-create-permission.handler';
+import { IamCreatePermissionsHandler } from './handlers/iam-create-permissions.handler';
+import { IamPaginatePermissionsHandler } from './handlers/iam-paginate-permissions.handler';
+import { IamGetPermissionsHandler } from './handlers/iam-get-permissions.handler';
+import { IamFindPermissionByIdHandler } from './handlers/iam-find-permission-by-id.handler';
+import { IamFindPermissionHandler } from './handlers/iam-find-permission.handler';
+import { IamUpdatePermissionHandler } from './handlers/iam-update-permission.handler';
+import { IamDeletePermissionByIdHandler } from './handlers/iam-delete-permission-by-id.handler';
+import { IamDeletePermissionsHandler } from './handlers/iam-delete-permissions.handler';
+
 export const IamPermissionControllers = [
     IamCreatePermissionController,
     IamCreatePermissionsController,
@@ -42,4 +53,16 @@ export const IamPermissionResolvers = [
     IamUpdatePermissionResolver,
     IamDeletePermissionByIdResolver,
     IamDeletePermissionsResolver,
+];
+
+export const IamPermissionApiHandlers = [
+    IamCreatePermissionHandler,
+    IamCreatePermissionsHandler,
+    IamPaginatePermissionsHandler,
+    IamGetPermissionsHandler,
+    IamFindPermissionByIdHandler,
+    IamFindPermissionHandler,
+    IamUpdatePermissionHandler,
+    IamDeletePermissionByIdHandler,
+    IamDeletePermissionsHandler,
 ];

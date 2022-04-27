@@ -21,8 +21,8 @@ describe('DeletePermissionByIdCommandHandler', () =>
                     useValue: {
                         main: () => {},
                     }
-                }
-            ]
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<DeletePermissionByIdCommandHandler>(DeletePermissionByIdCommandHandler);

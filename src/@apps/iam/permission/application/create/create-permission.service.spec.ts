@@ -13,9 +13,9 @@ import {
     PermissionCreatedAt,
     PermissionUpdatedAt,
     PermissionDeletedAt,
-} from './../../domain/value-objects';
-import { IPermissionRepository } from './../../domain/permission.repository';
-import { MockPermissionRepository } from './../../infrastructure/mock/mock-permission.repository';
+} from '../../domain/value-objects';
+import { IPermissionRepository } from '../../domain/permission.repository';
+import { MockPermissionRepository } from '../../infrastructure/mock/mock-permission.repository';
 
 describe('CreatePermissionService', () =>
 
@@ -37,9 +37,9 @@ describe('CreatePermissionService', () =>
                     provide : IPermissionRepository,
                     useValue: {
                         create: (item) => { /**/ },
-                    }
+                    },
                 },
-            ]
+            ],
         }).compile();
 
         service         = module.get(CreatePermissionService);
@@ -62,7 +62,7 @@ describe('CreatePermissionService', () =>
                     name: new PermissionName(permissions[0].name),
                     boundedContextId: new PermissionBoundedContextId(permissions[0].boundedContextId),
                     roleIds: new PermissionRoleIds(permissions[0].roleIds),
-                }
+                },
             )).toBe(undefined);
         });
     });

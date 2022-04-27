@@ -4,8 +4,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { CreateUsersService } from './create-users.service';
-import { IUserRepository } from './../../domain/user.repository';
-import { MockUserRepository } from './../../infrastructure/mock/mock-user.repository';
+import { IUserRepository } from '../../domain/user.repository';
+import { MockUserRepository } from '../../infrastructure/mock/mock-user.repository';
 
 describe('CreateUsersService', () =>
 {

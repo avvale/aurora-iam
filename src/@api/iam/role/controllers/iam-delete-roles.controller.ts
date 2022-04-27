@@ -1,25 +1,23 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Delete, Body } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { Constraint, ICommandBus, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
-import { RoleDto } from './../dto/role.dto';
+import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
+import { IamRoleDto } from '../dto';
 
 // @apps
-import { GetRolesQuery } from '../../../../@apps/iam/role/application/get/get-roles.query';
-import { DeleteRolesCommand } from '../../../../@apps/iam/role/application/delete/delete-roles.command';
+import { IamDeleteRolesHandler } from '../handlers/iam-delete-roles.handler';
 
 @ApiTags('[iam] role')
 @Controller('iam/roles/delete')
 export class IamDeleteRolesController
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamDeleteRolesHandler,
     ) {}
 
     @Delete()
     @ApiOperation({ summary: 'Delete roles in batch according to query' })
-    @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [RoleDto]})
+    @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [IamRoleDto]})
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
     async main(
@@ -28,10 +26,10 @@ export class IamDeleteRolesController
         @Timezone() timezone?: string,
     )
     {
-        const roles = await this.queryBus.ask(new GetRolesQuery(queryStatement, constraint, { timezone }));
-
-        await this.commandBus.dispatch(new DeleteRolesCommand(queryStatement, constraint, { timezone }));
-
-        return roles;
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

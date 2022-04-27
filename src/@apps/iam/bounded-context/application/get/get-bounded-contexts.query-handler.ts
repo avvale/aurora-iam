@@ -1,6 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { BoundedContextResponse } from './../../domain/bounded-context.response';
-import { BoundedContextMapper } from './../../domain/bounded-context.mapper';
+import { BoundedContextResponse } from '../../domain/bounded-context.response';
+import { BoundedContextMapper } from '../../domain/bounded-context.mapper';
 import { GetBoundedContextsQuery } from './get-bounded-contexts.query';
 import { GetBoundedContextsService } from './get-bounded-contexts.service';
 

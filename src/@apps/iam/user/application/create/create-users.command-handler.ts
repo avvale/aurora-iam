@@ -17,7 +17,7 @@ import {
     UserCreatedAt,
     UserUpdatedAt,
     UserDeletedAt,
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(CreateUsersCommand)
 export class CreateUsersCommandHandler implements ICommandHandler<CreateUsersCommand>
@@ -46,7 +46,8 @@ export class CreateUsersCommandHandler implements ICommandHandler<CreateUsersCom
                         rememberToken: new UserRememberToken(user.rememberToken),
                         data: new UserData(user.data),
                     };
-                })
+                }),
+            command.cQMetadata,
         );
     }
 }

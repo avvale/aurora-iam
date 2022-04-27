@@ -239,7 +239,7 @@ export interface IamPermission {
     id: string;
     name: GraphQLString;
     boundedContextId: string;
-    boundedContext: IamBoundedContext;
+    boundedContext?: Nullable<IamBoundedContext>;
     roles?: Nullable<Nullable<IamRole>[]>;
     createdAt?: Nullable<GraphQLTimestamp>;
     updatedAt?: Nullable<GraphQLTimestamp>;
@@ -273,7 +273,7 @@ export interface IamTenant {
 export interface IamUser {
     id: string;
     accountId: string;
-    account: IamAccount;
+    account?: Nullable<IamAccount>;
     name: GraphQLString;
     surname?: Nullable<GraphQLString>;
     avatar?: Nullable<GraphQLString>;

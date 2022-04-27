@@ -1,16 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamCreateTenantsResolver } from './iam-create-tenants.resolver';
+import { IamCreateTenantsHandler } from '../handlers/iam-create-tenants.handler';
+import { IamCreateTenantInput } from '../../../../graphql';
+
+// sources
 import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenant.seed';
-import { IamCreateTenantInput } from './../../../../graphql';
 
 describe('IamCreateTenantsResolver', () =>
 {
     let resolver: IamCreateTenantsResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamCreateTenantsHandler;
 
     beforeAll(async () =>
     {
@@ -18,23 +19,16 @@ describe('IamCreateTenantsResolver', () =>
             providers: [
                 IamCreateTenantsResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamCreateTenantsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<IamCreateTenantsResolver>(IamCreateTenantsResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<IamCreateTenantsResolver>(IamCreateTenantsResolver);
+        handler = module.get<IamCreateTenantsHandler>(IamCreateTenantsHandler);
     });
 
     test('IamCreateTenantsResolver should be defined', () =>
@@ -51,7 +45,7 @@ describe('IamCreateTenantsResolver', () =>
 
         test('should return an tenants created', async () =>
         {
-            expect(await resolver.main(<IamCreateTenantInput[]>tenants)).toBe(true);
+            expect(await resolver.main(<IamCreateTenantInput[]>tenants)).toBe(undefined);
         });
     });
 });

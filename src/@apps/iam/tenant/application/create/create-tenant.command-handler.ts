@@ -13,7 +13,7 @@ import {
     TenantCreatedAt,
     TenantUpdatedAt,
     TenantDeletedAt,
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(CreateTenantCommand)
 export class CreateTenantCommandHandler implements ICommandHandler<CreateTenantCommand>
@@ -34,7 +34,8 @@ export class CreateTenantCommandHandler implements ICommandHandler<CreateTenantC
                 isActive: new TenantIsActive(command.payload.isActive),
                 data: new TenantData(command.payload.data),
                 accountIds: new TenantAccountIds(command.payload.accountIds),
-            }
+            },
+            command.cQMetadata,
         );
     }
 }

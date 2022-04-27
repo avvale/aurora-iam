@@ -3,7 +3,7 @@ type IamUser
 {
     id: ID!
     accountId: ID!
-    account: IamAccount!
+    account: IamAccount
     name: GraphQLString!
     surname: GraphQLString
     avatar: GraphQLString

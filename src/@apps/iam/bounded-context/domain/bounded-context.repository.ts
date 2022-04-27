@@ -60,9 +60,10 @@ export abstract class IBoundedContextRepository implements IRepository<IamBounde
     abstract create(
         boundedContext: IamBoundedContext,
         options?: {
+            createOptions?: ObjectLiteral;
             dataFactory?: (aggregate: IamBoundedContext) => ObjectLiteral;
             // arguments to find object and check if object is duplicated
-            finderQueryStatement: (aggregate: IamBoundedContext) => QueryStatement;
+            finderQueryStatement?: (aggregate: IamBoundedContext) => QueryStatement;
         }
     ): Promise<void>;
 
@@ -79,6 +80,7 @@ export abstract class IBoundedContextRepository implements IRepository<IamBounde
     abstract update(
         boundedContext: IamBoundedContext,
         options?: {
+            updateOptions?: ObjectLiteral;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: IamBoundedContext) => ObjectLiteral;
@@ -91,6 +93,7 @@ export abstract class IBoundedContextRepository implements IRepository<IamBounde
     abstract deleteById(
         id: BoundedContextId,
         options?: {
+            deleteOptions?: ObjectLiteral;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
         }
@@ -99,6 +102,7 @@ export abstract class IBoundedContextRepository implements IRepository<IamBounde
     // delete records
     abstract delete(
         options?: {
+            deleteOptions?: ObjectLiteral;
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;

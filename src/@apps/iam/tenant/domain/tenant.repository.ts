@@ -60,9 +60,10 @@ export abstract class ITenantRepository implements IRepository<IamTenant>
     abstract create(
         tenant: IamTenant,
         options?: {
+            createOptions?: ObjectLiteral;
             dataFactory?: (aggregate: IamTenant) => ObjectLiteral;
             // arguments to find object and check if object is duplicated
-            finderQueryStatement: (aggregate: IamTenant) => QueryStatement;
+            finderQueryStatement?: (aggregate: IamTenant) => QueryStatement;
         }
     ): Promise<void>;
 
@@ -79,6 +80,7 @@ export abstract class ITenantRepository implements IRepository<IamTenant>
     abstract update(
         tenant: IamTenant,
         options?: {
+            updateOptions?: ObjectLiteral;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: IamTenant) => ObjectLiteral;
@@ -91,6 +93,7 @@ export abstract class ITenantRepository implements IRepository<IamTenant>
     abstract deleteById(
         id: TenantId,
         options?: {
+            deleteOptions?: ObjectLiteral;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
         }
@@ -99,6 +102,7 @@ export abstract class ITenantRepository implements IRepository<IamTenant>
     // delete records
     abstract delete(
         options?: {
+            deleteOptions?: ObjectLiteral;
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;

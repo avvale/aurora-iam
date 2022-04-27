@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamPaginateUsersController } from './iam-paginate-users.controller';
+import { IamPaginateUsersHandler } from '../handlers/iam-paginate-users.handler';
 
 // sources
 import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed';
@@ -11,8 +11,7 @@ import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed
 describe('IamPaginateUsersController', () =>
 {
     let controller: IamPaginateUsersController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamPaginateUsersHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,20 @@ describe('IamPaginateUsersController', () =>
             imports: [
             ],
             controllers: [
-                IamPaginateUsersController
+                IamPaginateUsersController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamPaginateUsersHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
-                },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
             ]
         }).compile();
 
-        controller  = module.get<IamPaginateUsersController>(IamPaginateUsersController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamPaginateUsersController>(IamPaginateUsersController);
+        handler = module.get<IamPaginateUsersHandler>(IamPaginateUsersHandler);
     });
 
     describe('main', () =>
@@ -52,8 +44,16 @@ describe('IamPaginateUsersController', () =>
 
         test('should return a users', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(users)));
-            expect(await controller.main()).toBe(users);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
+                total: 5,
+                count: 5,
+                rows : users,
+            })));
+            expect(await controller.main()).toStrictEqual({
+                total: 5,
+                count: 5,
+                rows : users,
+            });
         });
     });
 });

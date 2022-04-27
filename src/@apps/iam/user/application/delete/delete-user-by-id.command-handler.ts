@@ -3,7 +3,7 @@ import { DeleteUserByIdCommand } from './delete-user-by-id.command';
 import { DeleteUserByIdService } from './delete-user-by-id.service';
 import {
     UserId
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(DeleteUserByIdCommand)
 export class DeleteUserByIdCommandHandler implements ICommandHandler<DeleteUserByIdCommand>

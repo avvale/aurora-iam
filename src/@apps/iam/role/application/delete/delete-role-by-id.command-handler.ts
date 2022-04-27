@@ -3,7 +3,7 @@ import { DeleteRoleByIdCommand } from './delete-role-by-id.command';
 import { DeleteRoleByIdService } from './delete-role-by-id.service';
 import {
     RoleId
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(DeleteRoleByIdCommand)
 export class DeleteRoleByIdCommandHandler implements ICommandHandler<DeleteRoleByIdCommand>

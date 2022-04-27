@@ -1,33 +1,31 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
-import { ICommandBus, IQueryBus, Timezone } from 'aurora-ts-core';
-import { CreateRoleDto } from './../dto/create-role.dto';
-import { RoleDto } from './../dto/role.dto';
+import { Timezone } from 'aurora-ts-core';
+import { IamRoleDto, IamCreateRoleDto } from '../dto';
 
 // @apps
-import { FindRoleByIdQuery } from '../../../../@apps/iam/role/application/find/find-role-by-id.query';
-import { CreateRoleCommand } from '../../../../@apps/iam/role/application/create/create-role.command';
+import { IamCreateRoleHandler } from '../handlers/iam-create-role.handler';
 
 @ApiTags('[iam] role')
 @Controller('iam/role/create')
 export class IamCreateRoleController
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamCreateRoleHandler,
     ) {}
 
     @Post()
     @ApiOperation({ summary: 'Create role' })
-    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: RoleDto })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: IamRoleDto })
     async main(
-        @Body() payload: CreateRoleDto,
+        @Body() payload: IamCreateRoleDto,
         @Timezone() timezone?: string,
     )
     {
-        await this.commandBus.dispatch(new CreateRoleCommand(payload, { timezone }));
-
-        return await this.queryBus.ask(new FindRoleByIdQuery(payload.id, {}, { timezone }));
+        return await this.handler.main(
+            payload,
+            timezone,
+        );
     }
 }

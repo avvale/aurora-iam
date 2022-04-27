@@ -5,11 +5,11 @@ export class UpdateRoleCommand
 {
     constructor(
         public readonly payload: {
-            id: string,
-            name?: string,
-            isMaster?: boolean,
-            permissionIds?: string[],
-            accountIds?: string[],
+            id: string;
+            name?: string;
+            isMaster?: boolean;
+            permissionIds?: string[];
+            accountIds?: string[];
         },
         public readonly constraint?: QueryStatement,
         public readonly cQMetadata?: CQMetadata,

@@ -1,6 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { UserResponse } from './../../domain/user.response';
-import { UserMapper } from './../../domain/user.mapper';
+import { UserResponse } from '../../domain/user.response';
+import { UserMapper } from '../../domain/user.mapper';
 import { GetUsersQuery } from './get-users.query';
 import { GetUsersService } from './get-users.service';
 

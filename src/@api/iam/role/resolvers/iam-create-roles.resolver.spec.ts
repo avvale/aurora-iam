@@ -1,16 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamCreateRolesResolver } from './iam-create-roles.resolver';
+import { IamCreateRolesHandler } from '../handlers/iam-create-roles.handler';
+import { IamCreateRoleInput } from '../../../../graphql';
+
+// sources
 import { roles } from '../../../../@apps/iam/role/infrastructure/seeds/role.seed';
-import { IamCreateRoleInput } from './../../../../graphql';
 
 describe('IamCreateRolesResolver', () =>
 {
     let resolver: IamCreateRolesResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamCreateRolesHandler;
 
     beforeAll(async () =>
     {
@@ -18,23 +19,16 @@ describe('IamCreateRolesResolver', () =>
             providers: [
                 IamCreateRolesResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamCreateRolesHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<IamCreateRolesResolver>(IamCreateRolesResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<IamCreateRolesResolver>(IamCreateRolesResolver);
+        handler = module.get<IamCreateRolesHandler>(IamCreateRolesHandler);
     });
 
     test('IamCreateRolesResolver should be defined', () =>
@@ -51,7 +45,7 @@ describe('IamCreateRolesResolver', () =>
 
         test('should return an roles created', async () =>
         {
-            expect(await resolver.main(<IamCreateRoleInput[]>roles)).toBe(true);
+            expect(await resolver.main(<IamCreateRoleInput[]>roles)).toBe(undefined);
         });
     });
 });

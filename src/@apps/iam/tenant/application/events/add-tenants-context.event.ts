@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { IamTenant } from './../../domain/tenant.aggregate';
+import { IamTenant } from '../../domain/tenant.aggregate';
 import { CreatedTenantEvent } from './created-tenant.event';
 import { CreatedTenantsEvent } from './created-tenants.event';
 import { DeletedTenantEvent } from './deleted-tenant.event';

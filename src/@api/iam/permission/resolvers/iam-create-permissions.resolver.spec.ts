@@ -1,16 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamCreatePermissionsResolver } from './iam-create-permissions.resolver';
+import { IamCreatePermissionsHandler } from '../handlers/iam-create-permissions.handler';
+import { IamCreatePermissionInput } from '../../../../graphql';
+
+// sources
 import { permissions } from '../../../../@apps/iam/permission/infrastructure/seeds/permission.seed';
-import { IamCreatePermissionInput } from './../../../../graphql';
 
 describe('IamCreatePermissionsResolver', () =>
 {
     let resolver: IamCreatePermissionsResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamCreatePermissionsHandler;
 
     beforeAll(async () =>
     {
@@ -18,23 +19,16 @@ describe('IamCreatePermissionsResolver', () =>
             providers: [
                 IamCreatePermissionsResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamCreatePermissionsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<IamCreatePermissionsResolver>(IamCreatePermissionsResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<IamCreatePermissionsResolver>(IamCreatePermissionsResolver);
+        handler = module.get<IamCreatePermissionsHandler>(IamCreatePermissionsHandler);
     });
 
     test('IamCreatePermissionsResolver should be defined', () =>
@@ -51,7 +45,7 @@ describe('IamCreatePermissionsResolver', () =>
 
         test('should return an permissions created', async () =>
         {
-            expect(await resolver.main(<IamCreatePermissionInput[]>permissions)).toBe(true);
+            expect(await resolver.main(<IamCreatePermissionInput[]>permissions)).toBe(undefined);
         });
     });
 });

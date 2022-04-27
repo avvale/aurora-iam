@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamPaginateBoundedContextsController } from './iam-paginate-bounded-contexts.controller';
+import { IamPaginateBoundedContextsHandler } from '../handlers/iam-paginate-bounded-contexts.handler';
 
 // sources
 import { boundedContexts } from '../../../../@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
@@ -11,8 +11,7 @@ import { boundedContexts } from '../../../../@apps/iam/bounded-context/infrastru
 describe('IamPaginateBoundedContextsController', () =>
 {
     let controller: IamPaginateBoundedContextsController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamPaginateBoundedContextsHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,20 @@ describe('IamPaginateBoundedContextsController', () =>
             imports: [
             ],
             controllers: [
-                IamPaginateBoundedContextsController
+                IamPaginateBoundedContextsController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamPaginateBoundedContextsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
-                },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
             ]
         }).compile();
 
-        controller  = module.get<IamPaginateBoundedContextsController>(IamPaginateBoundedContextsController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamPaginateBoundedContextsController>(IamPaginateBoundedContextsController);
+        handler = module.get<IamPaginateBoundedContextsHandler>(IamPaginateBoundedContextsHandler);
     });
 
     describe('main', () =>
@@ -52,8 +44,16 @@ describe('IamPaginateBoundedContextsController', () =>
 
         test('should return a boundedContexts', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(boundedContexts)));
-            expect(await controller.main()).toBe(boundedContexts);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
+                total: 5,
+                count: 5,
+                rows : boundedContexts,
+            })));
+            expect(await controller.main()).toStrictEqual({
+                total: 5,
+                count: 5,
+                rows : boundedContexts,
+            });
         });
     });
 });

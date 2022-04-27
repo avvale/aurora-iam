@@ -32,11 +32,17 @@ export class IamRoleModel extends Model<IamRoleModel>
     isMaster: boolean;
 
 
-    @BelongsToMany(() => IamPermissionModel, () => IamPermissionsRolesModel)
+    @BelongsToMany(() => IamPermissionModel, {
+        through: () => IamPermissionsRolesModel,
+        uniqueKey: 'Uq01IamPermissionsRoles',
+    })
     permissions: IamPermissionModel[];
 
 
-    @BelongsToMany(() => IamAccountModel, { through: () => IamRolesAccountsModel, uniqueKey: 'Uq01IamRolesAccounts' })
+    @BelongsToMany(() => IamAccountModel, {
+        through: () => IamRolesAccountsModel,
+        uniqueKey: 'Uq01IamRolesAccounts',
+    })
     accounts: IamAccountModel[];
 
     @Column({

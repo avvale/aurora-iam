@@ -6,10 +6,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IRoleRepository } from '../../../src/@apps/iam/role/domain/role.repository';
 import { MockRoleSeeder } from '../../../src/@apps/iam/role/infrastructure/mock/mock-role.seeder';
+import { roles } from '../../../src/@apps/iam/role/infrastructure/seeds/role.seed';
 import { GraphQLConfigModule } from '../../../src/@aurora/graphql/graphql-config.module';
 import { IamModule } from '../../../src/@api/iam/iam.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+
 
 
 // disable import foreign modules, can be micro-services
@@ -20,6 +22,9 @@ describe('role', () =>
     let app: INestApplication;
     let repository: IRoleRepository;
     let seeder: MockRoleSeeder;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let mockData: any;
 
     beforeAll(async () =>
     {
@@ -55,6 +60,7 @@ describe('role', () =>
         })
             .compile();
 
+        mockData        = roles;
         app             = module.createNestApplication();
         repository      = module.get<IRoleRepository>(IRoleRepository);
         seeder          = module.get<MockRoleSeeder>(MockRoleSeeder);
@@ -71,11 +77,8 @@ describe('role', () =>
             .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
-                id: null,
-                name: 'Rustic Wooden Hat',
-                isMaster: false,
-                permissionIds: [],
-                accountIds: [],
+                ...mockData[0],
+                ...{ id: null },
             })
             .expect(400)
             .then(res =>
@@ -90,11 +93,8 @@ describe('role', () =>
             .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
-                id: '4425c308-10c7-44b0-a27e-7708793306af',
-                name: null,
-                isMaster: true,
-                permissionIds: [],
-                accountIds: [],
+                ...mockData[0],
+                ...{ name: null },
             })
             .expect(400)
             .then(res =>
@@ -109,11 +109,8 @@ describe('role', () =>
             .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
-                id: 'b9665a84-4a3d-488b-b468-e73619d6ffd1',
-                name: 'Tasty Plastic Car',
-                isMaster: null,
-                permissionIds: [],
-                accountIds: [],
+                ...mockData[0],
+                ...{ isMaster: null },
             })
             .expect(400)
             .then(res =>
@@ -128,10 +125,8 @@ describe('role', () =>
             .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
-                name: 'Generic Steel Pants',
-                isMaster: true,
-                permissionIds: [],
-                accountIds: [],
+                ...mockData[0],
+                ...{ id: undefined },
             })
             .expect(400)
             .then(res =>
@@ -146,10 +141,8 @@ describe('role', () =>
             .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
-                id: '355236c1-4995-417b-9427-475e83e30630',
-                isMaster: true,
-                permissionIds: [],
-                accountIds: [],
+                ...mockData[0],
+                ...{ name: undefined },
             })
             .expect(400)
             .then(res =>
@@ -164,10 +157,8 @@ describe('role', () =>
             .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
-                id: '1dc4f09c-ecbb-480d-a538-9d43fe939bed',
-                name: 'Unbranded Cotton Shirt',
-                permissionIds: [],
-                accountIds: [],
+                ...mockData[0],
+                ...{ isMaster: undefined },
             })
             .expect(400)
             .then(res =>
@@ -182,11 +173,8 @@ describe('role', () =>
             .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
-                id: '0o7wix264nq3vduetf6988f0ttdvu8eg4wvxf',
-                name: 'Sleek Steel Pizza',
-                isMaster: true,
-                permissionIds: [],
-                accountIds: [],
+                ...mockData[0],
+                ...{ id: '*************************************' },
             })
             .expect(400)
             .then(res =>
@@ -201,11 +189,8 @@ describe('role', () =>
             .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
-                id: 'fe0eabe5-0a9e-4eb9-ad96-102208a9f967',
-                name: 'qqvkbsprpll02p23fyviifbpdnaxeims730btxc6434np4rijfiwwwsoxv77bmr6qididip95oqpamcak3mnjtvj7oshj16pj2k74hlgfi6gvpog30d83noskjxw101p1z9wekysbql3riaxwfrxd339a5mf7sfs7l303o0occo5btpin2nvp3c9znm0pssd7v4qan5ape9r35vyjxojkcy4t6co6sfxfp054q5h673ds3ph97nxtopzuhy3xytt',
-                isMaster: false,
-                permissionIds: [],
-                accountIds: [],
+                ...mockData[0],
+                ...{ name: '****************************************************************************************************************************************************************************************************************************************************************' },
             })
             .expect(400)
             .then(res =>
@@ -220,11 +205,8 @@ describe('role', () =>
             .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
-                id: '0f050082-4090-4354-b723-1f904632deda',
-                name: 'Sleek Plastic Shoes',
-                isMaster: 'true',
-                permissionIds: [],
-                accountIds: [],
+                ...mockData[0],
+                ...{ isMaster: 'true' },
             })
             .expect(400)
             .then(res =>
@@ -238,7 +220,7 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/iam/role/create')
             .set('Accept', 'application/json')
-            .send(seeder.collectionResponse[0])
+            .send(mockData[0])
             .expect(409);
     });
 
@@ -289,7 +271,7 @@ describe('role', () =>
                 {
                     where:
                     {
-                        id: '1ecd59a8-344c-4004-97c0-fb39b6ccd922',
+                        id: '23140270-b5ac-4f1c-be96-4eaba218c0e7',
                     },
                 },
             })
@@ -302,11 +284,8 @@ describe('role', () =>
             .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
-                id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Ergonomic Soft Fish',
-                isMaster: false,
-                permissionIds: [],
-                accountIds: [],
+                ...mockData[0],
+                ...{ id: '5b19d6ac-4081-573b-96b3-56964d5326a8' },
             })
             .expect(201);
     });
@@ -335,7 +314,7 @@ describe('role', () =>
     test('/REST:GET iam/role/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/role/find/8d25c416-eb5b-4a37-a410-7030f97f6d5e')
+            .get('/iam/role/find/6366645e-9b2f-4649-8d0c-0bd58168b6ff')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -358,11 +337,8 @@ describe('role', () =>
             .put('/iam/role/update')
             .set('Accept', 'application/json')
             .send({
-                id: 'cb6105e6-8a63-47bd-940f-b523c02c9c49',
-                name: 'Intelligent Metal Bacon',
-                isMaster: true,
-                permissionIds: [],
-                accountIds: [],
+                ...mockData[0],
+                ...{ id: '53a2520c-b37f-4263-93a7-d90ea1c76c7c' },
             })
             .expect(404);
     });
@@ -374,8 +350,8 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .send({
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Sleek Metal Ball',
-                isMaster: true,
+                name: 'Gorgeous Soft Chair',
+                isMaster: false,
                 permissionIds: [],
                 accountIds: [],
             })
@@ -389,7 +365,7 @@ describe('role', () =>
     test('/REST:DELETE iam/role/delete/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/role/delete/3cb4ad05-62ee-4dee-8eac-14d1f1733b6e')
+            .delete('/iam/role/delete/b3e66858-8f93-4891-a53e-8ece034a9212')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -421,7 +397,7 @@ describe('role', () =>
                 `,
                 variables:
                 {
-                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt']),
+                    payload: _.omit(mockData[0], ['createdAt','updatedAt','deletedAt']),
                 },
             })
             .expect(200)
@@ -521,8 +497,8 @@ describe('role', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Refined Soft Chicken',
-                        isMaster: false,
+                        name: 'Intelligent Steel Soap',
+                        isMaster: true,
                     },
                 },
             })
@@ -558,7 +534,7 @@ describe('role', () =>
                     {
                         where:
                         {
-                            id: '001e58f1-e4f2-4c74-827c-56f8d628f00f',
+                            id: '5956494c-b4d1-449e-8db9-70b79ffec7ef',
                         },
                     },
                 },
@@ -629,7 +605,7 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: 'f2ab9817-d737-4bee-99e7-61605f131644',
+                    id: 'f8464671-414c-450c-a520-fff1f15a14c3',
                 },
             })
             .expect(200)
@@ -692,11 +668,8 @@ describe('role', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'f96d028f-7e60-4eec-873c-c48afecdf1ff',
-                        name: 'Rustic Metal Chicken',
-                        isMaster: false,
-                        permissionIds: [],
-                        accountIds: [],
+                        ...mockData[0],
+                        ...{ id: 'b9fa6953-46ce-4f2c-88b2-73694c735142' },
                     },
                 },
             })
@@ -731,7 +704,7 @@ describe('role', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Small Wooden Chips',
+                        name: 'Tasty Metal Chicken',
                         isMaster: true,
                         permissionIds: [],
                         accountIds: [],
@@ -765,7 +738,7 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: '9ced1fdf-dc31-4326-9fdb-1c14351ed45f',
+                    id: '24b988a7-cba7-49de-a308-ee9ccdc1b5bf',
                 },
             })
             .expect(200)
@@ -809,6 +782,11 @@ describe('role', () =>
 
     afterAll(async () =>
     {
+        await repository.delete({
+            queryStatement: {
+                where: {},
+            },
+        });
         await app.close();
     });
 });

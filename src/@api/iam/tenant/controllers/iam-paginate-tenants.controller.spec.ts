@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamPaginateTenantsController } from './iam-paginate-tenants.controller';
+import { IamPaginateTenantsHandler } from '../handlers/iam-paginate-tenants.handler';
 
 // sources
 import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenant.seed';
@@ -11,8 +11,7 @@ import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenan
 describe('IamPaginateTenantsController', () =>
 {
     let controller: IamPaginateTenantsController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamPaginateTenantsHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,20 @@ describe('IamPaginateTenantsController', () =>
             imports: [
             ],
             controllers: [
-                IamPaginateTenantsController
+                IamPaginateTenantsController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamPaginateTenantsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
-                },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
             ]
         }).compile();
 
-        controller  = module.get<IamPaginateTenantsController>(IamPaginateTenantsController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamPaginateTenantsController>(IamPaginateTenantsController);
+        handler = module.get<IamPaginateTenantsHandler>(IamPaginateTenantsHandler);
     });
 
     describe('main', () =>
@@ -52,8 +44,16 @@ describe('IamPaginateTenantsController', () =>
 
         test('should return a tenants', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants)));
-            expect(await controller.main()).toBe(tenants);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
+                total: 5,
+                count: 5,
+                rows : tenants,
+            })));
+            expect(await controller.main()).toStrictEqual({
+                total: 5,
+                count: 5,
+                rows : tenants,
+            });
         });
     });
 });

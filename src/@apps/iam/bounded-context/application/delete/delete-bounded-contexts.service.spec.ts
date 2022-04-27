@@ -4,8 +4,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { DeleteBoundedContextsService } from './delete-bounded-contexts.service';
-import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
-import { MockBoundedContextRepository } from './../../infrastructure/mock/mock-bounded-context.repository';
+import { IBoundedContextRepository } from '../../domain/bounded-context.repository';
+import { MockBoundedContextRepository } from '../../infrastructure/mock/mock-bounded-context.repository';
 
 describe('DeleteBoundedContextsService', () =>
 {
@@ -29,7 +29,7 @@ describe('DeleteBoundedContextsService', () =>
                         delete: (queryStatement) => { /**/ },
                     }
                 },
-            ]
+            ],
         }).compile();
 
         service         = module.get(DeleteBoundedContextsService);

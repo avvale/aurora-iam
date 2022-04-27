@@ -1,30 +1,32 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
-import { ICommandBus, Timezone } from 'aurora-ts-core';
-import { UserDto } from './../dto/user.dto';
-import { CreateUserDto } from './../dto/create-user.dto';
+import { Timezone } from 'aurora-ts-core';
+import { IamUserDto, IamCreateUserDto } from '../dto';
 
 // @apps
-import { CreateUsersCommand } from '../../../../@apps/iam/user/application/create/create-users.command';
+import { IamCreateUsersHandler } from '../handlers/iam-create-users.handler';
 
 @ApiTags('[iam] user')
 @Controller('iam/users/create')
 export class IamCreateUsersController
 {
     constructor(
-        private readonly commandBus: ICommandBus,
+        private readonly handler: IamCreateUsersHandler,
     ) {}
 
     @Post()
     @ApiOperation({ summary: 'Create users in batch' })
-    @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [UserDto] })
-    @ApiBody({ type: [CreateUserDto] })
+    @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [IamUserDto]})
+    @ApiBody({ type: [IamCreateUserDto]})
     async main(
-        @Body() payload: CreateUserDto[],
+        @Body() payload: IamCreateUserDto[],
         @Timezone() timezone?: string,
     )
     {
-        await this.commandBus.dispatch(new CreateUsersCommand(payload, { timezone }));
+        return await this.handler.main(
+            payload,
+            timezone,
+        );
     }
 }

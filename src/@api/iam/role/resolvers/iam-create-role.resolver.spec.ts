@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamCreateRoleResolver } from './iam-create-role.resolver';
-import { IamCreateRoleInput } from './../../../../graphql';
+import { IamCreateRoleHandler } from '../handlers/iam-create-role.handler';
+import { IamCreateRoleInput } from '../../../../graphql';
 
 // sources
 import { roles } from '../../../../@apps/iam/role/infrastructure/seeds/role.seed';
@@ -12,8 +12,7 @@ import { roles } from '../../../../@apps/iam/role/infrastructure/seeds/role.seed
 describe('IamCreateRoleResolver', () =>
 {
     let resolver: IamCreateRoleResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamCreateRoleHandler;
 
     beforeAll(async () =>
     {
@@ -23,23 +22,16 @@ describe('IamCreateRoleResolver', () =>
             providers: [
                 IamCreateRoleResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamCreateRoleHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<IamCreateRoleResolver>(IamCreateRoleResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<IamCreateRoleResolver>(IamCreateRoleResolver);
+        handler = module.get<IamCreateRoleHandler>(IamCreateRoleHandler);
     });
 
     test('IamCreateRoleResolver should be defined', () =>
@@ -56,7 +48,7 @@ describe('IamCreateRoleResolver', () =>
 
         test('should return an role created', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
             expect(await resolver.main(<IamCreateRoleInput>roles[0])).toBe(roles[0]);
         });
     });

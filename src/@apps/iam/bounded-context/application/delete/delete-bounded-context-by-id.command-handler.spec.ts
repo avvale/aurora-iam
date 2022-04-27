@@ -21,8 +21,8 @@ describe('DeleteBoundedContextByIdCommandHandler', () =>
                     useValue: {
                         main: () => {},
                     }
-                }
-            ]
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<DeleteBoundedContextByIdCommandHandler>(DeleteBoundedContextByIdCommandHandler);

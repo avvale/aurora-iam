@@ -1,6 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { RoleResponse } from './../../domain/role.response';
-import { RoleMapper } from './../../domain/role.mapper';
+import { RoleResponse } from '../../domain/role.response';
+import { RoleMapper } from '../../domain/role.mapper';
 import { GetRolesQuery } from './get-roles.query';
 import { GetRolesService } from './get-roles.service';
 

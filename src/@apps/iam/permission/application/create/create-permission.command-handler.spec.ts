@@ -17,12 +17,12 @@ describe('CreatePermissionCommandHandler', () =>
             providers: [
                 CreatePermissionCommandHandler,
                 {
-                    provide: CreatePermissionService,
+                    provide : CreatePermissionService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<CreatePermissionCommandHandler>(CreatePermissionCommandHandler);
@@ -46,8 +46,8 @@ describe('CreatePermissionCommandHandler', () =>
                         boundedContextId: permissions[0].boundedContextId,
                         roleIds: permissions[0].roleIds,
                     },
-                    { timezone: process.env.TZ }
-                )
+                    { timezone: process.env.TZ },
+                ),
             )).toBe(undefined);
         });
     });

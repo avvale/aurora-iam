@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamUpdatePermissionController } from './iam-update-permission.controller';
+import { IamUpdatePermissionHandler } from '../handlers/iam-update-permission.handler';
 
 // sources
 import { permissions } from '../../../../@apps/iam/permission/infrastructure/seeds/permission.seed';
@@ -11,8 +11,7 @@ import { permissions } from '../../../../@apps/iam/permission/infrastructure/see
 describe('IamUpdatePermissionController', () =>
 {
     let controller: IamUpdatePermissionController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamUpdatePermissionHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,20 @@ describe('IamUpdatePermissionController', () =>
             imports: [
             ],
             controllers: [
-                IamUpdatePermissionController
+                IamUpdatePermissionController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamUpdatePermissionHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        controller  = module.get<IamUpdatePermissionController>(IamUpdatePermissionController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamUpdatePermissionController>(IamUpdatePermissionController);
+        handler = module.get<IamUpdatePermissionHandler>(IamUpdatePermissionHandler);
     });
 
     describe('main', () =>
@@ -52,7 +44,7 @@ describe('IamUpdatePermissionController', () =>
 
         test('should return a permission created', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
             expect(await controller.main(permissions[0])).toBe(permissions[0]);
         });
     });

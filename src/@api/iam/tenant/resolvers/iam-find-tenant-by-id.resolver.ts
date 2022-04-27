@@ -1,16 +1,15 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { Constraint, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
+import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
-import { FindTenantByIdQuery } from '../../../../@apps/iam/tenant/application/find/find-tenant-by-id.query';
-import { IamTenant } from './../../../../graphql';
+import { IamFindTenantByIdHandler } from '../handlers/iam-find-tenant-by-id.handler';
+import { IamTenant } from '../../../../graphql';
 
 @Resolver()
 export class IamFindTenantByIdResolver
 {
     constructor(
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamFindTenantByIdHandler,
     ) {}
 
     @Query('iamFindTenantById')
@@ -20,6 +19,10 @@ export class IamFindTenantByIdResolver
         @Timezone() timezone?: string,
     ): Promise<IamTenant>
     {
-        return this.queryBus.ask(new FindTenantByIdQuery(id, constraint, { timezone }));
+        return await this.handler.main(
+            id,
+            constraint,
+            timezone,
+        );
     }
 }

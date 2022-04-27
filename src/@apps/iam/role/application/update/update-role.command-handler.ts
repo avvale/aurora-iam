@@ -11,7 +11,7 @@ import {
     RoleCreatedAt,
     RoleUpdatedAt,
     RoleDeletedAt,
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(UpdateRoleCommand)
 export class UpdateRoleCommandHandler implements ICommandHandler<UpdateRoleCommand>

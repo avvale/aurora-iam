@@ -11,7 +11,7 @@ import {
     BoundedContextCreatedAt,
     BoundedContextUpdatedAt,
     BoundedContextDeletedAt,
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(CreateBoundedContextsCommand)
 export class CreateBoundedContextsCommandHandler implements ICommandHandler<CreateBoundedContextsCommand>
@@ -34,7 +34,8 @@ export class CreateBoundedContextsCommandHandler implements ICommandHandler<Crea
                         sort: new BoundedContextSort(boundedContext.sort),
                         isActive: new BoundedContextIsActive(boundedContext.isActive),
                     };
-                })
+                }),
+            command.cQMetadata,
         );
     }
 }

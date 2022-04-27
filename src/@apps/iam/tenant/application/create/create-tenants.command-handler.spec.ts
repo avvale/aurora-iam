@@ -21,9 +21,9 @@ describe('CreateTenantsCommandHandler', () =>
                     provide : CreateTenantsService,
                     useValue: {
                         main: () => { /**/ },
-                    }
-                }
-            ]
+                    },
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<CreateTenantsCommandHandler>(CreateTenantsCommandHandler);
@@ -42,8 +42,8 @@ describe('CreateTenantsCommandHandler', () =>
             expect(await commandHandler.execute(
                 new CreateTenantsCommand(
                     tenants,
-                    { timezone: process.env.TZ }
-                )
+                    { timezone: process.env.TZ },
+                ),
             )).toBe(undefined);
         });
     });

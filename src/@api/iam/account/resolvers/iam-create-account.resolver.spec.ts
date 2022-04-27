@@ -49,7 +49,15 @@ describe('IamCreateAccountResolver', () =>
         test('should return an account created', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
-            expect(await resolver.main(<IamCreateAccountInput>accounts[0])).toBe(accounts[0]);
+            expect(await resolver.main(<IamCreateAccountInput>accounts[0], {
+                req: {
+                    headers: {
+                        // mock jwt
+                        // eslint-disable-next-line max-len
+                        authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImppdCI6IjE1MjQifQ.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.oDME4U1e7-hco5Nyx2pUlO53jcm7x3zakYHWpnHUHzI',
+                    },
+                },
+            })).toBe(accounts[0]);
         });
     });
 });

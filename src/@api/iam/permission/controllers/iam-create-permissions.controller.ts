@@ -1,30 +1,32 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
-import { ICommandBus, Timezone } from 'aurora-ts-core';
-import { PermissionDto } from './../dto/permission.dto';
-import { CreatePermissionDto } from './../dto/create-permission.dto';
+import { Timezone } from 'aurora-ts-core';
+import { IamPermissionDto, IamCreatePermissionDto } from '../dto';
 
 // @apps
-import { CreatePermissionsCommand } from '../../../../@apps/iam/permission/application/create/create-permissions.command';
+import { IamCreatePermissionsHandler } from '../handlers/iam-create-permissions.handler';
 
 @ApiTags('[iam] permission')
 @Controller('iam/permissions/create')
 export class IamCreatePermissionsController
 {
     constructor(
-        private readonly commandBus: ICommandBus,
+        private readonly handler: IamCreatePermissionsHandler,
     ) {}
 
     @Post()
     @ApiOperation({ summary: 'Create permissions in batch' })
-    @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [PermissionDto] })
-    @ApiBody({ type: [CreatePermissionDto] })
+    @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [IamPermissionDto]})
+    @ApiBody({ type: [IamCreatePermissionDto]})
     async main(
-        @Body() payload: CreatePermissionDto[],
+        @Body() payload: IamCreatePermissionDto[],
         @Timezone() timezone?: string,
     )
     {
-        await this.commandBus.dispatch(new CreatePermissionsCommand(payload, { timezone }));
+        return await this.handler.main(
+            payload,
+            timezone,
+        );
     }
 }

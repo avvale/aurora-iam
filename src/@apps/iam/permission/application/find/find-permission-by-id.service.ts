@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { QueryStatement } from 'aurora-ts-core';
 import { CQMetadata } from 'aurora-ts-core';
-import { IPermissionRepository } from './../../domain/permission.repository';
-import { IamPermission } from './../../domain/permission.aggregate';
-import { PermissionId } from './../../domain/value-objects';
+import { IPermissionRepository } from '../../domain/permission.repository';
+import { IamPermission } from '../../domain/permission.aggregate';
+import { PermissionId } from '../../domain/value-objects';
 
 @Injectable()
 export class FindPermissionByIdService
@@ -12,7 +12,7 @@ export class FindPermissionByIdService
         private readonly repository: IPermissionRepository,
     ) {}
 
-    public async main(id: PermissionId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<IamPermission>
+    async main(id: PermissionId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<IamPermission>
     {
         return await this.repository.findById(id, { constraint, cQMetadata });
     }

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamDeletePermissionByIdResolver } from './iam-delete-permission-by-id.resolver';
+import { IamDeletePermissionByIdHandler } from '../handlers/iam-delete-permission-by-id.handler';
 
 // sources
 import { permissions } from '../../../../@apps/iam/permission/infrastructure/seeds/permission.seed';
@@ -11,8 +11,7 @@ import { permissions } from '../../../../@apps/iam/permission/infrastructure/see
 describe('IamDeletePermissionByIdResolver', () =>
 {
     let resolver: IamDeletePermissionByIdResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamDeletePermissionByIdHandler;
 
     beforeAll(async () =>
     {
@@ -22,23 +21,16 @@ describe('IamDeletePermissionByIdResolver', () =>
             providers: [
                 IamDeletePermissionByIdResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamDeletePermissionByIdHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<IamDeletePermissionByIdResolver>(IamDeletePermissionByIdResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<IamDeletePermissionByIdResolver>(IamDeletePermissionByIdResolver);
+        handler = module.get<IamDeletePermissionByIdHandler>(IamDeletePermissionByIdHandler);
     });
 
     test('IamDeletePermissionByIdResolver should be defined', () =>
@@ -55,7 +47,7 @@ describe('IamDeletePermissionByIdResolver', () =>
 
         test('should return an permission deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
             expect(await resolver.main(permissions[0].id)).toBe(permissions[0]);
         });
     });

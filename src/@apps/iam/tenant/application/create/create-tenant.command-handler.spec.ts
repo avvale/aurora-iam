@@ -17,12 +17,12 @@ describe('CreateTenantCommandHandler', () =>
             providers: [
                 CreateTenantCommandHandler,
                 {
-                    provide: CreateTenantService,
+                    provide : CreateTenantService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<CreateTenantCommandHandler>(CreateTenantCommandHandler);
@@ -49,8 +49,8 @@ describe('CreateTenantCommandHandler', () =>
                         data: tenants[0].data,
                         accountIds: tenants[0].accountIds,
                     },
-                    { timezone: process.env.TZ }
-                )
+                    { timezone: process.env.TZ },
+                ),
             )).toBe(undefined);
         });
     });

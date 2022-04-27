@@ -1,24 +1,24 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { Constraint, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
-import { TenantDto } from './../dto/tenant.dto';
+import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
+import { IamTenantDto } from '../dto';
 
 // @apps
-import { GetTenantsQuery } from '../../../../@apps/iam/tenant/application/get/get-tenants.query';
+import { IamGetTenantsHandler } from '../handlers/iam-get-tenants.handler';
 
 @ApiTags('[iam] tenant')
 @Controller('iam/tenants/get')
 export class IamGetTenantsController
 {
     constructor(
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamGetTenantsHandler,
     ) {}
 
     @Post()
     @HttpCode(200)
     @ApiOperation({ summary: 'Get tenants according to query' })
-    @ApiOkResponse({ description: 'The records has been found successfully.', type: [TenantDto] })
+    @ApiOkResponse({ description: 'The records has been found successfully.', type: [IamTenantDto]})
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
     async main(
@@ -27,6 +27,10 @@ export class IamGetTenantsController
         @Timezone() timezone?: string,
     )
     {
-        return await this.queryBus.ask(new GetTenantsQuery(queryStatement, constraint, { timezone }));
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

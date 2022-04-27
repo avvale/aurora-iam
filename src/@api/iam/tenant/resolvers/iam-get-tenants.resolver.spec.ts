@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamGetTenantsResolver } from './iam-get-tenants.resolver';
+import { IamGetTenantsHandler } from '../handlers/iam-get-tenants.handler';
 
 // sources
 import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenant.seed';
 
 describe('IamGetTenantsResolver', () =>
 {
-    let resolver:   IamGetTenantsResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let resolver: IamGetTenantsResolver;
+    let handler: IamGetTenantsHandler;
 
     beforeAll(async () =>
     {
@@ -22,23 +21,16 @@ describe('IamGetTenantsResolver', () =>
             providers: [
                 IamGetTenantsResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamGetTenantsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<IamGetTenantsResolver>(IamGetTenantsResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<IamGetTenantsResolver>(IamGetTenantsResolver);
+        handler = module.get<IamGetTenantsHandler>(IamGetTenantsHandler);
     });
 
     test('IamGetTenantsResolver should be defined', () =>
@@ -55,7 +47,7 @@ describe('IamGetTenantsResolver', () =>
 
         test('should return a tenants', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants)));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(tenants)));
             expect(await resolver.main()).toBe(tenants);
         });
     });

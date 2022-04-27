@@ -4,8 +4,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { DeleteRolesService } from './delete-roles.service';
-import { IRoleRepository } from './../../domain/role.repository';
-import { MockRoleRepository } from './../../infrastructure/mock/mock-role.repository';
+import { IRoleRepository } from '../../domain/role.repository';
+import { MockRoleRepository } from '../../infrastructure/mock/mock-role.repository';
 
 describe('DeleteRolesService', () =>
 {
@@ -29,7 +29,7 @@ describe('DeleteRolesService', () =>
                         delete: (queryStatement) => { /**/ },
                     }
                 },
-            ]
+            ],
         }).compile();
 
         service         = module.get(DeleteRolesService);

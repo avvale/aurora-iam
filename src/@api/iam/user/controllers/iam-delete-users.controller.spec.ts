@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamDeleteUsersController } from './iam-delete-users.controller';
+import { IamDeleteUsersHandler } from '../handlers/iam-delete-users.handler';
 
 // sources
 import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed';
@@ -11,8 +11,7 @@ import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed
 describe('IamDeleteUsersController', () =>
 {
     let controller: IamDeleteUsersController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamDeleteUsersHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,20 @@ describe('IamDeleteUsersController', () =>
             imports: [
             ],
             controllers: [
-                IamDeleteUsersController
+                IamDeleteUsersController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamDeleteUsersHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        controller  = module.get<IamDeleteUsersController>(IamDeleteUsersController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamDeleteUsersController>(IamDeleteUsersController);
+        handler = module.get<IamDeleteUsersHandler>(IamDeleteUsersHandler);
     });
 
     describe('main', () =>
@@ -52,7 +44,7 @@ describe('IamDeleteUsersController', () =>
 
         test('should return an users deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(users)));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(users)));
             expect(await controller.main()).toBe(users);
         });
     });

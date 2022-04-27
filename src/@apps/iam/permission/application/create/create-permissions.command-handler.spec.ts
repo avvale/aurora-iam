@@ -21,9 +21,9 @@ describe('CreatePermissionsCommandHandler', () =>
                     provide : CreatePermissionsService,
                     useValue: {
                         main: () => { /**/ },
-                    }
-                }
-            ]
+                    },
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<CreatePermissionsCommandHandler>(CreatePermissionsCommandHandler);
@@ -42,8 +42,8 @@ describe('CreatePermissionsCommandHandler', () =>
             expect(await commandHandler.execute(
                 new CreatePermissionsCommand(
                     permissions,
-                    { timezone: process.env.TZ }
-                )
+                    { timezone: process.env.TZ },
+                ),
             )).toBe(undefined);
         });
     });

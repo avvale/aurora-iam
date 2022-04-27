@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ICommand, ofType, Saga } from '@nestjs/cqrs';
 import { Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { CreatedTenantEvent } from './../events/created-tenant.event';
+import { CreatedTenantEvent } from '../events/created-tenant.event';
 
 @Injectable()
 export class TenantSagas

@@ -60,9 +60,10 @@ export abstract class IPermissionRepository implements IRepository<IamPermission
     abstract create(
         permission: IamPermission,
         options?: {
+            createOptions?: ObjectLiteral;
             dataFactory?: (aggregate: IamPermission) => ObjectLiteral;
             // arguments to find object and check if object is duplicated
-            finderQueryStatement: (aggregate: IamPermission) => QueryStatement;
+            finderQueryStatement?: (aggregate: IamPermission) => QueryStatement;
         }
     ): Promise<void>;
 
@@ -79,6 +80,7 @@ export abstract class IPermissionRepository implements IRepository<IamPermission
     abstract update(
         permission: IamPermission,
         options?: {
+            updateOptions?: ObjectLiteral;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: IamPermission) => ObjectLiteral;
@@ -91,6 +93,7 @@ export abstract class IPermissionRepository implements IRepository<IamPermission
     abstract deleteById(
         id: PermissionId,
         options?: {
+            deleteOptions?: ObjectLiteral;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
         }
@@ -99,6 +102,7 @@ export abstract class IPermissionRepository implements IRepository<IamPermission
     // delete records
     abstract delete(
         options?: {
+            deleteOptions?: ObjectLiteral;
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;

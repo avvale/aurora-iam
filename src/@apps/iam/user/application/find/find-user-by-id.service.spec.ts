@@ -4,9 +4,9 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { users } from '../../../../../@apps/iam/user/infrastructure/seeds/user.seed';
 import { FindUserByIdService } from './find-user-by-id.service';
-import { UserId } from './../../domain/value-objects';
-import { IUserRepository } from './../../domain/user.repository';
-import { MockUserRepository } from './../../infrastructure/mock/mock-user.repository';
+import { UserId } from '../../domain/value-objects';
+import { IUserRepository } from '../../domain/user.repository';
+import { MockUserRepository } from '../../infrastructure/mock/mock-user.repository';
 
 describe('FindUserByIdService', () =>
 {

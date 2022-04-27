@@ -6,10 +6,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IBoundedContextRepository } from '../../../src/@apps/iam/bounded-context/domain/bounded-context.repository';
 import { MockBoundedContextSeeder } from '../../../src/@apps/iam/bounded-context/infrastructure/mock/mock-bounded-context.seeder';
+import { boundedContexts } from '../../../src/@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
 import { GraphQLConfigModule } from '../../../src/@aurora/graphql/graphql-config.module';
 import { IamModule } from '../../../src/@api/iam/iam.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+
 
 
 // disable import foreign modules, can be micro-services
@@ -20,6 +22,9 @@ describe('bounded-context', () =>
     let app: INestApplication;
     let repository: IBoundedContextRepository;
     let seeder: MockBoundedContextSeeder;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let mockData: any;
 
     beforeAll(async () =>
     {
@@ -55,6 +60,7 @@ describe('bounded-context', () =>
         })
             .compile();
 
+        mockData        = boundedContexts;
         app             = module.createNestApplication();
         repository      = module.get<IBoundedContextRepository>(IBoundedContextRepository);
         seeder          = module.get<MockBoundedContextSeeder>(MockBoundedContextSeeder);
@@ -71,11 +77,8 @@ describe('bounded-context', () =>
             .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: null,
-                name: 'Fantastic Metal Chips',
-                root: 'vtemzehjwh9kj3u2v3yrvus3fhn6x',
-                sort: 68434,
-                isActive: false,
+                ...mockData[0],
+                ...{ id: null },
             })
             .expect(400)
             .then(res =>
@@ -90,11 +93,8 @@ describe('bounded-context', () =>
             .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: '46f775b1-6219-4dd4-acf9-f041d47b045d',
-                name: null,
-                root: '2yktle9fnimgwvj8hw2g8lw7s4dqo',
-                sort: 53584,
-                isActive: false,
+                ...mockData[0],
+                ...{ name: null },
             })
             .expect(400)
             .then(res =>
@@ -109,11 +109,8 @@ describe('bounded-context', () =>
             .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: 'ab595d26-e1ed-410c-815c-801d9ee6ab3e',
-                name: 'Handmade Cotton Table',
-                root: null,
-                sort: 25396,
-                isActive: false,
+                ...mockData[0],
+                ...{ root: null },
             })
             .expect(400)
             .then(res =>
@@ -128,11 +125,8 @@ describe('bounded-context', () =>
             .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: 'cf2c15d8-cd1b-471d-b602-f8df9d1bab81',
-                name: 'Practical Plastic Salad',
-                root: 'x2j6sflg889n4uy2v18pztjcnztsq',
-                sort: 53200,
-                isActive: null,
+                ...mockData[0],
+                ...{ isActive: null },
             })
             .expect(400)
             .then(res =>
@@ -147,10 +141,8 @@ describe('bounded-context', () =>
             .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                name: 'Awesome Granite Gloves',
-                root: 'orabw6n44749wi2qruogdu32osno6',
-                sort: 19844,
-                isActive: true,
+                ...mockData[0],
+                ...{ id: undefined },
             })
             .expect(400)
             .then(res =>
@@ -165,10 +157,8 @@ describe('bounded-context', () =>
             .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: '3de23917-cbaf-4349-a4ab-864ab03d818a',
-                root: '7n5ornnrl90qucu4m3ibma5konuni',
-                sort: 65762,
-                isActive: false,
+                ...mockData[0],
+                ...{ name: undefined },
             })
             .expect(400)
             .then(res =>
@@ -183,10 +173,8 @@ describe('bounded-context', () =>
             .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: '31d16291-640d-4136-b867-fa3eeb111fc1',
-                name: 'Handcrafted Metal Pizza',
-                sort: 47625,
-                isActive: true,
+                ...mockData[0],
+                ...{ root: undefined },
             })
             .expect(400)
             .then(res =>
@@ -201,10 +189,8 @@ describe('bounded-context', () =>
             .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: '4a4b2ee2-1432-429f-b75e-bf6618a8b6c6',
-                name: 'Sleek Plastic Computer',
-                root: '353mumzbvca8vts8txrz9dygc8cz7',
-                sort: 92892,
+                ...mockData[0],
+                ...{ isActive: undefined },
             })
             .expect(400)
             .then(res =>
@@ -219,11 +205,8 @@ describe('bounded-context', () =>
             .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: 'cc9ib6gw13xqij42g5p0xtdiik2ltcxzvsoog',
-                name: 'Fantastic Cotton Tuna',
-                root: '6gqfj29r05n3edgsmcb471618q4m0',
-                sort: 32791,
-                isActive: true,
+                ...mockData[0],
+                ...{ id: '*************************************' },
             })
             .expect(400)
             .then(res =>
@@ -238,11 +221,8 @@ describe('bounded-context', () =>
             .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: '420f206d-0fb9-4593-b408-64ddbcd81917',
-                name: 'fa6ayla5kougsdaswjxlyes7bao3obktg1gmmcnrhlguvu82j9bfr6xlo3umtzvj06cqvve6jj6t90tsvgai9g78tb2fzfktxglxwsv6r9oi3cqy1p9ci46uepq773f5j2085qwew7dapy7tkusy0jjndga94ix58ndxv7sri4u2r88hgwx6yh01wvh7loc0vr7jw9bx73spkl6i1jygubdjk94agxaducvg7q37f0qofxsl1yl2s0gzzwkcngnd',
-                root: 'jib468n6jv05vdfa9lcci7d50ciwq',
-                sort: 57863,
-                isActive: true,
+                ...mockData[0],
+                ...{ name: '****************************************************************************************************************************************************************************************************************************************************************' },
             })
             .expect(400)
             .then(res =>
@@ -257,11 +237,8 @@ describe('bounded-context', () =>
             .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: '44662e4e-1f94-4e40-b350-9f1bbb657621',
-                name: 'Incredible Fresh Chips',
-                root: '6lo2uwb40n3getevm9tglbk25fpwouw',
-                sort: 85050,
-                isActive: true,
+                ...mockData[0],
+                ...{ root: '*******************************' },
             })
             .expect(400)
             .then(res =>
@@ -276,11 +253,8 @@ describe('bounded-context', () =>
             .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: 'b3ff5a6c-a19a-40a8-b95a-e4042c7226e1',
-                name: 'Awesome Rubber Tuna',
-                root: 'agtjiyp7vm5unv1lh3hqst47p0mle',
-                sort: 7534832,
-                isActive: false,
+                ...mockData[0],
+                ...{ sort: 1111111 },
             })
             .expect(400)
             .then(res =>
@@ -295,11 +269,8 @@ describe('bounded-context', () =>
             .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: '859c4156-73e9-462d-bccf-9d7253054dfe',
-                name: 'Sleek Steel Bike',
-                root: 'lroeyxtv8ey7veldq9l892ysh6da9',
-                sort: 80999,
-                isActive: 'true',
+                ...mockData[0],
+                ...{ isActive: 'true' },
             })
             .expect(400)
             .then(res =>
@@ -313,7 +284,7 @@ describe('bounded-context', () =>
         return request(app.getHttpServer())
             .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
-            .send(seeder.collectionResponse[0])
+            .send(mockData[0])
             .expect(409);
     });
 
@@ -364,7 +335,7 @@ describe('bounded-context', () =>
                 {
                     where:
                     {
-                        id: 'e1c68c78-5e20-4ee2-8d91-7f696e12a314',
+                        id: '8004dfa4-dfd0-4143-97b2-2fdccae06b39',
                     },
                 },
             })
@@ -377,11 +348,8 @@ describe('bounded-context', () =>
             .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
-                id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Handcrafted Soft Ball',
-                root: 'd8a7zmn7jgs1jzj2dyawycbe1z55z',
-                sort: 77790,
-                isActive: false,
+                ...mockData[0],
+                ...{ id: '5b19d6ac-4081-573b-96b3-56964d5326a8' },
             })
             .expect(201);
     });
@@ -410,7 +378,7 @@ describe('bounded-context', () =>
     test('/REST:GET iam/bounded-context/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/bounded-context/find/8acf546a-3419-4e06-9321-161151e17575')
+            .get('/iam/bounded-context/find/512ad7c1-477e-4db8-b880-de3838959211')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -433,11 +401,8 @@ describe('bounded-context', () =>
             .put('/iam/bounded-context/update')
             .set('Accept', 'application/json')
             .send({
-                id: '147d5163-90c3-4273-bec7-203de37631bc',
-                name: 'Small Wooden Shoes',
-                root: 'qql6l5trmnijsbo8us6x5h15lpp6m',
-                sort: 36345,
-                isActive: true,
+                ...mockData[0],
+                ...{ id: '4bfe3bb2-be1f-4ec5-ad74-7550d7ffb13e' },
             })
             .expect(404);
     });
@@ -449,10 +414,10 @@ describe('bounded-context', () =>
             .set('Accept', 'application/json')
             .send({
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Gorgeous Metal Chicken',
-                root: 'dieebws659tqoouof9hm36klsqw25',
-                sort: 54922,
-                isActive: true,
+                name: 'Ergonomic Fresh Car',
+                root: 'zv5b040kxt08gn0hq8wfiom9vkoa3',
+                sort: 95330,
+                isActive: false,
             })
             .expect(200)
             .then(res =>
@@ -464,7 +429,7 @@ describe('bounded-context', () =>
     test('/REST:DELETE iam/bounded-context/delete/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/bounded-context/delete/14ab22f1-e5fe-49c5-a4e2-40ad631898ce')
+            .delete('/iam/bounded-context/delete/bb579b73-7b8f-4ab0-9fab-d892e95d2374')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -498,7 +463,7 @@ describe('bounded-context', () =>
                 `,
                 variables:
                 {
-                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt']),
+                    payload: _.omit(mockData[0], ['createdAt','updatedAt','deletedAt']),
                 },
             })
             .expect(200)
@@ -602,10 +567,10 @@ describe('bounded-context', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Licensed Wooden Tuna',
-                        root: 'm601tl68a9lpkdvkrn02eewh1idc8',
-                        sort: 31682,
-                        isActive: true,
+                        name: 'Tasty Fresh Car',
+                        root: 'xf9m6tekkb8jpcd0erbo2402qt1eb',
+                        sort: 79182,
+                        isActive: false,
                     },
                 },
             })
@@ -643,7 +608,7 @@ describe('bounded-context', () =>
                     {
                         where:
                         {
-                            id: '94f1a1d6-2c04-4345-a755-e2c0b2431428',
+                            id: 'a4cfa42e-5b58-4ea4-bf87-4f3e7264e460',
                         },
                     },
                 },
@@ -718,7 +683,7 @@ describe('bounded-context', () =>
                     }
                 `,
                 variables: {
-                    id: '8ff83b7c-828f-44ba-baf2-6de428951628',
+                    id: 'cee8f29d-bbb5-4078-8f46-d0380453dde0',
                 },
             })
             .expect(200)
@@ -785,11 +750,8 @@ describe('bounded-context', () =>
                 `,
                 variables: {
                     payload: {
-                        id: 'c9c9b01a-8f41-4df2-95f3-e0e8df7afc42',
-                        name: 'Generic Metal Chicken',
-                        root: 'pm3gaxuspvjtbcdukjiriir7j2l5y',
-                        sort: 30102,
-                        isActive: false,
+                        ...mockData[0],
+                        ...{ id: '96e632db-aea8-48de-a7cc-e328187639ae' },
                     },
                 },
             })
@@ -826,9 +788,9 @@ describe('bounded-context', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Handcrafted Rubber Ball',
-                        root: 'n25hd60mvabad2htfmfyi06bzy2tk',
-                        sort: 33232,
+                        name: 'Rustic Fresh Fish',
+                        root: 'i0diqvyvepn5tmz8gqn9f4kpunrk0',
+                        sort: 97326,
                         isActive: false,
                     },
                 },
@@ -862,7 +824,7 @@ describe('bounded-context', () =>
                     }
                 `,
                 variables: {
-                    id: '679bcca7-904f-49b9-8e45-e77ba04042d3',
+                    id: '77c2de7a-1e93-4e20-8e59-160ed19ae1ea',
                 },
             })
             .expect(200)
@@ -908,6 +870,11 @@ describe('bounded-context', () =>
 
     afterAll(async () =>
     {
+        await repository.delete({
+            queryStatement: {
+                where: {},
+            },
+        });
         await app.close();
     });
 });

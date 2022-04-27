@@ -1,6 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { TenantResponse } from './../../domain/tenant.response';
-import { TenantMapper } from './../../domain/tenant.mapper';
+import { TenantResponse } from '../../domain/tenant.response';
+import { TenantMapper } from '../../domain/tenant.mapper';
 import { FindTenantQuery } from './find-tenant.query';
 import { FindTenantService } from './find-tenant.service';
 

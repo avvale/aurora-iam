@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamDeleteTenantsResolver } from './iam-delete-tenants.resolver';
+import { IamDeleteTenantsHandler } from '../handlers/iam-delete-tenants.handler';
 
 // sources
 import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenant.seed';
@@ -11,8 +11,7 @@ import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenan
 describe('IamDeleteTenantsResolver', () =>
 {
     let resolver: IamDeleteTenantsResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamDeleteTenantsHandler;
 
     beforeAll(async () =>
     {
@@ -22,23 +21,16 @@ describe('IamDeleteTenantsResolver', () =>
             providers: [
                 IamDeleteTenantsResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamDeleteTenantsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<IamDeleteTenantsResolver>(IamDeleteTenantsResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<IamDeleteTenantsResolver>(IamDeleteTenantsResolver);
+        handler = module.get<IamDeleteTenantsHandler>(IamDeleteTenantsHandler);
     });
 
     test('IamDeleteTenantsResolver should be defined', () =>
@@ -55,7 +47,7 @@ describe('IamDeleteTenantsResolver', () =>
 
         test('should return an tenants deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants)));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(tenants)));
             expect(await resolver.main()).toBe(tenants);
         });
     });

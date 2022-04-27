@@ -1,34 +1,33 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Put, Body } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { Constraint, ICommandBus, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
-import { UpdateRoleDto } from './../dto/update-role.dto';
-import { RoleDto } from './../dto/role.dto';
+import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
+import { IamRoleDto, IamUpdateRoleDto } from '../dto';
 
 // @apps
-import { UpdateRoleCommand } from '../../../../@apps/iam/role/application/update/update-role.command';
-import { FindRoleByIdQuery } from '../../../../@apps/iam/role/application/find/find-role-by-id.query';
+import { IamUpdateRoleHandler } from '../handlers/iam-update-role.handler';
 
 @ApiTags('[iam] role')
 @Controller('iam/role/update')
 export class IamUpdateRoleController
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamUpdateRoleHandler,
     ) {}
 
     @Put()
     @ApiOperation({ summary: 'Update role' })
-    @ApiOkResponse({ description: 'The record has been successfully updated.', type: RoleDto})
+    @ApiOkResponse({ description: 'The record has been successfully updated.', type: IamRoleDto})
     async main(
-        @Body() payload: UpdateRoleDto,
+        @Body() payload: IamUpdateRoleDto,
         @Constraint() constraint?: QueryStatement,
         @Timezone() timezone?: string,
     )
     {
-        await this.commandBus.dispatch(new UpdateRoleCommand(payload, constraint, { timezone }));
-
-        return await this.queryBus.ask(new FindRoleByIdQuery(payload.id, constraint, { timezone }));
+        return await this.handler.main(
+            payload,
+            constraint,
+            timezone,
+        );
     }
 }

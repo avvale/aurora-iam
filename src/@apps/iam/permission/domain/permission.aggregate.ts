@@ -10,9 +10,9 @@ import {
     PermissionUpdatedAt,
     PermissionDeletedAt,
 } from './value-objects';
-import { CreatedPermissionEvent } from './../application/events/created-permission.event';
-import { UpdatedPermissionEvent } from './../application/events/updated-permission.event';
-import { DeletedPermissionEvent } from './../application/events/deleted-permission.event';
+import { CreatedPermissionEvent } from '../application/events/created-permission.event';
+import { UpdatedPermissionEvent } from '../application/events/updated-permission.event';
+import { DeletedPermissionEvent } from '../application/events/deleted-permission.event';
 import { IamBoundedContext } from '../../../../@apps/iam/bounded-context/domain/bounded-context.aggregate';
 import { IamRole } from '../../../../@apps/iam/role/domain/role.aggregate';
 

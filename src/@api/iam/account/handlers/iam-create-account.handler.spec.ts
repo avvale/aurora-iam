@@ -1,12 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
+import { JwtModule } from '@nestjs/jwt';
+import { clients, ICommandBus, IQueryBus, OAuthFindClientByIdQuery } from 'aurora-ts-core';
 
-// custom items
+// ---- customizations ----
 import { IamCreateAccountHandler } from './iam-create-account.handler';
+import { GetRolesQuery } from '../../../../@apps/iam/role/application/get/get-roles.query';
+import { FindAccountByIdQuery } from '../../../../@apps/iam/account/application/find/find-account-by-id.query';
 
 // sources
 import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/account.seed';
+import { roles } from '../../../../@apps/iam/role/infrastructure/seeds/role.seed';
 
 describe('IamCreateAccountHandler', () =>
 {
@@ -18,6 +22,9 @@ describe('IamCreateAccountHandler', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             imports: [
+                JwtModule.register({
+                    secret: '1234567890',
+                }),
             ],
             providers: [
                 IamCreateAccountHandler,
@@ -50,8 +57,26 @@ describe('IamCreateAccountHandler', () =>
 
         test('should return an account created', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
-            expect(await handler.main(accounts[0])).toBe(accounts[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(query =>
+            {
+                return new Promise(resolve =>
+                {
+                    if (query instanceof OAuthFindClientByIdQuery) resolve(clients[0]); // return client
+                    if (query instanceof GetRolesQuery) resolve(roles); // return roles
+                    if (query instanceof FindAccountByIdQuery) resolve(accounts[0]); // return account created
+
+                    resolve(false);
+                });
+            });
+
+            expect(await handler.main(
+                accounts[0],
+                {
+                    // mock jwt
+                    // eslint-disable-next-line max-len
+                    authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImppdCI6IjE1MjQifQ.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.oDME4U1e7-hco5Nyx2pUlO53jcm7x3zakYHWpnHUHzI',
+                },
+            )).toBe(accounts[0]);
         });
     });
 });

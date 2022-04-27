@@ -20,6 +20,17 @@ import { IamUpdateTenantResolver } from './resolvers/iam-update-tenant.resolver'
 import { IamDeleteTenantByIdResolver } from './resolvers/iam-delete-tenant-by-id.resolver';
 import { IamDeleteTenantsResolver } from './resolvers/iam-delete-tenants.resolver';
 
+// handlers
+import { IamCreateTenantHandler } from './handlers/iam-create-tenant.handler';
+import { IamCreateTenantsHandler } from './handlers/iam-create-tenants.handler';
+import { IamPaginateTenantsHandler } from './handlers/iam-paginate-tenants.handler';
+import { IamGetTenantsHandler } from './handlers/iam-get-tenants.handler';
+import { IamFindTenantByIdHandler } from './handlers/iam-find-tenant-by-id.handler';
+import { IamFindTenantHandler } from './handlers/iam-find-tenant.handler';
+import { IamUpdateTenantHandler } from './handlers/iam-update-tenant.handler';
+import { IamDeleteTenantByIdHandler } from './handlers/iam-delete-tenant-by-id.handler';
+import { IamDeleteTenantsHandler } from './handlers/iam-delete-tenants.handler';
+
 export const IamTenantControllers = [
     IamCreateTenantController,
     IamCreateTenantsController,
@@ -42,4 +53,16 @@ export const IamTenantResolvers = [
     IamUpdateTenantResolver,
     IamDeleteTenantByIdResolver,
     IamDeleteTenantsResolver,
+];
+
+export const IamTenantApiHandlers = [
+    IamCreateTenantHandler,
+    IamCreateTenantsHandler,
+    IamPaginateTenantsHandler,
+    IamGetTenantsHandler,
+    IamFindTenantByIdHandler,
+    IamFindTenantHandler,
+    IamUpdateTenantHandler,
+    IamDeleteTenantByIdHandler,
+    IamDeleteTenantsHandler,
 ];

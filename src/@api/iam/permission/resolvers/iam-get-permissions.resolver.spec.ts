@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamGetPermissionsResolver } from './iam-get-permissions.resolver';
+import { IamGetPermissionsHandler } from '../handlers/iam-get-permissions.handler';
 
 // sources
 import { permissions } from '../../../../@apps/iam/permission/infrastructure/seeds/permission.seed';
 
 describe('IamGetPermissionsResolver', () =>
 {
-    let resolver:   IamGetPermissionsResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let resolver: IamGetPermissionsResolver;
+    let handler: IamGetPermissionsHandler;
 
     beforeAll(async () =>
     {
@@ -22,23 +21,16 @@ describe('IamGetPermissionsResolver', () =>
             providers: [
                 IamGetPermissionsResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamGetPermissionsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<IamGetPermissionsResolver>(IamGetPermissionsResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<IamGetPermissionsResolver>(IamGetPermissionsResolver);
+        handler = module.get<IamGetPermissionsHandler>(IamGetPermissionsHandler);
     });
 
     test('IamGetPermissionsResolver should be defined', () =>
@@ -55,7 +47,7 @@ describe('IamGetPermissionsResolver', () =>
 
         test('should return a permissions', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions)));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(permissions)));
             expect(await resolver.main()).toBe(permissions);
         });
     });

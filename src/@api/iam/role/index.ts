@@ -20,6 +20,17 @@ import { IamUpdateRoleResolver } from './resolvers/iam-update-role.resolver';
 import { IamDeleteRoleByIdResolver } from './resolvers/iam-delete-role-by-id.resolver';
 import { IamDeleteRolesResolver } from './resolvers/iam-delete-roles.resolver';
 
+// handlers
+import { IamCreateRoleHandler } from './handlers/iam-create-role.handler';
+import { IamCreateRolesHandler } from './handlers/iam-create-roles.handler';
+import { IamPaginateRolesHandler } from './handlers/iam-paginate-roles.handler';
+import { IamGetRolesHandler } from './handlers/iam-get-roles.handler';
+import { IamFindRoleByIdHandler } from './handlers/iam-find-role-by-id.handler';
+import { IamFindRoleHandler } from './handlers/iam-find-role.handler';
+import { IamUpdateRoleHandler } from './handlers/iam-update-role.handler';
+import { IamDeleteRoleByIdHandler } from './handlers/iam-delete-role-by-id.handler';
+import { IamDeleteRolesHandler } from './handlers/iam-delete-roles.handler';
+
 export const IamRoleControllers = [
     IamCreateRoleController,
     IamCreateRolesController,
@@ -42,4 +53,16 @@ export const IamRoleResolvers = [
     IamUpdateRoleResolver,
     IamDeleteRoleByIdResolver,
     IamDeleteRolesResolver,
+];
+
+export const IamRoleApiHandlers = [
+    IamCreateRoleHandler,
+    IamCreateRolesHandler,
+    IamPaginateRolesHandler,
+    IamGetRolesHandler,
+    IamFindRoleByIdHandler,
+    IamFindRoleHandler,
+    IamUpdateRoleHandler,
+    IamDeleteRoleByIdHandler,
+    IamDeleteRolesHandler,
 ];

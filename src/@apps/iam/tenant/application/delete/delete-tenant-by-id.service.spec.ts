@@ -5,9 +5,9 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { tenants } from '../../../../../@apps/iam/tenant/infrastructure/seeds/tenant.seed';
 import { DeleteTenantByIdService } from './delete-tenant-by-id.service';
-import { TenantId } from './../../domain/value-objects';
-import { ITenantRepository } from './../../domain/tenant.repository';
-import { MockTenantRepository } from './../../infrastructure/mock/mock-tenant.repository';
+import { TenantId } from '../../domain/value-objects';
+import { ITenantRepository } from '../../domain/tenant.repository';
+import { MockTenantRepository } from '../../infrastructure/mock/mock-tenant.repository';
 
 describe('DeleteTenantByIdService', () =>
 {

@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { roles } from '../../../../../@apps/iam/role/infrastructure/seeds/role.seed';
+import { rolesToCreate as roles } from '../../../../../@apps/iam/role/infrastructure/seeds/roles-to-create.seed';
 import { UpdateRoleService } from './update-role.service';
 import {
     RoleId,
@@ -14,9 +14,9 @@ import {
     RoleCreatedAt,
     RoleUpdatedAt,
     RoleDeletedAt,
-} from './../../domain/value-objects';
-import { IRoleRepository } from './../../domain/role.repository';
-import { MockRoleRepository } from './../../infrastructure/mock/mock-role.repository';
+} from '../../domain/value-objects';
+import { IRoleRepository } from '../../domain/role.repository';
+import { MockRoleRepository } from '../../infrastructure/mock/mock-role.repository';
 
 describe('UpdateRoleService', () =>
 {

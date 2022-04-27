@@ -2,12 +2,12 @@ import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { SharedModule } from '../../@aurora/shared.module';
 import { IamModels, IamHandlers, IamServices, IamRepositories, IamSagas } from '../../@apps/iam';
-import { IamBoundedContextControllers, IamBoundedContextResolvers } from './bounded-context';
-import { IamPermissionControllers, IamPermissionResolvers } from './permission';
-import { IamTenantControllers, IamTenantResolvers } from './tenant';
-import { IamRoleControllers, IamRoleResolvers } from './role';
+import { IamBoundedContextControllers, IamBoundedContextResolvers, IamBoundedContextApiHandlers } from './bounded-context';
+import { IamPermissionControllers, IamPermissionResolvers, IamPermissionApiHandlers } from './permission';
+import { IamTenantControllers, IamTenantResolvers, IamTenantApiHandlers } from './tenant';
+import { IamRoleControllers, IamRoleResolvers, IamRoleApiHandlers } from './role';
 import { IamAccountControllers, IamAccountResolvers, IamAccountApiHandlers } from './account';
-import { IamUserControllers, IamUserResolvers } from './user';
+import { IamUserControllers, IamUserResolvers, IamUserApiHandlers } from './user';
 
 @Module({
     imports: [
@@ -35,7 +35,12 @@ import { IamUserControllers, IamUserResolvers } from './user';
         ...IamRoleResolvers,
         ...IamAccountResolvers,
         ...IamUserResolvers,
-        ...IamAccountApiHandlers
+        ...IamAccountApiHandlers,
+        ...IamUserApiHandlers,
+        ...IamRoleApiHandlers,
+        ...IamPermissionApiHandlers,
+        ...IamBoundedContextApiHandlers,
+        ...IamTenantApiHandlers
     ],
 })
 export class IamModule {}

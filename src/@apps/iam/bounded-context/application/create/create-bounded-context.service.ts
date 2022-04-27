@@ -1,5 +1,6 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
+import { CQMetadata } from 'aurora-ts-core';
 import {
     BoundedContextId,
     BoundedContextName,
@@ -9,9 +10,9 @@ import {
     BoundedContextCreatedAt,
     BoundedContextUpdatedAt,
     BoundedContextDeletedAt,
-} from './../../domain/value-objects';
-import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
-import { IamBoundedContext } from './../../domain/bounded-context.aggregate';
+} from '../../domain/value-objects';
+import { IBoundedContextRepository } from '../../domain/bounded-context.repository';
+import { IamBoundedContext } from '../../domain/bounded-context.aggregate';
 
 @Injectable()
 export class CreateBoundedContextService
@@ -21,7 +22,7 @@ export class CreateBoundedContextService
         private readonly repository: IBoundedContextRepository,
     ) {}
 
-    public async main(
+    async main(
         payload: {
             id: BoundedContextId;
             name: BoundedContextName;
@@ -29,6 +30,7 @@ export class CreateBoundedContextService
             sort: BoundedContextSort;
             isActive: BoundedContextIsActive;
         },
+        cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // create aggregate with factory pattern
@@ -43,11 +45,11 @@ export class CreateBoundedContextService
             null, // deletedAt
         );
 
-        await this.repository.create(boundedContext);
+        await this.repository.create(boundedContext, { createOptions: cQMetadata?.repositoryOptions });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const boundedContextRegister = this.publisher.mergeObjectContext(
-            boundedContext
+            boundedContext,
         );
 
         boundedContextRegister.created(boundedContext); // apply event to model events

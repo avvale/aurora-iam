@@ -4,8 +4,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { CreatePermissionsService } from './create-permissions.service';
-import { IPermissionRepository } from './../../domain/permission.repository';
-import { MockPermissionRepository } from './../../infrastructure/mock/mock-permission.repository';
+import { IPermissionRepository } from '../../domain/permission.repository';
+import { MockPermissionRepository } from '../../infrastructure/mock/mock-permission.repository';
 
 describe('CreatePermissionsService', () =>
 {

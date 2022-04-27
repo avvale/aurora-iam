@@ -1,16 +1,15 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { Constraint, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
+import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
-import { GetRolesQuery } from '../../../../@apps/iam/role/application/get/get-roles.query';
-import { IamRole } from './../../../../graphql';
+import { IamGetRolesHandler } from '../handlers/iam-get-roles.handler';
+import { IamRole } from '../../../../graphql';
 
 @Resolver()
 export class IamGetRolesResolver
 {
     constructor(
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamGetRolesHandler,
     ) {}
 
     @Query('iamGetRoles')
@@ -20,6 +19,10 @@ export class IamGetRolesResolver
         @Timezone() timezone?: string,
     ): Promise<IamRole[]>
     {
-        return await this.queryBus.ask(new GetRolesQuery(queryStatement, constraint, { timezone }));
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

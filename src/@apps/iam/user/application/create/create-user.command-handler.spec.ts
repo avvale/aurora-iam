@@ -17,12 +17,12 @@ describe('CreateUserCommandHandler', () =>
             providers: [
                 CreateUserCommandHandler,
                 {
-                    provide: CreateUserService,
+                    provide : CreateUserService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<CreateUserCommandHandler>(CreateUserCommandHandler);
@@ -53,8 +53,8 @@ describe('CreateUserCommandHandler', () =>
                         rememberToken: users[0].rememberToken,
                         data: users[0].data,
                     },
-                    { timezone: process.env.TZ }
-                )
+                    { timezone: process.env.TZ },
+                ),
             )).toBe(undefined);
         });
     });

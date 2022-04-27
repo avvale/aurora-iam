@@ -19,10 +19,10 @@ describe('UpdateUserCommandHandler', () =>
                 {
                     provide : UpdateUserService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<UpdateUserCommandHandler>(UpdateUserCommandHandler);
@@ -54,8 +54,8 @@ describe('UpdateUserCommandHandler', () =>
                         data: users[0].data,
                     },
                     {},
-                    { timezone: process.env.TZ }
-                )
+                    { timezone: process.env.TZ },
+                ),
             )).toBe(undefined);
         });
     });

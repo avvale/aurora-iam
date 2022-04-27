@@ -67,7 +67,7 @@ export const IamPermissionHandlers = [
     DeletedPermissionEventHandler,
     DeletedPermissionsEventHandler,
 
-    // custom
+    // ---- customizations ----
     CreatePermissionsRolesCommandHandler,
 ];
 
@@ -82,6 +82,6 @@ export const IamPermissionServices = [
     DeletePermissionByIdService,
     DeletePermissionsService,
 
-    // custom
+    // ---- customizations ----
     CreatePermissionsRolesService,
 ];

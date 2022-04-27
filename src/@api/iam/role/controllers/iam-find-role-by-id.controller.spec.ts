@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamFindRoleByIdController } from './iam-find-role-by-id.controller';
+import { IamFindRoleByIdHandler } from '../handlers/iam-find-role-by-id.handler';
 
 // sources
 import { roles } from '../../../../@apps/iam/role/infrastructure/seeds/role.seed';
@@ -11,8 +11,7 @@ import { roles } from '../../../../@apps/iam/role/infrastructure/seeds/role.seed
 describe('IamFindRoleByIdController', () =>
 {
     let controller: IamFindRoleByIdController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamFindRoleByIdHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,20 @@ describe('IamFindRoleByIdController', () =>
             imports: [
             ],
             controllers: [
-                IamFindRoleByIdController
+                IamFindRoleByIdController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamFindRoleByIdHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        controller  = module.get<IamFindRoleByIdController>(IamFindRoleByIdController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamFindRoleByIdController>(IamFindRoleByIdController);
+        handler = module.get<IamFindRoleByIdHandler>(IamFindRoleByIdHandler);
     });
 
     describe('main', () =>
@@ -52,7 +44,7 @@ describe('IamFindRoleByIdController', () =>
 
         test('should return an role by id', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
             expect(await controller.main(roles[0].id)).toBe(roles[0]);
         });
     });

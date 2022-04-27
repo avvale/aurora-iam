@@ -11,8 +11,8 @@ import {
     BoundedContextUpdatedAt,
     BoundedContextDeletedAt,
 } from '../../../../../@apps/iam/bounded-context/domain/value-objects';
-import { IamBoundedContext } from './../../domain/bounded-context.aggregate';
-import { boundedContexts } from './../seeds/bounded-context.seed';
+import { IamBoundedContext } from '../../domain/bounded-context.aggregate';
+import { boundedContexts } from '../seeds/bounded-context.seed';
 
 @Injectable()
 export class MockBoundedContextRepository extends MockRepository<IamBoundedContext> implements IBoundedContextRepository
@@ -28,7 +28,7 @@ export class MockBoundedContextRepository extends MockRepository<IamBoundedConte
         this.createSourceMockData();
     }
 
-    public reset()
+    public reset(): void
     {
         this.createSourceMockData();
     }

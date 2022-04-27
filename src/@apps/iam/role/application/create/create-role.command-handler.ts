@@ -11,7 +11,7 @@ import {
     RoleCreatedAt,
     RoleUpdatedAt,
     RoleDeletedAt,
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(CreateRoleCommand)
 export class CreateRoleCommandHandler implements ICommandHandler<CreateRoleCommand>
@@ -30,7 +30,8 @@ export class CreateRoleCommandHandler implements ICommandHandler<CreateRoleComma
                 isMaster: new RoleIsMaster(command.payload.isMaster),
                 permissionIds: new RolePermissionIds(command.payload.permissionIds),
                 accountIds: new RoleAccountIds(command.payload.accountIds),
-            }
+            },
+            command.cQMetadata,
         );
     }
 }

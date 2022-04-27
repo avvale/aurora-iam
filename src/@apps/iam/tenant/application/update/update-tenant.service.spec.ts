@@ -16,9 +16,9 @@ import {
     TenantCreatedAt,
     TenantUpdatedAt,
     TenantDeletedAt,
-} from './../../domain/value-objects';
-import { ITenantRepository } from './../../domain/tenant.repository';
-import { MockTenantRepository } from './../../infrastructure/mock/mock-tenant.repository';
+} from '../../domain/value-objects';
+import { ITenantRepository } from '../../domain/tenant.repository';
+import { MockTenantRepository } from '../../infrastructure/mock/mock-tenant.repository';
 
 describe('UpdateTenantService', () =>
 {

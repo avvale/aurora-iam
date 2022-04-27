@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
+import { CQMetadata } from 'aurora-ts-core';
 import {
     UserId,
     UserAccountId,
@@ -15,10 +16,10 @@ import {
     UserCreatedAt,
     UserUpdatedAt,
     UserDeletedAt,
-} from './../../domain/value-objects';
-import { IUserRepository } from './../../domain/user.repository';
-import { IamUser } from './../../domain/user.aggregate';
-import { AddUsersContextEvent } from './../events/add-users-context.event';
+} from '../../domain/value-objects';
+import { IUserRepository } from '../../domain/user.repository';
+import { IamUser } from '../../domain/user.aggregate';
+import { AddUsersContextEvent } from '../events/add-users-context.event';
 
 @Injectable()
 export class CreateUsersService
@@ -28,7 +29,7 @@ export class CreateUsersService
         private readonly repository: IUserRepository,
     ) {}
 
-    public async main(
+    async main(
         users: {
             id: UserId;
             accountId: UserAccountId;
@@ -42,6 +43,7 @@ export class CreateUsersService
             rememberToken: UserRememberToken;
             data: UserData;
         } [],
+        cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // create aggregate with factory pattern
@@ -63,7 +65,7 @@ export class CreateUsersService
         ));
 
         // insert
-        await this.repository.insert(aggregateUsers);
+        await this.repository.insert(aggregateUsers, { insertOptions: cQMetadata?.repositoryOptions });
 
         // create AddUsersContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events

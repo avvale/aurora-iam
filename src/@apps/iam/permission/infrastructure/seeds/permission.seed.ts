@@ -1,5 +1,6 @@
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+
 export const permissions = [
 
     { id: 'c3f07181-ef34-4905-94fc-8c8af191153c',  name: 'iam.access',                               boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba', roleIds: []},

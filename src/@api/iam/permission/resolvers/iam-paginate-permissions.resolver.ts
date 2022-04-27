@@ -1,16 +1,15 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { Constraint, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
+import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
-import { PaginatePermissionsQuery } from '../../../../@apps/iam/permission/application/paginate/paginate-permissions.query';
-import { Pagination } from './../../../../graphql';
+import { IamPaginatePermissionsHandler } from '../handlers/iam-paginate-permissions.handler';
+import { Pagination } from '../../../../graphql';
 
 @Resolver()
 export class IamPaginatePermissionsResolver
 {
     constructor(
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamPaginatePermissionsHandler,
     ) {}
 
     @Query('iamPaginatePermissions')
@@ -20,6 +19,10 @@ export class IamPaginatePermissionsResolver
         @Timezone() timezone?: string,
     ): Promise<Pagination>
     {
-        return await this.queryBus.ask(new PaginatePermissionsQuery(queryStatement, constraint, { timezone }));
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

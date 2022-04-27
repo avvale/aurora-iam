@@ -3,8 +3,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { FindRoleService } from './find-role.service';
-import { IRoleRepository } from './../../domain/role.repository';
-import { MockRoleRepository } from './../../infrastructure/mock/mock-role.repository';
+import { IRoleRepository } from '../../domain/role.repository';
+import { MockRoleRepository } from '../../infrastructure/mock/mock-role.repository';
 
 describe('FindRoleService', () =>
 {

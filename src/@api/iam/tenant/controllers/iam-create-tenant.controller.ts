@@ -1,33 +1,31 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
-import { ICommandBus, IQueryBus, Timezone } from 'aurora-ts-core';
-import { CreateTenantDto } from './../dto/create-tenant.dto';
-import { TenantDto } from './../dto/tenant.dto';
+import { Timezone } from 'aurora-ts-core';
+import { IamTenantDto, IamCreateTenantDto } from '../dto';
 
 // @apps
-import { FindTenantByIdQuery } from '../../../../@apps/iam/tenant/application/find/find-tenant-by-id.query';
-import { CreateTenantCommand } from '../../../../@apps/iam/tenant/application/create/create-tenant.command';
+import { IamCreateTenantHandler } from '../handlers/iam-create-tenant.handler';
 
 @ApiTags('[iam] tenant')
 @Controller('iam/tenant/create')
 export class IamCreateTenantController
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamCreateTenantHandler,
     ) {}
 
     @Post()
     @ApiOperation({ summary: 'Create tenant' })
-    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: TenantDto })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: IamTenantDto })
     async main(
-        @Body() payload: CreateTenantDto,
+        @Body() payload: IamCreateTenantDto,
         @Timezone() timezone?: string,
     )
     {
-        await this.commandBus.dispatch(new CreateTenantCommand(payload, { timezone }));
-
-        return await this.queryBus.ask(new FindTenantByIdQuery(payload.id, {}, { timezone }));
+        return await this.handler.main(
+            payload,
+            timezone,
+        );
     }
 }

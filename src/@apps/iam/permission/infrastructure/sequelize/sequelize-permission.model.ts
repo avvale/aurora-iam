@@ -37,7 +37,10 @@ export class IamPermissionModel extends Model<IamPermissionModel>
     boundedContext: IamBoundedContextModel;
 
 
-    @BelongsToMany(() => IamRoleModel, { through: () => IamPermissionsRolesModel, uniqueKey: 'Uq01IamPermissionsRoles' })
+    @BelongsToMany(() => IamRoleModel, {
+        through: () => IamPermissionsRolesModel,
+        uniqueKey: 'Uq01IamPermissionsRoles',
+    })
     roles: IamRoleModel[];
 
     @Column({

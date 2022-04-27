@@ -1,17 +1,15 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Constraint, ICommandBus, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
+import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
-import { GetRolesQuery } from '../../../../@apps/iam/role/application/get/get-roles.query';
-import { DeleteRolesCommand } from '../../../../@apps/iam/role/application/delete/delete-roles.command';
+import { IamDeleteRolesHandler } from '../handlers/iam-delete-roles.handler';
+import { IamRole } from '../../../../graphql';
 
 @Resolver()
 export class IamDeleteRolesResolver
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamDeleteRolesHandler,
     ) {}
 
     @Mutation('iamDeleteRoles')
@@ -19,12 +17,12 @@ export class IamDeleteRolesResolver
         @Args('query') queryStatement?: QueryStatement,
         @Constraint() constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    )
+    ): Promise<IamRole[]>
     {
-        const roles = await this.queryBus.ask(new GetRolesQuery(queryStatement, constraint, { timezone }));
-
-        await this.commandBus.dispatch(new DeleteRolesCommand(queryStatement, constraint, { timezone }));
-
-        return roles;
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

@@ -10,7 +10,7 @@ import {
     PermissionCreatedAt,
     PermissionUpdatedAt,
     PermissionDeletedAt,
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(CreatePermissionCommand)
 export class CreatePermissionCommandHandler implements ICommandHandler<CreatePermissionCommand>
@@ -28,7 +28,8 @@ export class CreatePermissionCommandHandler implements ICommandHandler<CreatePer
                 name: new PermissionName(command.payload.name),
                 boundedContextId: new PermissionBoundedContextId(command.payload.boundedContextId),
                 roleIds: new PermissionRoleIds(command.payload.roleIds),
-            }
+            },
+            command.cQMetadata,
         );
     }
 }

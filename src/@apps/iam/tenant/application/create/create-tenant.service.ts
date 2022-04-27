@@ -1,5 +1,6 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
+import { CQMetadata } from 'aurora-ts-core';
 import {
     TenantId,
     TenantName,
@@ -11,9 +12,9 @@ import {
     TenantCreatedAt,
     TenantUpdatedAt,
     TenantDeletedAt,
-} from './../../domain/value-objects';
-import { ITenantRepository } from './../../domain/tenant.repository';
-import { IamTenant } from './../../domain/tenant.aggregate';
+} from '../../domain/value-objects';
+import { ITenantRepository } from '../../domain/tenant.repository';
+import { IamTenant } from '../../domain/tenant.aggregate';
 
 @Injectable()
 export class CreateTenantService
@@ -23,7 +24,7 @@ export class CreateTenantService
         private readonly repository: ITenantRepository,
     ) {}
 
-    public async main(
+    async main(
         payload: {
             id: TenantId;
             name: TenantName;
@@ -33,6 +34,7 @@ export class CreateTenantService
             data: TenantData;
             accountIds: TenantAccountIds;
         },
+        cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // create aggregate with factory pattern
@@ -49,11 +51,11 @@ export class CreateTenantService
             null, // deletedAt
         );
 
-        await this.repository.create(tenant);
+        await this.repository.create(tenant, { createOptions: cQMetadata?.repositoryOptions });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const tenantRegister = this.publisher.mergeObjectContext(
-            tenant
+            tenant,
         );
 
         tenantRegister.created(tenant); // apply event to model events

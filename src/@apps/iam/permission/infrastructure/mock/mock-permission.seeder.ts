@@ -8,9 +8,10 @@ import {
     PermissionCreatedAt,
     PermissionUpdatedAt,
     PermissionDeletedAt,
-} from './../../domain/value-objects';
-import { IamPermission } from './../../domain/permission.aggregate';
-import { permissions } from './../seeds/permission.seed';
+} from '../../domain/value-objects';
+import { IamPermission } from '../../domain/permission.aggregate';
+import { permissions } from '../seeds/permission.seed';
+import * as _ from 'lodash';
 
 @Injectable()
 export class MockPermissionSeeder extends MockSeeder<IamPermission>
@@ -27,7 +28,7 @@ export class MockPermissionSeeder extends MockSeeder<IamPermission>
     {
         this.collectionSource = [];
 
-        for (const permission of permissions)
+        for (const permission of _.orderBy(permissions, ['id']))
         {
             this.collectionSource.push(
                 IamPermission.register(
@@ -38,7 +39,7 @@ export class MockPermissionSeeder extends MockSeeder<IamPermission>
                     new PermissionCreatedAt({ currentTimestamp: true }),
                     new PermissionUpdatedAt({ currentTimestamp: true }),
                     new PermissionDeletedAt(null),
-                )
+                ),
             );
         }
     }

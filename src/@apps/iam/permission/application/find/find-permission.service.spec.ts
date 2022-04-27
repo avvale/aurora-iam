@@ -3,8 +3,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { FindPermissionService } from './find-permission.service';
-import { IPermissionRepository } from './../../domain/permission.repository';
-import { MockPermissionRepository } from './../../infrastructure/mock/mock-permission.repository';
+import { IPermissionRepository } from '../../domain/permission.repository';
+import { MockPermissionRepository } from '../../infrastructure/mock/mock-permission.repository';
 
 describe('FindPermissionService', () =>
 {

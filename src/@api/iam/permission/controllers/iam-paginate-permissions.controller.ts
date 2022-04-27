@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { Constraint, IQueryBus, Pagination, QueryStatement, Timezone } from 'aurora-ts-core';
-import { PermissionDto } from './../dto/permission.dto';
+import { Constraint, Pagination, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
-import { PaginatePermissionsQuery } from '../../../../@apps/iam/permission/application/paginate/paginate-permissions.query';
+import { IamPaginatePermissionsHandler } from '../handlers/iam-paginate-permissions.handler';
 
 @ApiTags('[iam] permission')
 @Controller('iam/permissions/paginate')
 export class IamPaginatePermissionsController
 {
     constructor(
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamPaginatePermissionsHandler,
     ) {}
 
     @Post()
@@ -27,6 +26,10 @@ export class IamPaginatePermissionsController
         @Timezone() timezone?: string,
     )
     {
-        return await this.queryBus.ask(new PaginatePermissionsQuery(queryStatement, constraint, { timezone }));
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

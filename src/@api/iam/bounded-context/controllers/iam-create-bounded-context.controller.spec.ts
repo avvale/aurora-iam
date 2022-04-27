@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamCreateBoundedContextController } from './iam-create-bounded-context.controller';
+import { IamCreateBoundedContextHandler } from '../handlers/iam-create-bounded-context.handler';
 
 // sources
 import { boundedContexts } from '../../../../@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
@@ -11,8 +11,7 @@ import { boundedContexts } from '../../../../@apps/iam/bounded-context/infrastru
 describe('IamCreateBoundedContextController', () =>
 {
     let controller: IamCreateBoundedContextController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamCreateBoundedContextHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,20 @@ describe('IamCreateBoundedContextController', () =>
             imports: [
             ],
             controllers: [
-                IamCreateBoundedContextController
+                IamCreateBoundedContextController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamCreateBoundedContextHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        controller  = module.get<IamCreateBoundedContextController>(IamCreateBoundedContextController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamCreateBoundedContextController>(IamCreateBoundedContextController);
+        handler = module.get<IamCreateBoundedContextHandler>(IamCreateBoundedContextHandler);
     });
 
     describe('main', () =>
@@ -52,7 +44,7 @@ describe('IamCreateBoundedContextController', () =>
 
         test('should return an boundedContext created', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
             expect(await controller.main(boundedContexts[0])).toBe(boundedContexts[0]);
         });
     });

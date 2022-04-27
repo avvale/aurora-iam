@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamDeleteUserByIdResolver } from './iam-delete-user-by-id.resolver';
+import { IamDeleteUserByIdHandler } from '../handlers/iam-delete-user-by-id.handler';
 
 // sources
 import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed';
@@ -11,8 +11,7 @@ import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed
 describe('IamDeleteUserByIdResolver', () =>
 {
     let resolver: IamDeleteUserByIdResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamDeleteUserByIdHandler;
 
     beforeAll(async () =>
     {
@@ -22,23 +21,16 @@ describe('IamDeleteUserByIdResolver', () =>
             providers: [
                 IamDeleteUserByIdResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamDeleteUserByIdHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<IamDeleteUserByIdResolver>(IamDeleteUserByIdResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<IamDeleteUserByIdResolver>(IamDeleteUserByIdResolver);
+        handler = module.get<IamDeleteUserByIdHandler>(IamDeleteUserByIdHandler);
     });
 
     test('IamDeleteUserByIdResolver should be defined', () =>
@@ -55,7 +47,7 @@ describe('IamDeleteUserByIdResolver', () =>
 
         test('should return an user deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(users[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(users[0])));
             expect(await resolver.main(users[0].id)).toBe(users[0]);
         });
     });

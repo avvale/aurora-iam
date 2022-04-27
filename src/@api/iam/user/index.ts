@@ -20,6 +20,17 @@ import { IamUpdateUserResolver } from './resolvers/iam-update-user.resolver';
 import { IamDeleteUserByIdResolver } from './resolvers/iam-delete-user-by-id.resolver';
 import { IamDeleteUsersResolver } from './resolvers/iam-delete-users.resolver';
 
+// handlers
+import { IamCreateUserHandler } from './handlers/iam-create-user.handler';
+import { IamCreateUsersHandler } from './handlers/iam-create-users.handler';
+import { IamPaginateUsersHandler } from './handlers/iam-paginate-users.handler';
+import { IamGetUsersHandler } from './handlers/iam-get-users.handler';
+import { IamFindUserByIdHandler } from './handlers/iam-find-user-by-id.handler';
+import { IamFindUserHandler } from './handlers/iam-find-user.handler';
+import { IamUpdateUserHandler } from './handlers/iam-update-user.handler';
+import { IamDeleteUserByIdHandler } from './handlers/iam-delete-user-by-id.handler';
+import { IamDeleteUsersHandler } from './handlers/iam-delete-users.handler';
+
 export const IamUserControllers = [
     IamCreateUserController,
     IamCreateUsersController,
@@ -42,4 +53,16 @@ export const IamUserResolvers = [
     IamUpdateUserResolver,
     IamDeleteUserByIdResolver,
     IamDeleteUsersResolver,
+];
+
+export const IamUserApiHandlers = [
+    IamCreateUserHandler,
+    IamCreateUsersHandler,
+    IamPaginateUsersHandler,
+    IamGetUsersHandler,
+    IamFindUserByIdHandler,
+    IamFindUserHandler,
+    IamUpdateUserHandler,
+    IamDeleteUserByIdHandler,
+    IamDeleteUsersHandler,
 ];

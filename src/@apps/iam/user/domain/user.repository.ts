@@ -60,9 +60,10 @@ export abstract class IUserRepository implements IRepository<IamUser>
     abstract create(
         user: IamUser,
         options?: {
+            createOptions?: ObjectLiteral;
             dataFactory?: (aggregate: IamUser) => ObjectLiteral;
             // arguments to find object and check if object is duplicated
-            finderQueryStatement: (aggregate: IamUser) => QueryStatement;
+            finderQueryStatement?: (aggregate: IamUser) => QueryStatement;
         }
     ): Promise<void>;
 
@@ -79,6 +80,7 @@ export abstract class IUserRepository implements IRepository<IamUser>
     abstract update(
         user: IamUser,
         options?: {
+            updateOptions?: ObjectLiteral;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: IamUser) => ObjectLiteral;
@@ -91,6 +93,7 @@ export abstract class IUserRepository implements IRepository<IamUser>
     abstract deleteById(
         id: UserId,
         options?: {
+            deleteOptions?: ObjectLiteral;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
         }
@@ -99,6 +102,7 @@ export abstract class IUserRepository implements IRepository<IamUser>
     // delete records
     abstract delete(
         options?: {
+            deleteOptions?: ObjectLiteral;
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;

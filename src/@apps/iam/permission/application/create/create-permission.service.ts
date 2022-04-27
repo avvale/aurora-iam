@@ -1,5 +1,6 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
+import { CQMetadata } from 'aurora-ts-core';
 import {
     PermissionId,
     PermissionName,
@@ -8,9 +9,9 @@ import {
     PermissionCreatedAt,
     PermissionUpdatedAt,
     PermissionDeletedAt,
-} from './../../domain/value-objects';
-import { IPermissionRepository } from './../../domain/permission.repository';
-import { IamPermission } from './../../domain/permission.aggregate';
+} from '../../domain/value-objects';
+import { IPermissionRepository } from '../../domain/permission.repository';
+import { IamPermission } from '../../domain/permission.aggregate';
 
 @Injectable()
 export class CreatePermissionService
@@ -20,13 +21,14 @@ export class CreatePermissionService
         private readonly repository: IPermissionRepository,
     ) {}
 
-    public async main(
+    async main(
         payload: {
             id: PermissionId;
             name: PermissionName;
             boundedContextId: PermissionBoundedContextId;
             roleIds: PermissionRoleIds;
         },
+        cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // create aggregate with factory pattern
@@ -40,11 +42,11 @@ export class CreatePermissionService
             null, // deletedAt
         );
 
-        await this.repository.create(permission);
+        await this.repository.create(permission, { createOptions: cQMetadata?.repositoryOptions });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const permissionRegister = this.publisher.mergeObjectContext(
-            permission
+            permission,
         );
 
         permissionRegister.created(permission); // apply event to model events

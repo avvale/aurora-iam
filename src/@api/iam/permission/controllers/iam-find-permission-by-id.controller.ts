@@ -1,29 +1,33 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Get, Param } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { Constraint, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
-import { PermissionDto } from './../dto/permission.dto';
+import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
+import { IamPermissionDto } from '../dto';
 
 // @apps
-import { FindPermissionByIdQuery } from '../../../../@apps/iam/permission/application/find/find-permission-by-id.query';
+import { IamFindPermissionByIdHandler } from '../handlers/iam-find-permission-by-id.handler';
 
 @ApiTags('[iam] permission')
 @Controller('iam/permission/find')
 export class IamFindPermissionByIdController
 {
     constructor(
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamFindPermissionByIdHandler,
     ) {}
 
     @Get(':id')
     @ApiOperation({ summary: 'Find permission by id' })
-    @ApiOkResponse({ description: 'The record has been successfully created.', type: PermissionDto })
+    @ApiOkResponse({ description: 'The record has been successfully created.', type: IamPermissionDto })
     async main(
         @Param('id') id: string,
         @Constraint() constraint?: QueryStatement,
         @Timezone() timezone?: string,
     )
     {
-        return this.queryBus.ask(new FindPermissionByIdQuery(id, constraint, { timezone }));
+        return await this.handler.main(
+            id,
+            constraint,
+            timezone,
+        );
     }
 }

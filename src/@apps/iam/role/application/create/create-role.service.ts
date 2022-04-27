@@ -1,5 +1,6 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
+import { CQMetadata } from 'aurora-ts-core';
 import {
     RoleId,
     RoleName,
@@ -9,9 +10,9 @@ import {
     RoleCreatedAt,
     RoleUpdatedAt,
     RoleDeletedAt,
-} from './../../domain/value-objects';
-import { IRoleRepository } from './../../domain/role.repository';
-import { IamRole } from './../../domain/role.aggregate';
+} from '../../domain/value-objects';
+import { IRoleRepository } from '../../domain/role.repository';
+import { IamRole } from '../../domain/role.aggregate';
 
 @Injectable()
 export class CreateRoleService
@@ -21,7 +22,7 @@ export class CreateRoleService
         private readonly repository: IRoleRepository,
     ) {}
 
-    public async main(
+    async main(
         payload: {
             id: RoleId;
             name: RoleName;
@@ -29,6 +30,7 @@ export class CreateRoleService
             permissionIds: RolePermissionIds;
             accountIds: RoleAccountIds;
         },
+        cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // create aggregate with factory pattern
@@ -43,11 +45,11 @@ export class CreateRoleService
             null, // deletedAt
         );
 
-        await this.repository.create(role);
+        await this.repository.create(role, { createOptions: cQMetadata?.repositoryOptions });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const roleRegister = this.publisher.mergeObjectContext(
-            role
+            role,
         );
 
         roleRegister.created(role); // apply event to model events

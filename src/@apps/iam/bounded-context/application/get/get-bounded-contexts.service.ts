@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { QueryStatement } from 'aurora-ts-core';
 import { CQMetadata } from 'aurora-ts-core';
-import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
-import { IamBoundedContext } from './../../domain/bounded-context.aggregate';
+import { IBoundedContextRepository } from '../../domain/bounded-context.repository';
+import { IamBoundedContext } from '../../domain/bounded-context.aggregate';
 
 @Injectable()
 export class GetBoundedContextsService
@@ -11,7 +11,7 @@ export class GetBoundedContextsService
         private readonly repository: IBoundedContextRepository,
     ) {}
 
-    public async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<IamBoundedContext[]>
+    async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<IamBoundedContext[]>
     {
         return await this.repository.get({ queryStatement, constraint, cQMetadata });
     }

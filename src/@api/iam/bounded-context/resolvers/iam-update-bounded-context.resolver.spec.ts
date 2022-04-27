@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamUpdateBoundedContextResolver } from './iam-update-bounded-context.resolver';
-import { IamUpdateBoundedContextInput } from './../../../../graphql';
+import { IamUpdateBoundedContextHandler } from '../handlers/iam-update-bounded-context.handler';
+import { IamUpdateBoundedContextInput } from '../../../../graphql';
 
 // sources
 import { boundedContexts } from '../../../../@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
@@ -12,8 +12,7 @@ import { boundedContexts } from '../../../../@apps/iam/bounded-context/infrastru
 describe('IamUpdateBoundedContextResolver', () =>
 {
     let resolver: IamUpdateBoundedContextResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamUpdateBoundedContextHandler;
 
     beforeAll(async () =>
     {
@@ -23,23 +22,16 @@ describe('IamUpdateBoundedContextResolver', () =>
             providers: [
                 IamUpdateBoundedContextResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamUpdateBoundedContextHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<IamUpdateBoundedContextResolver>(IamUpdateBoundedContextResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<IamUpdateBoundedContextResolver>(IamUpdateBoundedContextResolver);
+        handler = module.get<IamUpdateBoundedContextHandler>(IamUpdateBoundedContextHandler);
     });
 
     test('IamUpdateBoundedContextResolver should be defined', () =>
@@ -56,7 +48,7 @@ describe('IamUpdateBoundedContextResolver', () =>
 
         test('should return a boundedContext created', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
             expect(await resolver.main(<IamUpdateBoundedContextInput>boundedContexts[0])).toBe(boundedContexts[0]);
         });
     });

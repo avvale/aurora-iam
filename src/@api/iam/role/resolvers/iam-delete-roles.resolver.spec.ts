@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamDeleteRolesResolver } from './iam-delete-roles.resolver';
+import { IamDeleteRolesHandler } from '../handlers/iam-delete-roles.handler';
 
 // sources
 import { roles } from '../../../../@apps/iam/role/infrastructure/seeds/role.seed';
@@ -11,8 +11,7 @@ import { roles } from '../../../../@apps/iam/role/infrastructure/seeds/role.seed
 describe('IamDeleteRolesResolver', () =>
 {
     let resolver: IamDeleteRolesResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamDeleteRolesHandler;
 
     beforeAll(async () =>
     {
@@ -22,23 +21,16 @@ describe('IamDeleteRolesResolver', () =>
             providers: [
                 IamDeleteRolesResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamDeleteRolesHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<IamDeleteRolesResolver>(IamDeleteRolesResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<IamDeleteRolesResolver>(IamDeleteRolesResolver);
+        handler = module.get<IamDeleteRolesHandler>(IamDeleteRolesHandler);
     });
 
     test('IamDeleteRolesResolver should be defined', () =>
@@ -55,7 +47,7 @@ describe('IamDeleteRolesResolver', () =>
 
         test('should return an roles deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles)));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(roles)));
             expect(await resolver.main()).toBe(roles);
         });
     });

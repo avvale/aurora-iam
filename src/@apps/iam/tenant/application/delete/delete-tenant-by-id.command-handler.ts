@@ -3,7 +3,7 @@ import { DeleteTenantByIdCommand } from './delete-tenant-by-id.command';
 import { DeleteTenantByIdService } from './delete-tenant-by-id.service';
 import {
     TenantId
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(DeleteTenantByIdCommand)
 export class DeleteTenantByIdCommandHandler implements ICommandHandler<DeleteTenantByIdCommand>

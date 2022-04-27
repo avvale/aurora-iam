@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamDeleteBoundedContextsController } from './iam-delete-bounded-contexts.controller';
+import { IamDeleteBoundedContextsHandler } from '../handlers/iam-delete-bounded-contexts.handler';
 
 // sources
 import { boundedContexts } from '../../../../@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
@@ -11,8 +11,7 @@ import { boundedContexts } from '../../../../@apps/iam/bounded-context/infrastru
 describe('IamDeleteBoundedContextsController', () =>
 {
     let controller: IamDeleteBoundedContextsController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamDeleteBoundedContextsHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,20 @@ describe('IamDeleteBoundedContextsController', () =>
             imports: [
             ],
             controllers: [
-                IamDeleteBoundedContextsController
+                IamDeleteBoundedContextsController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamDeleteBoundedContextsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        controller  = module.get<IamDeleteBoundedContextsController>(IamDeleteBoundedContextsController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamDeleteBoundedContextsController>(IamDeleteBoundedContextsController);
+        handler = module.get<IamDeleteBoundedContextsHandler>(IamDeleteBoundedContextsHandler);
     });
 
     describe('main', () =>
@@ -52,7 +44,7 @@ describe('IamDeleteBoundedContextsController', () =>
 
         test('should return an boundedContexts deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(boundedContexts)));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(boundedContexts)));
             expect(await controller.main()).toBe(boundedContexts);
         });
     });

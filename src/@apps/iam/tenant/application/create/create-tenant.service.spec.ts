@@ -16,9 +16,9 @@ import {
     TenantCreatedAt,
     TenantUpdatedAt,
     TenantDeletedAt,
-} from './../../domain/value-objects';
-import { ITenantRepository } from './../../domain/tenant.repository';
-import { MockTenantRepository } from './../../infrastructure/mock/mock-tenant.repository';
+} from '../../domain/value-objects';
+import { ITenantRepository } from '../../domain/tenant.repository';
+import { MockTenantRepository } from '../../infrastructure/mock/mock-tenant.repository';
 
 describe('CreateTenantService', () =>
 
@@ -40,9 +40,9 @@ describe('CreateTenantService', () =>
                     provide : ITenantRepository,
                     useValue: {
                         create: (item) => { /**/ },
-                    }
+                    },
                 },
-            ]
+            ],
         }).compile();
 
         service         = module.get(CreateTenantService);
@@ -68,7 +68,7 @@ describe('CreateTenantService', () =>
                     isActive: new TenantIsActive(tenants[0].isActive),
                     data: new TenantData(tenants[0].data),
                     accountIds: new TenantAccountIds(tenants[0].accountIds),
-                }
+                },
             )).toBe(undefined);
         });
     });

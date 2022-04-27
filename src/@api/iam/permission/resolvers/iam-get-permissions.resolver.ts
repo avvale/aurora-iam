@@ -1,16 +1,15 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { Constraint, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
+import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
-import { GetPermissionsQuery } from '../../../../@apps/iam/permission/application/get/get-permissions.query';
-import { IamPermission } from './../../../../graphql';
+import { IamGetPermissionsHandler } from '../handlers/iam-get-permissions.handler';
+import { IamPermission } from '../../../../graphql';
 
 @Resolver()
 export class IamGetPermissionsResolver
 {
     constructor(
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamGetPermissionsHandler,
     ) {}
 
     @Query('iamGetPermissions')
@@ -20,6 +19,10 @@ export class IamGetPermissionsResolver
         @Timezone() timezone?: string,
     ): Promise<IamPermission[]>
     {
-        return await this.queryBus.ask(new GetPermissionsQuery(queryStatement, constraint, { timezone }));
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

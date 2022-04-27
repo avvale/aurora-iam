@@ -1,41 +1,35 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamCreateRolesController } from './iam-create-roles.controller';
+import { IamCreateRolesHandler } from '../handlers/iam-create-roles.handler';
+
+// sources
 import { roles } from '../../../../@apps/iam/role/infrastructure/seeds/role.seed';
 
 describe('IamCreateRolesController', () =>
 {
     let controller: IamCreateRolesController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamCreateRolesHandler;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
-                IamCreateRolesController
+                IamCreateRolesController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamCreateRolesHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        controller  = module.get<IamCreateRolesController>(IamCreateRolesController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamCreateRolesController>(IamCreateRolesController);
+        handler = module.get<IamCreateRolesHandler>(IamCreateRolesHandler);
     });
 
     describe('main', () =>

@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamGetUsersResolver } from './iam-get-users.resolver';
+import { IamGetUsersHandler } from '../handlers/iam-get-users.handler';
 
 // sources
 import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed';
 
 describe('IamGetUsersResolver', () =>
 {
-    let resolver:   IamGetUsersResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let resolver: IamGetUsersResolver;
+    let handler: IamGetUsersHandler;
 
     beforeAll(async () =>
     {
@@ -22,23 +21,16 @@ describe('IamGetUsersResolver', () =>
             providers: [
                 IamGetUsersResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamGetUsersHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<IamGetUsersResolver>(IamGetUsersResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<IamGetUsersResolver>(IamGetUsersResolver);
+        handler = module.get<IamGetUsersHandler>(IamGetUsersHandler);
     });
 
     test('IamGetUsersResolver should be defined', () =>
@@ -55,7 +47,7 @@ describe('IamGetUsersResolver', () =>
 
         test('should return a users', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(users)));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(users)));
             expect(await resolver.main()).toBe(users);
         });
     });

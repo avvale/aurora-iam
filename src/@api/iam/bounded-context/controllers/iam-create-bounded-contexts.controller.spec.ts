@@ -1,41 +1,35 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamCreateBoundedContextsController } from './iam-create-bounded-contexts.controller';
+import { IamCreateBoundedContextsHandler } from '../handlers/iam-create-bounded-contexts.handler';
+
+// sources
 import { boundedContexts } from '../../../../@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
 
 describe('IamCreateBoundedContextsController', () =>
 {
     let controller: IamCreateBoundedContextsController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamCreateBoundedContextsHandler;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
-                IamCreateBoundedContextsController
+                IamCreateBoundedContextsController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamCreateBoundedContextsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        controller  = module.get<IamCreateBoundedContextsController>(IamCreateBoundedContextsController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamCreateBoundedContextsController>(IamCreateBoundedContextsController);
+        handler = module.get<IamCreateBoundedContextsHandler>(IamCreateBoundedContextsHandler);
     });
 
     describe('main', () =>

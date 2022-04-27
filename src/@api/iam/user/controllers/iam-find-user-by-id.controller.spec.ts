@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamFindUserByIdController } from './iam-find-user-by-id.controller';
+import { IamFindUserByIdHandler } from '../handlers/iam-find-user-by-id.handler';
 
 // sources
 import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed';
@@ -11,8 +11,7 @@ import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed
 describe('IamFindUserByIdController', () =>
 {
     let controller: IamFindUserByIdController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamFindUserByIdHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,20 @@ describe('IamFindUserByIdController', () =>
             imports: [
             ],
             controllers: [
-                IamFindUserByIdController
+                IamFindUserByIdController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamFindUserByIdHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        controller  = module.get<IamFindUserByIdController>(IamFindUserByIdController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamFindUserByIdController>(IamFindUserByIdController);
+        handler = module.get<IamFindUserByIdHandler>(IamFindUserByIdHandler);
     });
 
     describe('main', () =>
@@ -52,7 +44,7 @@ describe('IamFindUserByIdController', () =>
 
         test('should return an user by id', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(users[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(users[0])));
             expect(await controller.main(users[0].id)).toBe(users[0]);
         });
     });

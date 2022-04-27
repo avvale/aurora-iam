@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamDeletePermissionsController } from './iam-delete-permissions.controller';
+import { IamDeletePermissionsHandler } from '../handlers/iam-delete-permissions.handler';
 
 // sources
 import { permissions } from '../../../../@apps/iam/permission/infrastructure/seeds/permission.seed';
@@ -11,8 +11,7 @@ import { permissions } from '../../../../@apps/iam/permission/infrastructure/see
 describe('IamDeletePermissionsController', () =>
 {
     let controller: IamDeletePermissionsController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamDeletePermissionsHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,20 @@ describe('IamDeletePermissionsController', () =>
             imports: [
             ],
             controllers: [
-                IamDeletePermissionsController
+                IamDeletePermissionsController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamDeletePermissionsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        controller  = module.get<IamDeletePermissionsController>(IamDeletePermissionsController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamDeletePermissionsController>(IamDeletePermissionsController);
+        handler = module.get<IamDeletePermissionsHandler>(IamDeletePermissionsHandler);
     });
 
     describe('main', () =>
@@ -52,7 +44,7 @@ describe('IamDeletePermissionsController', () =>
 
         test('should return an permissions deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions)));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(permissions)));
             expect(await controller.main()).toBe(permissions);
         });
     });

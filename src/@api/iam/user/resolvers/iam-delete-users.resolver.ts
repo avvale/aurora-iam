@@ -1,17 +1,15 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Constraint, ICommandBus, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
+import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
-import { GetUsersQuery } from '../../../../@apps/iam/user/application/get/get-users.query';
-import { DeleteUsersCommand } from '../../../../@apps/iam/user/application/delete/delete-users.command';
+import { IamDeleteUsersHandler } from '../handlers/iam-delete-users.handler';
+import { IamUser } from '../../../../graphql';
 
 @Resolver()
 export class IamDeleteUsersResolver
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamDeleteUsersHandler,
     ) {}
 
     @Mutation('iamDeleteUsers')
@@ -19,12 +17,12 @@ export class IamDeleteUsersResolver
         @Args('query') queryStatement?: QueryStatement,
         @Constraint() constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    )
+    ): Promise<IamUser[]>
     {
-        const users = await this.queryBus.ask(new GetUsersQuery(queryStatement, constraint, { timezone }));
-
-        await this.commandBus.dispatch(new DeleteUsersCommand(queryStatement, constraint, { timezone }));
-
-        return users;
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

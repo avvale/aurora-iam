@@ -1,28 +1,26 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { ICommandBus, IQueryBus, Timezone } from 'aurora-ts-core';
+import { Timezone } from 'aurora-ts-core';
 
 // @apps
-import { FindTenantByIdQuery } from '../../../../@apps/iam/tenant/application/find/find-tenant-by-id.query';
-import { CreateTenantCommand } from '../../../../@apps/iam/tenant/application/create/create-tenant.command';
-import { IamCreateTenantInput } from './../../../../graphql';
+import { IamCreateTenantHandler } from '../handlers/iam-create-tenant.handler';
+import { IamTenant, IamCreateTenantInput } from '../../../../graphql';
 
 @Resolver()
 export class IamCreateTenantResolver
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamCreateTenantHandler,
     ) {}
 
     @Mutation('iamCreateTenant')
     async main(
         @Args('payload') payload: IamCreateTenantInput,
         @Timezone() timezone?: string,
-    )
+    ): Promise<IamTenant>
     {
-        await this.commandBus.dispatch(new CreateTenantCommand(payload, { timezone }));
-
-        return await this.queryBus.ask(new FindTenantByIdQuery(payload.id, {}, { timezone }));
+        return await this.handler.main(
+            payload,
+            timezone,
+        );
     }
 }

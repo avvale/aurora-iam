@@ -14,9 +14,9 @@ import {
     BoundedContextCreatedAt,
     BoundedContextUpdatedAt,
     BoundedContextDeletedAt,
-} from './../../domain/value-objects';
-import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
-import { MockBoundedContextRepository } from './../../infrastructure/mock/mock-bounded-context.repository';
+} from '../../domain/value-objects';
+import { IBoundedContextRepository } from '../../domain/bounded-context.repository';
+import { MockBoundedContextRepository } from '../../infrastructure/mock/mock-bounded-context.repository';
 
 describe('UpdateBoundedContextService', () =>
 {

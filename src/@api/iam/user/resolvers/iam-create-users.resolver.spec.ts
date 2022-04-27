@@ -1,16 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamCreateUsersResolver } from './iam-create-users.resolver';
+import { IamCreateUsersHandler } from '../handlers/iam-create-users.handler';
+import { IamCreateUserInput } from '../../../../graphql';
+
+// sources
 import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed';
-import { IamCreateUserInput } from './../../../../graphql';
 
 describe('IamCreateUsersResolver', () =>
 {
     let resolver: IamCreateUsersResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamCreateUsersHandler;
 
     beforeAll(async () =>
     {
@@ -18,23 +19,16 @@ describe('IamCreateUsersResolver', () =>
             providers: [
                 IamCreateUsersResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamCreateUsersHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<IamCreateUsersResolver>(IamCreateUsersResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<IamCreateUsersResolver>(IamCreateUsersResolver);
+        handler = module.get<IamCreateUsersHandler>(IamCreateUsersHandler);
     });
 
     test('IamCreateUsersResolver should be defined', () =>
@@ -51,7 +45,7 @@ describe('IamCreateUsersResolver', () =>
 
         test('should return an users created', async () =>
         {
-            expect(await resolver.main(<IamCreateUserInput[]>users)).toBe(true);
+            expect(await resolver.main(<IamCreateUserInput[]>users)).toBe(undefined);
         });
     });
 });

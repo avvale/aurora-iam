@@ -19,10 +19,10 @@ describe('UpdateBoundedContextCommandHandler', () =>
                 {
                     provide : UpdateBoundedContextService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<UpdateBoundedContextCommandHandler>(UpdateBoundedContextCommandHandler);
@@ -48,8 +48,8 @@ describe('UpdateBoundedContextCommandHandler', () =>
                         isActive: boundedContexts[0].isActive,
                     },
                     {},
-                    { timezone: process.env.TZ }
-                )
+                    { timezone: process.env.TZ },
+                ),
             )).toBe(undefined);
         });
     });

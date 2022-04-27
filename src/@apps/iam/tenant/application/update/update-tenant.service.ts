@@ -13,9 +13,9 @@ import {
     TenantCreatedAt,
     TenantUpdatedAt,
     TenantDeletedAt,
-} from './../../domain/value-objects';
-import { ITenantRepository } from './../../domain/tenant.repository';
-import { IamTenant } from './../../domain/tenant.aggregate';
+} from '../../domain/value-objects';
+import { ITenantRepository } from '../../domain/tenant.repository';
+import { IamTenant } from '../../domain/tenant.aggregate';
 
 @Injectable()
 export class UpdateTenantService
@@ -25,15 +25,15 @@ export class UpdateTenantService
         private readonly repository: ITenantRepository,
     ) {}
 
-    public async main(
+    async main(
         payload: {
-            id: TenantId,
-            name?: TenantName,
-            code?: TenantCode,
-            logo?: TenantLogo,
-            isActive?: TenantIsActive,
-            data?: TenantData,
-            accountIds?: TenantAccountIds,
+            id: TenantId;
+            name?: TenantName;
+            code?: TenantCode;
+            logo?: TenantLogo;
+            isActive?: TenantIsActive;
+            data?: TenantData;
+            accountIds?: TenantAccountIds;
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
@@ -55,11 +55,11 @@ export class UpdateTenantService
 
 
         // update
-        await this.repository.update(tenant, { constraint, cQMetadata });
+        await this.repository.update(tenant, { constraint, cQMetadata, updateOptions: cQMetadata?.repositoryOptions });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const tenantRegister = this.publisher.mergeObjectContext(
-            tenant
+            tenant,
         );
 
         tenantRegister.updated(tenant); // apply event to model events

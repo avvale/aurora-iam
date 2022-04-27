@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamDeleteTenantByIdResolver } from './iam-delete-tenant-by-id.resolver';
+import { IamDeleteTenantByIdHandler } from '../handlers/iam-delete-tenant-by-id.handler';
 
 // sources
 import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenant.seed';
@@ -11,8 +11,7 @@ import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenan
 describe('IamDeleteTenantByIdResolver', () =>
 {
     let resolver: IamDeleteTenantByIdResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamDeleteTenantByIdHandler;
 
     beforeAll(async () =>
     {
@@ -22,23 +21,16 @@ describe('IamDeleteTenantByIdResolver', () =>
             providers: [
                 IamDeleteTenantByIdResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamDeleteTenantByIdHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<IamDeleteTenantByIdResolver>(IamDeleteTenantByIdResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<IamDeleteTenantByIdResolver>(IamDeleteTenantByIdResolver);
+        handler = module.get<IamDeleteTenantByIdHandler>(IamDeleteTenantByIdHandler);
     });
 
     test('IamDeleteTenantByIdResolver should be defined', () =>
@@ -55,7 +47,7 @@ describe('IamDeleteTenantByIdResolver', () =>
 
         test('should return an tenant deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(tenants[0])));
             expect(await resolver.main(tenants[0].id)).toBe(tenants[0]);
         });
     });

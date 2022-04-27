@@ -1,6 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { PermissionResponse } from './../../domain/permission.response';
-import { PermissionMapper } from './../../domain/permission.mapper';
+import { PermissionResponse } from '../../domain/permission.response';
+import { PermissionMapper } from '../../domain/permission.mapper';
 import { FindPermissionQuery } from './find-permission.query';
 import { FindPermissionService } from './find-permission.service';
 

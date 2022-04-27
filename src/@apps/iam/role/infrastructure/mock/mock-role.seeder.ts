@@ -28,7 +28,7 @@ export class MockRoleSeeder extends MockSeeder<IamRole>
     {
         this.collectionSource = [];
 
-        for (const role of roles)
+        for (const role of _.orderBy(roles, ['id']))
         {
             this.collectionSource.push(
                 IamRole.register(
@@ -41,7 +41,7 @@ export class MockRoleSeeder extends MockSeeder<IamRole>
                     new RoleCreatedAt({ currentTimestamp: true }),
                     new RoleUpdatedAt({ currentTimestamp: true }),
                     new RoleDeletedAt(null),
-                )
+                ),
             );
         }
     }

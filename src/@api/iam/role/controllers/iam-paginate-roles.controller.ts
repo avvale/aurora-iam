@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { Constraint, IQueryBus, Pagination, QueryStatement, Timezone } from 'aurora-ts-core';
-import { RoleDto } from './../dto/role.dto';
+import { Constraint, Pagination, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
-import { PaginateRolesQuery } from '../../../../@apps/iam/role/application/paginate/paginate-roles.query';
+import { IamPaginateRolesHandler } from '../handlers/iam-paginate-roles.handler';
 
 @ApiTags('[iam] role')
 @Controller('iam/roles/paginate')
 export class IamPaginateRolesController
 {
     constructor(
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamPaginateRolesHandler,
     ) {}
 
     @Post()
@@ -27,6 +26,10 @@ export class IamPaginateRolesController
         @Timezone() timezone?: string,
     )
     {
-        return await this.queryBus.ask(new PaginateRolesQuery(queryStatement, constraint, { timezone }));
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

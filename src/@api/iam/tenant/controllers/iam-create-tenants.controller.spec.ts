@@ -1,41 +1,35 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamCreateTenantsController } from './iam-create-tenants.controller';
+import { IamCreateTenantsHandler } from '../handlers/iam-create-tenants.handler';
+
+// sources
 import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenant.seed';
 
 describe('IamCreateTenantsController', () =>
 {
     let controller: IamCreateTenantsController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamCreateTenantsHandler;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
-                IamCreateTenantsController
+                IamCreateTenantsController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamCreateTenantsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        controller  = module.get<IamCreateTenantsController>(IamCreateTenantsController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamCreateTenantsController>(IamCreateTenantsController);
+        handler = module.get<IamCreateTenantsHandler>(IamCreateTenantsHandler);
     });
 
     describe('main', () =>

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamFindPermissionByIdController } from './iam-find-permission-by-id.controller';
+import { IamFindPermissionByIdHandler } from '../handlers/iam-find-permission-by-id.handler';
 
 // sources
 import { permissions } from '../../../../@apps/iam/permission/infrastructure/seeds/permission.seed';
@@ -11,8 +11,7 @@ import { permissions } from '../../../../@apps/iam/permission/infrastructure/see
 describe('IamFindPermissionByIdController', () =>
 {
     let controller: IamFindPermissionByIdController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamFindPermissionByIdHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,20 @@ describe('IamFindPermissionByIdController', () =>
             imports: [
             ],
             controllers: [
-                IamFindPermissionByIdController
+                IamFindPermissionByIdController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamFindPermissionByIdHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        controller  = module.get<IamFindPermissionByIdController>(IamFindPermissionByIdController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamFindPermissionByIdController>(IamFindPermissionByIdController);
+        handler = module.get<IamFindPermissionByIdHandler>(IamFindPermissionByIdHandler);
     });
 
     describe('main', () =>
@@ -52,7 +44,7 @@ describe('IamFindPermissionByIdController', () =>
 
         test('should return an permission by id', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
             expect(await controller.main(permissions[0].id)).toBe(permissions[0]);
         });
     });

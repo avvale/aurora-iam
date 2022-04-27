@@ -1,16 +1,15 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { Constraint, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
+import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
-import { GetUsersQuery } from '../../../../@apps/iam/user/application/get/get-users.query';
-import { IamUser } from './../../../../graphql';
+import { IamGetUsersHandler } from '../handlers/iam-get-users.handler';
+import { IamUser } from '../../../../graphql';
 
 @Resolver()
 export class IamGetUsersResolver
 {
     constructor(
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamGetUsersHandler,
     ) {}
 
     @Query('iamGetUsers')
@@ -20,6 +19,10 @@ export class IamGetUsersResolver
         @Timezone() timezone?: string,
     ): Promise<IamUser[]>
     {
-        return await this.queryBus.ask(new GetUsersQuery(queryStatement, constraint, { timezone }));
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

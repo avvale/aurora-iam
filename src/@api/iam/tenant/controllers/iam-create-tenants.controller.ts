@@ -1,30 +1,32 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
-import { ICommandBus, Timezone } from 'aurora-ts-core';
-import { TenantDto } from './../dto/tenant.dto';
-import { CreateTenantDto } from './../dto/create-tenant.dto';
+import { Timezone } from 'aurora-ts-core';
+import { IamTenantDto, IamCreateTenantDto } from '../dto';
 
 // @apps
-import { CreateTenantsCommand } from '../../../../@apps/iam/tenant/application/create/create-tenants.command';
+import { IamCreateTenantsHandler } from '../handlers/iam-create-tenants.handler';
 
 @ApiTags('[iam] tenant')
 @Controller('iam/tenants/create')
 export class IamCreateTenantsController
 {
     constructor(
-        private readonly commandBus: ICommandBus,
+        private readonly handler: IamCreateTenantsHandler,
     ) {}
 
     @Post()
     @ApiOperation({ summary: 'Create tenants in batch' })
-    @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [TenantDto] })
-    @ApiBody({ type: [CreateTenantDto] })
+    @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [IamTenantDto]})
+    @ApiBody({ type: [IamCreateTenantDto]})
     async main(
-        @Body() payload: CreateTenantDto[],
+        @Body() payload: IamCreateTenantDto[],
         @Timezone() timezone?: string,
     )
     {
-        await this.commandBus.dispatch(new CreateTenantsCommand(payload, { timezone }));
+        return await this.handler.main(
+            payload,
+            timezone,
+        );
     }
 }

@@ -10,7 +10,7 @@ export const users = [
         avatar: null,
         mobile: null,
         langId: null,
-        username: 'john@gmail.com',
+        username: 'john.doe@gmail.com',
         password: '1111',
         rememberToken: null,
         data: null,

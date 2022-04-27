@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamPaginateTenantsResolver } from './iam-paginate-tenants.resolver';
+import { IamPaginateTenantsHandler } from '../handlers/iam-paginate-tenants.handler';
 
 // sources
 import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenant.seed';
@@ -11,8 +11,7 @@ import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenan
 describe('IamPaginateTenantsResolver', () =>
 {
     let resolver: IamPaginateTenantsResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamPaginateTenantsHandler;
 
     beforeAll(async () =>
     {
@@ -22,23 +21,16 @@ describe('IamPaginateTenantsResolver', () =>
             providers: [
                 IamPaginateTenantsResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamPaginateTenantsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
         resolver    = module.get<IamPaginateTenantsResolver>(IamPaginateTenantsResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamPaginateTenantsHandler>(IamPaginateTenantsHandler);
     });
 
     test('IamPaginateTenantsResolver should be defined', () =>
@@ -55,8 +47,16 @@ describe('IamPaginateTenantsResolver', () =>
 
         test('should return a tenants', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants)));
-            expect(await resolver.main()).toBe(tenants);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
+                total: 5,
+                count: 5,
+                rows : tenants,
+            })));
+            expect(await resolver.main()).toStrictEqual({
+                total: 5,
+                count: 5,
+                rows : tenants,
+            });
         });
     });
 });

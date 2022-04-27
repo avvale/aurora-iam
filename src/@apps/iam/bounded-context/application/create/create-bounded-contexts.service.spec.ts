@@ -4,8 +4,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { CreateBoundedContextsService } from './create-bounded-contexts.service';
-import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
-import { MockBoundedContextRepository } from './../../infrastructure/mock/mock-bounded-context.repository';
+import { IBoundedContextRepository } from '../../domain/bounded-context.repository';
+import { MockBoundedContextRepository } from '../../infrastructure/mock/mock-bounded-context.repository';
 
 describe('CreateBoundedContextsService', () =>
 {

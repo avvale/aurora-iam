@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
+import { CQMetadata } from 'aurora-ts-core';
 import {
     PermissionId,
     PermissionName,
@@ -8,10 +9,10 @@ import {
     PermissionCreatedAt,
     PermissionUpdatedAt,
     PermissionDeletedAt,
-} from './../../domain/value-objects';
-import { IPermissionRepository } from './../../domain/permission.repository';
-import { IamPermission } from './../../domain/permission.aggregate';
-import { AddPermissionsContextEvent } from './../events/add-permissions-context.event';
+} from '../../domain/value-objects';
+import { IPermissionRepository } from '../../domain/permission.repository';
+import { IamPermission } from '../../domain/permission.aggregate';
+import { AddPermissionsContextEvent } from '../events/add-permissions-context.event';
 
 @Injectable()
 export class CreatePermissionsService
@@ -21,13 +22,14 @@ export class CreatePermissionsService
         private readonly repository: IPermissionRepository,
     ) {}
 
-    public async main(
+    async main(
         permissions: {
             id: PermissionId;
             name: PermissionName;
             boundedContextId: PermissionBoundedContextId;
             roleIds: PermissionRoleIds;
         } [],
+        cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // create aggregate with factory pattern
@@ -42,7 +44,7 @@ export class CreatePermissionsService
         ));
 
         // insert
-        await this.repository.insert(aggregatePermissions);
+        await this.repository.insert(aggregatePermissions, { insertOptions: cQMetadata?.repositoryOptions });
 
         // create AddPermissionsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events

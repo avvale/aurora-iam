@@ -5,9 +5,9 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { boundedContexts } from '../../../../../@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
 import { DeleteBoundedContextByIdService } from './delete-bounded-context-by-id.service';
-import { BoundedContextId } from './../../domain/value-objects';
-import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
-import { MockBoundedContextRepository } from './../../infrastructure/mock/mock-bounded-context.repository';
+import { BoundedContextId } from '../../domain/value-objects';
+import { IBoundedContextRepository } from '../../domain/bounded-context.repository';
+import { MockBoundedContextRepository } from '../../infrastructure/mock/mock-bounded-context.repository';
 
 describe('DeleteBoundedContextByIdService', () =>
 {

@@ -4,8 +4,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { DeleteUsersService } from './delete-users.service';
-import { IUserRepository } from './../../domain/user.repository';
-import { MockUserRepository } from './../../infrastructure/mock/mock-user.repository';
+import { IUserRepository } from '../../domain/user.repository';
+import { MockUserRepository } from '../../infrastructure/mock/mock-user.repository';
 
 describe('DeleteUsersService', () =>
 {
@@ -29,7 +29,7 @@ describe('DeleteUsersService', () =>
                         delete: (queryStatement) => { /**/ },
                     }
                 },
-            ]
+            ],
         }).compile();
 
         service         = module.get(DeleteUsersService);

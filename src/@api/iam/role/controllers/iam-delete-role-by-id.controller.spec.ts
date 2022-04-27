@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamDeleteRoleByIdController } from './iam-delete-role-by-id.controller';
+import { IamDeleteRoleByIdHandler } from '../handlers/iam-delete-role-by-id.handler';
 
 // sources
 import { roles } from '../../../../@apps/iam/role/infrastructure/seeds/role.seed';
@@ -11,8 +11,7 @@ import { roles } from '../../../../@apps/iam/role/infrastructure/seeds/role.seed
 describe('IamDeleteRoleByIdController', () =>
 {
     let controller: IamDeleteRoleByIdController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamDeleteRoleByIdHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,20 @@ describe('IamDeleteRoleByIdController', () =>
             imports: [
             ],
             controllers: [
-                IamDeleteRoleByIdController
+                IamDeleteRoleByIdController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamDeleteRoleByIdHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        controller  = module.get<IamDeleteRoleByIdController>(IamDeleteRoleByIdController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamDeleteRoleByIdController>(IamDeleteRoleByIdController);
+        handler = module.get<IamDeleteRoleByIdHandler>(IamDeleteRoleByIdHandler);
     });
 
     describe('main', () =>
@@ -52,7 +44,7 @@ describe('IamDeleteRoleByIdController', () =>
 
         test('should return an role deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
             expect(await controller.main(roles[0].id)).toBe(roles[0]);
         });
     });

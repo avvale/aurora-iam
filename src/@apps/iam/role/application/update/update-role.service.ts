@@ -11,9 +11,9 @@ import {
     RoleCreatedAt,
     RoleUpdatedAt,
     RoleDeletedAt,
-} from './../../domain/value-objects';
-import { IRoleRepository } from './../../domain/role.repository';
-import { IamRole } from './../../domain/role.aggregate';
+} from '../../domain/value-objects';
+import { IRoleRepository } from '../../domain/role.repository';
+import { IamRole } from '../../domain/role.aggregate';
 
 @Injectable()
 export class UpdateRoleService
@@ -23,13 +23,13 @@ export class UpdateRoleService
         private readonly repository: IRoleRepository,
     ) {}
 
-    public async main(
+    async main(
         payload: {
-            id: RoleId,
-            name?: RoleName,
-            isMaster?: RoleIsMaster,
-            permissionIds?: RolePermissionIds,
-            accountIds?: RoleAccountIds,
+            id: RoleId;
+            name?: RoleName;
+            isMaster?: RoleIsMaster;
+            permissionIds?: RolePermissionIds;
+            accountIds?: RoleAccountIds;
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
@@ -49,11 +49,11 @@ export class UpdateRoleService
 
 
         // update
-        await this.repository.update(role, { constraint, cQMetadata });
+        await this.repository.update(role, { constraint, cQMetadata, updateOptions: cQMetadata?.repositoryOptions });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const roleRegister = this.publisher.mergeObjectContext(
-            role
+            role,
         );
 
         roleRegister.updated(role); // apply event to model events

@@ -3,8 +3,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { GetTenantsService } from './get-tenants.service';
-import { ITenantRepository } from './../../domain/tenant.repository';
-import { MockTenantRepository } from './../../infrastructure/mock/mock-tenant.repository';
+import { ITenantRepository } from '../../domain/tenant.repository';
+import { MockTenantRepository } from '../../infrastructure/mock/mock-tenant.repository';
 
 describe('GetTenantsService', () =>
 {

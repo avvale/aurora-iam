@@ -21,9 +21,9 @@ describe('CreateUsersCommandHandler', () =>
                     provide : CreateUsersService,
                     useValue: {
                         main: () => { /**/ },
-                    }
-                }
-            ]
+                    },
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<CreateUsersCommandHandler>(CreateUsersCommandHandler);
@@ -42,8 +42,8 @@ describe('CreateUsersCommandHandler', () =>
             expect(await commandHandler.execute(
                 new CreateUsersCommand(
                     users,
-                    { timezone: process.env.TZ }
-                )
+                    { timezone: process.env.TZ },
+                ),
             )).toBe(undefined);
         });
     });

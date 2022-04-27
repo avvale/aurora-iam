@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { Constraint, IQueryBus, Pagination, QueryStatement, Timezone } from 'aurora-ts-core';
-import { BoundedContextDto } from './../dto/bounded-context.dto';
+import { Constraint, Pagination, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
-import { PaginateBoundedContextsQuery } from '../../../../@apps/iam/bounded-context/application/paginate/paginate-bounded-contexts.query';
+import { IamPaginateBoundedContextsHandler } from '../handlers/iam-paginate-bounded-contexts.handler';
 
 @ApiTags('[iam] bounded-context')
 @Controller('iam/bounded-contexts/paginate')
 export class IamPaginateBoundedContextsController
 {
     constructor(
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamPaginateBoundedContextsHandler,
     ) {}
 
     @Post()
@@ -27,6 +26,10 @@ export class IamPaginateBoundedContextsController
         @Timezone() timezone?: string,
     )
     {
-        return await this.queryBus.ask(new PaginateBoundedContextsQuery(queryStatement, constraint, { timezone }));
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

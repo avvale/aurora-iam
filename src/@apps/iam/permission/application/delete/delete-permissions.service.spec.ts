@@ -4,8 +4,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { DeletePermissionsService } from './delete-permissions.service';
-import { IPermissionRepository } from './../../domain/permission.repository';
-import { MockPermissionRepository } from './../../infrastructure/mock/mock-permission.repository';
+import { IPermissionRepository } from '../../domain/permission.repository';
+import { MockPermissionRepository } from '../../infrastructure/mock/mock-permission.repository';
 
 describe('DeletePermissionsService', () =>
 {
@@ -29,7 +29,7 @@ describe('DeletePermissionsService', () =>
                         delete: (queryStatement) => { /**/ },
                     }
                 },
-            ]
+            ],
         }).compile();
 
         service         = module.get(DeletePermissionsService);

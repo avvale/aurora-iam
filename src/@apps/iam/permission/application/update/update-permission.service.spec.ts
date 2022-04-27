@@ -13,9 +13,9 @@ import {
     PermissionCreatedAt,
     PermissionUpdatedAt,
     PermissionDeletedAt,
-} from './../../domain/value-objects';
-import { IPermissionRepository } from './../../domain/permission.repository';
-import { MockPermissionRepository } from './../../infrastructure/mock/mock-permission.repository';
+} from '../../domain/value-objects';
+import { IPermissionRepository } from '../../domain/permission.repository';
+import { MockPermissionRepository } from '../../infrastructure/mock/mock-permission.repository';
 
 describe('UpdatePermissionService', () =>
 {

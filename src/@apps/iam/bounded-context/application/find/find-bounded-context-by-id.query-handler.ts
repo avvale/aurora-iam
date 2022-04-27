@@ -1,7 +1,7 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { BoundedContextResponse } from './../../domain/bounded-context.response';
-import { BoundedContextMapper } from './../../domain/bounded-context.mapper';
-import { BoundedContextId } from './../../domain/value-objects';
+import { BoundedContextResponse } from '../../domain/bounded-context.response';
+import { BoundedContextMapper } from '../../domain/bounded-context.mapper';
+import { BoundedContextId } from '../../domain/value-objects';
 import { FindBoundedContextByIdQuery } from './find-bounded-context-by-id.query';
 import { FindBoundedContextByIdService } from './find-bounded-context-by-id.service';
 

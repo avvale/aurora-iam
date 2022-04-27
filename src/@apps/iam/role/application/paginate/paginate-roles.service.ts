@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { QueryStatement } from 'aurora-ts-core';
 import { Pagination } from 'aurora-ts-core';
 import { CQMetadata } from 'aurora-ts-core';
-import { IRoleRepository } from './../../domain/role.repository';
-import { IamRole } from './../../domain/role.aggregate';
+import { IRoleRepository } from '../../domain/role.repository';
+import { IamRole } from '../../domain/role.aggregate';
 
 @Injectable()
 export class PaginateRolesService
@@ -12,7 +12,7 @@ export class PaginateRolesService
         private readonly repository: IRoleRepository,
     ) {}
 
-    public async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<IamRole>>
+    async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<IamRole>>
     {
         return await this.repository.paginate({ queryStatement, constraint, cQMetadata });
     }

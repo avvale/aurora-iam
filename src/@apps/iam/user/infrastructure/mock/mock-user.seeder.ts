@@ -15,9 +15,10 @@ import {
     UserCreatedAt,
     UserUpdatedAt,
     UserDeletedAt,
-} from './../../domain/value-objects';
-import { IamUser } from './../../domain/user.aggregate';
-import { users } from './../seeds/user.seed';
+} from '../../domain/value-objects';
+import { IamUser } from '../../domain/user.aggregate';
+import { users } from '../seeds/user.seed';
+import * as _ from 'lodash';
 
 @Injectable()
 export class MockUserSeeder extends MockSeeder<IamUser>
@@ -34,7 +35,7 @@ export class MockUserSeeder extends MockSeeder<IamUser>
     {
         this.collectionSource = [];
 
-        for (const user of users)
+        for (const user of _.orderBy(users, ['id']))
         {
             this.collectionSource.push(
                 IamUser.register(
@@ -52,7 +53,7 @@ export class MockUserSeeder extends MockSeeder<IamUser>
                     new UserCreatedAt({ currentTimestamp: true }),
                     new UserUpdatedAt({ currentTimestamp: true }),
                     new UserDeletedAt(null),
-                )
+                ),
             );
         }
     }

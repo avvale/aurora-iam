@@ -1,5 +1,6 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
+import { CQMetadata } from 'aurora-ts-core';
 import {
     UserId,
     UserAccountId,
@@ -15,9 +16,9 @@ import {
     UserCreatedAt,
     UserUpdatedAt,
     UserDeletedAt,
-} from './../../domain/value-objects';
-import { IUserRepository } from './../../domain/user.repository';
-import { IamUser } from './../../domain/user.aggregate';
+} from '../../domain/value-objects';
+import { IUserRepository } from '../../domain/user.repository';
+import { IamUser } from '../../domain/user.aggregate';
 
 @Injectable()
 export class CreateUserService
@@ -27,7 +28,7 @@ export class CreateUserService
         private readonly repository: IUserRepository,
     ) {}
 
-    public async main(
+    async main(
         payload: {
             id: UserId;
             accountId: UserAccountId;
@@ -41,6 +42,7 @@ export class CreateUserService
             rememberToken: UserRememberToken;
             data: UserData;
         },
+        cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // create aggregate with factory pattern
@@ -61,11 +63,11 @@ export class CreateUserService
             null, // deletedAt
         );
 
-        await this.repository.create(user);
+        await this.repository.create(user, { createOptions: cQMetadata?.repositoryOptions });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const userRegister = this.publisher.mergeObjectContext(
-            user
+            user,
         );
 
         userRegister.created(user); // apply event to model events

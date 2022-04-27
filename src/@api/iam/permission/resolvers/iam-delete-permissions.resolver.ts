@@ -1,17 +1,15 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Constraint, ICommandBus, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
+import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
-import { GetPermissionsQuery } from '../../../../@apps/iam/permission/application/get/get-permissions.query';
-import { DeletePermissionsCommand } from '../../../../@apps/iam/permission/application/delete/delete-permissions.command';
+import { IamDeletePermissionsHandler } from '../handlers/iam-delete-permissions.handler';
+import { IamPermission } from '../../../../graphql';
 
 @Resolver()
 export class IamDeletePermissionsResolver
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamDeletePermissionsHandler,
     ) {}
 
     @Mutation('iamDeletePermissions')
@@ -19,12 +17,12 @@ export class IamDeletePermissionsResolver
         @Args('query') queryStatement?: QueryStatement,
         @Constraint() constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    )
+    ): Promise<IamPermission[]>
     {
-        const permissions = await this.queryBus.ask(new GetPermissionsQuery(queryStatement, constraint, { timezone }));
-
-        await this.commandBus.dispatch(new DeletePermissionsCommand(queryStatement, constraint, { timezone }));
-
-        return permissions;
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

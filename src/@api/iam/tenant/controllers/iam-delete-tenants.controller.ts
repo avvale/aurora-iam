@@ -1,25 +1,23 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Delete, Body } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { Constraint, ICommandBus, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
-import { TenantDto } from './../dto/tenant.dto';
+import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
+import { IamTenantDto } from '../dto';
 
 // @apps
-import { GetTenantsQuery } from '../../../../@apps/iam/tenant/application/get/get-tenants.query';
-import { DeleteTenantsCommand } from '../../../../@apps/iam/tenant/application/delete/delete-tenants.command';
+import { IamDeleteTenantsHandler } from '../handlers/iam-delete-tenants.handler';
 
 @ApiTags('[iam] tenant')
 @Controller('iam/tenants/delete')
 export class IamDeleteTenantsController
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamDeleteTenantsHandler,
     ) {}
 
     @Delete()
     @ApiOperation({ summary: 'Delete tenants in batch according to query' })
-    @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [TenantDto]})
+    @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [IamTenantDto]})
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
     async main(
@@ -28,10 +26,10 @@ export class IamDeleteTenantsController
         @Timezone() timezone?: string,
     )
     {
-        const tenants = await this.queryBus.ask(new GetTenantsQuery(queryStatement, constraint, { timezone }));
-
-        await this.commandBus.dispatch(new DeleteTenantsCommand(queryStatement, constraint, { timezone }));
-
-        return tenants;
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

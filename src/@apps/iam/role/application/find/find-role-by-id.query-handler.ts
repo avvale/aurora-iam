@@ -1,7 +1,7 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { RoleResponse } from './../../domain/role.response';
-import { RoleMapper } from './../../domain/role.mapper';
-import { RoleId } from './../../domain/value-objects';
+import { RoleResponse } from '../../domain/role.response';
+import { RoleMapper } from '../../domain/role.mapper';
+import { RoleId } from '../../domain/value-objects';
 import { FindRoleByIdQuery } from './find-role-by-id.query';
 import { FindRoleByIdService } from './find-role-by-id.service';
 

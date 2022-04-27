@@ -11,9 +11,10 @@ import {
     TenantCreatedAt,
     TenantUpdatedAt,
     TenantDeletedAt,
-} from './../../domain/value-objects';
-import { IamTenant } from './../../domain/tenant.aggregate';
-import { tenants } from './../seeds/tenant.seed';
+} from '../../domain/value-objects';
+import { IamTenant } from '../../domain/tenant.aggregate';
+import { tenants } from '../seeds/tenant.seed';
+import * as _ from 'lodash';
 
 @Injectable()
 export class MockTenantSeeder extends MockSeeder<IamTenant>
@@ -30,7 +31,7 @@ export class MockTenantSeeder extends MockSeeder<IamTenant>
     {
         this.collectionSource = [];
 
-        for (const tenant of tenants)
+        for (const tenant of _.orderBy(tenants, ['id']))
         {
             this.collectionSource.push(
                 IamTenant.register(
@@ -44,7 +45,7 @@ export class MockTenantSeeder extends MockSeeder<IamTenant>
                     new TenantCreatedAt({ currentTimestamp: true }),
                     new TenantUpdatedAt({ currentTimestamp: true }),
                     new TenantDeletedAt(null),
-                )
+                ),
             );
         }
     }

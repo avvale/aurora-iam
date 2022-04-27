@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
+import { CQMetadata } from 'aurora-ts-core';
 import {
     TenantId,
     TenantName,
@@ -11,10 +12,10 @@ import {
     TenantCreatedAt,
     TenantUpdatedAt,
     TenantDeletedAt,
-} from './../../domain/value-objects';
-import { ITenantRepository } from './../../domain/tenant.repository';
-import { IamTenant } from './../../domain/tenant.aggregate';
-import { AddTenantsContextEvent } from './../events/add-tenants-context.event';
+} from '../../domain/value-objects';
+import { ITenantRepository } from '../../domain/tenant.repository';
+import { IamTenant } from '../../domain/tenant.aggregate';
+import { AddTenantsContextEvent } from '../events/add-tenants-context.event';
 
 @Injectable()
 export class CreateTenantsService
@@ -24,7 +25,7 @@ export class CreateTenantsService
         private readonly repository: ITenantRepository,
     ) {}
 
-    public async main(
+    async main(
         tenants: {
             id: TenantId;
             name: TenantName;
@@ -34,6 +35,7 @@ export class CreateTenantsService
             data: TenantData;
             accountIds: TenantAccountIds;
         } [],
+        cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // create aggregate with factory pattern
@@ -51,7 +53,7 @@ export class CreateTenantsService
         ));
 
         // insert
-        await this.repository.insert(aggregateTenants);
+        await this.repository.insert(aggregateTenants, { insertOptions: cQMetadata?.repositoryOptions });
 
         // create AddTenantsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events

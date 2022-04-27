@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { roles } from '../../../../../@apps/iam/role/infrastructure/seeds/role.seed';
+import { rolesToCreate as roles } from '../../../../../@apps/iam/role/infrastructure/seeds/roles-to-create.seed';
 import { CreateRoleService } from './create-role.service';
 import {
     RoleId,
@@ -14,9 +14,9 @@ import {
     RoleCreatedAt,
     RoleUpdatedAt,
     RoleDeletedAt,
-} from './../../domain/value-objects';
-import { IRoleRepository } from './../../domain/role.repository';
-import { MockRoleRepository } from './../../infrastructure/mock/mock-role.repository';
+} from '../../domain/value-objects';
+import { IRoleRepository } from '../../domain/role.repository';
+import { MockRoleRepository } from '../../infrastructure/mock/mock-role.repository';
 
 describe('CreateRoleService', () =>
 
@@ -38,9 +38,9 @@ describe('CreateRoleService', () =>
                     provide : IRoleRepository,
                     useValue: {
                         create: (item) => { /**/ },
-                    }
+                    },
                 },
-            ]
+            ],
         }).compile();
 
         service         = module.get(CreateRoleService);
@@ -64,7 +64,7 @@ describe('CreateRoleService', () =>
                     isMaster: new RoleIsMaster(roles[0].isMaster),
                     permissionIds: new RolePermissionIds(roles[0].permissionIds),
                     accountIds: new RoleAccountIds(roles[0].accountIds),
-                }
+                },
             )).toBe(undefined);
         });
     });

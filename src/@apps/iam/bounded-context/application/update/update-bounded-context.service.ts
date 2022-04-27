@@ -11,9 +11,9 @@ import {
     BoundedContextCreatedAt,
     BoundedContextUpdatedAt,
     BoundedContextDeletedAt,
-} from './../../domain/value-objects';
-import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
-import { IamBoundedContext } from './../../domain/bounded-context.aggregate';
+} from '../../domain/value-objects';
+import { IBoundedContextRepository } from '../../domain/bounded-context.repository';
+import { IamBoundedContext } from '../../domain/bounded-context.aggregate';
 
 @Injectable()
 export class UpdateBoundedContextService
@@ -23,13 +23,13 @@ export class UpdateBoundedContextService
         private readonly repository: IBoundedContextRepository,
     ) {}
 
-    public async main(
+    async main(
         payload: {
-            id: BoundedContextId,
-            name?: BoundedContextName,
-            root?: BoundedContextRoot,
-            sort?: BoundedContextSort,
-            isActive?: BoundedContextIsActive,
+            id: BoundedContextId;
+            name?: BoundedContextName;
+            root?: BoundedContextRoot;
+            sort?: BoundedContextSort;
+            isActive?: BoundedContextIsActive;
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
@@ -49,11 +49,11 @@ export class UpdateBoundedContextService
 
 
         // update
-        await this.repository.update(boundedContext, { constraint, cQMetadata });
+        await this.repository.update(boundedContext, { constraint, cQMetadata, updateOptions: cQMetadata?.repositoryOptions });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const boundedContextRegister = this.publisher.mergeObjectContext(
-            boundedContext
+            boundedContext,
         );
 
         boundedContextRegister.updated(boundedContext); // apply event to model events

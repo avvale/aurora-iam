@@ -19,10 +19,10 @@ describe('UpdatePermissionCommandHandler', () =>
                 {
                     provide : UpdatePermissionService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<UpdatePermissionCommandHandler>(UpdatePermissionCommandHandler);
@@ -47,8 +47,8 @@ describe('UpdatePermissionCommandHandler', () =>
                         roleIds: permissions[0].roleIds,
                     },
                     {},
-                    { timezone: process.env.TZ }
-                )
+                    { timezone: process.env.TZ },
+                ),
             )).toBe(undefined);
         });
     });

@@ -4,7 +4,7 @@ type IamPermission
     id: ID!
     name: GraphQLString!
     boundedContextId: ID!
-    boundedContext: IamBoundedContext!
+    boundedContext: IamBoundedContext
     roles: [IamRole]
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp

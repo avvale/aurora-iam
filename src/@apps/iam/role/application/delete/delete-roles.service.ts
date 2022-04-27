@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { QueryStatement } from 'aurora-ts-core';
 import { CQMetadata } from 'aurora-ts-core';
-import { IRoleRepository } from './../../domain/role.repository';
-import { AddRolesContextEvent } from './../events/add-roles-context.event';
+import { IRoleRepository } from '../../domain/role.repository';
+import { AddRolesContextEvent } from '../events/add-roles-context.event';
 
 @Injectable()
 export class DeleteRolesService
@@ -13,12 +13,21 @@ export class DeleteRolesService
         private readonly repository: IRoleRepository,
     ) {}
 
-    public async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>
+    async main(
+        queryStatement?: QueryStatement,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<void>
     {
         // get object to delete
         const roles = await this.repository.get({ queryStatement, constraint, cQMetadata });
 
-        await this.repository.delete({ queryStatement, constraint, cQMetadata });
+        await this.repository.delete({
+            queryStatement,
+            constraint,
+            cQMetadata,
+            deleteOptions: cQMetadata?.repositoryOptions,
+        });
 
         // create AddRolesContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events

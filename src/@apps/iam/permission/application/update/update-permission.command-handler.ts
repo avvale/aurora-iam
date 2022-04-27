@@ -10,7 +10,7 @@ import {
     PermissionCreatedAt,
     PermissionUpdatedAt,
     PermissionDeletedAt,
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(UpdatePermissionCommand)
 export class UpdatePermissionCommandHandler implements ICommandHandler<UpdatePermissionCommand>

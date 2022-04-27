@@ -17,8 +17,8 @@ import {
     UserUpdatedAt,
     UserDeletedAt,
 } from '../../../../../@apps/iam/user/domain/value-objects';
-import { IamUser } from './../../domain/user.aggregate';
-import { users } from './../seeds/user.seed';
+import { IamUser } from '../../domain/user.aggregate';
+import { users } from '../seeds/user.seed';
 
 @Injectable()
 export class MockUserRepository extends MockRepository<IamUser> implements IUserRepository
@@ -34,7 +34,7 @@ export class MockUserRepository extends MockRepository<IamUser> implements IUser
         this.createSourceMockData();
     }
 
-    public reset()
+    public reset(): void
     {
         this.createSourceMockData();
     }

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamFindTenantByIdResolver } from './iam-find-tenant-by-id.resolver';
+import { IamFindTenantByIdHandler } from '../handlers/iam-find-tenant-by-id.handler';
 
 // sources
 import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenant.seed';
@@ -11,8 +11,7 @@ import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenan
 describe('IamFindTenantByIdResolver', () =>
 {
     let resolver: IamFindTenantByIdResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamFindTenantByIdHandler;
 
     beforeAll(async () =>
     {
@@ -22,23 +21,16 @@ describe('IamFindTenantByIdResolver', () =>
             providers: [
                 IamFindTenantByIdResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamFindTenantByIdHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<IamFindTenantByIdResolver>(IamFindTenantByIdResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<IamFindTenantByIdResolver>(IamFindTenantByIdResolver);
+        handler = module.get<IamFindTenantByIdHandler>(IamFindTenantByIdHandler);
     });
 
     test('IamFindTenantByIdResolver should be defined', () =>
@@ -55,7 +47,7 @@ describe('IamFindTenantByIdResolver', () =>
 
         test('should return an tenant by id', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(tenants[0])));
             expect(await resolver.main(tenants[0].id)).toBe(tenants[0]);
         });
     });

@@ -17,9 +17,9 @@ import {
     UserUpdatedAt,
     UserDeletedAt,
 } from './value-objects';
-import { CreatedUserEvent } from './../application/events/created-user.event';
-import { UpdatedUserEvent } from './../application/events/updated-user.event';
-import { DeletedUserEvent } from './../application/events/deleted-user.event';
+import { CreatedUserEvent } from '../application/events/created-user.event';
+import { UpdatedUserEvent } from '../application/events/updated-user.event';
+import { DeletedUserEvent } from '../application/events/deleted-user.event';
 import { IamAccount } from '../../../../@apps/iam/account/domain/account.aggregate';
 
 export class IamUser extends AggregateRoot

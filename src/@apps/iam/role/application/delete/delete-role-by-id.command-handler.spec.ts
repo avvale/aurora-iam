@@ -21,8 +21,8 @@ describe('DeleteRoleByIdCommandHandler', () =>
                     useValue: {
                         main: () => {},
                     }
-                }
-            ]
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<DeleteRoleByIdCommandHandler>(DeleteRoleByIdCommandHandler);

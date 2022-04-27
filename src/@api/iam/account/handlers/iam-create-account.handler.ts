@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { ICommandBus, IQueryBus, Jwt, Utils } from 'aurora-ts-core';
+import { Injectable, LiteralObject } from '@nestjs/common';
+import { ICommandBus, IQueryBus, Jwt, OAuthFindAccessTokenByIdQuery, OAuthFindClientByIdQuery, Utils } from 'aurora-ts-core';
 
 // @apps
 import { FindAccountByIdQuery } from '../../../../@apps/iam/account/application/find/find-account-by-id.query';
@@ -9,8 +9,6 @@ import { IamAccountDto, IamCreateAccountDto } from '../dto';
 
 // ---- customizations ----
 import { JwtService } from '@nestjs/jwt';
-import { AccessTokenService } from '../../../../@apps/iam/shared/o-auth/domain/access-token/access-token.service';
-import { ClientService } from '../../../../@apps/iam/shared/o-auth/domain/client/client.service';
 import { GetRolesQuery } from '../../../../@apps/iam/role/application/get/get-roles.query';
 import { CreateUserCommand } from '../../../../@apps/iam/user/application/create/create-user.command';
 import { AccountHelper } from '../../../../@apps/iam/account/domain/account.helper';
@@ -22,13 +20,11 @@ export class IamCreateAccountHandler
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
         private readonly jwtService: JwtService,
-        private readonly accessTokenService: AccessTokenService,
-        private readonly clientService: ClientService,
     ) {}
 
     async main(
         payload: IamCreateAccountInput | IamCreateAccountDto,
-        headers: Record <string, string>,
+        headers: LiteralObject,
         timezone?: string,
     ): Promise<IamAccount | IamAccountDto>
     {
@@ -36,15 +32,14 @@ export class IamCreateAccountHandler
         const jwt = <Jwt>this.jwtService.decode(headers.authorization.replace('Bearer ', ''));
 
         // get access token from database
-        const accessToken = await this.accessTokenService.findAccessTokenById(jwt.jit);
+        const accessToken = await this.queryBus.ask(new OAuthFindAccessTokenByIdQuery(jwt.jit));
 
-        // get client to get applications related
-        const client = await this.clientService.findClient({
-            where: {
-                id: payload.type === IamAccountType.SERVICE ? payload.clientId : accessToken.clientId
+        // get client to get applications related OAuthFindClientByIdQuery
+        const client = await this.queryBus.ask(new OAuthFindClientByIdQuery(payload.type === IamAccountType.SERVICE ? payload.clientId : accessToken.clientId,
+            {
+                include: ['applications'],
             },
-            include: ['applications'],
-        });
+        ));
 
         // get roles
         const roles = await this.queryBus.ask(new GetRolesQuery({

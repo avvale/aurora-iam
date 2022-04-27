@@ -3,7 +3,7 @@ import { DeleteBoundedContextByIdCommand } from './delete-bounded-context-by-id.
 import { DeleteBoundedContextByIdService } from './delete-bounded-context-by-id.service';
 import {
     BoundedContextId
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(DeleteBoundedContextByIdCommand)
 export class DeleteBoundedContextByIdCommandHandler implements ICommandHandler<DeleteBoundedContextByIdCommand>

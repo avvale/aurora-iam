@@ -13,8 +13,8 @@ import {
     TenantUpdatedAt,
     TenantDeletedAt,
 } from '../../../../../@apps/iam/tenant/domain/value-objects';
-import { IamTenant } from './../../domain/tenant.aggregate';
-import { tenants } from './../seeds/tenant.seed';
+import { IamTenant } from '../../domain/tenant.aggregate';
+import { tenants } from '../seeds/tenant.seed';
 
 @Injectable()
 export class MockTenantRepository extends MockRepository<IamTenant> implements ITenantRepository
@@ -30,7 +30,7 @@ export class MockTenantRepository extends MockRepository<IamTenant> implements I
         this.createSourceMockData();
     }
 
-    public reset()
+    public reset(): void
     {
         this.createSourceMockData();
     }

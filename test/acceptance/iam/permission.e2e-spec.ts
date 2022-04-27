@@ -6,10 +6,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IPermissionRepository } from '../../../src/@apps/iam/permission/domain/permission.repository';
 import { MockPermissionSeeder } from '../../../src/@apps/iam/permission/infrastructure/mock/mock-permission.seeder';
+import { permissions } from '../../../src/@apps/iam/permission/infrastructure/seeds/permission.seed';
 import { GraphQLConfigModule } from '../../../src/@aurora/graphql/graphql-config.module';
 import { IamModule } from '../../../src/@api/iam/iam.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
+
 
 
 // disable import foreign modules, can be micro-services
@@ -20,6 +22,9 @@ describe('permission', () =>
     let app: INestApplication;
     let repository: IPermissionRepository;
     let seeder: MockPermissionSeeder;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let mockData: any;
 
     beforeAll(async () =>
     {
@@ -55,6 +60,7 @@ describe('permission', () =>
         })
             .compile();
 
+        mockData        = permissions;
         app             = module.createNestApplication();
         repository      = module.get<IPermissionRepository>(IPermissionRepository);
         seeder          = module.get<MockPermissionSeeder>(MockPermissionSeeder);
@@ -71,10 +77,8 @@ describe('permission', () =>
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
             .send({
-                id: null,
-                name: 'Awesome Steel Shirt',
-                boundedContextId: '1696bce9-4b3f-407b-b53e-4b24ed6332bf',
-                roleIds: [],
+                ...mockData[0],
+                ...{ id: null },
             })
             .expect(400)
             .then(res =>
@@ -89,10 +93,8 @@ describe('permission', () =>
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
             .send({
-                id: 'f71bc232-9c25-4f63-89c3-8f460a7077ec',
-                name: null,
-                boundedContextId: '61e4a239-9654-42a7-82d6-becdf8a8ea77',
-                roleIds: [],
+                ...mockData[0],
+                ...{ name: null },
             })
             .expect(400)
             .then(res =>
@@ -107,10 +109,8 @@ describe('permission', () =>
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
             .send({
-                id: '6e9589d9-6c4d-465b-98b7-1e2601b97b7f',
-                name: 'Practical Cotton Car',
-                boundedContextId: null,
-                roleIds: [],
+                ...mockData[0],
+                ...{ boundedContextId: null },
             })
             .expect(400)
             .then(res =>
@@ -125,9 +125,8 @@ describe('permission', () =>
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
             .send({
-                name: 'Awesome Soft Soap',
-                boundedContextId: 'fdc70cf9-2d29-426c-b092-79f81005ffef',
-                roleIds: [],
+                ...mockData[0],
+                ...{ id: undefined },
             })
             .expect(400)
             .then(res =>
@@ -142,9 +141,8 @@ describe('permission', () =>
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
             .send({
-                id: '4a12b9d5-4a54-42fa-8a12-e38b775c5986',
-                boundedContextId: 'e5e78d7f-7ff1-4548-bf6b-89dce50db196',
-                roleIds: [],
+                ...mockData[0],
+                ...{ name: undefined },
             })
             .expect(400)
             .then(res =>
@@ -159,9 +157,8 @@ describe('permission', () =>
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
             .send({
-                id: '4500d1c9-5e99-41f2-b1e8-a32595946365',
-                name: 'Generic Steel Soap',
-                roleIds: [],
+                ...mockData[0],
+                ...{ boundedContextId: undefined },
             })
             .expect(400)
             .then(res =>
@@ -176,10 +173,8 @@ describe('permission', () =>
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
             .send({
-                id: '7zvkcvz1iyclthahxr16oa3c48t38r59pma4i',
-                name: 'Tasty Wooden Chips',
-                boundedContextId: 'a5c5723f-fe08-41b3-946b-e315b1867fde',
-                roleIds: [],
+                ...mockData[0],
+                ...{ id: '*************************************' },
             })
             .expect(400)
             .then(res =>
@@ -194,10 +189,8 @@ describe('permission', () =>
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
             .send({
-                id: '3d3a26dc-18d0-46cb-a4ca-688fb926cc29',
-                name: 'Small Fresh Soap',
-                boundedContextId: 'fxd87mf5fmuwgy0ibgt7mstkq9pdffmjneybc',
-                roleIds: [],
+                ...mockData[0],
+                ...{ boundedContextId: '*************************************' },
             })
             .expect(400)
             .then(res =>
@@ -212,10 +205,8 @@ describe('permission', () =>
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
             .send({
-                id: '152ed623-91c7-475f-84a7-e528ba0086ae',
-                name: 'yjgb7v08ti1rax36e1rmk18xt0dtsowd0b72by8jvbtt1joq0d9obzxzs0o138w7vzjy1vn7lwpg47dgkn2hh4jhjhwt8m1kqm531g71pkj239yf89u4kb39k6ebrce6ll8e3ks5m3gw0bdgirlnh3zgw7tvssvn52f2k0ulpsht94nb6tuyz80myztgily3iafivckxmnfyytznd6x3mstj1agmiff5l5mlqhyt60fiokx263raibq6eyclbw9l',
-                boundedContextId: '4aaca6f5-263f-4d6d-be03-411f29d5a57d',
-                roleIds: [],
+                ...mockData[0],
+                ...{ name: '****************************************************************************************************************************************************************************************************************************************************************' },
             })
             .expect(400)
             .then(res =>
@@ -230,7 +221,7 @@ describe('permission', () =>
         return request(app.getHttpServer())
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
-            .send(seeder.collectionResponse[0])
+            .send(mockData[0])
             .expect(409);
     });
 
@@ -281,7 +272,7 @@ describe('permission', () =>
                 {
                     where:
                     {
-                        id: 'a1769ffc-2a51-4125-9550-70155282a72f',
+                        id: '76b17ee9-45f8-4bcb-a220-eb41c82cc52d',
                     },
                 },
             })
@@ -294,10 +285,8 @@ describe('permission', () =>
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
             .send({
-                id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Intelligent Rubber Computer',
-                boundedContextId: '94ac501c-64e8-4f92-8b9b-86e415982224',
-                roleIds: [],
+                ...mockData[0],
+                ...{ id: '5b19d6ac-4081-573b-96b3-56964d5326a8' },
             })
             .expect(201);
     });
@@ -326,7 +315,7 @@ describe('permission', () =>
     test('/REST:GET iam/permission/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/permission/find/4d89920b-b54d-4008-b3f3-600e352dfbb0')
+            .get('/iam/permission/find/27f7625d-7e8c-4055-9010-99cc4dc0d242')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -349,10 +338,8 @@ describe('permission', () =>
             .put('/iam/permission/update')
             .set('Accept', 'application/json')
             .send({
-                id: 'bd03bd7c-7e24-4e81-a1af-1f0e9d5f84d1',
-                name: 'Intelligent Cotton Shoes',
-                boundedContextId: '6fbf0e1d-b653-40de-9fe1-15e98fb6548f',
-                roleIds: [],
+                ...mockData[0],
+                ...{ id: '70029693-0b6b-4c16-bdf7-2a5c8a519802' },
             })
             .expect(404);
     });
@@ -364,7 +351,7 @@ describe('permission', () =>
             .set('Accept', 'application/json')
             .send({
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Generic Cotton Chair',
+                name: 'Tasty Soft Sausages',
                 boundedContextId: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                 roleIds: [],
             })
@@ -378,7 +365,7 @@ describe('permission', () =>
     test('/REST:DELETE iam/permission/delete/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/permission/delete/a09d0e4e-374f-45b3-89b1-27ad2a667592')
+            .delete('/iam/permission/delete/93a72b59-bdc8-4ea1-9dec-51fdda854629')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -410,7 +397,7 @@ describe('permission', () =>
                 `,
                 variables:
                 {
-                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt']),
+                    payload: _.omit(mockData[0], ['createdAt','updatedAt','deletedAt']),
                 },
             })
             .expect(200)
@@ -509,7 +496,7 @@ describe('permission', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Ergonomic Rubber Bike',
+                        name: 'Handmade Frozen Ball',
                         boundedContextId: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
@@ -545,7 +532,7 @@ describe('permission', () =>
                     {
                         where:
                         {
-                            id: '2a5005c7-aa5a-435f-a9a5-9803fb47dc73',
+                            id: '5bd92b61-f5df-4f97-939a-addd862237a5',
                         },
                     },
                 },
@@ -614,7 +601,7 @@ describe('permission', () =>
                     }
                 `,
                 variables: {
-                    id: '484dbcd9-91cc-4a9f-a2e9-485e95c0e83f',
+                    id: '6ddc8da9-1361-43cd-a024-47e03e095112',
                 },
             })
             .expect(200)
@@ -675,10 +662,8 @@ describe('permission', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '329d2a34-f87f-4251-8afb-465a0ac9c1b3',
-                        name: 'Tasty Fresh Chicken',
-                        boundedContextId: '028b1fa7-d18e-476c-bf36-e70e5fd48ed2',
-                        roleIds: [],
+                        ...mockData[0],
+                        ...{ id: '7ab2dbbb-b1cc-4caa-9d2c-503342cf5bae' },
                     },
                 },
             })
@@ -712,7 +697,7 @@ describe('permission', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Rustic Concrete Gloves',
+                        name: 'Generic Wooden Bacon',
                         boundedContextId: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                         roleIds: [],
                     },
@@ -744,7 +729,7 @@ describe('permission', () =>
                     }
                 `,
                 variables: {
-                    id: '69f8392f-31b0-442e-b395-0247c1930a61',
+                    id: 'bacc4d82-b87c-4335-8759-516b28b59441',
                 },
             })
             .expect(200)
@@ -787,6 +772,11 @@ describe('permission', () =>
 
     afterAll(async () =>
     {
+        await repository.delete({
+            queryStatement: {
+                where: {},
+            },
+        });
         await app.close();
     });
 });

@@ -1,41 +1,35 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamCreatePermissionsController } from './iam-create-permissions.controller';
+import { IamCreatePermissionsHandler } from '../handlers/iam-create-permissions.handler';
+
+// sources
 import { permissions } from '../../../../@apps/iam/permission/infrastructure/seeds/permission.seed';
 
 describe('IamCreatePermissionsController', () =>
 {
     let controller: IamCreatePermissionsController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamCreatePermissionsHandler;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
-                IamCreatePermissionsController
+                IamCreatePermissionsController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamCreatePermissionsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        controller  = module.get<IamCreatePermissionsController>(IamCreatePermissionsController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamCreatePermissionsController>(IamCreatePermissionsController);
+        handler = module.get<IamCreatePermissionsHandler>(IamCreatePermissionsHandler);
     });
 
     describe('main', () =>

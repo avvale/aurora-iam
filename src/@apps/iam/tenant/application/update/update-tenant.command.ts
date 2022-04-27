@@ -5,13 +5,13 @@ export class UpdateTenantCommand
 {
     constructor(
         public readonly payload: {
-            id: string,
-            name?: string,
-            code?: string,
-            logo?: string,
-            isActive?: boolean,
-            data?: any,
-            accountIds?: string[],
+            id: string;
+            name?: string;
+            code?: string;
+            logo?: string;
+            isActive?: boolean;
+            data?: any;
+            accountIds?: string[];
         },
         public readonly constraint?: QueryStatement,
         public readonly cQMetadata?: CQMetadata,

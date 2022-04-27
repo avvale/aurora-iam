@@ -1,16 +1,15 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { Constraint, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
+import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
-import { FindBoundedContextQuery } from '../../../../@apps/iam/bounded-context/application/find/find-bounded-context.query';
-import { IamBoundedContext } from './../../../../graphql';
+import { IamFindBoundedContextHandler } from '../handlers/iam-find-bounded-context.handler';
+import { IamBoundedContext } from '../../../../graphql';
 
 @Resolver()
 export class IamFindBoundedContextResolver
 {
     constructor(
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamFindBoundedContextHandler,
     ) {}
 
     @Query('iamFindBoundedContext')
@@ -20,6 +19,10 @@ export class IamFindBoundedContextResolver
         @Timezone() timezone?: string,
     ): Promise<IamBoundedContext>
     {
-        return await this.queryBus.ask(new FindBoundedContextQuery(queryStatement, constraint, { timezone }));
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

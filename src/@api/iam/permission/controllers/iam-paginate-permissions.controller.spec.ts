@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamPaginatePermissionsController } from './iam-paginate-permissions.controller';
+import { IamPaginatePermissionsHandler } from '../handlers/iam-paginate-permissions.handler';
 
 // sources
 import { permissions } from '../../../../@apps/iam/permission/infrastructure/seeds/permission.seed';
@@ -11,8 +11,7 @@ import { permissions } from '../../../../@apps/iam/permission/infrastructure/see
 describe('IamPaginatePermissionsController', () =>
 {
     let controller: IamPaginatePermissionsController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamPaginatePermissionsHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,20 @@ describe('IamPaginatePermissionsController', () =>
             imports: [
             ],
             controllers: [
-                IamPaginatePermissionsController
+                IamPaginatePermissionsController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamPaginatePermissionsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
-                },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
             ]
         }).compile();
 
-        controller  = module.get<IamPaginatePermissionsController>(IamPaginatePermissionsController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamPaginatePermissionsController>(IamPaginatePermissionsController);
+        handler = module.get<IamPaginatePermissionsHandler>(IamPaginatePermissionsHandler);
     });
 
     describe('main', () =>
@@ -52,8 +44,16 @@ describe('IamPaginatePermissionsController', () =>
 
         test('should return a permissions', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions)));
-            expect(await controller.main()).toBe(permissions);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
+                total: 5,
+                count: 5,
+                rows : permissions,
+            })));
+            expect(await controller.main()).toStrictEqual({
+                total: 5,
+                count: 5,
+                rows : permissions,
+            });
         });
     });
 });

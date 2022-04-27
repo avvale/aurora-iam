@@ -52,7 +52,10 @@ export class IamTenantModel extends Model<IamTenantModel>
     data: any;
 
 
-    @BelongsToMany(() => IamAccountModel, { through: () => IamTenantsAccountsModel, uniqueKey: 'Uq01IamTenantsAccounts' })
+    @BelongsToMany(() => IamAccountModel, {
+        through: () => IamTenantsAccountsModel,
+        uniqueKey: 'Uq01IamTenantsAccounts',
+    })
     accounts: IamAccountModel[];
 
     @Column({

@@ -11,8 +11,8 @@ import {
     RoleUpdatedAt,
     RoleDeletedAt,
 } from '../../../../../@apps/iam/role/domain/value-objects';
-import { IamRole } from './../../domain/role.aggregate';
-import { roles } from './../seeds/role.seed';
+import { IamRole } from '../../domain/role.aggregate';
+import { roles } from '../seeds/role.seed';
 
 @Injectable()
 export class MockRoleRepository extends MockRepository<IamRole> implements IRoleRepository
@@ -28,7 +28,7 @@ export class MockRoleRepository extends MockRepository<IamRole> implements IRole
         this.createSourceMockData();
     }
 
-    public reset()
+    public reset(): void
     {
         this.createSourceMockData();
     }

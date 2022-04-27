@@ -1,28 +1,26 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { ICommandBus, IQueryBus, Timezone } from 'aurora-ts-core';
+import { Timezone } from 'aurora-ts-core';
 
 // @apps
-import { FindPermissionByIdQuery } from '../../../../@apps/iam/permission/application/find/find-permission-by-id.query';
-import { CreatePermissionCommand } from '../../../../@apps/iam/permission/application/create/create-permission.command';
-import { IamCreatePermissionInput } from './../../../../graphql';
+import { IamCreatePermissionHandler } from '../handlers/iam-create-permission.handler';
+import { IamPermission, IamCreatePermissionInput } from '../../../../graphql';
 
 @Resolver()
 export class IamCreatePermissionResolver
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamCreatePermissionHandler,
     ) {}
 
     @Mutation('iamCreatePermission')
     async main(
         @Args('payload') payload: IamCreatePermissionInput,
         @Timezone() timezone?: string,
-    )
+    ): Promise<IamPermission>
     {
-        await this.commandBus.dispatch(new CreatePermissionCommand(payload, { timezone }));
-
-        return await this.queryBus.ask(new FindPermissionByIdQuery(payload.id, {}, { timezone }));
+        return await this.handler.main(
+            payload,
+            timezone,
+        );
     }
 }

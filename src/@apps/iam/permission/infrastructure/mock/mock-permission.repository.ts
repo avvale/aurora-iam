@@ -10,8 +10,8 @@ import {
     PermissionUpdatedAt,
     PermissionDeletedAt,
 } from '../../../../../@apps/iam/permission/domain/value-objects';
-import { IamPermission } from './../../domain/permission.aggregate';
-import { permissions } from './../seeds/permission.seed';
+import { IamPermission } from '../../domain/permission.aggregate';
+import { permissions } from '../seeds/permission.seed';
 
 @Injectable()
 export class MockPermissionRepository extends MockRepository<IamPermission> implements IPermissionRepository
@@ -27,7 +27,7 @@ export class MockPermissionRepository extends MockRepository<IamPermission> impl
         this.createSourceMockData();
     }
 
-    public reset()
+    public reset(): void
     {
         this.createSourceMockData();
     }

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamGetTenantsController } from './iam-get-tenants.controller';
+import { IamGetTenantsHandler } from '../handlers/iam-get-tenants.handler';
 
 // sources
 import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenant.seed';
@@ -11,8 +11,7 @@ import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenan
 describe('IamGetTenantsController', () =>
 {
     let controller: IamGetTenantsController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamGetTenantsHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,20 @@ describe('IamGetTenantsController', () =>
             imports: [
             ],
             controllers: [
-                IamGetTenantsController
+                IamGetTenantsController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamGetTenantsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        controller  = module.get<IamGetTenantsController>(IamGetTenantsController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamGetTenantsController>(IamGetTenantsController);
+        handler = module.get<IamGetTenantsHandler>(IamGetTenantsHandler);
     });
 
     describe('main', () =>
@@ -52,7 +44,7 @@ describe('IamGetTenantsController', () =>
 
         test('should return a tenants', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants)));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(tenants)));
             expect(await controller.main()).toBe(tenants);
         });
     });

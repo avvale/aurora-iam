@@ -21,8 +21,8 @@ describe('DeleteTenantByIdCommandHandler', () =>
                     useValue: {
                         main: () => {},
                     }
-                }
-            ]
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<DeleteTenantByIdCommandHandler>(DeleteTenantByIdCommandHandler);

@@ -21,9 +21,9 @@ describe('CreateRolesCommandHandler', () =>
                     provide : CreateRolesService,
                     useValue: {
                         main: () => { /**/ },
-                    }
-                }
-            ]
+                    },
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<CreateRolesCommandHandler>(CreateRolesCommandHandler);
@@ -42,8 +42,8 @@ describe('CreateRolesCommandHandler', () =>
             expect(await commandHandler.execute(
                 new CreateRolesCommand(
                     roles,
-                    { timezone: process.env.TZ }
-                )
+                    { timezone: process.env.TZ },
+                ),
             )).toBe(undefined);
         });
     });

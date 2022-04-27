@@ -60,9 +60,10 @@ export abstract class IRoleRepository implements IRepository<IamRole>
     abstract create(
         role: IamRole,
         options?: {
+            createOptions?: ObjectLiteral;
             dataFactory?: (aggregate: IamRole) => ObjectLiteral;
             // arguments to find object and check if object is duplicated
-            finderQueryStatement: (aggregate: IamRole) => QueryStatement;
+            finderQueryStatement?: (aggregate: IamRole) => QueryStatement;
         }
     ): Promise<void>;
 
@@ -79,6 +80,7 @@ export abstract class IRoleRepository implements IRepository<IamRole>
     abstract update(
         role: IamRole,
         options?: {
+            updateOptions?: ObjectLiteral;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: IamRole) => ObjectLiteral;
@@ -91,6 +93,7 @@ export abstract class IRoleRepository implements IRepository<IamRole>
     abstract deleteById(
         id: RoleId,
         options?: {
+            deleteOptions?: ObjectLiteral;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
         }
@@ -99,6 +102,7 @@ export abstract class IRoleRepository implements IRepository<IamRole>
     // delete records
     abstract delete(
         options?: {
+            deleteOptions?: ObjectLiteral;
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;

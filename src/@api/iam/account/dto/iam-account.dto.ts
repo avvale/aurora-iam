@@ -78,6 +78,12 @@ export class IamAccountDto
     tenants?: IamTenantDto[];
 
     @ApiProperty({
+        type       : IamUserDto,
+        description: 'user [input here api field description]',
+    })
+    user?: IamUserDto;
+
+    @ApiProperty({
         type       : String,
         description: 'createdAt [input here api field description]',
     })

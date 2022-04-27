@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamPaginateRolesResolver } from './iam-paginate-roles.resolver';
+import { IamPaginateRolesHandler } from '../handlers/iam-paginate-roles.handler';
 
 // sources
 import { roles } from '../../../../@apps/iam/role/infrastructure/seeds/role.seed';
@@ -11,8 +11,7 @@ import { roles } from '../../../../@apps/iam/role/infrastructure/seeds/role.seed
 describe('IamPaginateRolesResolver', () =>
 {
     let resolver: IamPaginateRolesResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamPaginateRolesHandler;
 
     beforeAll(async () =>
     {
@@ -22,23 +21,16 @@ describe('IamPaginateRolesResolver', () =>
             providers: [
                 IamPaginateRolesResolver,
                 {
-                    provide : IQueryBus,
+                    provide : IamPaginateRolesHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
         resolver    = module.get<IamPaginateRolesResolver>(IamPaginateRolesResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamPaginateRolesHandler>(IamPaginateRolesHandler);
     });
 
     test('IamPaginateRolesResolver should be defined', () =>
@@ -55,8 +47,16 @@ describe('IamPaginateRolesResolver', () =>
 
         test('should return a roles', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles)));
-            expect(await resolver.main()).toBe(roles);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
+                total: 5,
+                count: 5,
+                rows : roles,
+            })));
+            expect(await resolver.main()).toStrictEqual({
+                total: 5,
+                count: 5,
+                rows : roles,
+            });
         });
     });
 });

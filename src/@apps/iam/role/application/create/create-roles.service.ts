@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
+import { CQMetadata } from 'aurora-ts-core';
 import {
     RoleId,
     RoleName,
@@ -9,10 +10,10 @@ import {
     RoleCreatedAt,
     RoleUpdatedAt,
     RoleDeletedAt,
-} from './../../domain/value-objects';
-import { IRoleRepository } from './../../domain/role.repository';
-import { IamRole } from './../../domain/role.aggregate';
-import { AddRolesContextEvent } from './../events/add-roles-context.event';
+} from '../../domain/value-objects';
+import { IRoleRepository } from '../../domain/role.repository';
+import { IamRole } from '../../domain/role.aggregate';
+import { AddRolesContextEvent } from '../events/add-roles-context.event';
 
 @Injectable()
 export class CreateRolesService
@@ -22,7 +23,7 @@ export class CreateRolesService
         private readonly repository: IRoleRepository,
     ) {}
 
-    public async main(
+    async main(
         roles: {
             id: RoleId;
             name: RoleName;
@@ -30,6 +31,7 @@ export class CreateRolesService
             permissionIds: RolePermissionIds;
             accountIds: RoleAccountIds;
         } [],
+        cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // create aggregate with factory pattern
@@ -45,7 +47,7 @@ export class CreateRolesService
         ));
 
         // insert
-        await this.repository.insert(aggregateRoles);
+        await this.repository.insert(aggregateRoles, { insertOptions: cQMetadata?.repositoryOptions });
 
         // create AddRolesContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events

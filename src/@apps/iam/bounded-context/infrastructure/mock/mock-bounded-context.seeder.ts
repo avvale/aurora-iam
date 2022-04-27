@@ -9,9 +9,10 @@ import {
     BoundedContextCreatedAt,
     BoundedContextUpdatedAt,
     BoundedContextDeletedAt,
-} from './../../domain/value-objects';
-import { IamBoundedContext } from './../../domain/bounded-context.aggregate';
-import { boundedContexts } from './../seeds/bounded-context.seed';
+} from '../../domain/value-objects';
+import { IamBoundedContext } from '../../domain/bounded-context.aggregate';
+import { boundedContexts } from '../seeds/bounded-context.seed';
+import * as _ from 'lodash';
 
 @Injectable()
 export class MockBoundedContextSeeder extends MockSeeder<IamBoundedContext>
@@ -28,7 +29,7 @@ export class MockBoundedContextSeeder extends MockSeeder<IamBoundedContext>
     {
         this.collectionSource = [];
 
-        for (const boundedContext of boundedContexts)
+        for (const boundedContext of _.orderBy(boundedContexts, ['id']))
         {
             this.collectionSource.push(
                 IamBoundedContext.register(
@@ -40,7 +41,7 @@ export class MockBoundedContextSeeder extends MockSeeder<IamBoundedContext>
                     new BoundedContextCreatedAt({ currentTimestamp: true }),
                     new BoundedContextUpdatedAt({ currentTimestamp: true }),
                     new BoundedContextDeletedAt(null),
-                )
+                ),
             );
         }
     }

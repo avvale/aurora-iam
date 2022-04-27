@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Post, Body, Headers } from '@nestjs/common';
+import { Controller, Post, Body, Headers, LiteralObject } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { Timezone } from 'aurora-ts-core';
 import { IamAccountDto, IamCreateAccountDto } from '../dto';
@@ -20,7 +20,7 @@ export class IamCreateAccountController
     @ApiCreatedResponse({ description: 'The record has been successfully created.', type: IamAccountDto })
     async main(
         @Body() payload: IamCreateAccountDto,
-        @Headers() headers: Record <string, string>,
+        @Headers() headers: LiteralObject,
         @Timezone() timezone?: string,
     )
     {

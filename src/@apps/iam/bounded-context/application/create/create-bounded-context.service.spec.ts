@@ -14,9 +14,9 @@ import {
     BoundedContextCreatedAt,
     BoundedContextUpdatedAt,
     BoundedContextDeletedAt,
-} from './../../domain/value-objects';
-import { IBoundedContextRepository } from './../../domain/bounded-context.repository';
-import { MockBoundedContextRepository } from './../../infrastructure/mock/mock-bounded-context.repository';
+} from '../../domain/value-objects';
+import { IBoundedContextRepository } from '../../domain/bounded-context.repository';
+import { MockBoundedContextRepository } from '../../infrastructure/mock/mock-bounded-context.repository';
 
 describe('CreateBoundedContextService', () =>
 
@@ -38,9 +38,9 @@ describe('CreateBoundedContextService', () =>
                     provide : IBoundedContextRepository,
                     useValue: {
                         create: (item) => { /**/ },
-                    }
+                    },
                 },
-            ]
+            ],
         }).compile();
 
         service         = module.get(CreateBoundedContextService);
@@ -64,7 +64,7 @@ describe('CreateBoundedContextService', () =>
                     root: new BoundedContextRoot(boundedContexts[0].root),
                     sort: new BoundedContextSort(boundedContexts[0].sort),
                     isActive: new BoundedContextIsActive(boundedContexts[0].isActive),
-                }
+                },
             )).toBe(undefined);
         });
     });

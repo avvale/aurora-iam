@@ -1,33 +1,31 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
-import { ICommandBus, IQueryBus, Timezone } from 'aurora-ts-core';
-import { CreateBoundedContextDto } from './../dto/create-bounded-context.dto';
-import { BoundedContextDto } from './../dto/bounded-context.dto';
+import { Timezone } from 'aurora-ts-core';
+import { IamBoundedContextDto, IamCreateBoundedContextDto } from '../dto';
 
 // @apps
-import { FindBoundedContextByIdQuery } from '../../../../@apps/iam/bounded-context/application/find/find-bounded-context-by-id.query';
-import { CreateBoundedContextCommand } from '../../../../@apps/iam/bounded-context/application/create/create-bounded-context.command';
+import { IamCreateBoundedContextHandler } from '../handlers/iam-create-bounded-context.handler';
 
 @ApiTags('[iam] bounded-context')
 @Controller('iam/bounded-context/create')
 export class IamCreateBoundedContextController
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamCreateBoundedContextHandler,
     ) {}
 
     @Post()
     @ApiOperation({ summary: 'Create bounded-context' })
-    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: BoundedContextDto })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: IamBoundedContextDto })
     async main(
-        @Body() payload: CreateBoundedContextDto,
+        @Body() payload: IamCreateBoundedContextDto,
         @Timezone() timezone?: string,
     )
     {
-        await this.commandBus.dispatch(new CreateBoundedContextCommand(payload, { timezone }));
-
-        return await this.queryBus.ask(new FindBoundedContextByIdQuery(payload.id, {}, { timezone }));
+        return await this.handler.main(
+            payload,
+            timezone,
+        );
     }
 }

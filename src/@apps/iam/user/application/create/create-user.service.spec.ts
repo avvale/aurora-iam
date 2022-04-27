@@ -20,9 +20,9 @@ import {
     UserCreatedAt,
     UserUpdatedAt,
     UserDeletedAt,
-} from './../../domain/value-objects';
-import { IUserRepository } from './../../domain/user.repository';
-import { MockUserRepository } from './../../infrastructure/mock/mock-user.repository';
+} from '../../domain/value-objects';
+import { IUserRepository } from '../../domain/user.repository';
+import { MockUserRepository } from '../../infrastructure/mock/mock-user.repository';
 
 describe('CreateUserService', () =>
 
@@ -44,9 +44,9 @@ describe('CreateUserService', () =>
                     provide : IUserRepository,
                     useValue: {
                         create: (item) => { /**/ },
-                    }
+                    },
                 },
-            ]
+            ],
         }).compile();
 
         service         = module.get(CreateUserService);
@@ -76,7 +76,7 @@ describe('CreateUserService', () =>
                     password: new UserPassword(users[0].password),
                     rememberToken: new UserRememberToken(users[0].rememberToken),
                     data: new UserData(users[0].data),
-                }
+                },
             )).toBe(undefined);
         });
     });

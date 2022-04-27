@@ -10,9 +10,9 @@ import {
     PermissionCreatedAt,
     PermissionUpdatedAt,
     PermissionDeletedAt,
-} from './../../domain/value-objects';
-import { IPermissionRepository } from './../../domain/permission.repository';
-import { IamPermission } from './../../domain/permission.aggregate';
+} from '../../domain/value-objects';
+import { IPermissionRepository } from '../../domain/permission.repository';
+import { IamPermission } from '../../domain/permission.aggregate';
 
 @Injectable()
 export class UpdatePermissionService
@@ -22,12 +22,12 @@ export class UpdatePermissionService
         private readonly repository: IPermissionRepository,
     ) {}
 
-    public async main(
+    async main(
         payload: {
-            id: PermissionId,
-            name?: PermissionName,
-            boundedContextId?: PermissionBoundedContextId,
-            roleIds?: PermissionRoleIds,
+            id: PermissionId;
+            name?: PermissionName;
+            boundedContextId?: PermissionBoundedContextId;
+            roleIds?: PermissionRoleIds;
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
@@ -46,11 +46,11 @@ export class UpdatePermissionService
 
 
         // update
-        await this.repository.update(permission, { constraint, cQMetadata });
+        await this.repository.update(permission, { constraint, cQMetadata, updateOptions: cQMetadata?.repositoryOptions });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const permissionRegister = this.publisher.mergeObjectContext(
-            permission
+            permission,
         );
 
         permissionRegister.updated(permission); // apply event to model events

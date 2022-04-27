@@ -1,34 +1,33 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Put, Body } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { Constraint, ICommandBus, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
-import { UpdateBoundedContextDto } from './../dto/update-bounded-context.dto';
-import { BoundedContextDto } from './../dto/bounded-context.dto';
+import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
+import { IamBoundedContextDto, IamUpdateBoundedContextDto } from '../dto';
 
 // @apps
-import { UpdateBoundedContextCommand } from '../../../../@apps/iam/bounded-context/application/update/update-bounded-context.command';
-import { FindBoundedContextByIdQuery } from '../../../../@apps/iam/bounded-context/application/find/find-bounded-context-by-id.query';
+import { IamUpdateBoundedContextHandler } from '../handlers/iam-update-bounded-context.handler';
 
 @ApiTags('[iam] bounded-context')
 @Controller('iam/bounded-context/update')
 export class IamUpdateBoundedContextController
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
+        private readonly handler: IamUpdateBoundedContextHandler,
     ) {}
 
     @Put()
     @ApiOperation({ summary: 'Update bounded-context' })
-    @ApiOkResponse({ description: 'The record has been successfully updated.', type: BoundedContextDto})
+    @ApiOkResponse({ description: 'The record has been successfully updated.', type: IamBoundedContextDto})
     async main(
-        @Body() payload: UpdateBoundedContextDto,
+        @Body() payload: IamUpdateBoundedContextDto,
         @Constraint() constraint?: QueryStatement,
         @Timezone() timezone?: string,
     )
     {
-        await this.commandBus.dispatch(new UpdateBoundedContextCommand(payload, constraint, { timezone }));
-
-        return await this.queryBus.ask(new FindBoundedContextByIdQuery(payload.id, constraint, { timezone }));
+        return await this.handler.main(
+            payload,
+            constraint,
+            timezone,
+        );
     }
 }

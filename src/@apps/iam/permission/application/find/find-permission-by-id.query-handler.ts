@@ -1,7 +1,7 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { PermissionResponse } from './../../domain/permission.response';
-import { PermissionMapper } from './../../domain/permission.mapper';
-import { PermissionId } from './../../domain/value-objects';
+import { PermissionResponse } from '../../domain/permission.response';
+import { PermissionMapper } from '../../domain/permission.mapper';
+import { PermissionId } from '../../domain/value-objects';
 import { FindPermissionByIdQuery } from './find-permission-by-id.query';
 import { FindPermissionByIdService } from './find-permission-by-id.service';
 

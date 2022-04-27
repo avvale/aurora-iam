@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamDeleteTenantsController } from './iam-delete-tenants.controller';
+import { IamDeleteTenantsHandler } from '../handlers/iam-delete-tenants.handler';
 
 // sources
 import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenant.seed';
@@ -11,8 +11,7 @@ import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenan
 describe('IamDeleteTenantsController', () =>
 {
     let controller: IamDeleteTenantsController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamDeleteTenantsHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,20 @@ describe('IamDeleteTenantsController', () =>
             imports: [
             ],
             controllers: [
-                IamDeleteTenantsController
+                IamDeleteTenantsController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamDeleteTenantsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        controller  = module.get<IamDeleteTenantsController>(IamDeleteTenantsController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamDeleteTenantsController>(IamDeleteTenantsController);
+        handler = module.get<IamDeleteTenantsHandler>(IamDeleteTenantsHandler);
     });
 
     describe('main', () =>
@@ -52,7 +44,7 @@ describe('IamDeleteTenantsController', () =>
 
         test('should return an tenants deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants)));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(tenants)));
             expect(await controller.main()).toBe(tenants);
         });
     });

@@ -1,7 +1,7 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { UserResponse } from './../../domain/user.response';
-import { UserMapper } from './../../domain/user.mapper';
-import { UserId } from './../../domain/value-objects';
+import { UserResponse } from '../../domain/user.response';
+import { UserMapper } from '../../domain/user.mapper';
+import { UserId } from '../../domain/value-objects';
 import { FindUserByIdQuery } from './find-user-by-id.query';
 import { FindUserByIdService } from './find-user-by-id.service';
 

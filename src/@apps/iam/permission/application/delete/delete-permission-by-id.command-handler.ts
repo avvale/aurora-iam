@@ -3,7 +3,7 @@ import { DeletePermissionByIdCommand } from './delete-permission-by-id.command';
 import { DeletePermissionByIdService } from './delete-permission-by-id.service';
 import {
     PermissionId
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(DeletePermissionByIdCommand)
 export class DeletePermissionByIdCommandHandler implements ICommandHandler<DeletePermissionByIdCommand>

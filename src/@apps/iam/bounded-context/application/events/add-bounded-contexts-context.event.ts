@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { IamBoundedContext } from './../../domain/bounded-context.aggregate';
+import { IamBoundedContext } from '../../domain/bounded-context.aggregate';
 import { CreatedBoundedContextEvent } from './created-bounded-context.event';
 import { CreatedBoundedContextsEvent } from './created-bounded-contexts.event';
 import { DeletedBoundedContextEvent } from './deleted-bounded-context.event';

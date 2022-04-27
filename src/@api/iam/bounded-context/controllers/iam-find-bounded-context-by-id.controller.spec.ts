@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamFindBoundedContextByIdController } from './iam-find-bounded-context-by-id.controller';
+import { IamFindBoundedContextByIdHandler } from '../handlers/iam-find-bounded-context-by-id.handler';
 
 // sources
 import { boundedContexts } from '../../../../@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
@@ -11,8 +11,7 @@ import { boundedContexts } from '../../../../@apps/iam/bounded-context/infrastru
 describe('IamFindBoundedContextByIdController', () =>
 {
     let controller: IamFindBoundedContextByIdController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: IamFindBoundedContextByIdHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,20 @@ describe('IamFindBoundedContextByIdController', () =>
             imports: [
             ],
             controllers: [
-                IamFindBoundedContextByIdController
+                IamFindBoundedContextByIdController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : IamFindBoundedContextByIdHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        controller  = module.get<IamFindBoundedContextByIdController>(IamFindBoundedContextByIdController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<IamFindBoundedContextByIdController>(IamFindBoundedContextByIdController);
+        handler = module.get<IamFindBoundedContextByIdHandler>(IamFindBoundedContextByIdHandler);
     });
 
     describe('main', () =>
@@ -52,7 +44,7 @@ describe('IamFindBoundedContextByIdController', () =>
 
         test('should return an boundedContext by id', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
             expect(await controller.main(boundedContexts[0].id)).toBe(boundedContexts[0]);
         });
     });
