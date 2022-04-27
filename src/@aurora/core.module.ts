@@ -10,8 +10,8 @@ import { GraphQLConfigModule } from './graphql/graphql-config.module';
         SequelizeConfigModule,
     ],
     controllers: [
-        CorePreparationRequestController
+        CorePreparationRequestController,
     ],
-    exports: []
+    exports: [],
 })
 export class CoreModule {}

@@ -1,5 +1,6 @@
-import { Module } from '@nestjs/common';
+import { DynamicModule, Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { JwtModule, JwtModuleOptions } from '@nestjs/jwt';
 import { SharedModule } from '../../@aurora/shared.module';
 import { IamModels, IamHandlers, IamServices, IamRepositories, IamSagas } from '../../@apps/iam';
 import { IamBoundedContextControllers, IamBoundedContextResolvers, IamBoundedContextApiHandlers } from './bounded-context';
@@ -13,8 +14,8 @@ import { IamUserControllers, IamUserResolvers, IamUserApiHandlers } from './user
     imports: [
         SharedModule,
         SequelizeModule.forFeature([
-                ...IamModels
-            ])
+            ...IamModels,
+        ]),
     ],
     controllers: [
         ...IamBoundedContextControllers,
@@ -22,7 +23,7 @@ import { IamUserControllers, IamUserResolvers, IamUserApiHandlers } from './user
         ...IamTenantControllers,
         ...IamRoleControllers,
         ...IamAccountControllers,
-        ...IamUserControllers
+        ...IamUserControllers,
     ],
     providers: [
         ...IamHandlers,
@@ -40,7 +41,18 @@ import { IamUserControllers, IamUserResolvers, IamUserApiHandlers } from './user
         ...IamRoleApiHandlers,
         ...IamPermissionApiHandlers,
         ...IamBoundedContextApiHandlers,
-        ...IamTenantApiHandlers
+        ...IamTenantApiHandlers,
     ],
 })
-export class IamModule {}
+export class IamModule
+{
+    static forRoot(jwtOptions: JwtModuleOptions): DynamicModule
+    {
+        return {
+            module : IamModule,
+            imports: [
+                JwtModule.register(jwtOptions),
+            ],
+        };
+    }
+}

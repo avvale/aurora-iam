@@ -1,9 +1,11 @@
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import * as fs from 'fs';
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { TestingJwtService } from 'aurora-ts-core';
 import { IAccountRepository } from '../../../src/@apps/iam/account/domain/account.repository';
 import { MockAccountSeeder } from '../../../src/@apps/iam/account/infrastructure/mock/mock-account.seeder';
 import { accounts } from '../../../src/@apps/iam/account/infrastructure/seeds/account.seed';
@@ -12,8 +14,7 @@ import { IamModule } from '../../../src/@api/iam/iam.module';
 import { IamAccountType } from '../../../src/graphql';
 import * as request from 'supertest';
 import * as _ from 'lodash';
-
-
+import { JwtModule, JwtModuleOptions } from '@nestjs/jwt';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -23,6 +24,14 @@ describe('account', () =>
     let app: INestApplication;
     let repository: IAccountRepository;
     let seeder: MockAccountSeeder;
+    let testJwt: string;
+    const jwtOptions: JwtModuleOptions = {
+        privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
+        publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
+        signOptions: {
+            algorithm: 'RS256',
+        },
+    };
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -32,7 +41,8 @@ describe('account', () =>
         const module: TestingModule = await Test.createTestingModule({
             imports: [
                 ...importForeignModules,
-                IamModule,
+                IamModule.forRoot(jwtOptions),
+                JwtModule.register(jwtOptions),
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
                     imports   : [ConfigModule],
@@ -57,6 +67,7 @@ describe('account', () =>
             ],
             providers: [
                 MockAccountSeeder,
+                TestingJwtService,
             ],
         })
             .compile();
@@ -65,6 +76,7 @@ describe('account', () =>
         app             = module.createNestApplication();
         repository      = module.get<IAccountRepository>(IAccountRepository);
         seeder          = module.get<MockAccountSeeder>(MockAccountSeeder);
+        testJwt         = module.get(TestingJwtService).getJwt();
 
         // seed mock data in memory database
         await repository.insert(seeder.collectionSource);
@@ -77,6 +89,7 @@ describe('account', () =>
         return request(app.getHttpServer())
             .post('/iam/account/create')
             .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 ...mockData[0],
                 ...{ id: null },
