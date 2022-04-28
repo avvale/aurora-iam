@@ -406,7 +406,7 @@ describe('role', () =>
                 `,
                 variables:
                 {
-                    payload: _.omit(mockData[0], ['createdAt','updatedAt','deletedAt']),
+                    payload: _.omit(mockData[0], ['permissions', 'createdAt','updatedAt','deletedAt']),
                 },
             })
             .expect(200)
@@ -677,7 +677,7 @@ describe('role', () =>
                 `,
                 variables: {
                     payload: {
-                        ...mockData[0],
+                        ..._.omit(mockData[0], ['permissions', 'createdAt','updatedAt','deletedAt']),
                         ...{ id: 'e72379f5-fa88-46af-9bb9-aebb2bb31448' },
                     },
                 },
