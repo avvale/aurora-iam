@@ -1,9 +1,11 @@
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import * as fs from 'fs';
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { JwtModuleOptions } from '@nestjs/jwt';
 import { IRoleRepository } from '../../../src/@apps/iam/role/domain/role.repository';
 import { MockRoleSeeder } from '../../../src/@apps/iam/role/infrastructure/mock/mock-role.seeder';
 import { roles } from '../../../src/@apps/iam/role/infrastructure/seeds/role.seed';
@@ -22,6 +24,13 @@ describe('role', () =>
     let app: INestApplication;
     let repository: IRoleRepository;
     let seeder: MockRoleSeeder;
+    const jwtOptions: JwtModuleOptions = {
+        privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
+        publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
+        signOptions: {
+            algorithm: 'RS256',
+        },
+    };
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -31,7 +40,7 @@ describe('role', () =>
         const module: TestingModule = await Test.createTestingModule({
             imports: [
                 ...importForeignModules,
-                IamModule,
+                IamModule.forRoot(jwtOptions),
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
                     imports   : [ConfigModule],
