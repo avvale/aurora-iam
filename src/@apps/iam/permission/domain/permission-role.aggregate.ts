@@ -1,5 +1,5 @@
+import { LiteralObject } from '@nestjs/common';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { ObjectLiteral } from 'aurora-ts-core';
 import {
     PermissionPermissionId,
     PermissionRoleId,
@@ -23,7 +23,7 @@ export class IamPermissionRole extends AggregateRoot
         return new IamPermissionRole(permissionId, roleId);
     }
 
-    toDTO(): ObjectLiteral
+    toDTO(): LiteralObject
     {
         return {
             permissionId: this.permissionId.value,

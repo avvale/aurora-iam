@@ -13,8 +13,8 @@ export class CreateAccountsCommand
             dPermissions: any;
             dTenants: any;
             data?: any;
-            roleIds?: string[];
-            tenantIds?: string[];
+            roles?: string[];
+            tenants?: string[];
         } [],
         public readonly cQMetadata?: CQMetadata,
     ) {}

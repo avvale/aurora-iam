@@ -1,4 +1,5 @@
-import { IMapper, MapperOptions, ObjectLiteral, CQMetadata } from 'aurora-ts-core';
+import { LiteralObject } from '@nestjs/common';
+import { IMapper, MapperOptions, CQMetadata } from 'aurora-ts-core';
 import { IamUser } from './user.aggregate';
 import { UserResponse } from './user.response';
 import {
@@ -29,7 +30,7 @@ export class UserMapper implements IMapper
      * Map object to aggregate
      * @param user
      */
-    mapModelToAggregate(user: ObjectLiteral, cQMetadata?: CQMetadata): IamUser
+    mapModelToAggregate(user: LiteralObject, cQMetadata?: CQMetadata): IamUser
     {
         if (!user) return;
 
@@ -40,7 +41,7 @@ export class UserMapper implements IMapper
      * Map array of objects to array aggregates
      * @param users
      */
-    mapModelsToAggregates(users: ObjectLiteral[], cQMetadata?: CQMetadata): IamUser[]
+    mapModelsToAggregates(users: LiteralObject[], cQMetadata?: CQMetadata): IamUser[]
     {
         if (!Array.isArray(users)) return;
 
@@ -67,7 +68,7 @@ export class UserMapper implements IMapper
         return users.map(user => this.makeResponse(user));
     }
 
-    private makeAggregate(user: ObjectLiteral, cQMetadata?: CQMetadata): IamUser
+    private makeAggregate(user: LiteralObject, cQMetadata?: CQMetadata): IamUser
     {
         return IamUser.register(
             new UserId(user.id, { undefinable: true }),

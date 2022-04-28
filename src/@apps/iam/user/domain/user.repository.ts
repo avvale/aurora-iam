@@ -1,5 +1,6 @@
 
-import { CQMetadata, IRepository, ObjectLiteral, Pagination, QueryStatement } from 'aurora-ts-core';
+import { LiteralObject } from '@nestjs/common';
+import { CQMetadata, IRepository, Pagination, QueryStatement } from 'aurora-ts-core';
 import { IamUser } from './user.aggregate';
 import { UserId } from './value-objects';
 
@@ -60,8 +61,8 @@ export abstract class IUserRepository implements IRepository<IamUser>
     abstract create(
         user: IamUser,
         options?: {
-            createOptions?: ObjectLiteral;
-            dataFactory?: (aggregate: IamUser) => ObjectLiteral;
+            createOptions?: LiteralObject;
+            dataFactory?: (aggregate: IamUser) => LiteralObject;
             // arguments to find object and check if object is duplicated
             finderQueryStatement?: (aggregate: IamUser) => QueryStatement;
         }
@@ -71,8 +72,8 @@ export abstract class IUserRepository implements IRepository<IamUser>
     abstract insert(
         users: IamUser[],
         options?: {
-            insertOptions?: ObjectLiteral;
-            dataFactory?: (aggregate: IamUser) => ObjectLiteral;
+            insertOptions?: LiteralObject;
+            dataFactory?: (aggregate: IamUser) => LiteralObject;
         }
     ): Promise<void>;
 
@@ -80,12 +81,12 @@ export abstract class IUserRepository implements IRepository<IamUser>
     abstract update(
         user: IamUser,
         options?: {
-            updateOptions?: ObjectLiteral;
+            updateOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: IamUser) => ObjectLiteral;
+            dataFactory?: (aggregate: IamUser) => LiteralObject;
             // arguments to find object to update, with i18n we use langId and id relationship with parent entity
-            findArguments?: ObjectLiteral;
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 
@@ -93,7 +94,7 @@ export abstract class IUserRepository implements IRepository<IamUser>
     abstract deleteById(
         id: UserId,
         options?: {
-            deleteOptions?: ObjectLiteral;
+            deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
         }
@@ -102,7 +103,7 @@ export abstract class IUserRepository implements IRepository<IamUser>
     // delete records
     abstract delete(
         options?: {
-            deleteOptions?: ObjectLiteral;
+            deleteOptions?: LiteralObject;
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;

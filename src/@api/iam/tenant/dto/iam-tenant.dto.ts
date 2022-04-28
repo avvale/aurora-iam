@@ -42,7 +42,7 @@ export class IamTenantDto
 
     @ApiProperty({
         type       : [IamAccountDto],
-        description: 'accountIds [input here api field description]',
+        description: 'accounts [input here api field description]',
     })
     accounts?: IamAccountDto[];
 

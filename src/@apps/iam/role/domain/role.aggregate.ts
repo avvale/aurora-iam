@@ -1,12 +1,13 @@
 /* eslint-disable key-spacing */
+import { LiteralObject } from '@nestjs/common';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { ObjectLiteral, Utils } from 'aurora-ts-core';
+import { Utils } from 'aurora-ts-core';
 import {
     RoleId,
     RoleName,
     RoleIsMaster,
-    RolePermissionIds,
-    RoleAccountIds,
+    RolePermissions,
+    RoleAccounts,
     RoleCreatedAt,
     RoleUpdatedAt,
     RoleDeletedAt,
@@ -22,8 +23,8 @@ export class IamRole extends AggregateRoot
     id: RoleId;
     name: RoleName;
     isMaster: RoleIsMaster;
-    permissionIds: RolePermissionIds;
-    accountIds: RoleAccountIds;
+    permissions: RolePermissions;
+    accounts: RoleAccounts;
     createdAt: RoleCreatedAt;
     updatedAt: RoleUpdatedAt;
     deletedAt: RoleDeletedAt;
@@ -36,8 +37,8 @@ export class IamRole extends AggregateRoot
         id: RoleId,
         name: RoleName,
         isMaster: RoleIsMaster,
-        permissionIds: RolePermissionIds,
-        accountIds: RoleAccountIds,
+        permissions: RolePermissions,
+        accounts: RoleAccounts,
         createdAt: RoleCreatedAt,
         updatedAt: RoleUpdatedAt,
         deletedAt: RoleDeletedAt,
@@ -50,8 +51,8 @@ export class IamRole extends AggregateRoot
         this.id = id;
         this.name = name;
         this.isMaster = isMaster;
-        this.permissionIds = permissionIds;
-        this.accountIds = accountIds;
+        this.permissions = permissions;
+        this.accounts = accounts;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -65,8 +66,8 @@ export class IamRole extends AggregateRoot
         id: RoleId,
         name: RoleName,
         isMaster: RoleIsMaster,
-        permissionIds: RolePermissionIds,
-        accountIds: RoleAccountIds,
+        permissions: RolePermissions,
+        accounts: RoleAccounts,
         createdAt: RoleCreatedAt,
         updatedAt: RoleUpdatedAt,
         deletedAt: RoleDeletedAt,
@@ -79,8 +80,8 @@ export class IamRole extends AggregateRoot
             id,
             name,
             isMaster,
-            permissionIds,
-            accountIds,
+            permissions,
+            accounts,
             createdAt,
             updatedAt,
             deletedAt,
@@ -97,8 +98,8 @@ export class IamRole extends AggregateRoot
                 role.id.value,
                 role.name.value,
                 role.isMaster.value,
-                role.permissionIds?.value,
-                role.accountIds?.value,
+                role.permissions?.value,
+                role.accounts?.value,
                 role.createdAt?.value,
                 role.updatedAt?.value,
                 role.deletedAt?.value,
@@ -113,8 +114,8 @@ export class IamRole extends AggregateRoot
                 role.id.value,
                 role.name?.value,
                 role.isMaster?.value,
-                role.permissionIds?.value,
-                role.accountIds?.value,
+                role.permissions?.value,
+                role.accounts?.value,
                 role.createdAt?.value,
                 role.updatedAt?.value,
                 role.deletedAt?.value,
@@ -129,8 +130,8 @@ export class IamRole extends AggregateRoot
                 role.id.value,
                 role.name.value,
                 role.isMaster.value,
-                role.permissionIds?.value,
-                role.accountIds?.value,
+                role.permissions?.value,
+                role.accounts?.value,
                 role.createdAt?.value,
                 role.updatedAt?.value,
                 role.deletedAt?.value,
@@ -138,14 +139,14 @@ export class IamRole extends AggregateRoot
         );
     }
 
-    toDTO(): ObjectLiteral
+    toDTO(): LiteralObject
     {
         return {
             id: this.id.value,
             name: this.name.value,
             isMaster: this.isMaster.value,
-            permissionIds: this.permissionIds?.value,
-            accountIds: this.accountIds?.value,
+            permissions: this.permissions?.value,
+            accounts: this.accounts?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
@@ -157,7 +158,7 @@ export class IamRole extends AggregateRoot
     }
 
 
-    toI18nDTO(): ObjectLiteral
+    toI18nDTO(): LiteralObject
     {
         return {
         };

@@ -1,6 +1,7 @@
 /* eslint-disable key-spacing */
+import { LiteralObject } from '@nestjs/common';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { ObjectLiteral, Utils } from 'aurora-ts-core';
+import { Utils } from 'aurora-ts-core';
 import {
     AccountId,
     AccountType,
@@ -11,8 +12,8 @@ import {
     AccountDPermissions,
     AccountDTenants,
     AccountData,
-    AccountRoleIds,
-    AccountTenantIds,
+    AccountRoles,
+    AccountTenants,
     AccountCreatedAt,
     AccountUpdatedAt,
     AccountDeletedAt,
@@ -35,8 +36,8 @@ export class IamAccount extends AggregateRoot
     dPermissions: AccountDPermissions;
     dTenants: AccountDTenants;
     data: AccountData;
-    roleIds: AccountRoleIds;
-    tenantIds: AccountTenantIds;
+    roles: AccountRoles;
+    tenants: AccountTenants;
     createdAt: AccountCreatedAt;
     updatedAt: AccountUpdatedAt;
     deletedAt: AccountDeletedAt;
@@ -56,8 +57,8 @@ export class IamAccount extends AggregateRoot
         dPermissions: AccountDPermissions,
         dTenants: AccountDTenants,
         data: AccountData,
-        roleIds: AccountRoleIds,
-        tenantIds: AccountTenantIds,
+        roles: AccountRoles,
+        tenants: AccountTenants,
         createdAt: AccountCreatedAt,
         updatedAt: AccountUpdatedAt,
         deletedAt: AccountDeletedAt,
@@ -77,8 +78,8 @@ export class IamAccount extends AggregateRoot
         this.dPermissions = dPermissions;
         this.dTenants = dTenants;
         this.data = data;
-        this.roleIds = roleIds;
-        this.tenantIds = tenantIds;
+        this.roles = roles;
+        this.tenants = tenants;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -99,8 +100,8 @@ export class IamAccount extends AggregateRoot
         dPermissions: AccountDPermissions,
         dTenants: AccountDTenants,
         data: AccountData,
-        roleIds: AccountRoleIds,
-        tenantIds: AccountTenantIds,
+        roles: AccountRoles,
+        tenants: AccountTenants,
         createdAt: AccountCreatedAt,
         updatedAt: AccountUpdatedAt,
         deletedAt: AccountDeletedAt,
@@ -120,8 +121,8 @@ export class IamAccount extends AggregateRoot
             dPermissions,
             dTenants,
             data,
-            roleIds,
-            tenantIds,
+            roles,
+            tenants,
             createdAt,
             updatedAt,
             deletedAt,
@@ -145,8 +146,8 @@ export class IamAccount extends AggregateRoot
                 account.dPermissions.value,
                 account.dTenants.value,
                 account.data?.value,
-                account.roleIds?.value,
-                account.tenantIds?.value,
+                account.roles?.value,
+                account.tenants?.value,
                 account.createdAt?.value,
                 account.updatedAt?.value,
                 account.deletedAt?.value,
@@ -167,8 +168,8 @@ export class IamAccount extends AggregateRoot
                 account.dPermissions?.value,
                 account.dTenants?.value,
                 account.data?.value,
-                account.roleIds?.value,
-                account.tenantIds?.value,
+                account.roles?.value,
+                account.tenants?.value,
                 account.createdAt?.value,
                 account.updatedAt?.value,
                 account.deletedAt?.value,
@@ -189,8 +190,8 @@ export class IamAccount extends AggregateRoot
                 account.dPermissions.value,
                 account.dTenants.value,
                 account.data?.value,
-                account.roleIds?.value,
-                account.tenantIds?.value,
+                account.roles?.value,
+                account.tenants?.value,
                 account.createdAt?.value,
                 account.updatedAt?.value,
                 account.deletedAt?.value,
@@ -198,7 +199,7 @@ export class IamAccount extends AggregateRoot
         );
     }
 
-    toDTO(): ObjectLiteral
+    toDTO(): LiteralObject
     {
         return {
             id: this.id.value,
@@ -210,8 +211,8 @@ export class IamAccount extends AggregateRoot
             dPermissions: this.dPermissions.value,
             dTenants: this.dTenants.value,
             data: this.data?.value,
-            roleIds: this.roleIds?.value,
-            tenantIds: this.tenantIds?.value,
+            roles: this.roles?.value,
+            tenants: this.tenants?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
@@ -224,7 +225,7 @@ export class IamAccount extends AggregateRoot
     }
 
 
-    toI18nDTO(): ObjectLiteral
+    toI18nDTO(): LiteralObject
     {
         return {
         };

@@ -6,7 +6,7 @@ import {
     PermissionId,
     PermissionName,
     PermissionBoundedContextId,
-    PermissionRoleIds,
+    PermissionRoles,
     PermissionCreatedAt,
     PermissionUpdatedAt,
     PermissionDeletedAt,
@@ -27,7 +27,7 @@ export class UpdatePermissionService
             id: PermissionId;
             name?: PermissionName;
             boundedContextId?: PermissionBoundedContextId;
-            roleIds?: PermissionRoleIds;
+            roles?: PermissionRoles;
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
@@ -38,7 +38,7 @@ export class UpdatePermissionService
             payload.id,
             payload.name,
             payload.boundedContextId,
-            payload.roleIds,
+            payload.roles,
             null, // createdAt
             new PermissionUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt

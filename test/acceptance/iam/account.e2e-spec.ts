@@ -5,6 +5,7 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { JwtModule, JwtModuleOptions } from '@nestjs/jwt';
 import { OAuthFindAccessTokenByIdQueryHandler, OAuthFindClientByIdQueryHandler, TestingJwtService } from 'aurora-ts-core';
 import { IAccountRepository } from '../../../src/@apps/iam/account/domain/account.repository';
 import { MockAccountSeeder } from '../../../src/@apps/iam/account/infrastructure/mock/mock-account.seeder';
@@ -14,7 +15,8 @@ import { IamModule } from '../../../src/@api/iam/iam.module';
 import { IamAccountType } from '../../../src/graphql';
 import * as request from 'supertest';
 import * as _ from 'lodash';
-import { JwtModule, JwtModuleOptions } from '@nestjs/jwt';
+
+
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];

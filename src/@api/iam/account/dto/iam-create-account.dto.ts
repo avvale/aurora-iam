@@ -65,20 +65,19 @@ export class IamCreateAccountDto
 
     @ApiProperty({
         type       : [String],
-        description: 'roleIds [input here api field description]',
+        description: 'roles [input here api field description]',
     })
     roleIds?: string[];
 
     @ApiProperty({
         type       : [String],
-        description: 'tenantIds [input here api field description]',
+        description: 'tenants [input here api field description]',
     })
     tenantIds?: string[];
 
     @ApiProperty({
         type       : IamCreateUserDto,
         description: 'user [input here api field description]',
-        example    : '',
     })
     user?: IamCreateUserDto;
 

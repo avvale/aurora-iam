@@ -47,7 +47,7 @@ describe('UpdateTenantCommandHandler', () =>
                         logo: tenants[0].logo,
                         isActive: tenants[0].isActive,
                         data: tenants[0].data,
-                        accountIds: tenants[0].accountIds,
+                        accounts: tenants[0].accounts,
                     },
                     {},
                     { timezone: process.env.TZ },

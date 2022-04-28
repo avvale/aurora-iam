@@ -1,11 +1,12 @@
 /* eslint-disable key-spacing */
+import { LiteralObject } from '@nestjs/common';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { ObjectLiteral, Utils } from 'aurora-ts-core';
+import { Utils } from 'aurora-ts-core';
 import {
     PermissionId,
     PermissionName,
     PermissionBoundedContextId,
-    PermissionRoleIds,
+    PermissionRoles,
     PermissionCreatedAt,
     PermissionUpdatedAt,
     PermissionDeletedAt,
@@ -21,7 +22,7 @@ export class IamPermission extends AggregateRoot
     id: PermissionId;
     name: PermissionName;
     boundedContextId: PermissionBoundedContextId;
-    roleIds: PermissionRoleIds;
+    roles: PermissionRoles;
     createdAt: PermissionCreatedAt;
     updatedAt: PermissionUpdatedAt;
     deletedAt: PermissionDeletedAt;
@@ -34,7 +35,7 @@ export class IamPermission extends AggregateRoot
         id: PermissionId,
         name: PermissionName,
         boundedContextId: PermissionBoundedContextId,
-        roleIds: PermissionRoleIds,
+        roles: PermissionRoles,
         createdAt: PermissionCreatedAt,
         updatedAt: PermissionUpdatedAt,
         deletedAt: PermissionDeletedAt,
@@ -47,7 +48,7 @@ export class IamPermission extends AggregateRoot
         this.id = id;
         this.name = name;
         this.boundedContextId = boundedContextId;
-        this.roleIds = roleIds;
+        this.roles = roles;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -61,7 +62,7 @@ export class IamPermission extends AggregateRoot
         id: PermissionId,
         name: PermissionName,
         boundedContextId: PermissionBoundedContextId,
-        roleIds: PermissionRoleIds,
+        roles: PermissionRoles,
         createdAt: PermissionCreatedAt,
         updatedAt: PermissionUpdatedAt,
         deletedAt: PermissionDeletedAt,
@@ -74,7 +75,7 @@ export class IamPermission extends AggregateRoot
             id,
             name,
             boundedContextId,
-            roleIds,
+            roles,
             createdAt,
             updatedAt,
             deletedAt,
@@ -91,7 +92,7 @@ export class IamPermission extends AggregateRoot
                 permission.id.value,
                 permission.name.value,
                 permission.boundedContextId.value,
-                permission.roleIds?.value,
+                permission.roles?.value,
                 permission.createdAt?.value,
                 permission.updatedAt?.value,
                 permission.deletedAt?.value,
@@ -106,7 +107,7 @@ export class IamPermission extends AggregateRoot
                 permission.id.value,
                 permission.name?.value,
                 permission.boundedContextId?.value,
-                permission.roleIds?.value,
+                permission.roles?.value,
                 permission.createdAt?.value,
                 permission.updatedAt?.value,
                 permission.deletedAt?.value,
@@ -121,7 +122,7 @@ export class IamPermission extends AggregateRoot
                 permission.id.value,
                 permission.name.value,
                 permission.boundedContextId.value,
-                permission.roleIds?.value,
+                permission.roles?.value,
                 permission.createdAt?.value,
                 permission.updatedAt?.value,
                 permission.deletedAt?.value,
@@ -129,13 +130,13 @@ export class IamPermission extends AggregateRoot
         );
     }
 
-    toDTO(): ObjectLiteral
+    toDTO(): LiteralObject
     {
         return {
             id: this.id.value,
             name: this.name.value,
             boundedContextId: this.boundedContextId.value,
-            roleIds: this.roleIds?.value,
+            roles: this.roles?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
@@ -147,7 +148,7 @@ export class IamPermission extends AggregateRoot
     }
 
 
-    toI18nDTO(): ObjectLiteral
+    toI18nDTO(): LiteralObject
     {
         return {
         };

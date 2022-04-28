@@ -9,9 +9,10 @@ import {
     RoleCreatedAt,
     RoleUpdatedAt,
     RoleDeletedAt,
-} from './../../domain/value-objects';
-import { IamRole } from './../../domain/role.aggregate';
-import { roles } from './../seeds/role.seed';
+} from '../../domain/value-objects';
+import { IamRole } from '../../domain/role.aggregate';
+import { roles } from '../seeds/role.seed';
+import * as _ from 'lodash';
 
 @Injectable()
 export class MockRoleSeeder extends MockSeeder<IamRole>

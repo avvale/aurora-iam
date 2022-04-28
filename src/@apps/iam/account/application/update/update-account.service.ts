@@ -12,8 +12,8 @@ import {
     AccountDPermissions,
     AccountDTenants,
     AccountData,
-    AccountRoleIds,
-    AccountTenantIds,
+    AccountRoles,
+    AccountTenants,
     AccountCreatedAt,
     AccountUpdatedAt,
     AccountDeletedAt,
@@ -31,17 +31,17 @@ export class UpdateAccountService
 
     async main(
         payload: {
-            id: AccountId,
-            type?: AccountType,
-            email?: AccountEmail,
-            isActive?: AccountIsActive,
-            clientId?: AccountClientId,
-            dApplicationCodes?: AccountDApplicationCodes,
-            dPermissions?: AccountDPermissions,
-            dTenants?: AccountDTenants,
-            data?: AccountData,
-            roleIds?: AccountRoleIds,
-            tenantIds?: AccountTenantIds,
+            id: AccountId;
+            type?: AccountType;
+            email?: AccountEmail;
+            isActive?: AccountIsActive;
+            clientId?: AccountClientId;
+            dApplicationCodes?: AccountDApplicationCodes;
+            dPermissions?: AccountDPermissions;
+            dTenants?: AccountDTenants;
+            data?: AccountData;
+            roles?: AccountRoles;
+            tenants?: AccountTenants;
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
@@ -58,8 +58,8 @@ export class UpdateAccountService
             payload.dPermissions,
             payload.dTenants,
             payload.data,
-            payload.roleIds,
-            payload.tenantIds,
+            payload.roles,
+            payload.tenants,
             null, // createdAt
             new AccountUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt

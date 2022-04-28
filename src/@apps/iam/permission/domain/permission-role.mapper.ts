@@ -1,6 +1,7 @@
 
 
-import { CQMetadata, IMapper, MapperOptions, ObjectLiteral } from 'aurora-ts-core';
+import { LiteralObject } from '@nestjs/common';
+import { CQMetadata, IMapper, MapperOptions } from 'aurora-ts-core';
 import { IamPermissionRole } from './permission-role.aggregate';
 import {
     PermissionPermissionId,
@@ -17,7 +18,7 @@ export class PermissionRoleMapper implements IMapper
      * Map object to aggregate
      * @param permissionRole
      */
-    mapModelToAggregate(permissionRole: ObjectLiteral, cQMetadata?: CQMetadata): IamPermissionRole
+    mapModelToAggregate(permissionRole: LiteralObject, cQMetadata?: CQMetadata): IamPermissionRole
     {
         if (!permissionRole) return;
 
@@ -28,24 +29,24 @@ export class PermissionRoleMapper implements IMapper
      * Map array of objects to array aggregates
      * @param permissionsRoles
      */
-    mapModelsToAggregates(permissionsRoles: ObjectLiteral[], cQMetadata?: CQMetadata): IamPermissionRole[]
+    mapModelsToAggregates(permissionsRoles: LiteralObject[], cQMetadata?: CQMetadata): IamPermissionRole[]
     {
         if (!Array.isArray(permissionsRoles)) return;
 
         return permissionsRoles.map(permissionRole  => this.makeAggregate(permissionRole, cQMetadata));
     }
 
-    mapAggregateToResponse(permissionRole: IamPermissionRole): ObjectLiteral
+    mapAggregateToResponse(permissionRole: IamPermissionRole): LiteralObject
     {
         return null;
     }
 
-    mapAggregatesToResponses(permissionRole: IamPermissionRole[]): ObjectLiteral[]
+    mapAggregatesToResponses(permissionRole: IamPermissionRole[]): LiteralObject[]
     {
         return null;
     }
 
-    private makeAggregate(permissionRole: ObjectLiteral, cQMetadata?: CQMetadata): IamPermissionRole
+    private makeAggregate(permissionRole: LiteralObject, cQMetadata?: CQMetadata): IamPermissionRole
     {
         return IamPermissionRole.register(
             new PermissionPermissionId(permissionRole.permissionId),

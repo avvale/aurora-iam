@@ -9,7 +9,7 @@ import {
     TenantLogo,
     TenantIsActive,
     TenantData,
-    TenantAccountIds,
+    TenantAccounts,
     TenantCreatedAt,
     TenantUpdatedAt,
     TenantDeletedAt,
@@ -33,7 +33,7 @@ export class UpdateTenantService
             logo?: TenantLogo;
             isActive?: TenantIsActive;
             data?: TenantData;
-            accountIds?: TenantAccountIds;
+            accounts?: TenantAccounts;
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
@@ -47,7 +47,7 @@ export class UpdateTenantService
             payload.logo,
             payload.isActive,
             payload.data,
-            payload.accountIds,
+            payload.accounts,
             null, // createdAt
             new TenantUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt

@@ -25,13 +25,13 @@ export class SequelizeTenantRepository extends SequelizeRepository<IamTenant, Ia
     async createdAggregateHook(aggregate: IamTenant, model: IamTenantModel): Promise<void>
     {
         // add many to many relation
-        if (aggregate.accountIds.length > 0) await model.$add('accounts', aggregate.accountIds.value);
+        if (aggregate.accounts.length > 0) await model.$add('accounts', aggregate.accounts.value);
     }
 
     // hook called after create aggregate
     async updatedAggregateHook(aggregate: IamTenant, model: IamTenantModel): Promise<void>
     {
         // set many to many relation
-        if (aggregate.accountIds.isArray()) await model.$set('accounts', aggregate.accountIds.value);
+        if (aggregate.accounts.isArray()) await model.$set('accounts', aggregate.accounts.value);
     }
 }

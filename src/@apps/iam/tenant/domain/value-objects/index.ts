@@ -4,7 +4,7 @@ export { TenantCode } from './tenant-code';
 export { TenantLogo } from './tenant-logo';
 export { TenantIsActive } from './tenant-is-active';
 export { TenantData } from './tenant-data';
-export { TenantAccountIds } from './tenant-account-ids';
+export { TenantAccounts } from './tenant-accounts';
 export { TenantCreatedAt } from './tenant-created-at';
 export { TenantUpdatedAt } from './tenant-updated-at';
 export { TenantDeletedAt } from './tenant-deleted-at';

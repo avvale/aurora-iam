@@ -231,15 +231,15 @@
         },
         {
             "path": "src/@apps/iam/bounded-context/domain/bounded-context.aggregate.ts",
-            "integrity": "sha1:48f9d5375b74ce8a57f6580b36a1cf89a626cdc7"
+            "integrity": "sha1:19a6cfa1a29b9d6b29d7e358d65c3a6e3e585e8c"
         },
         {
             "path": "src/@apps/iam/bounded-context/domain/bounded-context.mapper.ts",
-            "integrity": "sha1:5ae506148010563dc5afa656b6bf7cddd1b57cea"
+            "integrity": "sha1:bcff6f9faa3a134f0401c575a7c20d241000a9d5"
         },
         {
             "path": "src/@apps/iam/bounded-context/domain/bounded-context.repository.ts",
-            "integrity": "sha1:a17d34371a41504880976c0eb51cff45b7fc8caf"
+            "integrity": "sha1:63e353733cb1c9e00c34efc25ddcd21afb968a16"
         },
         {
             "path": "src/@apps/iam/bounded-context/domain/bounded-context.response.ts",
@@ -263,7 +263,7 @@
         },
         {
             "path": "src/@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed.ts",
-            "integrity": "sha1:78c6d9cf3f2e99f03f7ef2f97aeece42bff9cfdd"
+            "integrity": "sha1:4d6e9ad2492c5354c442211c3240c6be69b0dc49"
         },
         {
             "path": "src/@apps/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.model.ts",
@@ -555,11 +555,11 @@
         },
         {
             "path": "test/acceptance/iam/bounded-context.e2e-spec.ts",
-            "integrity": "sha1:e9e6c1c7be7e205069013ccabaa08ae43dc41812"
+            "integrity": "sha1:727154ecf856d6178e920e3e4d665a31a1fc6273"
         },
         {
             "path": "postman/iam.bounded-context.postman.json",
-            "integrity": "sha1:6262dbd6974ed927eb5cb7ce91734a003359d2c0"
+            "integrity": "sha1:6eae151631920715cc50c862399d5b2c4a43d26a"
         }
     ]
 }

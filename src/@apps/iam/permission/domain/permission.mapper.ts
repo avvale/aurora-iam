@@ -1,11 +1,12 @@
-import { IMapper, MapperOptions, ObjectLiteral, CQMetadata } from 'aurora-ts-core';
+import { LiteralObject } from '@nestjs/common';
+import { IMapper, MapperOptions, CQMetadata } from 'aurora-ts-core';
 import { IamPermission } from './permission.aggregate';
 import { PermissionResponse } from './permission.response';
 import {
     PermissionId,
     PermissionName,
     PermissionBoundedContextId,
-    PermissionRoleIds,
+    PermissionRoles,
     PermissionCreatedAt,
     PermissionUpdatedAt,
     PermissionDeletedAt,
@@ -23,7 +24,7 @@ export class PermissionMapper implements IMapper
      * Map object to aggregate
      * @param permission
      */
-    mapModelToAggregate(permission: ObjectLiteral, cQMetadata?: CQMetadata): IamPermission
+    mapModelToAggregate(permission: LiteralObject, cQMetadata?: CQMetadata): IamPermission
     {
         if (!permission) return;
 
@@ -34,7 +35,7 @@ export class PermissionMapper implements IMapper
      * Map array of objects to array aggregates
      * @param permissions
      */
-    mapModelsToAggregates(permissions: ObjectLiteral[], cQMetadata?: CQMetadata): IamPermission[]
+    mapModelsToAggregates(permissions: LiteralObject[], cQMetadata?: CQMetadata): IamPermission[]
     {
         if (!Array.isArray(permissions)) return;
 
@@ -61,13 +62,13 @@ export class PermissionMapper implements IMapper
         return permissions.map(permission => this.makeResponse(permission));
     }
 
-    private makeAggregate(permission: ObjectLiteral, cQMetadata?: CQMetadata): IamPermission
+    private makeAggregate(permission: LiteralObject, cQMetadata?: CQMetadata): IamPermission
     {
         return IamPermission.register(
             new PermissionId(permission.id, { undefinable: true }),
             new PermissionName(permission.name, { undefinable: true }),
             new PermissionBoundedContextId(permission.boundedContextId, { undefinable: true }),
-            new PermissionRoleIds(permission.roleIds, { undefinable: true }),
+            new PermissionRoles(permission.roles, { undefinable: true }),
             new PermissionCreatedAt(permission.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             new PermissionUpdatedAt(permission.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             new PermissionDeletedAt(permission.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
@@ -84,7 +85,7 @@ export class PermissionMapper implements IMapper
             permission.id.value,
             permission.name.value,
             permission.boundedContextId.value,
-            permission.roleIds.value,
+            permission.roles.value,
             permission.createdAt.value,
             permission.updatedAt.value,
             permission.deletedAt.value,

@@ -1,9 +1,11 @@
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import * as fs from 'fs';
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { JwtModuleOptions } from '@nestjs/jwt';
 import { IBoundedContextRepository } from '../../../src/@apps/iam/bounded-context/domain/bounded-context.repository';
 import { MockBoundedContextSeeder } from '../../../src/@apps/iam/bounded-context/infrastructure/mock/mock-bounded-context.seeder';
 import { boundedContexts } from '../../../src/@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
@@ -22,6 +24,13 @@ describe('bounded-context', () =>
     let app: INestApplication;
     let repository: IBoundedContextRepository;
     let seeder: MockBoundedContextSeeder;
+    const jwtOptions: JwtModuleOptions = {
+        privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
+        publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
+        signOptions: {
+            algorithm: 'RS256',
+        },
+    };
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -31,7 +40,7 @@ describe('bounded-context', () =>
         const module: TestingModule = await Test.createTestingModule({
             imports: [
                 ...importForeignModules,
-                IamModule,
+                IamModule.forRoot(jwtOptions),
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
                     imports   : [ConfigModule],

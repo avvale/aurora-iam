@@ -25,13 +25,13 @@ export class IamRoleDto
 
     @ApiProperty({
         type       : [IamPermissionDto],
-        description: 'permissionIds [input here api field description]',
+        description: 'permissions [input here api field description]',
     })
     permissions?: IamPermissionDto[];
 
     @ApiProperty({
         type       : [IamAccountDto],
-        description: 'accountIds [input here api field description]',
+        description: 'accounts [input here api field description]',
     })
     accounts?: IamAccountDto[];
 

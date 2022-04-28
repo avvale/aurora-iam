@@ -18,13 +18,13 @@ export class IamCreatePermissionDto
     @ApiProperty({
         type       : String,
         description: 'boundedContextId [input here api field description]',
-        example    : 'f6107b97-0c4a-4605-ab40-d736e8df4608',
+        example    : '299f2457-980d-445e-8bc9-d35fe963ca4d',
     })
     boundedContextId: string;
 
     @ApiProperty({
         type       : [String],
-        description: 'roleIds [input here api field description]',
+        description: 'roles [input here api field description]',
     })
     roleIds?: string[];
 

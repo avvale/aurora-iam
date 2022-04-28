@@ -1,5 +1,6 @@
 
-import { CQMetadata, IRepository, ObjectLiteral, Pagination, QueryStatement } from 'aurora-ts-core';
+import { LiteralObject } from '@nestjs/common';
+import { CQMetadata, IRepository, Pagination, QueryStatement } from 'aurora-ts-core';
 import { IamBoundedContext } from './bounded-context.aggregate';
 import { BoundedContextId } from './value-objects';
 
@@ -60,8 +61,8 @@ export abstract class IBoundedContextRepository implements IRepository<IamBounde
     abstract create(
         boundedContext: IamBoundedContext,
         options?: {
-            createOptions?: ObjectLiteral;
-            dataFactory?: (aggregate: IamBoundedContext) => ObjectLiteral;
+            createOptions?: LiteralObject;
+            dataFactory?: (aggregate: IamBoundedContext) => LiteralObject;
             // arguments to find object and check if object is duplicated
             finderQueryStatement?: (aggregate: IamBoundedContext) => QueryStatement;
         }
@@ -71,8 +72,8 @@ export abstract class IBoundedContextRepository implements IRepository<IamBounde
     abstract insert(
         boundedContexts: IamBoundedContext[],
         options?: {
-            insertOptions?: ObjectLiteral;
-            dataFactory?: (aggregate: IamBoundedContext) => ObjectLiteral;
+            insertOptions?: LiteralObject;
+            dataFactory?: (aggregate: IamBoundedContext) => LiteralObject;
         }
     ): Promise<void>;
 
@@ -80,12 +81,12 @@ export abstract class IBoundedContextRepository implements IRepository<IamBounde
     abstract update(
         boundedContext: IamBoundedContext,
         options?: {
-            updateOptions?: ObjectLiteral;
+            updateOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: IamBoundedContext) => ObjectLiteral;
+            dataFactory?: (aggregate: IamBoundedContext) => LiteralObject;
             // arguments to find object to update, with i18n we use langId and id relationship with parent entity
-            findArguments?: ObjectLiteral;
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 
@@ -93,7 +94,7 @@ export abstract class IBoundedContextRepository implements IRepository<IamBounde
     abstract deleteById(
         id: BoundedContextId,
         options?: {
-            deleteOptions?: ObjectLiteral;
+            deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
         }
@@ -102,7 +103,7 @@ export abstract class IBoundedContextRepository implements IRepository<IamBounde
     // delete records
     abstract delete(
         options?: {
-            deleteOptions?: ObjectLiteral;
+            deleteOptions?: LiteralObject;
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;

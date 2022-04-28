@@ -1,4 +1,5 @@
-import { IMapper, MapperOptions, ObjectLiteral, CQMetadata } from 'aurora-ts-core';
+import { LiteralObject } from '@nestjs/common';
+import { IMapper, MapperOptions, CQMetadata } from 'aurora-ts-core';
 import { IamTenant } from './tenant.aggregate';
 import { TenantResponse } from './tenant.response';
 import {
@@ -8,7 +9,7 @@ import {
     TenantLogo,
     TenantIsActive,
     TenantData,
-    TenantAccountIds,
+    TenantAccounts,
     TenantCreatedAt,
     TenantUpdatedAt,
     TenantDeletedAt,
@@ -25,7 +26,7 @@ export class TenantMapper implements IMapper
      * Map object to aggregate
      * @param tenant
      */
-    mapModelToAggregate(tenant: ObjectLiteral, cQMetadata?: CQMetadata): IamTenant
+    mapModelToAggregate(tenant: LiteralObject, cQMetadata?: CQMetadata): IamTenant
     {
         if (!tenant) return;
 
@@ -36,7 +37,7 @@ export class TenantMapper implements IMapper
      * Map array of objects to array aggregates
      * @param tenants
      */
-    mapModelsToAggregates(tenants: ObjectLiteral[], cQMetadata?: CQMetadata): IamTenant[]
+    mapModelsToAggregates(tenants: LiteralObject[], cQMetadata?: CQMetadata): IamTenant[]
     {
         if (!Array.isArray(tenants)) return;
 
@@ -63,7 +64,7 @@ export class TenantMapper implements IMapper
         return tenants.map(tenant => this.makeResponse(tenant));
     }
 
-    private makeAggregate(tenant: ObjectLiteral, cQMetadata?: CQMetadata): IamTenant
+    private makeAggregate(tenant: LiteralObject, cQMetadata?: CQMetadata): IamTenant
     {
         return IamTenant.register(
             new TenantId(tenant.id, { undefinable: true }),
@@ -72,7 +73,7 @@ export class TenantMapper implements IMapper
             new TenantLogo(tenant.logo, { undefinable: true }),
             new TenantIsActive(tenant.isActive, { undefinable: true }),
             new TenantData(tenant.data, { undefinable: true }),
-            new TenantAccountIds(tenant.accountIds, { undefinable: true }),
+            new TenantAccounts(tenant.accounts, { undefinable: true }),
             new TenantCreatedAt(tenant.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             new TenantUpdatedAt(tenant.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             new TenantDeletedAt(tenant.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
@@ -91,7 +92,7 @@ export class TenantMapper implements IMapper
             tenant.logo.value,
             tenant.isActive.value,
             tenant.data.value,
-            tenant.accountIds.value,
+            tenant.accounts.value,
             tenant.createdAt.value,
             tenant.updatedAt.value,
             tenant.deletedAt.value,

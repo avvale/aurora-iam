@@ -1,5 +1,5 @@
+import { LiteralObject } from '@nestjs/common';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { ObjectLiteral } from 'aurora-ts-core';
 import {
     RoleRoleId,
     RoleAccountId,
@@ -23,7 +23,7 @@ export class IamRoleAccount extends AggregateRoot
         return new IamRoleAccount(roleId, accountId);
     }
 
-    toDTO(): ObjectLiteral
+    toDTO(): LiteralObject
     {
         return {
             roleId   : this.roleId.value,

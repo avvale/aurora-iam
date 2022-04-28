@@ -242,7 +242,7 @@ describe('role', () =>
                 expect(res.body).toEqual({
                     total: seeder.collectionResponse.length,
                     count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'permissionIds', 'accountIds']))).slice(0, 5),
+                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'permissions', 'accounts']))).slice(0, 5),
                 });
             });
     });
@@ -256,7 +256,7 @@ describe('role', () =>
             .then(res =>
             {
                 expect(res.body).toEqual(
-                    seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'permissionIds', 'accountIds']))),
+                    seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'permissions', 'accounts']))),
                 );
             });
     });
@@ -271,7 +271,7 @@ describe('role', () =>
                 {
                     where:
                     {
-                        id: '23140270-b5ac-4f1c-be96-4eaba218c0e7',
+                        id: '3d39fa4f-8587-4ddd-866c-945d85c5348e',
                     },
                 },
             })
@@ -314,7 +314,7 @@ describe('role', () =>
     test('/REST:GET iam/role/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/role/find/6366645e-9b2f-4649-8d0c-0bd58168b6ff')
+            .get('/iam/role/find/2a9a8ca5-2aaa-40ac-9c21-95fbe6d4cd72')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -338,7 +338,7 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: '53a2520c-b37f-4263-93a7-d90ea1c76c7c' },
+                ...{ id: 'a35e7a97-f4c2-4df6-87c3-45f2a3ca2b97' },
             })
             .expect(404);
     });
@@ -350,10 +350,10 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .send({
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Gorgeous Soft Chair',
-                isMaster: false,
-                permissionIds: [],
-                accountIds: [],
+                name: 'Intelligent Rubber Gloves',
+                isMaster: true,
+                permissions: [],
+                accounts: [],
             })
             .expect(200)
             .then(res =>
@@ -365,7 +365,7 @@ describe('role', () =>
     test('/REST:DELETE iam/role/delete/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/role/delete/b3e66858-8f93-4891-a53e-8ece034a9212')
+            .delete('/iam/role/delete/f6e5d5ab-4510-42ca-b26e-f3a65ce8325c')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -441,7 +441,7 @@ describe('role', () =>
                 expect(res.body.data.iamPaginateRoles).toEqual({
                     total: seeder.collectionResponse.length,
                     count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'permissionIds', 'accountIds']))).slice(0, 5),
+                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'permissions', 'accounts']))).slice(0, 5),
                 });
             });
     });
@@ -497,8 +497,8 @@ describe('role', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Intelligent Steel Soap',
-                        isMaster: true,
+                        name: 'Small Rubber Table',
+                        isMaster: false,
                     },
                 },
             })
@@ -534,7 +534,7 @@ describe('role', () =>
                     {
                         where:
                         {
-                            id: '5956494c-b4d1-449e-8db9-70b79ffec7ef',
+                            id: 'a19f444b-9735-4a45-8c4d-be3d1646955d',
                         },
                     },
                 },
@@ -605,7 +605,7 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: 'f8464671-414c-450c-a520-fff1f15a14c3',
+                    id: 'b77c0e65-369d-46cb-a871-31484c47f2eb',
                 },
             })
             .expect(200)
@@ -669,7 +669,7 @@ describe('role', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        ...{ id: 'b9fa6953-46ce-4f2c-88b2-73694c735142' },
+                        ...{ id: '836828e9-284d-4b45-a057-ba9ac1621feb' },
                     },
                 },
             })
@@ -704,10 +704,10 @@ describe('role', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Tasty Metal Chicken',
+                        name: 'Unbranded Cotton Chicken',
                         isMaster: true,
-                        permissionIds: [],
-                        accountIds: [],
+                        permissions: [],
+                        accounts: [],
                     },
                 },
             })
@@ -738,7 +738,7 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: '24b988a7-cba7-49de-a308-ee9ccdc1b5bf',
+                    id: 'f34523c1-60f7-4bda-af37-54a6f9612b20',
                 },
             })
             .expect(200)

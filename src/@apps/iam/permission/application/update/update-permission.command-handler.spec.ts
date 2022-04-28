@@ -44,7 +44,7 @@ describe('UpdatePermissionCommandHandler', () =>
                         id: permissions[0].id,
                         name: permissions[0].name,
                         boundedContextId: permissions[0].boundedContextId,
-                        roleIds: permissions[0].roleIds,
+                        roles: permissions[0].roles,
                     },
                     {},
                     { timezone: process.env.TZ },

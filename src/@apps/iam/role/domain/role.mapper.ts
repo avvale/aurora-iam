@@ -1,12 +1,13 @@
-import { IMapper, MapperOptions, ObjectLiteral, CQMetadata } from 'aurora-ts-core';
+import { LiteralObject } from '@nestjs/common';
+import { IMapper, MapperOptions, CQMetadata } from 'aurora-ts-core';
 import { IamRole } from './role.aggregate';
 import { RoleResponse } from './role.response';
 import {
     RoleId,
     RoleName,
     RoleIsMaster,
-    RolePermissionIds,
-    RoleAccountIds,
+    RolePermissions,
+    RoleAccounts,
     RoleCreatedAt,
     RoleUpdatedAt,
     RoleDeletedAt,
@@ -24,7 +25,7 @@ export class RoleMapper implements IMapper
      * Map object to aggregate
      * @param role
      */
-    mapModelToAggregate(role: ObjectLiteral, cQMetadata?: CQMetadata): IamRole
+    mapModelToAggregate(role: LiteralObject, cQMetadata?: CQMetadata): IamRole
     {
         if (!role) return;
 
@@ -35,7 +36,7 @@ export class RoleMapper implements IMapper
      * Map array of objects to array aggregates
      * @param roles
      */
-    mapModelsToAggregates(roles: ObjectLiteral[], cQMetadata?: CQMetadata): IamRole[]
+    mapModelsToAggregates(roles: LiteralObject[], cQMetadata?: CQMetadata): IamRole[]
     {
         if (!Array.isArray(roles)) return;
 
@@ -62,14 +63,14 @@ export class RoleMapper implements IMapper
         return roles.map(role => this.makeResponse(role));
     }
 
-    private makeAggregate(role: ObjectLiteral, cQMetadata?: CQMetadata): IamRole
+    private makeAggregate(role: LiteralObject, cQMetadata?: CQMetadata): IamRole
     {
         return IamRole.register(
             new RoleId(role.id, { undefinable: true }),
             new RoleName(role.name, { undefinable: true }),
             new RoleIsMaster(role.isMaster, { undefinable: true }),
-            new RolePermissionIds(role.permissionIds, { undefinable: true }),
-            new RoleAccountIds(role.accountIds, { undefinable: true }),
+            new RolePermissions(role.permissions, { undefinable: true }),
+            new RoleAccounts(role.accounts, { undefinable: true }),
             new RoleCreatedAt(role.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             new RoleUpdatedAt(role.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             new RoleDeletedAt(role.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
@@ -86,8 +87,8 @@ export class RoleMapper implements IMapper
             role.id.value,
             role.name.value,
             role.isMaster.value,
-            role.permissionIds.value,
-            role.accountIds.value,
+            role.permissions.value,
+            role.accounts.value,
             role.createdAt.value,
             role.updatedAt.value,
             role.deletedAt.value,

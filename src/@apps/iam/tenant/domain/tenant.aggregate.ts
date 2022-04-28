@@ -1,6 +1,7 @@
 /* eslint-disable key-spacing */
+import { LiteralObject } from '@nestjs/common';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { ObjectLiteral, Utils } from 'aurora-ts-core';
+import { Utils } from 'aurora-ts-core';
 import {
     TenantId,
     TenantName,
@@ -8,7 +9,7 @@ import {
     TenantLogo,
     TenantIsActive,
     TenantData,
-    TenantAccountIds,
+    TenantAccounts,
     TenantCreatedAt,
     TenantUpdatedAt,
     TenantDeletedAt,
@@ -26,7 +27,7 @@ export class IamTenant extends AggregateRoot
     logo: TenantLogo;
     isActive: TenantIsActive;
     data: TenantData;
-    accountIds: TenantAccountIds;
+    accounts: TenantAccounts;
     createdAt: TenantCreatedAt;
     updatedAt: TenantUpdatedAt;
     deletedAt: TenantDeletedAt;
@@ -41,7 +42,7 @@ export class IamTenant extends AggregateRoot
         logo: TenantLogo,
         isActive: TenantIsActive,
         data: TenantData,
-        accountIds: TenantAccountIds,
+        accounts: TenantAccounts,
         createdAt: TenantCreatedAt,
         updatedAt: TenantUpdatedAt,
         deletedAt: TenantDeletedAt,
@@ -56,7 +57,7 @@ export class IamTenant extends AggregateRoot
         this.logo = logo;
         this.isActive = isActive;
         this.data = data;
-        this.accountIds = accountIds;
+        this.accounts = accounts;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -72,7 +73,7 @@ export class IamTenant extends AggregateRoot
         logo: TenantLogo,
         isActive: TenantIsActive,
         data: TenantData,
-        accountIds: TenantAccountIds,
+        accounts: TenantAccounts,
         createdAt: TenantCreatedAt,
         updatedAt: TenantUpdatedAt,
         deletedAt: TenantDeletedAt,
@@ -87,7 +88,7 @@ export class IamTenant extends AggregateRoot
             logo,
             isActive,
             data,
-            accountIds,
+            accounts,
             createdAt,
             updatedAt,
             deletedAt,
@@ -106,7 +107,7 @@ export class IamTenant extends AggregateRoot
                 tenant.logo?.value,
                 tenant.isActive.value,
                 tenant.data?.value,
-                tenant.accountIds?.value,
+                tenant.accounts?.value,
                 tenant.createdAt?.value,
                 tenant.updatedAt?.value,
                 tenant.deletedAt?.value,
@@ -124,7 +125,7 @@ export class IamTenant extends AggregateRoot
                 tenant.logo?.value,
                 tenant.isActive?.value,
                 tenant.data?.value,
-                tenant.accountIds?.value,
+                tenant.accounts?.value,
                 tenant.createdAt?.value,
                 tenant.updatedAt?.value,
                 tenant.deletedAt?.value,
@@ -142,7 +143,7 @@ export class IamTenant extends AggregateRoot
                 tenant.logo?.value,
                 tenant.isActive.value,
                 tenant.data?.value,
-                tenant.accountIds?.value,
+                tenant.accounts?.value,
                 tenant.createdAt?.value,
                 tenant.updatedAt?.value,
                 tenant.deletedAt?.value,
@@ -150,7 +151,7 @@ export class IamTenant extends AggregateRoot
         );
     }
 
-    toDTO(): ObjectLiteral
+    toDTO(): LiteralObject
     {
         return {
             id: this.id.value,
@@ -159,7 +160,7 @@ export class IamTenant extends AggregateRoot
             logo: this.logo?.value,
             isActive: this.isActive.value,
             data: this.data?.value,
-            accountIds: this.accountIds?.value,
+            accounts: this.accounts?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
@@ -170,7 +171,7 @@ export class IamTenant extends AggregateRoot
     }
 
 
-    toI18nDTO(): ObjectLiteral
+    toI18nDTO(): LiteralObject
     {
         return {
         };

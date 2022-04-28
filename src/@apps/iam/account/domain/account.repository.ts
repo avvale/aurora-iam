@@ -1,5 +1,6 @@
 
-import { CQMetadata, IRepository, ObjectLiteral, Pagination, QueryStatement } from 'aurora-ts-core';
+import { LiteralObject } from '@nestjs/common';
+import { CQMetadata, IRepository, Pagination, QueryStatement } from 'aurora-ts-core';
 import { IamAccount } from './account.aggregate';
 import { AccountId } from './value-objects';
 
@@ -60,8 +61,8 @@ export abstract class IAccountRepository implements IRepository<IamAccount>
     abstract create(
         account: IamAccount,
         options?: {
-            createOptions?: ObjectLiteral;
-            dataFactory?: (aggregate: IamAccount) => ObjectLiteral;
+            createOptions?: LiteralObject;
+            dataFactory?: (aggregate: IamAccount) => LiteralObject;
             // arguments to find object and check if object is duplicated
             finderQueryStatement?: (aggregate: IamAccount) => QueryStatement;
         }
@@ -71,8 +72,8 @@ export abstract class IAccountRepository implements IRepository<IamAccount>
     abstract insert(
         accounts: IamAccount[],
         options?: {
-            insertOptions?: ObjectLiteral;
-            dataFactory?: (aggregate: IamAccount) => ObjectLiteral;
+            insertOptions?: LiteralObject;
+            dataFactory?: (aggregate: IamAccount) => LiteralObject;
         }
     ): Promise<void>;
 
@@ -80,12 +81,12 @@ export abstract class IAccountRepository implements IRepository<IamAccount>
     abstract update(
         account: IamAccount,
         options?: {
-            updateOptions?: ObjectLiteral;
+            updateOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: IamAccount) => ObjectLiteral;
+            dataFactory?: (aggregate: IamAccount) => LiteralObject;
             // arguments to find object to update, with i18n we use langId and id relationship with parent entity
-            findArguments?: ObjectLiteral;
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 
@@ -93,7 +94,7 @@ export abstract class IAccountRepository implements IRepository<IamAccount>
     abstract deleteById(
         id: AccountId,
         options?: {
-            deleteOptions?: ObjectLiteral;
+            deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
         }
@@ -102,7 +103,7 @@ export abstract class IAccountRepository implements IRepository<IamAccount>
     // delete records
     abstract delete(
         options?: {
-            deleteOptions?: ObjectLiteral;
+            deleteOptions?: LiteralObject;
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;

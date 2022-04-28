@@ -67,13 +67,13 @@ export class IamAccountDto
 
     @ApiProperty({
         type       : [IamRoleDto],
-        description: 'roleIds [input here api field description]',
+        description: 'roles [input here api field description]',
     })
     roles?: IamRoleDto[];
 
     @ApiProperty({
         type       : [IamTenantDto],
-        description: 'tenantIds [input here api field description]',
+        description: 'tenants [input here api field description]',
     })
     tenants?: IamTenantDto[];
 

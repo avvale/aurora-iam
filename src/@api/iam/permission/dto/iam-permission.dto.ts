@@ -20,19 +20,19 @@ export class IamPermissionDto
     @ApiProperty({
         type       : String,
         description: 'boundedContextId [input here api field description]',
-        example    : '7b8bc8a4-8806-4270-893c-72d9623f7392',
+        example    : 'f6e3f976-3d6a-4d75-b776-e0399f471c40',
     })
     boundedContextId: string;
 
     @ApiProperty({
         type       : IamBoundedContextDto,
-        description: 'boundedContextId [input here api field description]',
+        description: 'IamBoundedContext [input here api field description]',
     })
-    boundedContext: IamBoundedContextDto;
+    boundedContext?: IamBoundedContextDto;
 
     @ApiProperty({
         type       : [IamRoleDto],
-        description: 'roleIds [input here api field description]',
+        description: 'roles [input here api field description]',
     })
     roles?: IamRoleDto[];
 

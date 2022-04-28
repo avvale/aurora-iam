@@ -6,7 +6,7 @@ import {
     PermissionId,
     PermissionName,
     PermissionBoundedContextId,
-    PermissionRoleIds,
+    PermissionRoles,
     PermissionCreatedAt,
     PermissionUpdatedAt,
     PermissionDeletedAt,
@@ -27,7 +27,7 @@ export class CreatePermissionCommandHandler implements ICommandHandler<CreatePer
                 id: new PermissionId(command.payload.id),
                 name: new PermissionName(command.payload.name),
                 boundedContextId: new PermissionBoundedContextId(command.payload.boundedContextId),
-                roleIds: new PermissionRoleIds(command.payload.roleIds),
+                roles: new PermissionRoles(command.payload.roles),
             },
             command.cQMetadata,
         );

@@ -1,4 +1,5 @@
-import { IMapper, MapperOptions, ObjectLiteral, CQMetadata } from 'aurora-ts-core';
+import { LiteralObject } from '@nestjs/common';
+import { IMapper, MapperOptions, CQMetadata } from 'aurora-ts-core';
 import { IamBoundedContext } from './bounded-context.aggregate';
 import { BoundedContextResponse } from './bounded-context.response';
 import {
@@ -23,7 +24,7 @@ export class BoundedContextMapper implements IMapper
      * Map object to aggregate
      * @param boundedContext
      */
-    mapModelToAggregate(boundedContext: ObjectLiteral, cQMetadata?: CQMetadata): IamBoundedContext
+    mapModelToAggregate(boundedContext: LiteralObject, cQMetadata?: CQMetadata): IamBoundedContext
     {
         if (!boundedContext) return;
 
@@ -34,7 +35,7 @@ export class BoundedContextMapper implements IMapper
      * Map array of objects to array aggregates
      * @param boundedContexts
      */
-    mapModelsToAggregates(boundedContexts: ObjectLiteral[], cQMetadata?: CQMetadata): IamBoundedContext[]
+    mapModelsToAggregates(boundedContexts: LiteralObject[], cQMetadata?: CQMetadata): IamBoundedContext[]
     {
         if (!Array.isArray(boundedContexts)) return;
 
@@ -61,7 +62,7 @@ export class BoundedContextMapper implements IMapper
         return boundedContexts.map(boundedContext => this.makeResponse(boundedContext));
     }
 
-    private makeAggregate(boundedContext: ObjectLiteral, cQMetadata?: CQMetadata): IamBoundedContext
+    private makeAggregate(boundedContext: LiteralObject, cQMetadata?: CQMetadata): IamBoundedContext
     {
         return IamBoundedContext.register(
             new BoundedContextId(boundedContext.id, { undefinable: true }),

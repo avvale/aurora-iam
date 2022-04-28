@@ -1,5 +1,6 @@
 
-import { CQMetadata, IRepository, ObjectLiteral, Pagination, QueryStatement } from 'aurora-ts-core';
+import { LiteralObject } from '@nestjs/common';
+import { CQMetadata, IRepository, Pagination, QueryStatement } from 'aurora-ts-core';
 import { IamRoleAccount } from './role-account.aggregate';
 import { RoleId } from './value-objects';
 
@@ -60,7 +61,8 @@ export abstract class IRoleAccountRepository implements IRepository<IamRoleAccou
     abstract create(
         roleAccount: IamRoleAccount,
         options?: {
-            dataFactory?: (aggregate: IamRoleAccount) => ObjectLiteral;
+            createOptions?: LiteralObject;
+            dataFactory?: (aggregate: IamRoleAccount) => LiteralObject;
             // arguments to find object and check if object is duplicated
             finderQueryStatement: (aggregate: IamRoleAccount) => QueryStatement;
         }
@@ -70,8 +72,8 @@ export abstract class IRoleAccountRepository implements IRepository<IamRoleAccou
     abstract insert(
         rolesAccounts: IamRoleAccount[],
         options?: {
-            insertOptions?: ObjectLiteral;
-            dataFactory?: (aggregate: IamRoleAccount) => ObjectLiteral;
+            insertOptions?: LiteralObject;
+            dataFactory?: (aggregate: IamRoleAccount) => LiteralObject;
         }
     ): Promise<void>;
 
@@ -79,11 +81,12 @@ export abstract class IRoleAccountRepository implements IRepository<IamRoleAccou
     abstract update(
         roleAccount: IamRoleAccount,
         options?: {
+            updateOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: IamRoleAccount) => ObjectLiteral;
+            dataFactory?: (aggregate: IamRoleAccount) => LiteralObject;
             // arguments to find object to update, with i18n we use langId and id relationship with parent entity
-            findArguments?: ObjectLiteral;
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 
@@ -91,6 +94,7 @@ export abstract class IRoleAccountRepository implements IRepository<IamRoleAccou
     abstract deleteById(
         id: RoleId,
         options?: {
+            deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
         }
@@ -99,6 +103,7 @@ export abstract class IRoleAccountRepository implements IRepository<IamRoleAccou
     // delete records
     abstract delete(
         options?: {
+            deleteOptions?: LiteralObject;
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;

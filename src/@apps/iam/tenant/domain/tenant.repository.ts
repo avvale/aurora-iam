@@ -1,5 +1,6 @@
 
-import { CQMetadata, IRepository, ObjectLiteral, Pagination, QueryStatement } from 'aurora-ts-core';
+import { LiteralObject } from '@nestjs/common';
+import { CQMetadata, IRepository, Pagination, QueryStatement } from 'aurora-ts-core';
 import { IamTenant } from './tenant.aggregate';
 import { TenantId } from './value-objects';
 
@@ -60,8 +61,8 @@ export abstract class ITenantRepository implements IRepository<IamTenant>
     abstract create(
         tenant: IamTenant,
         options?: {
-            createOptions?: ObjectLiteral;
-            dataFactory?: (aggregate: IamTenant) => ObjectLiteral;
+            createOptions?: LiteralObject;
+            dataFactory?: (aggregate: IamTenant) => LiteralObject;
             // arguments to find object and check if object is duplicated
             finderQueryStatement?: (aggregate: IamTenant) => QueryStatement;
         }
@@ -71,8 +72,8 @@ export abstract class ITenantRepository implements IRepository<IamTenant>
     abstract insert(
         tenants: IamTenant[],
         options?: {
-            insertOptions?: ObjectLiteral;
-            dataFactory?: (aggregate: IamTenant) => ObjectLiteral;
+            insertOptions?: LiteralObject;
+            dataFactory?: (aggregate: IamTenant) => LiteralObject;
         }
     ): Promise<void>;
 
@@ -80,12 +81,12 @@ export abstract class ITenantRepository implements IRepository<IamTenant>
     abstract update(
         tenant: IamTenant,
         options?: {
-            updateOptions?: ObjectLiteral;
+            updateOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: IamTenant) => ObjectLiteral;
+            dataFactory?: (aggregate: IamTenant) => LiteralObject;
             // arguments to find object to update, with i18n we use langId and id relationship with parent entity
-            findArguments?: ObjectLiteral;
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 
@@ -93,7 +94,7 @@ export abstract class ITenantRepository implements IRepository<IamTenant>
     abstract deleteById(
         id: TenantId,
         options?: {
-            deleteOptions?: ObjectLiteral;
+            deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
         }
@@ -102,7 +103,7 @@ export abstract class ITenantRepository implements IRepository<IamTenant>
     // delete records
     abstract delete(
         options?: {
-            deleteOptions?: ObjectLiteral;
+            deleteOptions?: LiteralObject;
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;

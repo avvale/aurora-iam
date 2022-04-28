@@ -1,4 +1,5 @@
-import { IMapper, MapperOptions, ObjectLiteral } from 'aurora-ts-core';
+import { LiteralObject } from '@nestjs/common';
+import { IMapper, MapperOptions } from 'aurora-ts-core';
 import { IamRoleAccount } from './role-account.aggregate';
 import {
     RoleRoleId,
@@ -16,7 +17,7 @@ export class RoleAccountMapper implements IMapper
      * Map object to aggregate
      * @param roleAccount
      */
-    mapModelToAggregate(roleAccount: ObjectLiteral): IamRoleAccount
+    mapModelToAggregate(roleAccount: LiteralObject): IamRoleAccount
     {
         if (!roleAccount) return;
 
@@ -27,24 +28,24 @@ export class RoleAccountMapper implements IMapper
      * Map array of objects to array aggregates
      * @param rolesAccounts
      */
-    mapModelsToAggregates(rolesAccounts: ObjectLiteral[]): IamRoleAccount[]
+    mapModelsToAggregates(rolesAccounts: LiteralObject[]): IamRoleAccount[]
     {
         if (!Array.isArray(rolesAccounts)) return;
 
         return rolesAccounts.map(roleAccount  => this.makeAggregate(roleAccount));
     }
 
-    mapAggregateToResponse(roleAccount: IamRoleAccount): ObjectLiteral
+    mapAggregateToResponse(roleAccount: IamRoleAccount): LiteralObject
     {
         return null;
     }
 
-    mapAggregatesToResponses(roleAccount: IamRoleAccount[]): ObjectLiteral[]
+    mapAggregatesToResponses(roleAccount: IamRoleAccount[]): LiteralObject[]
     {
         return null;
     }
 
-    private makeAggregate(roleAccount: ObjectLiteral): IamRoleAccount
+    private makeAggregate(roleAccount: LiteralObject): IamRoleAccount
     {
         return IamRoleAccount.register(
             new RoleRoleId(roleAccount.roleId),

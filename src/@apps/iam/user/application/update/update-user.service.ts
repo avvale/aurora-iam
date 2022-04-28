@@ -31,17 +31,17 @@ export class UpdateUserService
 
     async main(
         payload: {
-            id: UserId,
-            accountId?: UserAccountId,
-            name?: UserName,
-            surname?: UserSurname,
-            avatar?: UserAvatar,
-            mobile?: UserMobile,
-            langId?: UserLangId,
-            username?: UserUsername,
-            password?: UserPassword,
-            rememberToken?: UserRememberToken,
-            data?: UserData,
+            id: UserId;
+            accountId?: UserAccountId;
+            name?: UserName;
+            surname?: UserSurname;
+            avatar?: UserAvatar;
+            mobile?: UserMobile;
+            langId?: UserLangId;
+            username?: UserUsername;
+            password?: UserPassword;
+            rememberToken?: UserRememberToken;
+            data?: UserData;
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,

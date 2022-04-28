@@ -18,13 +18,13 @@ export class IamUpdatePermissionDto
     @ApiProperty({
         type       : String,
         description: 'boundedContextId [input here api field description]',
-        example    : 'ca7ced1f-9943-4c42-97e4-e158495596c1',
+        example    : 'cfb7e13c-fb3b-4c9c-a705-4ee0c362ad53',
     })
-    boundedContextId: string;
+    boundedContextId?: string;
 
     @ApiProperty({
         type       : [String],
-        description: 'roleIds [input here api field description]',
+        description: 'roles [input here api field description]',
     })
     roleIds?: string[];
 

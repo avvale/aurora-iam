@@ -8,7 +8,7 @@ import {
     TenantLogo,
     TenantIsActive,
     TenantData,
-    TenantAccountIds,
+    TenantAccounts,
     TenantCreatedAt,
     TenantUpdatedAt,
     TenantDeletedAt,
@@ -33,7 +33,7 @@ export class CreateTenantsService
             logo: TenantLogo;
             isActive: TenantIsActive;
             data: TenantData;
-            accountIds: TenantAccountIds;
+            accounts: TenantAccounts;
         } [],
         cQMetadata?: CQMetadata,
     ): Promise<void>
@@ -46,7 +46,7 @@ export class CreateTenantsService
             tenant.logo,
             tenant.isActive,
             tenant.data,
-            tenant.accountIds,
+            tenant.accounts,
             new TenantCreatedAt({ currentTimestamp: true }),
             new TenantUpdatedAt({ currentTimestamp: true }),
             null, // deleteAt

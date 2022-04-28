@@ -1,5 +1,6 @@
 
-import { CQMetadata, IRepository, ObjectLiteral, Pagination, QueryStatement } from 'aurora-ts-core';
+import { LiteralObject } from '@nestjs/common';
+import { CQMetadata, IRepository, Pagination, QueryStatement } from 'aurora-ts-core';
 import { IamPermissionRole } from './permission-role.aggregate';
 import { PermissionId } from './value-objects';
 
@@ -60,7 +61,8 @@ export abstract class IPermissionRoleRepository implements IRepository<IamPermis
     abstract create(
         permissionRole: IamPermissionRole,
         options?: {
-            dataFactory?: (aggregate: IamPermissionRole) => ObjectLiteral;
+            createOptions?: LiteralObject;
+            dataFactory?: (aggregate: IamPermissionRole) => LiteralObject;
             // arguments to find object and check if object is duplicated
             finderQueryStatement: (aggregate: IamPermissionRole) => QueryStatement;
         }
@@ -70,8 +72,8 @@ export abstract class IPermissionRoleRepository implements IRepository<IamPermis
     abstract insert(
         permissionsRoles: IamPermissionRole[],
         options?: {
-            insertOptions?: ObjectLiteral;
-            dataFactory?: (aggregate: IamPermissionRole) => ObjectLiteral;
+            insertOptions?: LiteralObject;
+            dataFactory?: (aggregate: IamPermissionRole) => LiteralObject;
         }
     ): Promise<void>;
 
@@ -79,11 +81,12 @@ export abstract class IPermissionRoleRepository implements IRepository<IamPermis
     abstract update(
         permissionRole: IamPermissionRole,
         options?: {
+            updateOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: IamPermissionRole) => ObjectLiteral;
+            dataFactory?: (aggregate: IamPermissionRole) => LiteralObject;
             // arguments to find object to update, with i18n we use langId and id relationship with parent entity
-            findArguments?: ObjectLiteral;
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 
@@ -91,6 +94,7 @@ export abstract class IPermissionRoleRepository implements IRepository<IamPermis
     abstract deleteById(
         id: PermissionId,
         options?: {
+            deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
         }
@@ -99,6 +103,7 @@ export abstract class IPermissionRoleRepository implements IRepository<IamPermis
     // delete records
     abstract delete(
         options?: {
+            deleteOptions?: LiteralObject;
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;

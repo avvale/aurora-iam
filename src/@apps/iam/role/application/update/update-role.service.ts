@@ -6,8 +6,8 @@ import {
     RoleId,
     RoleName,
     RoleIsMaster,
-    RolePermissionIds,
-    RoleAccountIds,
+    RolePermissions,
+    RoleAccounts,
     RoleCreatedAt,
     RoleUpdatedAt,
     RoleDeletedAt,
@@ -28,8 +28,8 @@ export class UpdateRoleService
             id: RoleId;
             name?: RoleName;
             isMaster?: RoleIsMaster;
-            permissionIds?: RolePermissionIds;
-            accountIds?: RoleAccountIds;
+            permissions?: RolePermissions;
+            accounts?: RoleAccounts;
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
@@ -40,8 +40,8 @@ export class UpdateRoleService
             payload.id,
             payload.name,
             payload.isMaster,
-            payload.permissionIds,
-            payload.accountIds,
+            payload.permissions,
+            payload.accounts,
             null, // createdAt
             new RoleUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt

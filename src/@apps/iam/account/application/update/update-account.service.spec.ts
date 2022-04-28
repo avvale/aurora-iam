@@ -15,8 +15,8 @@ import {
     AccountDPermissions,
     AccountDTenants,
     AccountData,
-    AccountRoleIds,
-    AccountTenantIds,
+    AccountRoles,
+    AccountTenants,
     AccountCreatedAt,
     AccountUpdatedAt,
     AccountDeletedAt,
@@ -73,8 +73,8 @@ describe('UpdateAccountService', () =>
                     dPermissions: new AccountDPermissions(accounts[0].dPermissions),
                     dTenants: new AccountDTenants(accounts[0].dTenants),
                     data: new AccountData(accounts[0].data),
-                    roleIds: new AccountRoleIds(accounts[0].roleIds),
-                    tenantIds: new AccountTenantIds(accounts[0].tenantIds),
+                    roles: new AccountRoles(accounts[0].roles),
+                    tenants: new AccountTenants(accounts[0].tenants),
                 }
             )).toBe(undefined);
         });

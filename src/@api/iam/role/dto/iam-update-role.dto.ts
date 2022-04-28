@@ -23,13 +23,13 @@ export class IamUpdateRoleDto
 
     @ApiProperty({
         type       : [String],
-        description: 'permissionIds [input here api field description]',
+        description: 'permissions [input here api field description]',
     })
     permissionIds?: string[];
 
     @ApiProperty({
         type       : [String],
-        description: 'accountIds [input here api field description]',
+        description: 'accounts [input here api field description]',
     })
     accountIds?: string[];
 

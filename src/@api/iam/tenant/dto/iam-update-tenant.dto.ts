@@ -41,7 +41,7 @@ export class IamUpdateTenantDto
 
     @ApiProperty({
         type       : [String],
-        description: 'accountIds [input here api field description]',
+        description: 'accounts [input here api field description]',
     })
     accountIds?: string[];
 

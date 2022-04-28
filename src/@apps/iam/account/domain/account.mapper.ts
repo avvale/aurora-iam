@@ -1,4 +1,5 @@
-import { IMapper, MapperOptions, ObjectLiteral, CQMetadata } from 'aurora-ts-core';
+import { LiteralObject } from '@nestjs/common';
+import { IMapper, MapperOptions, CQMetadata } from 'aurora-ts-core';
 import { IamAccount } from './account.aggregate';
 import { AccountResponse } from './account.response';
 import {
@@ -11,8 +12,8 @@ import {
     AccountDPermissions,
     AccountDTenants,
     AccountData,
-    AccountRoleIds,
-    AccountTenantIds,
+    AccountRoles,
+    AccountTenants,
     AccountCreatedAt,
     AccountUpdatedAt,
     AccountDeletedAt,
@@ -31,7 +32,7 @@ export class AccountMapper implements IMapper
      * Map object to aggregate
      * @param account
      */
-    mapModelToAggregate(account: ObjectLiteral, cQMetadata?: CQMetadata): IamAccount
+    mapModelToAggregate(account: LiteralObject, cQMetadata?: CQMetadata): IamAccount
     {
         if (!account) return;
 
@@ -42,7 +43,7 @@ export class AccountMapper implements IMapper
      * Map array of objects to array aggregates
      * @param accounts
      */
-    mapModelsToAggregates(accounts: ObjectLiteral[], cQMetadata?: CQMetadata): IamAccount[]
+    mapModelsToAggregates(accounts: LiteralObject[], cQMetadata?: CQMetadata): IamAccount[]
     {
         if (!Array.isArray(accounts)) return;
 
@@ -69,7 +70,7 @@ export class AccountMapper implements IMapper
         return accounts.map(account => this.makeResponse(account));
     }
 
-    private makeAggregate(account: ObjectLiteral, cQMetadata?: CQMetadata): IamAccount
+    private makeAggregate(account: LiteralObject, cQMetadata?: CQMetadata): IamAccount
     {
         return IamAccount.register(
             new AccountId(account.id, { undefinable: true }),
@@ -81,8 +82,8 @@ export class AccountMapper implements IMapper
             new AccountDPermissions(account.dPermissions, { undefinable: true }),
             new AccountDTenants(account.dTenants, { undefinable: true }),
             new AccountData(account.data, { undefinable: true }),
-            new AccountRoleIds(account.roleIds, { undefinable: true }),
-            new AccountTenantIds(account.tenantIds, { undefinable: true }),
+            new AccountRoles(account.roles, { undefinable: true }),
+            new AccountTenants(account.tenants, { undefinable: true }),
             new AccountCreatedAt(account.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             new AccountUpdatedAt(account.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             new AccountDeletedAt(account.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
@@ -106,8 +107,8 @@ export class AccountMapper implements IMapper
             account.dPermissions.value,
             account.dTenants.value,
             account.data.value,
-            account.roleIds.value,
-            account.tenantIds.value,
+            account.roles.value,
+            account.tenants.value,
             account.createdAt.value,
             account.updatedAt.value,
             account.deletedAt.value,
