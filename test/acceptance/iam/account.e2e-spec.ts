@@ -172,58 +172,6 @@ describe('account', () =>
             });
     });
 
-    test('/REST:POST iam/account/create - Got 400 Conflict, AccountDApplicationCodes property can not to be null', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/iam/account/create')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                ...mockData[0],
-                ...{ dApplicationCodes: null },
-            })
-            // .expect(400)
-            .then(res =>
-            {
-                console.log(res.body);
-                expect(res.body.message).toContain('Value for AccountDApplicationCodes must be defined, can not be null');
-            });
-    });
-
-    test('/REST:POST iam/account/create - Got 400 Conflict, AccountDPermissions property can not to be null', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/iam/account/create')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                ...mockData[0],
-                ...{ dPermissions: null },
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AccountDPermissions must be defined, can not be null');
-            });
-    });
-
-    test('/REST:POST iam/account/create - Got 400 Conflict, AccountDTenants property can not to be null', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/iam/account/create')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                ...mockData[0],
-                ...{ dTenants: null },
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AccountDTenants must be defined, can not be null');
-            });
-    });
-
     test('/REST:POST iam/account/create - Got 400 Conflict, AccountId property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
@@ -300,63 +248,12 @@ describe('account', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 ...mockData[0],
-                ...{ clientId: undefined },
+                ...{ clientId: null, type: IamAccountType.SERVICE },
             })
             .expect(400)
             .then(res =>
             {
                 expect(res.body.message).toContain('Value for AccountClientId must be defined, can not be undefined');
-            });
-    });
-
-    test('/REST:POST iam/account/create - Got 400 Conflict, AccountDApplicationCodes property can not to be undefined', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/iam/account/create')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                ...mockData[0],
-                ...{ dApplicationCodes: undefined },
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AccountDApplicationCodes must be defined, can not be undefined');
-            });
-    });
-
-    test('/REST:POST iam/account/create - Got 400 Conflict, AccountDPermissions property can not to be undefined', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/iam/account/create')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                ...mockData[0],
-                ...{ dPermissions: undefined },
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AccountDPermissions must be defined, can not be undefined');
-            });
-    });
-
-    test('/REST:POST iam/account/create - Got 400 Conflict, AccountDTenants property can not to be undefined', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/iam/account/create')
-            .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${testJwt}`)
-            .send({
-                ...mockData[0],
-                ...{ dTenants: undefined },
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AccountDTenants must be defined, can not be undefined');
             });
     });
 
@@ -385,12 +282,13 @@ describe('account', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 ...mockData[0],
-                ...{ clientId: '*************************************' },
+                ...{ clientId: '*************************************', type: IamAccountType.SERVICE },
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AccountClientId is not allowed, must be a length of 36');
+                // try get client from null and get a undefined instance of null
+                expect(res.body.message).toContain('Value for AccountClientId must be defined, can not be undefined');
             });
     });
 
@@ -451,6 +349,19 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${testJwt}`)
             .send(mockData[0])
+            .expect(409);
+    });
+
+    test('/REST:POST iam/account/create - Got 409 Conflict, email already exist in database', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/account/create')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${testJwt}`)
+            .send({
+                ...mockData[0],
+                ...{ id: '5b19d6ac-4081-573b-96b3-56964d5326a8', type: IamAccountType.SERVICE },
+            })
             .expect(409);
     });
 
@@ -519,7 +430,7 @@ describe('account', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 ...mockData[0],
-                ...{ id: '5b19d6ac-4081-573b-96b3-56964d5326a8' },
+                ...{ id: '5b19d6ac-4081-573b-96b3-56964d5326a8', type: IamAccountType.SERVICE, email: 'john.***@gmail.com' },
             })
             .expect(201);
     });
@@ -765,15 +676,8 @@ describe('account', () =>
                 `,
                 variables: {
                     payload: {
-                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        type: IamAccountType.USER,
-                        email: '0sxw617k33f25mhtu0sgkhsq3v91ws0a5ycru2y94ozz9iidfdzhpo7mcwavw7btoqc78b0yyp2ju2utgzbtct0mx35t9glgcgy72penrpgx4hgg8fql1md',
-                        isActive: false,
-                        clientId: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        dApplicationCodes: { "foo" : "bar" },
-                        dPermissions: { "foo" : "bar" },
-                        dTenants: { "foo" : "bar" },
-                        data: { "foo" : "bar" },
+                        ...mockData[0],
+                        ...{ id: '5b19d6ac-4081-573b-96b3-56964d5326a8', type: IamAccountType.SERVICE, email: 'john.***@gmail.com' },
                     },
                 },
             })
