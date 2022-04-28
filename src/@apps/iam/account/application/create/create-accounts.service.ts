@@ -11,8 +11,8 @@ import {
     AccountDPermissions,
     AccountDTenants,
     AccountData,
-    AccountRoles,
-    AccountTenants,
+    AccountRoleIds,
+    AccountTenantIds,
     AccountCreatedAt,
     AccountUpdatedAt,
     AccountDeletedAt,
@@ -40,8 +40,8 @@ export class CreateAccountsService
             dPermissions: AccountDPermissions;
             dTenants: AccountDTenants;
             data: AccountData;
-            roles: AccountRoles;
-            tenants: AccountTenants;
+            roleIds: AccountRoleIds;
+            tenantIds: AccountTenantIds;
         } [],
         cQMetadata?: CQMetadata,
     ): Promise<void>
@@ -57,8 +57,8 @@ export class CreateAccountsService
             account.dPermissions,
             account.dTenants,
             account.data,
-            account.roles,
-            account.tenants,
+            account.roleIds,
+            account.tenantIds,
             new AccountCreatedAt({ currentTimestamp: true }),
             new AccountUpdatedAt({ currentTimestamp: true }),
             null, // deleteAt

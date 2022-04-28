@@ -12,8 +12,8 @@ import {
     AccountDPermissions,
     AccountDTenants,
     AccountData,
-    AccountRoles,
-    AccountTenants,
+    AccountRoleIds,
+    AccountTenantIds,
     AccountCreatedAt,
     AccountUpdatedAt,
     AccountDeletedAt,
@@ -36,8 +36,8 @@ export class IamAccount extends AggregateRoot
     dPermissions: AccountDPermissions;
     dTenants: AccountDTenants;
     data: AccountData;
-    roles: AccountRoles;
-    tenants: AccountTenants;
+    roleIds: AccountRoleIds;
+    tenantIds: AccountTenantIds;
     createdAt: AccountCreatedAt;
     updatedAt: AccountUpdatedAt;
     deletedAt: AccountDeletedAt;
@@ -57,8 +57,8 @@ export class IamAccount extends AggregateRoot
         dPermissions: AccountDPermissions,
         dTenants: AccountDTenants,
         data: AccountData,
-        roles: AccountRoles,
-        tenants: AccountTenants,
+        roleIds: AccountRoleIds,
+        tenantIds: AccountTenantIds,
         createdAt: AccountCreatedAt,
         updatedAt: AccountUpdatedAt,
         deletedAt: AccountDeletedAt,
@@ -78,8 +78,8 @@ export class IamAccount extends AggregateRoot
         this.dPermissions = dPermissions;
         this.dTenants = dTenants;
         this.data = data;
-        this.roles = roles;
-        this.tenants = tenants;
+        this.roleIds = roleIds;
+        this.tenantIds = tenantIds;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -100,8 +100,8 @@ export class IamAccount extends AggregateRoot
         dPermissions: AccountDPermissions,
         dTenants: AccountDTenants,
         data: AccountData,
-        roles: AccountRoles,
-        tenants: AccountTenants,
+        roleIds: AccountRoleIds,
+        tenantIds: AccountTenantIds,
         createdAt: AccountCreatedAt,
         updatedAt: AccountUpdatedAt,
         deletedAt: AccountDeletedAt,
@@ -121,8 +121,8 @@ export class IamAccount extends AggregateRoot
             dPermissions,
             dTenants,
             data,
-            roles,
-            tenants,
+            roleIds,
+            tenantIds,
             createdAt,
             updatedAt,
             deletedAt,
@@ -146,8 +146,8 @@ export class IamAccount extends AggregateRoot
                 account.dPermissions.value,
                 account.dTenants.value,
                 account.data?.value,
-                account.roles?.value,
-                account.tenants?.value,
+                account.roleIds?.value,
+                account.tenantIds?.value,
                 account.createdAt?.value,
                 account.updatedAt?.value,
                 account.deletedAt?.value,
@@ -168,8 +168,8 @@ export class IamAccount extends AggregateRoot
                 account.dPermissions?.value,
                 account.dTenants?.value,
                 account.data?.value,
-                account.roles?.value,
-                account.tenants?.value,
+                account.roleIds?.value,
+                account.tenantIds?.value,
                 account.createdAt?.value,
                 account.updatedAt?.value,
                 account.deletedAt?.value,
@@ -190,8 +190,8 @@ export class IamAccount extends AggregateRoot
                 account.dPermissions.value,
                 account.dTenants.value,
                 account.data?.value,
-                account.roles?.value,
-                account.tenants?.value,
+                account.roleIds?.value,
+                account.tenantIds?.value,
                 account.createdAt?.value,
                 account.updatedAt?.value,
                 account.deletedAt?.value,
@@ -211,8 +211,8 @@ export class IamAccount extends AggregateRoot
             dPermissions: this.dPermissions.value,
             dTenants: this.dTenants.value,
             data: this.data?.value,
-            roles: this.roles?.value,
-            tenants: this.tenants?.value,
+            roleIds: this.roleIds?.value,
+            tenantIds: this.tenantIds?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,

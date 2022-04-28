@@ -25,15 +25,15 @@ export class SequelizeAccountRepository extends SequelizeRepository<IamAccount, 
     async createdAggregateHook(aggregate: IamAccount, model: IamAccountModel): Promise<void>
     {
         // add many to many relation
-        if (aggregate.roles.length > 0) await model.$add('roles', aggregate.roles.value);
-        if (aggregate.tenants.length > 0) await model.$add('tenants', aggregate.tenants.value);
+        if (aggregate.roleIds.length > 0) await model.$add('roles', aggregate.roleIds.value);
+        if (aggregate.tenantIds.length > 0) await model.$add('tenants', aggregate.tenantIds.value);
     }
 
     // hook called after create aggregate
     async updatedAggregateHook(aggregate: IamAccount, model: IamAccountModel): Promise<void>
     {
         // set many to many relation
-        if (aggregate.roles.isArray()) await model.$set('roles', aggregate.roles.value);
-        if (aggregate.tenants.isArray()) await model.$set('tenants', aggregate.tenants.value);
+        if (aggregate.roleIds.isArray()) await model.$set('roles', aggregate.roleIds.value);
+        if (aggregate.tenantIds.isArray()) await model.$set('tenants', aggregate.tenantIds.value);
     }
 }

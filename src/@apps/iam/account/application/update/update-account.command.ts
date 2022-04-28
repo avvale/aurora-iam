@@ -14,8 +14,8 @@ export class UpdateAccountCommand
             dPermissions?: any;
             dTenants?: any;
             data?: any;
-            roles?: string[];
-            tenants?: string[];
+            roleIds?: string[];
+            tenantIds?: string[];
         },
         public readonly constraint?: QueryStatement,
         public readonly cQMetadata?: CQMetadata,

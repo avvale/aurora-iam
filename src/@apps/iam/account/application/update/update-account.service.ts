@@ -12,8 +12,8 @@ import {
     AccountDPermissions,
     AccountDTenants,
     AccountData,
-    AccountRoles,
-    AccountTenants,
+    AccountRoleIds,
+    AccountTenantIds,
     AccountCreatedAt,
     AccountUpdatedAt,
     AccountDeletedAt,
@@ -40,8 +40,8 @@ export class UpdateAccountService
             dPermissions?: AccountDPermissions;
             dTenants?: AccountDTenants;
             data?: AccountData;
-            roles?: AccountRoles;
-            tenants?: AccountTenants;
+            roleIds?: AccountRoleIds;
+            tenantIds?: AccountTenantIds;
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
@@ -58,8 +58,8 @@ export class UpdateAccountService
             payload.dPermissions,
             payload.dTenants,
             payload.data,
-            payload.roles,
-            payload.tenants,
+            payload.roleIds,
+            payload.tenantIds,
             null, // createdAt
             new AccountUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt
