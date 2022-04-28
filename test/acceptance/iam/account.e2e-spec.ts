@@ -162,13 +162,13 @@ describe('account', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             .send({
                 ...mockData[0],
-                ...{ clientId: null },
+                ...{ clientId: null, type: IamAccountType.SERVICE },
             })
-            // .expect(400)
+            .expect(400)
             .then(res =>
             {
-                console.log(res.body)
-                expect(res.body.message).toContain('Value for AccountClientId must be defined, can not be null');
+                // try get client from null and get a undefined instance of null
+                expect(res.body.message).toContain('Value for AccountClientId must be defined, can not be undefined');
             });
     });
 
@@ -182,9 +182,10 @@ describe('account', () =>
                 ...mockData[0],
                 ...{ dApplicationCodes: null },
             })
-            .expect(400)
+            // .expect(400)
             .then(res =>
             {
+                console.log(res.body);
                 expect(res.body.message).toContain('Value for AccountDApplicationCodes must be defined, can not be null');
             });
     });
