@@ -11,7 +11,7 @@ export class UpdateTenantCommand
             logo?: string;
             isActive?: boolean;
             data?: any;
-            accounts?: string[];
+            accountIds?: string[];
         },
         public readonly constraint?: QueryStatement,
         public readonly cQMetadata?: CQMetadata,

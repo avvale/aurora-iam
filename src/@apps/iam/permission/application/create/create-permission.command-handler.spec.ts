@@ -44,7 +44,7 @@ describe('CreatePermissionCommandHandler', () =>
                         id: permissions[0].id,
                         name: permissions[0].name,
                         boundedContextId: permissions[0].boundedContextId,
-                        roles: permissions[0].roles,
+                        roleIds: permissions[0].roleIds,
                     },
                     { timezone: process.env.TZ },
                 ),

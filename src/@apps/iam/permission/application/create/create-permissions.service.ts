@@ -5,7 +5,7 @@ import {
     PermissionId,
     PermissionName,
     PermissionBoundedContextId,
-    PermissionRoles,
+    PermissionRoleIds,
     PermissionCreatedAt,
     PermissionUpdatedAt,
     PermissionDeletedAt,
@@ -27,7 +27,7 @@ export class CreatePermissionsService
             id: PermissionId;
             name: PermissionName;
             boundedContextId: PermissionBoundedContextId;
-            roles: PermissionRoles;
+            roleIds: PermissionRoleIds;
         } [],
         cQMetadata?: CQMetadata,
     ): Promise<void>
@@ -37,7 +37,7 @@ export class CreatePermissionsService
             permission.id,
             permission.name,
             permission.boundedContextId,
-            permission.roles,
+            permission.roleIds,
             new PermissionCreatedAt({ currentTimestamp: true }),
             new PermissionUpdatedAt({ currentTimestamp: true }),
             null, // deleteAt

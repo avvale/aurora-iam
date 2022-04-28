@@ -8,7 +8,7 @@ export class UpdatePermissionCommand
             id: string;
             name?: string;
             boundedContextId?: string;
-            roles?: string[];
+            roleIds?: string[];
         },
         public readonly constraint?: QueryStatement,
         public readonly cQMetadata?: CQMetadata,

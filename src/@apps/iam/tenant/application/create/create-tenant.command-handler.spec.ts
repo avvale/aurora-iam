@@ -47,7 +47,7 @@ describe('CreateTenantCommandHandler', () =>
                         logo: tenants[0].logo,
                         isActive: tenants[0].isActive,
                         data: tenants[0].data,
-                        accounts: tenants[0].accounts,
+                        accountIds: tenants[0].accountIds,
                     },
                     { timezone: process.env.TZ },
                 ),

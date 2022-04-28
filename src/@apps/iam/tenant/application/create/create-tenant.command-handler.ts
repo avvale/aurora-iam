@@ -9,7 +9,7 @@ import {
     TenantLogo,
     TenantIsActive,
     TenantData,
-    TenantAccounts,
+    TenantAccountIds,
     TenantCreatedAt,
     TenantUpdatedAt,
     TenantDeletedAt,
@@ -33,7 +33,7 @@ export class CreateTenantCommandHandler implements ICommandHandler<CreateTenantC
                 logo: new TenantLogo(command.payload.logo),
                 isActive: new TenantIsActive(command.payload.isActive),
                 data: new TenantData(command.payload.data),
-                accounts: new TenantAccounts(command.payload.accounts),
+                accountIds: new TenantAccountIds(command.payload.accountIds),
             },
             command.cQMetadata,
         );

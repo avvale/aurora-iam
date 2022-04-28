@@ -6,7 +6,7 @@ import {
     PermissionId,
     PermissionName,
     PermissionBoundedContextId,
-    PermissionRoles,
+    PermissionRoleIds,
     PermissionCreatedAt,
     PermissionUpdatedAt,
     PermissionDeletedAt,
@@ -22,7 +22,7 @@ export class IamPermission extends AggregateRoot
     id: PermissionId;
     name: PermissionName;
     boundedContextId: PermissionBoundedContextId;
-    roles: PermissionRoles;
+    roleIds: PermissionRoleIds;
     createdAt: PermissionCreatedAt;
     updatedAt: PermissionUpdatedAt;
     deletedAt: PermissionDeletedAt;
@@ -35,7 +35,7 @@ export class IamPermission extends AggregateRoot
         id: PermissionId,
         name: PermissionName,
         boundedContextId: PermissionBoundedContextId,
-        roles: PermissionRoles,
+        roleIds: PermissionRoleIds,
         createdAt: PermissionCreatedAt,
         updatedAt: PermissionUpdatedAt,
         deletedAt: PermissionDeletedAt,
@@ -48,7 +48,7 @@ export class IamPermission extends AggregateRoot
         this.id = id;
         this.name = name;
         this.boundedContextId = boundedContextId;
-        this.roles = roles;
+        this.roleIds = roleIds;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -62,7 +62,7 @@ export class IamPermission extends AggregateRoot
         id: PermissionId,
         name: PermissionName,
         boundedContextId: PermissionBoundedContextId,
-        roles: PermissionRoles,
+        roleIds: PermissionRoleIds,
         createdAt: PermissionCreatedAt,
         updatedAt: PermissionUpdatedAt,
         deletedAt: PermissionDeletedAt,
@@ -75,7 +75,7 @@ export class IamPermission extends AggregateRoot
             id,
             name,
             boundedContextId,
-            roles,
+            roleIds,
             createdAt,
             updatedAt,
             deletedAt,
@@ -92,7 +92,7 @@ export class IamPermission extends AggregateRoot
                 permission.id.value,
                 permission.name.value,
                 permission.boundedContextId.value,
-                permission.roles?.value,
+                permission.roleIds?.value,
                 permission.createdAt?.value,
                 permission.updatedAt?.value,
                 permission.deletedAt?.value,
@@ -107,7 +107,7 @@ export class IamPermission extends AggregateRoot
                 permission.id.value,
                 permission.name?.value,
                 permission.boundedContextId?.value,
-                permission.roles?.value,
+                permission.roleIds?.value,
                 permission.createdAt?.value,
                 permission.updatedAt?.value,
                 permission.deletedAt?.value,
@@ -122,7 +122,7 @@ export class IamPermission extends AggregateRoot
                 permission.id.value,
                 permission.name.value,
                 permission.boundedContextId.value,
-                permission.roles?.value,
+                permission.roleIds?.value,
                 permission.createdAt?.value,
                 permission.updatedAt?.value,
                 permission.deletedAt?.value,
@@ -136,7 +136,7 @@ export class IamPermission extends AggregateRoot
             id: this.id.value,
             name: this.name.value,
             boundedContextId: this.boundedContextId.value,
-            roles: this.roles?.value,
+            roleIds: this.roleIds?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,

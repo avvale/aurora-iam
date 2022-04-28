@@ -9,7 +9,7 @@ import {
     TenantLogo,
     TenantIsActive,
     TenantData,
-    TenantAccounts,
+    TenantAccountIds,
     TenantCreatedAt,
     TenantUpdatedAt,
     TenantDeletedAt,
@@ -27,7 +27,7 @@ export class IamTenant extends AggregateRoot
     logo: TenantLogo;
     isActive: TenantIsActive;
     data: TenantData;
-    accounts: TenantAccounts;
+    accountIds: TenantAccountIds;
     createdAt: TenantCreatedAt;
     updatedAt: TenantUpdatedAt;
     deletedAt: TenantDeletedAt;
@@ -42,7 +42,7 @@ export class IamTenant extends AggregateRoot
         logo: TenantLogo,
         isActive: TenantIsActive,
         data: TenantData,
-        accounts: TenantAccounts,
+        accountIds: TenantAccountIds,
         createdAt: TenantCreatedAt,
         updatedAt: TenantUpdatedAt,
         deletedAt: TenantDeletedAt,
@@ -57,7 +57,7 @@ export class IamTenant extends AggregateRoot
         this.logo = logo;
         this.isActive = isActive;
         this.data = data;
-        this.accounts = accounts;
+        this.accountIds = accountIds;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -73,7 +73,7 @@ export class IamTenant extends AggregateRoot
         logo: TenantLogo,
         isActive: TenantIsActive,
         data: TenantData,
-        accounts: TenantAccounts,
+        accountIds: TenantAccountIds,
         createdAt: TenantCreatedAt,
         updatedAt: TenantUpdatedAt,
         deletedAt: TenantDeletedAt,
@@ -88,7 +88,7 @@ export class IamTenant extends AggregateRoot
             logo,
             isActive,
             data,
-            accounts,
+            accountIds,
             createdAt,
             updatedAt,
             deletedAt,
@@ -107,7 +107,7 @@ export class IamTenant extends AggregateRoot
                 tenant.logo?.value,
                 tenant.isActive.value,
                 tenant.data?.value,
-                tenant.accounts?.value,
+                tenant.accountIds?.value,
                 tenant.createdAt?.value,
                 tenant.updatedAt?.value,
                 tenant.deletedAt?.value,
@@ -125,7 +125,7 @@ export class IamTenant extends AggregateRoot
                 tenant.logo?.value,
                 tenant.isActive?.value,
                 tenant.data?.value,
-                tenant.accounts?.value,
+                tenant.accountIds?.value,
                 tenant.createdAt?.value,
                 tenant.updatedAt?.value,
                 tenant.deletedAt?.value,
@@ -143,7 +143,7 @@ export class IamTenant extends AggregateRoot
                 tenant.logo?.value,
                 tenant.isActive.value,
                 tenant.data?.value,
-                tenant.accounts?.value,
+                tenant.accountIds?.value,
                 tenant.createdAt?.value,
                 tenant.updatedAt?.value,
                 tenant.deletedAt?.value,
@@ -160,7 +160,7 @@ export class IamTenant extends AggregateRoot
             logo: this.logo?.value,
             isActive: this.isActive.value,
             data: this.data?.value,
-            accounts: this.accounts?.value,
+            accountIds: this.accountIds?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,

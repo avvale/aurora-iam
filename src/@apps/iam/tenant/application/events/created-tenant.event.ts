@@ -7,7 +7,7 @@ export class CreatedTenantEvent
         public readonly logo: string,
         public readonly isActive: boolean,
         public readonly data: any,
-        public readonly accounts: string[],
+        public readonly accountIds: string[],
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,

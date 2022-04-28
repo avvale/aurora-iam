@@ -10,7 +10,7 @@ export class CreateTenantsCommand
             logo?: string;
             isActive: boolean;
             data?: any;
-            accounts?: string[];
+            accountIds?: string[];
         } [],
         public readonly cQMetadata?: CQMetadata,
     ) {}

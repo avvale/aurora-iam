@@ -9,7 +9,7 @@ import {
     PermissionId,
     PermissionName,
     PermissionBoundedContextId,
-    PermissionRoles,
+    PermissionRoleIds,
     PermissionCreatedAt,
     PermissionUpdatedAt,
     PermissionDeletedAt,
@@ -61,7 +61,7 @@ describe('CreatePermissionService', () =>
                     id: new PermissionId(permissions[0].id),
                     name: new PermissionName(permissions[0].name),
                     boundedContextId: new PermissionBoundedContextId(permissions[0].boundedContextId),
-                    roles: new PermissionRoles(permissions[0].roles),
+                    roleIds: new PermissionRoleIds(permissions[0].roleIds),
                 },
             )).toBe(undefined);
         });

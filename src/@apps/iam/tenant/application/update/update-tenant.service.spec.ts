@@ -12,7 +12,7 @@ import {
     TenantLogo,
     TenantIsActive,
     TenantData,
-    TenantAccounts,
+    TenantAccountIds,
     TenantCreatedAt,
     TenantUpdatedAt,
     TenantDeletedAt,
@@ -66,7 +66,7 @@ describe('UpdateTenantService', () =>
                     logo: new TenantLogo(tenants[0].logo),
                     isActive: new TenantIsActive(tenants[0].isActive),
                     data: new TenantData(tenants[0].data),
-                    accounts: new TenantAccounts(tenants[0].accounts),
+                    accountIds: new TenantAccountIds(tenants[0].accountIds),
                 }
             )).toBe(undefined);
         });

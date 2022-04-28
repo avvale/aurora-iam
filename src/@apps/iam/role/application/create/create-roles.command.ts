@@ -7,8 +7,8 @@ export class CreateRolesCommand
             id: string;
             name: string;
             isMaster: boolean;
-            permissions?: string[];
-            accounts?: string[];
+            permissionIds?: string[];
+            accountIds?: string[];
         } [],
         public readonly cQMetadata?: CQMetadata,
     ) {}

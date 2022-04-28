@@ -8,8 +8,8 @@ export class UpdateRoleCommand
             id: string;
             name?: string;
             isMaster?: boolean;
-            permissions?: string[];
-            accounts?: string[];
+            permissionIds?: string[];
+            accountIds?: string[];
         },
         public readonly constraint?: QueryStatement,
         public readonly cQMetadata?: CQMetadata,

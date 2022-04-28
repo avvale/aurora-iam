@@ -274,7 +274,7 @@ describe('tenant', () =>
                 expect(res.body).toEqual({
                     total: seeder.collectionResponse.length,
                     count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'accounts']))).slice(0, 5),
+                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'accountIds']))).slice(0, 5),
                 });
             });
     });
@@ -288,7 +288,7 @@ describe('tenant', () =>
             .then(res =>
             {
                 expect(res.body).toEqual(
-                    seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'accounts']))),
+                    seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'accountIds']))),
                 );
             });
     });
@@ -303,7 +303,7 @@ describe('tenant', () =>
                 {
                     where:
                     {
-                        id: 'a0a6e986-90f2-4041-9041-a35e18843fc3',
+                        id: 'ce22386f-478d-4fb3-ae52-5f945f92200d',
                     },
                 },
             })
@@ -346,7 +346,7 @@ describe('tenant', () =>
     test('/REST:GET iam/tenant/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/tenant/find/5b75b3a0-d964-4052-8839-beb8224fda2d')
+            .get('/iam/tenant/find/aadaada3-74a5-4803-8c8a-5cd7a4dbb8b6')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -370,7 +370,7 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: '42739de7-7258-47d0-8188-42f0cfdc1522' },
+                ...{ id: 'e8371640-b0b6-421f-8f3c-87660cfce4ea' },
             })
             .expect(404);
     });
@@ -382,12 +382,12 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Ergonomic Concrete Hat',
-                code: 'yczotbpwitp1afuynqe7ktflto0nnjx9kg87ebel8tfxkbvxy',
-                logo: 'gjck6a4ojzniape4objc47fxq9mt8uqt09hs7f2x9aknwx0s4ek0lib2rka0lwccxqm94x1aq1brqzxrydy0c6724xkyrmx02c3alj5r9u5mpxetanda9k7tipsgk8hlnuwax23abwye52yolovf6uhmbn075qn7ufvhz21en47qki27f0vpylv56vctmj29ffh66gbkvz09ixhitfemaxq7iyjbq111h4d9viacw4w99yfok5rzwte38btewe',
+                name: 'Refined Rubber Tuna',
+                code: 'q1ym4k74auym2p9txlq38ta451pv5o5fg8mngspxxjhpexvbz',
+                logo: 'mq7wzlpbzu84fdfmjd59o4fehi1daie38i8stjostmrc85747fl1s4swo13fulza0wi5oc0hl0dsw7ysot07uqzf982uvwp0edfh4haz7ke040p63lbyjcea502wntvkurdhpj87lesps415p9euk2kqskgarkfx3suj7pzin82rf5dkc8i9rmkdr6xefmgdhghej3k2c22ph34gzq3wiryw356bio7xvsa2dh2tednvxpayghoukrmb65msjq',
                 isActive: true,
                 data: { "foo" : "bar" },
-                accounts: [],
+                accountIds: [],
             })
             .expect(200)
             .then(res =>
@@ -399,7 +399,7 @@ describe('tenant', () =>
     test('/REST:DELETE iam/tenant/delete/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/tenant/delete/6eb7341e-cbe9-43e4-acba-cc2a5d9d9500')
+            .delete('/iam/tenant/delete/02b79daa-d874-48a9-9492-3084e39ac0b5')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -478,7 +478,7 @@ describe('tenant', () =>
                 expect(res.body.data.iamPaginateTenants).toEqual({
                     total: seeder.collectionResponse.length,
                     count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'accounts']))).slice(0, 5),
+                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'accountIds']))).slice(0, 5),
                 });
             });
     });
@@ -540,9 +540,9 @@ describe('tenant', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Small Plastic Ball',
-                        code: 'vba7mtzvud7badv4bw8qtwexchr7qth5dt5uym9vsbzl4t88x',
-                        logo: 'h24ackg8fhl78js351t7xohbkqmdxeve6y37ezx2mt1qcw0vlbgi5uz1a151sbv232xzkzb3hngfetl772d5vfk0ongh9g1ga77uhwd7kltci5f7ty76iarvmn907g0ow1uitllik70ab2h3enaw4ieb1koyri8opz2cr93kx2bxf1bw9rf4zf6n3v5p2ug9eqspj37ojktx4ze3k714wik0xqa2chdykxvygh67eqk0x9jpruelp7n2j96g31',
+                        name: 'Generic Wooden Soap',
+                        code: 'so9v2inhfe0d3xvdnvge2fksafqj8yfuqdf6s8vz0scf90em6',
+                        logo: 'm7s3mds0kf5r4axwxz6z8fffkaplxpi7kpqgw7vmr2d9b8bbdl0bjy7qsmuo7hixwb1mziej6p08t92j761dnqcr80ni58taibme6vzv5pevmk6a7f3vbtbbqlwr02wazelldqstprzzs7pgyn5hcv2auzd3lw1bmxpb1vn0lns1g34lhwqb34jt03l4e0osyaq9s0swl8itv5tmwugl7ovjuncud1wc9c7bmhx8ekgiqvvlnoft9qyeryip9x',
                         isActive: true,
                         data: { "foo" : "bar" },
                     },
@@ -583,7 +583,7 @@ describe('tenant', () =>
                     {
                         where:
                         {
-                            id: 'ddf05dcb-e6a1-4fe0-b05f-ac3f2b995755',
+                            id: '71d51b77-89b2-482d-961f-324a65e57fe2',
                         },
                     },
                 },
@@ -660,7 +660,7 @@ describe('tenant', () =>
                     }
                 `,
                 variables: {
-                    id: 'c6d6615e-14ff-4b15-b713-32e5b2859047',
+                    id: '88d8d733-1c3d-4988-96da-9d148758888b',
                 },
             })
             .expect(200)
@@ -730,7 +730,7 @@ describe('tenant', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        ...{ id: 'aa8d70a7-7894-44f6-b565-5b2f5da4eda9' },
+                        ...{ id: 'ce69d62a-f428-4544-8c3c-dc79ee269e3d' },
                     },
                 },
             })
@@ -768,12 +768,12 @@ describe('tenant', () =>
                 variables: {
                     payload: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Tasty Rubber Bike',
-                        code: 'cwja8q5bxriyhdml72q6kcs2e6t8j1ygtyz1j54njib4re9ow',
-                        logo: '55re97iz99qsyvigkavc4rhbn62hq7wnaz4cshrxpcc3rvunujinvpurqkvouf94mtg4ns6gn0g9n61mjg3eau15ou5c6cp4h9qften752lvp7dci1e1m1cftivr4bn2i2fdfhn4q39s2pt1aekovsp4r2nshtpz8fvilvstvtzvoo3f70kqqw3juzf8olgsc3wlz2uy9ppfg6fwtunvy6foxrld67ek30jbzu8ztla6owy7wxq8jje5umu8v7',
-                        isActive: true,
+                        name: 'Ergonomic Wooden Table',
+                        code: 'fsq0l78k7xaumqr6mw2ix3c97456n3tngqlh55aqqia064ojb',
+                        logo: '1nxut13bvu4arbc9zl425ozxlvtz2mgogl84vnb13fsl0bb16b5hoyxmq39ewd4gjb4r5o73qbd2tj1cil88os0zvczpvu0mj6gdfq5w8yloarmhi79p67f4eaff6xbzt3onfkyqx3obhuzjnk6e91q0m576fwm811g6dt6x8dmh2ggvklri8vvso9w77k3trdlqmtknwsizdbz7dpex40lcq6scco8cj4wjrfmebuq9i2r8jq46jzqq6cw8o7',
+                        isActive: false,
                         data: { "foo" : "bar" },
-                        accounts: [],
+                        accountIds: [],
                     },
                 },
             })
@@ -807,7 +807,7 @@ describe('tenant', () =>
                     }
                 `,
                 variables: {
-                    id: '31fbef1b-1f0a-4b64-b6aa-aaaa6b2f07d1',
+                    id: '8f162a5a-4026-47eb-9eab-175cb122faba',
                 },
             })
             .expect(200)

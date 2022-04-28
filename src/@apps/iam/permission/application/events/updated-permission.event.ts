@@ -4,7 +4,7 @@ export class UpdatedPermissionEvent
         public readonly id: string,
         public readonly name: string,
         public readonly boundedContextId: string,
-        public readonly roles: string[],
+        public readonly roleIds: string[],
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,

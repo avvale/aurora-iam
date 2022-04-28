@@ -7,7 +7,7 @@ export class CreatePermissionCommand
             id: string;
             name: string;
             boundedContextId: string;
-            roles?: string[];
+            roleIds?: string[];
         },
         public readonly cQMetadata?: CQMetadata,
     ) {}

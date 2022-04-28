@@ -6,8 +6,8 @@ import {
     RoleId,
     RoleName,
     RoleIsMaster,
-    RolePermissions,
-    RoleAccounts,
+    RolePermissionIds,
+    RoleAccountIds,
     RoleCreatedAt,
     RoleUpdatedAt,
     RoleDeletedAt,
@@ -23,8 +23,8 @@ export class IamRole extends AggregateRoot
     id: RoleId;
     name: RoleName;
     isMaster: RoleIsMaster;
-    permissions: RolePermissions;
-    accounts: RoleAccounts;
+    permissionIds: RolePermissionIds;
+    accountIds: RoleAccountIds;
     createdAt: RoleCreatedAt;
     updatedAt: RoleUpdatedAt;
     deletedAt: RoleDeletedAt;
@@ -37,8 +37,8 @@ export class IamRole extends AggregateRoot
         id: RoleId,
         name: RoleName,
         isMaster: RoleIsMaster,
-        permissions: RolePermissions,
-        accounts: RoleAccounts,
+        permissionIds: RolePermissionIds,
+        accountIds: RoleAccountIds,
         createdAt: RoleCreatedAt,
         updatedAt: RoleUpdatedAt,
         deletedAt: RoleDeletedAt,
@@ -51,8 +51,8 @@ export class IamRole extends AggregateRoot
         this.id = id;
         this.name = name;
         this.isMaster = isMaster;
-        this.permissions = permissions;
-        this.accounts = accounts;
+        this.permissionIds = permissionIds;
+        this.accountIds = accountIds;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -66,8 +66,8 @@ export class IamRole extends AggregateRoot
         id: RoleId,
         name: RoleName,
         isMaster: RoleIsMaster,
-        permissions: RolePermissions,
-        accounts: RoleAccounts,
+        permissionIds: RolePermissionIds,
+        accountIds: RoleAccountIds,
         createdAt: RoleCreatedAt,
         updatedAt: RoleUpdatedAt,
         deletedAt: RoleDeletedAt,
@@ -80,8 +80,8 @@ export class IamRole extends AggregateRoot
             id,
             name,
             isMaster,
-            permissions,
-            accounts,
+            permissionIds,
+            accountIds,
             createdAt,
             updatedAt,
             deletedAt,
@@ -98,8 +98,8 @@ export class IamRole extends AggregateRoot
                 role.id.value,
                 role.name.value,
                 role.isMaster.value,
-                role.permissions?.value,
-                role.accounts?.value,
+                role.permissionIds?.value,
+                role.accountIds?.value,
                 role.createdAt?.value,
                 role.updatedAt?.value,
                 role.deletedAt?.value,
@@ -114,8 +114,8 @@ export class IamRole extends AggregateRoot
                 role.id.value,
                 role.name?.value,
                 role.isMaster?.value,
-                role.permissions?.value,
-                role.accounts?.value,
+                role.permissionIds?.value,
+                role.accountIds?.value,
                 role.createdAt?.value,
                 role.updatedAt?.value,
                 role.deletedAt?.value,
@@ -130,8 +130,8 @@ export class IamRole extends AggregateRoot
                 role.id.value,
                 role.name.value,
                 role.isMaster.value,
-                role.permissions?.value,
-                role.accounts?.value,
+                role.permissionIds?.value,
+                role.accountIds?.value,
                 role.createdAt?.value,
                 role.updatedAt?.value,
                 role.deletedAt?.value,
@@ -145,8 +145,8 @@ export class IamRole extends AggregateRoot
             id: this.id.value,
             name: this.name.value,
             isMaster: this.isMaster.value,
-            permissions: this.permissions?.value,
-            accounts: this.accounts?.value,
+            permissionIds: this.permissionIds?.value,
+            accountIds: this.accountIds?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,

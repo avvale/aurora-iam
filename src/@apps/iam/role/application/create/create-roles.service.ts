@@ -5,8 +5,8 @@ import {
     RoleId,
     RoleName,
     RoleIsMaster,
-    RolePermissions,
-    RoleAccounts,
+    RolePermissionIds,
+    RoleAccountIds,
     RoleCreatedAt,
     RoleUpdatedAt,
     RoleDeletedAt,
@@ -28,8 +28,8 @@ export class CreateRolesService
             id: RoleId;
             name: RoleName;
             isMaster: RoleIsMaster;
-            permissions: RolePermissions;
-            accounts: RoleAccounts;
+            permissionIds: RolePermissionIds;
+            accountIds: RoleAccountIds;
         } [],
         cQMetadata?: CQMetadata,
     ): Promise<void>
@@ -39,8 +39,8 @@ export class CreateRolesService
             role.id,
             role.name,
             role.isMaster,
-            role.permissions,
-            role.accounts,
+            role.permissionIds,
+            role.accountIds,
             new RoleCreatedAt({ currentTimestamp: true }),
             new RoleUpdatedAt({ currentTimestamp: true }),
             null, // deleteAt
