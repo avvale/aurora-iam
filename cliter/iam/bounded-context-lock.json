@@ -263,7 +263,7 @@
         },
         {
             "path": "src/@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed.ts",
-            "integrity": "sha1:4d6e9ad2492c5354c442211c3240c6be69b0dc49"
+            "integrity": "sha1:005aa7894c9dc56cdcdebb0ae66296fc64e0584a"
         },
         {
             "path": "src/@apps/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.model.ts",
@@ -555,11 +555,11 @@
         },
         {
             "path": "test/acceptance/iam/bounded-context.e2e-spec.ts",
-            "integrity": "sha1:727154ecf856d6178e920e3e4d665a31a1fc6273"
+            "integrity": "sha1:b9bd95fc69578de192361280d70aa61d28406e38"
         },
         {
             "path": "postman/iam.bounded-context.postman.json",
-            "integrity": "sha1:6eae151631920715cc50c862399d5b2c4a43d26a"
+            "integrity": "sha1:43d423c688cb74bc625e97359d3697b2f0f176ff"
         }
     ]
 }
